@@ -1,0 +1,95 @@
+patient_id,age,gender,cancer_type,cancer_stage,biomarker_status,primary_treatment,response_eval,overall_survival_months,vital_status
+PAT-1001,64,Female,Breast Cancer,Stage II,HER2+,Chemotherapy,Partial Response (PR),28.4,Alive
+PAT-1002,58,Male,Lung Cancer (NSCLC),Stage IV,EGFR Mutation,Targeted Therapy,Complete Response (CR),42.1,Alive
+PAT-1003,72,Male,Prostate Cancer,Stage III,PSA Elevated,Radiation Therapy,Stable Disease (SD),24.8,Alive
+PAT-1004,49,Female,Colorectal Cancer,Stage II,KRAS G12D,Surgery,Complete Response (CR),55.0,Alive
+PAT-1005,61,Female,Melanoma,Stage IV,BRAF V600E,Immunotherapy,Progressive Disease (PD),9.3,Deceased
+PAT-1006,81,Male,Pancreatic Adenocarcinoma,Stage IV,KRAS Mutation,Chemotherapy,Progressive Disease (PD),4.1,Deceased
+PAT-1007,53,Female,Ovarian Cancer,Stage III,BRCA1+,Combination Therapy,Partial Response (PR),31.7,Alive
+PAT-1008,66,Male,Glioblastoma,Stage IV,MGMT Methylated,Radiation Therapy,Progressive Disease (PD),11.5,Deceased
+PAT-1009,42,Female,Breast Cancer,Stage I,ER+/PR+,Surgery,Complete Response (CR),78.2,Alive
+PAT-1010,75,Other,Acute Myeloid Leukemia,Unknown Stage,FLT3-ITD,Chemotherapy,Complete Response (CR),18.6,Alive
+PAT-1011,61,Female,Lung Cancer (NSCLC),Stage III,PD-L1 >= 50%,Immunotherapy,Partial Response (PR),22.0,Alive
+PAT-1012,50,Male,Colorectal Cancer,Stage IV,MSI-High,Immunotherapy,Partial Response (PR),19.4,Alive
+PAT-1013,67,Female,Breast Cancer,Stage III,Triple Negative,Chemotherapy,Progressive Disease (PD),14.2,Deceased
+PAT-1014,73,Male,Prostate Cancer,Stage II,BRCA2+,Targeted Therapy,Stable Disease (SD),36.8,Alive
+PAT-1015,55,Female,Ovarian Cancer,Stage IV,HRD Positive,Combination Therapy,Partial Response (PR),16.1,Alive
+PAT-1016,39,Male,Melanoma,Stage I,Not Tested,Surgery,Complete Response (CR),62.4,Alive
+PAT-1017,84,Female,Pancreatic Adenocarcinoma,Stage III,Not Tested,Chemotherapy,Progressive Disease (PD),6.2,Deceased
+PAT-1018,60,Male,Lung Cancer (NSCLC),Stage II,ALK Fusion,Targeted Therapy,Complete Response (CR),48.9,Alive
+PAT-1019,46,Female,Breast Cancer,Stage II,HER2+,Chemotherapy,Partial Response (PR),41.3,Alive
+PAT-1020,70,Male,Glioblastoma,Stage IV,IDH1 Mutant,Radiation Therapy,Stable Disease (SD),13.7,Deceased
+PAT-1021,68,Female,Colorectal Cancer,Stage III,BRAF V600E,Chemotherapy,Progressive Disease (PD),12.0,Deceased
+PAT-1022,52,Male,Lung Cancer (NSCLC),Stage IV,KRAS G12C,Targeted Therapy,Stable Disease (SD),15.8,Alive
+PAT-1023,77,Female,Ovarian Cancer,Stage II,BRCA2+,Surgery,Complete Response (CR),51.2,Alive
+PAT-1024,63,Male,Prostate Cancer,Stage IV,AR-V7+,Targeted Therapy,Progressive Disease (PD),8.4,Deceased
+PAT-1025,45,Female,Breast Cancer,Stage I,ER+/PR+,Surgery,Complete Response (CR),94.1,Alive
+PAT-1026,59,Male,Melanoma,Stage III,PD-L1 positive,Immunotherapy,Partial Response (PR),29.3,Alive
+PAT-1027,71,Female,Pancreatic Adenocarcinoma,Stage IV,BRCA2+,Combination Therapy,Stable Disease (SD),9.8,Deceased
+PAT-1028,65,Male,Acute Myeloid Leukemia,Unknown Stage,NPM1 Mutant,Chemotherapy,Complete Response (CR),33.5,Alive
+PAT-1029,61,Female,Breast Cancer,Stage III,BRCA1+,Chemotherapy,Partial Response (PR),21.4,Alive
+PAT-1030,56,Male,Lung Cancer (NSCLC),Stage I,EGFR Mutation,Surgery,Complete Response (CR),67.0,Alive
+PAT-1031,69,Female,Ovarian Cancer,Stage IV,BRCA1+,Combination Therapy,Progressive Disease (PD),11.1,Deceased
+PAT-1032,48,Male,Glioblastoma,Stage IV,EGFRvIII,Radiation Therapy,Progressive Disease (PD),7.9,Deceased
+PAT-1033,74,Female,Colorectal Cancer,Stage II,KRAS G12D,Surgery,Complete Response (CR),44.6,Alive
+PAT-1034,62,Male,Prostate Cancer,Stage III,PSA Elevated,Radiation Therapy,Partial Response (PR),27.5,Alive
+PAT-1035,51,Female,Breast Cancer,Stage IV,HER2+,Targeted Therapy,Partial Response (PR),20.2,Alive
+PAT-1036,80,Male,Pancreatic Adenocarcinoma,Stage III,KRAS Mutation,Chemotherapy,Stable Disease (SD),7.4,Deceased
+PAT-1037,43,Female,Melanoma,Stage II,NRAS Mutation,Surgery,Complete Response (CR),58.3,Alive
+PAT-1038,67,Male,Lung Cancer (NSCLC),Stage IV,PD-L1 >= 50%,Immunotherapy,Partial Response (PR),17.9,Alive
+PAT-1039,54,Female,Ovarian Cancer,Stage I,BRCA2+,Surgery,Complete Response (CR),82.0,Alive
+PAT-1040,76,Male,Acute Myeloid Leukemia,Unknown Stage,IDH2 Mutant,Targeted Therapy,Stable Disease (SD),13.2,Alive
+PAT-1041,57,Female,Breast Cancer,Stage II,Triple Negative,Chemotherapy,Complete Response (CR),39.5,Alive
+PAT-1042,66,Male,Colorectal Cancer,Stage IV,BRAF V600E,Combination Therapy,Progressive Disease (PD),6.8,Deceased
+PAT-1043,41,Female,Melanoma,Stage IV,BRAF V600E,Targeted Therapy,Partial Response (PR),24.6,Alive
+PAT-1044,79,Male,Prostate Cancer,Stage I,PSA Elevated,Radiation Therapy,Complete Response (CR),71.3,Alive
+PAT-1045,63,Female,Lung Cancer (NSCLC),Stage II,EGFR Mutation,Targeted Therapy,Partial Response (PR),35.0,Alive
+PAT-1046,70,Male,Pancreatic Adenocarcinoma,Stage IV,Not Tested,Chemotherapy,Progressive Disease (PD),3.8,Deceased
+PAT-1047,52,Female,Breast Cancer,Stage III,HER2+,Combination Therapy,Partial Response (PR),26.1,Alive
+PAT-1048,47,Male,Glioblastoma,Stage IV,MGMT Methylated,Radiation Therapy,Stable Disease (SD),10.6,Deceased
+PAT-1049,68,Female,Ovarian Cancer,Stage III,HRD Positive,Combination Therapy,Partial Response (PR),23.7,Alive
+PAT-1050,59,Male,Colorectal Cancer,Stage I,KRAS G12D,Surgery,Complete Response (CR),61.2,Alive
+PAT-1051,61,Other,Lung Cancer (NSCLC),Stage IV,ALK Fusion,Targeted Therapy,Stable Disease (SD),14.5,Alive
+PAT-1052,73,Female,Breast Cancer,Stage IV,ER+/PR+,Targeted Therapy,Partial Response (PR),18.3,Alive
+PAT-1053,82,Male,Prostate Cancer,Stage IV,AR-V7+,Targeted Therapy,Progressive Disease (PD),5.5,Deceased
+PAT-1054,44,Female,Melanoma,Stage III,PD-L1 positive,Immunotherapy,Complete Response (CR),46.0,Alive
+PAT-1055,61,Male,Pancreatic Adenocarcinoma,Stage II,KRAS Mutation,Surgery,Partial Response (PR),15.2,Alive
+PAT-1056,55,Female,Ovarian Cancer,Stage IV,BRCA1+,Chemotherapy,Progressive Disease (PD),9.9,Deceased
+PAT-1057,69,Male,Acute Myeloid Leukemia,Unknown Stage,FLT3-ITD,Combination Therapy,Partial Response (PR),11.8,Deceased
+PAT-1058,38,Female,Breast Cancer,Stage II,BRCA1+,Chemotherapy,Complete Response (CR),53.4,Alive
+PAT-1059,75,Male,Lung Cancer (NSCLC),Stage III,PD-L1 >= 50%,Immunotherapy,Stable Disease (SD),21.0,Alive
+PAT-1060,64,Female,Colorectal Cancer,Stage III,MSI-High,Immunotherapy,Complete Response (CR),38.2,Alive
+PAT-1061,50,Male,Glioblastoma,Stage IV,IDH1 Mutant,Radiation Therapy,Progressive Disease (PD),8.9,Deceased
+PAT-1062,71,Female,Pancreatic Adenocarcinoma,Stage IV,KRAS Mutation,Chemotherapy,Progressive Disease (PD),4.7,Deceased
+PAT-1063,58,Male,Melanoma,Stage I,BRAF V600E,Surgery,Complete Response (CR),88.5,Alive
+PAT-1064,46,Female,Ovarian Cancer,Stage II,BRCA2+,Surgery,Complete Response (CR),49.8,Alive
+PAT-1065,83,Male,Prostate Cancer,Stage III,BRCA2+,Radiation Therapy,Stable Disease (SD),25.1,Alive
+PAT-1066,60,Female,Breast Cancer,Stage III,HER2+,Targeted Therapy,Partial Response (PR),30.0,Alive
+PAT-1067,65,Male,Lung Cancer (NSCLC),Stage IV,KRAS G12C,Chemotherapy,Progressive Disease (PD),7.1,Deceased
+PAT-1068,53,Female,Colorectal Cancer,Stage II,BRAF V600E,Surgery,Complete Response (CR),57.3,Alive
+PAT-1069,77,Male,Acute Myeloid Leukemia,Unknown Stage,NPM1 Mutant,Targeted Therapy,Complete Response (CR),22.8,Alive
+PAT-1070,61,Female,Glioblastoma,Stage IV,MGMT Methylated,Radiation Therapy,Stable Disease (SD),12.1,Deceased
+PAT-1071,49,Male,Melanoma,Stage IV,NRAS Mutation,Immunotherapy,Partial Response (PR),16.5,Alive
+PAT-1072,62,Female,Breast Cancer,Stage I,ER+/PR+,Surgery,Complete Response (CR),91.0,Alive
+PAT-1073,74,Male,Pancreatic Adenocarcinoma,Stage III,KRAS Mutation,Chemotherapy,Progressive Disease (PD),6.0,Deceased
+PAT-1074,56,Female,Ovarian Cancer,Stage III,HRD Positive,Combination Therapy,Partial Response (PR),27.9,Alive
+PAT-1075,67,Male,Prostate Cancer,Stage IV,AR-V7+,Targeted Therapy,Progressive Disease (PD),6.4,Deceased
+PAT-1076,43,Female,Lung Cancer (NSCLC),Stage II,EGFR Mutation,Targeted Therapy,Complete Response (CR),45.6,Alive
+PAT-1077,78,Male,Colorectal Cancer,Stage IV,KRAS G12D,Chemotherapy,Progressive Disease (PD),8.0,Deceased
+PAT-1078,51,Female,Breast Cancer,Stage II,Triple Negative,Chemotherapy,Partial Response (PR),32.1,Alive
+PAT-1079,66,Male,Melanoma,Stage II,BRAF V600E,Surgery,Complete Response (CR),64.5,Alive
+PAT-1080,72,Female,Pancreatic Adenocarcinoma,Stage IV,BRCA2+,Combination Therapy,Stable Disease (SD),8.7,Deceased
+PAT-1081,59,Male,Glioblastoma,Stage IV,EGFRvIII,Radiation Therapy,Progressive Disease (PD),9.2,Deceased
+PAT-1082,47,Female,Ovarian Cancer,Stage I,BRCA1+,Surgery,Complete Response (CR),76.4,Alive
+PAT-1083,85,Male,Prostate Cancer,Stage II,PSA Elevated,Radiation Therapy,Stable Disease (SD),31.0,Alive
+PAT-1084,61,Female,Lung Cancer (NSCLC),Stage III,ALK Fusion,Targeted Therapy,Partial Response (PR),24.8,Alive
+PAT-1085,61,Male,Acute Myeloid Leukemia,Unknown Stage,FLT3-ITD,Chemotherapy,Complete Response (CR),29.1,Alive
+PAT-1086,54,Female,Breast Cancer,Stage IV,HER2+,Targeted Therapy,Partial Response (PR),17.2,Alive
+PAT-1087,70,Male,Colorectal Cancer,Stage III,MSI-High,Immunotherapy,Complete Response (CR),40.3,Alive
+PAT-1088,48,Female,Melanoma,Stage III,PD-L1 positive,Immunotherapy,Partial Response (PR),33.9,Alive
+PAT-1089,76,Male,Pancreatic Adenocarcinoma,Stage IV,KRAS Mutation,Chemotherapy,Progressive Disease (PD),5.1,Deceased
+PAT-1090,63,Female,Ovarian Cancer,Stage II,HRD Positive,Surgery,Complete Response (CR),52.6,Alive
+PAT-1091,52,Male,Lung Cancer (NSCLC),Stage II,EGFR Mutation,Targeted Therapy,Partial Response (PR),26.4,Alive
+PAT-1092,67,Female,Breast Cancer,Stage III,Triple Negative,Chemotherapy,Progressive Disease (PD),15.0,Deceased
+PAT-1093,71,Male,Prostate Cancer,Stage IV,AR-V7+,Targeted Therapy,Progressive Disease (PD),7.3,Deceased
+PAT-1094,45,Female,Colorectal Cancer,Stage I,MSI-High,Surgery,Complete Response (CR),68.1,Alive
