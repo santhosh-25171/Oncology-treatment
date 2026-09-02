@@ -1,0 +1,96 @@
+patient_id,age,gender,cancer_type,tumor_size_cm,tumor_stage,biomarker_status,treatment_regimen,survival_months,level_of_risk
+PAT-1001,64,Female,Breast Cancer,2.1,Stage I,HER2+,Chemotherapy,48,Low
+PAT-1002,52,Male,Lung Cancer,4.8,Stage III,EGFR Mutated,Targeted Therapy,18,High
+PAT-1003,57,Female,Colorectal Cancer,3.2,Stage II,Not Tested,Surgery + Chemo,36,Moderate
+PAT-1004,71,Male,Prostate Cancer,1.6,Stage I,TP53 Mutated,Hormone Therapy,60,Low
+PAT-1005,45,Female,Melanoma,1.2,Stage I,BRCA1/2+,Surgery + Chemo,75,Low
+PAT-1006,58,Female,Breast Cancer,5.5,Stage III,Triple Negative,Chemotherapy,14,Critical
+PAT-1007,67,Male,Lung Cancer,7.1,Stage IV,PD-L1 High,Immunotherapy,8,Critical
+PAT-1008,39,Female,Ovarian Cancer,3.8,Stage II,BRCA1/2+,Targeted Therapy,29,Moderate
+PAT-1009,74,Male,Pancreatic Cancer,6.3,Stage IV,Not Tested,Chemotherapy,5,Critical
+PAT-1010,61,Female,Colorectal Cancer,2.9,Stage II,KRAS Mutated,Radiation Therapy,42,Moderate
+PAT-1011,48,Female,Breast Cancer,1.8,Stage I,HER2+,Chemotherapy,75,Low
+PAT-1012,55,Male,Prostate Cancer,3.5,Stage II,TP53 Mutated,Hormone Therapy,54,Moderate
+PAT-1013,57,Male,Lung Cancer,8.2,Stage IV,ALK Fusion,Targeted Therapy,11,Critical
+PAT-1014,63,Female,Melanoma,2.4,Stage II,PD-L1 High,Immunotherapy,38,Moderate
+PAT-1015,50,Female,Ovarian Cancer,4.8,Stage III,BRCA1/2+,Chemotherapy,22,High
+PAT-1016,73,Male,Colorectal Cancer,4.1,Stage III,KRAS Mutated,Surgery + Chemo,19,High
+PAT-1017,42,Female,Breast Cancer,0.9,Stage I,HER2+,Chemotherapy,72,Low
+PAT-1018,66,Male,Lung Cancer,5.0,Stage III,EGFR Mutated,Radiation Therapy,16,High
+PAT-1019,59,Female,Breast Cancer,6.8,Stage IV,TP53 Mutated,Immunotherapy,7,Critical
+PAT-1020,31,Female,Melanoma,1.5,Stage I,PD-L1 High,Surgery + Chemo,84,Low
+PAT-1021,68,Male,Prostate Cancer,2.2,Stage I,TP53 Mutated,Hormone Therapy,65,Low
+PAT-1022,57,Female,Breast Cancer,3.9,Stage II,Triple Negative,Chemotherapy,31,Moderate
+PAT-1023,57,Male,Pancreatic Cancer,7.9,Stage IV,Not Tested,Chemotherapy,4,Critical
+PAT-1024,46,Female,Ovarian Cancer,4.3,Stage III,BRCA1/2+,Targeted Therapy,21,High
+PAT-1025,62,Male,Colorectal Cancer,3.0,Stage II,KRAS Mutated,Surgery + Chemo,45,Moderate
+PAT-1026,70,Female,Lung Cancer,6.1,Stage IV,PD-L1 High,Immunotherapy,9,Critical
+PAT-1027,53,Male,Melanoma,3.2,Stage II,ALK Fusion,Radiation Therapy,33,Moderate
+PAT-1028,41,Female,Breast Cancer,1.4,Stage I,HER2+,Chemotherapy,90,Low
+PAT-1029,76,Male,Prostate Cancer,5.8,Stage III,Not Tested,Hormone Therapy,15,High
+PAT-1030,49,Female,Ovarian Cancer,2.7,Stage II,BRCA1/2+,Targeted Therapy,40,Moderate
+PAT-1031,65,Male,Lung Cancer,4.6,Stage III,EGFR Mutated,Radiation Therapy,22,High
+PAT-1032,38,Female,Melanoma,0.8,Stage I,PD-L1 High,Surgery + Chemo,96,Low
+PAT-1033,57,Male,Pancreatic Cancer,8.5,Stage IV,TP53 Mutated,Chemotherapy,3,Critical
+PAT-1034,54,Female,Breast Cancer,6.2,Stage IV,Triple Negative,Immunotherapy,10,Critical
+PAT-1035,69,Male,Colorectal Cancer,3.6,Stage II,KRAS Mutated,Surgery + Chemo,38,Moderate
+PAT-1036,44,Female,Ovarian Cancer,5.1,Stage III,BRCA1/2+,Chemotherapy,17,High
+PAT-1037,72,Male,Lung Cancer,2.0,Stage I,ALK Fusion,Targeted Therapy,58,Low
+PAT-1038,51,Female,Melanoma,3.2,Stage II,PD-L1 High,Immunotherapy,41,Moderate
+PAT-1039,60,Male,Prostate Cancer,4.2,Stage III,TP53 Mutated,Hormone Therapy,25,High
+PAT-1040,47,Female,Breast Cancer,2.3,Stage I,HER2+,Chemotherapy,62,Low
+PAT-1041,75,Male,Pancreatic Cancer,7.4,Stage IV,Not Tested,Chemotherapy,6,Critical
+PAT-1042,56,Female,Colorectal Cancer,1.9,Stage I,KRAS Mutated,Radiation Therapy,70,Low
+PAT-1043,63,Male,Lung Cancer,5.7,Stage III,EGFR Mutated,Targeted Therapy,13,High
+PAT-1044,57,Female,Ovarian Cancer,3.4,Stage II,BRCA1/2+,Targeted Therapy,34,Moderate
+PAT-1045,43,Female,Breast Cancer,4.7,Stage III,Triple Negative,Chemotherapy,20,High
+PAT-1046,78,Male,Prostate Cancer,1.6,Stage I,TP53 Mutated,Hormone Therapy,80,Low
+PAT-1047,52,Female,Melanoma,6.5,Stage IV,PD-L1 High,Immunotherapy,12,Critical
+PAT-1048,67,Male,Colorectal Cancer,5.2,Stage III,KRAS Mutated,Surgery + Chemo,16,High
+PAT-1049,36,Female,Ovarian Cancer,1.1,Stage I,BRCA1/2+,Surgery + Chemo,102,Low
+PAT-1050,71,Male,Pancreatic Cancer,6.9,Stage IV,TP53 Mutated,Chemotherapy,5,Critical
+PAT-1051,59,Female,Breast Cancer,3.2,Stage II,HER2+,Chemotherapy,44,Moderate
+PAT-1052,64,Male,Lung Cancer,3.3,Stage II,EGFR Mutated,Radiation Therapy,36,Moderate
+PAT-1053,40,Female,Melanoma,2.5,Stage II,PD-L1 High,Immunotherapy,50,Moderate
+PAT-1054,77,Male,Prostate Cancer,8.1,Stage IV,TP53 Mutated,Hormone Therapy,8,Critical
+PAT-1055,45,Female,Colorectal Cancer,2.8,Stage II,KRAS Mutated,Surgery + Chemo,48,Moderate
+PAT-1056,57,Female,Breast Cancer,5.9,Stage IV,Triple Negative,Chemotherapy,11,Critical
+PAT-1057,68,Male,Lung Cancer,1.7,Stage I,ALK Fusion,Targeted Therapy,75,Low
+PAT-1058,50,Female,Ovarian Cancer,6.0,Stage IV,BRCA1/2+,Immunotherapy,14,Critical
+PAT-1059,62,Male,Pancreatic Cancer,4.9,Stage III,TP53 Mutated,Chemotherapy,18,High
+PAT-1060,37,Female,Melanoma,1.3,Stage I,PD-L1 High,Surgery + Chemo,88,Low
+PAT-1061,73,Male,Prostate Cancer,3.7,Stage II,TP53 Mutated,Hormone Therapy,40,Moderate
+PAT-1062,54,Female,Breast Cancer,3.1,Stage II,HER2+,Chemotherapy,52,Moderate
+PAT-1063,66,Male,Colorectal Cancer,7.2,Stage IV,KRAS Mutated,Surgery + Chemo,9,Critical
+PAT-1064,42,Female,Ovarian Cancer,2.2,Stage I,BRCA1/2+,Targeted Therapy,68,Low
+PAT-1065,79,Male,Pancreatic Cancer,5.4,Stage III,Not Tested,Chemotherapy,15,High
+PAT-1066,58,Female,Melanoma,3.9,Stage II,PD-L1 High,Immunotherapy,35,Moderate
+PAT-1067,46,Female,Breast Cancer,1.0,Stage I,HER2+,Radiation Therapy,94,Low
+PAT-1068,70,Male,Lung Cancer,6.6,Stage IV,EGFR Mutated,Targeted Therapy,7,Critical
+PAT-1069,53,Female,Ovarian Cancer,4.4,Stage III,BRCA1/2+,Chemotherapy,24,High
+PAT-1070,61,Male,Prostate Cancer,2.6,Stage II,TP53 Mutated,Hormone Therapy,50,Moderate
+PAT-1071,35,Female,Melanoma,0.9,Stage I,PD-L1 High,Surgery + Chemo,110,Low
+PAT-1072,57,Male,Colorectal Cancer,6.6,Stage IV,KRAS Mutated,Surgery + Chemo,10,Critical
+PAT-1073,69,Female,Breast Cancer,4.0,Stage III,Triple Negative,Chemotherapy,21,High
+PAT-1074,51,Male,Pancreatic Cancer,7.6,Stage IV,TP53 Mutated,Chemotherapy,6,Critical
+PAT-1075,74,Female,Ovarian Cancer,5.6,Stage III,BRCA1/2+,Immunotherapy,19,High
+PAT-1076,43,Male,Lung Cancer,2.8,Stage II,ALK Fusion,Targeted Therapy,46,Moderate
+PAT-1077,65,Female,Melanoma,2.1,Stage I,PD-L1 High,Surgery + Chemo,66,Low
+PAT-1078,57,Male,Prostate Cancer,5.0,Stage III,TP53 Mutated,Hormone Therapy,23,High
+PAT-1079,49,Female,Breast Cancer,2.0,Stage I,HER2+,Chemotherapy,78,Low
+PAT-1080,72,Male,Colorectal Cancer,3.8,Stage II,KRAS Mutated,Surgery + Chemo,42,Moderate
+PAT-1081,38,Female,Ovarian Cancer,7.0,Stage IV,BRCA1/2+,Chemotherapy,13,Critical
+PAT-1082,60,Male,Pancreatic Cancer,6.6,Stage IV,TP53 Mutated,Immunotherapy,8,Critical
+PAT-1083,55,Female,Lung Cancer,4.1,Stage III,EGFR Mutated,Radiation Therapy,26,High
+PAT-1084,66,Male,Melanoma,1.6,Stage I,PD-L1 High,Surgery + Chemo,72,Low
+PAT-1085,47,Female,Breast Cancer,3.5,Stage II,Triple Negative,Chemotherapy,39,Moderate
+PAT-1086,76,Male,Prostate Cancer,4.5,Stage III,TP53 Mutated,Hormone Therapy,27,High
+PAT-1087,53,Female,Ovarian Cancer,1.7,Stage I,BRCA1/2+,Targeted Therapy,85,Low
+PAT-1088,57,Male,Lung Cancer,6.4,Stage IV,ALK Fusion,Targeted Therapy,9,Critical
+PAT-1089,62,Female,Melanoma,2.9,Stage II,PD-L1 High,Immunotherapy,44,Moderate
+PAT-1090,41,Male,Colorectal Cancer,4.3,Stage III,KRAS Mutated,Surgery + Chemo,28,High
+PAT-1091,70,Female,Breast Cancer,7.8,Stage IV,HER2+,Chemotherapy,11,Critical
+PAT-1092,56,Male,Pancreatic Cancer,3.6,Stage II,TP53 Mutated,Chemotherapy,32,Moderate
+PAT-1093,44,Female,Ovarian Cancer,5.3,Stage III,BRCA1/2+,Radiation Therapy,20,High
+PAT-1094,68,Male,Prostate Cancer,1.9,Stage I,TP53 Mutated,Hormone Therapy,88,Low
+PAT-1095,50,Female,Lung Cancer,2.6,Stage II,EGFR Mutated,Targeted Therapy,48,Moderate
