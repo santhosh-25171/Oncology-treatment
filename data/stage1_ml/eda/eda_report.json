@@ -1,0 +1,492 @@
+{
+    "dataset_dimensions": {
+        "rows": 5000,
+        "columns": 36
+    },
+    "feature_types": {
+        "numerical": 25,
+        "categorical": 9,
+        "targets": 2
+    },
+    "missing_value_summary": {
+        "renal_function": {
+            "count": 123,
+            "pct": 2.46
+        },
+        "liver_function": {
+            "count": 117,
+            "pct": 2.34
+        },
+        "hemoglobin": {
+            "count": 135,
+            "pct": 2.7
+        },
+        "ctDNA_level": {
+            "count": 102,
+            "pct": 2.04
+        },
+        "biomarker_1": {
+            "count": 119,
+            "pct": 2.3800000000000003
+        },
+        "biomarker_2": {
+            "count": 120,
+            "pct": 2.4
+        },
+        "albumin": {
+            "count": 141,
+            "pct": 2.82
+        }
+    },
+    "target_distributions": {
+        "toxicity_risk": {
+            "Low": {
+                "count": 2025,
+                "pct": 40.5
+            },
+            "High": {
+                "count": 1954,
+                "pct": 39.08
+            },
+            "Moderate": {
+                "count": 1021,
+                "pct": 20.419999999999998
+            }
+        },
+        "therapy_response": {
+            "Partial Response": {
+                "count": 2306,
+                "pct": 46.12
+            },
+            "Complete Response": {
+                "count": 1777,
+                "pct": 35.54
+            },
+            "Non-Responder": {
+                "count": 917,
+                "pct": 18.34
+            }
+        }
+    },
+    "numerical_summaries": {
+        "age": {
+            "count": 5000.0,
+            "mean": 56.79928,
+            "std": 12.645824878550698,
+            "min": 18.0,
+            "25%": 48.375,
+            "50%": 56.8,
+            "75%": 65.5,
+            "max": 85.0
+        },
+        "performance_status": {
+            "count": 5000.0,
+            "mean": 1.4738,
+            "std": 1.062986146621668,
+            "min": 0.0,
+            "25%": 1.0,
+            "50%": 1.0,
+            "75%": 2.0,
+            "max": 4.0
+        },
+        "treatment_dose": {
+            "count": 5000.0,
+            "mean": 75.66990200000001,
+            "std": 18.013802228972786,
+            "min": 12.17,
+            "25%": 63.69,
+            "50%": 75.33,
+            "75%": 87.6425,
+            "max": 140.0
+        },
+        "treatment_duration": {
+            "count": 5000.0,
+            "mean": 15.9267,
+            "std": 6.765882096379483,
+            "min": 2.0,
+            "25%": 11.2,
+            "50%": 15.9,
+            "75%": 20.5,
+            "max": 40.0
+        },
+        "renal_function": {
+            "count": 4877.0,
+            "mean": 69.61804387943407,
+            "std": 18.41432622174103,
+            "min": 20.0,
+            "25%": 57.2,
+            "50%": 69.2,
+            "75%": 82.0,
+            "max": 125.0
+        },
+        "liver_function": {
+            "count": 4883.0,
+            "mean": 82.69731722301863,
+            "std": 12.222328266157941,
+            "min": 39.7,
+            "25%": 74.4,
+            "50%": 82.9,
+            "75%": 90.9,
+            "max": 115.0
+        },
+        "hemoglobin": {
+            "count": 4865.0,
+            "mean": 11.720415210688591,
+            "std": 1.7237301629327353,
+            "min": 7.0,
+            "25%": 10.57,
+            "50%": 11.7,
+            "75%": 12.87,
+            "max": 17.0
+        },
+        "wbc_count": {
+            "count": 5000.0,
+            "mean": 7.099186,
+            "std": 1.9886321250924692,
+            "min": 2.0,
+            "25%": 5.78,
+            "50%": 7.07,
+            "75%": 8.48,
+            "max": 13.49
+        },
+        "platelet_count": {
+            "count": 5000.0,
+            "mean": 230.3344,
+            "std": 65.3525556649959,
+            "min": 80.0,
+            "25%": 185.0,
+            "50%": 229.4,
+            "75%": 274.025,
+            "max": 450.0
+        },
+        "mutation_burden": {
+            "count": 5000.0,
+            "mean": 5.755203999999999,
+            "std": 2.98388730938,
+            "min": 0.55,
+            "25%": 3.62,
+            "50%": 5.17,
+            "75%": 7.2,
+            "max": 25.71
+        },
+        "ctDNA_level": {
+            "count": 4898.0,
+            "mean": 6.3879544712127405,
+            "std": 5.991076940829142,
+            "min": 0.3,
+            "25%": 2.7275,
+            "50%": 4.603,
+            "75%": 7.99475,
+            "max": 92.917
+        },
+        "biomarker_1": {
+            "count": 4881.0,
+            "mean": 55.109078057775044,
+            "std": 18.144999630996544,
+            "min": 2.0,
+            "25%": 42.75,
+            "50%": 55.31,
+            "75%": 67.39,
+            "max": 124.01
+        },
+        "biomarker_2": {
+            "count": 4880.0,
+            "mean": 34.62025819672131,
+            "std": 14.907637236529217,
+            "min": 2.0,
+            "25%": 24.47,
+            "50%": 34.32,
+            "75%": 44.6825,
+            "max": 96.28
+        },
+        "prior_treatment_count": {
+            "count": 5000.0,
+            "mean": 1.299,
+            "std": 1.1282967742230519,
+            "min": 0.0,
+            "25%": 0.0,
+            "50%": 1.0,
+            "75%": 2.0,
+            "max": 6.0
+        },
+        "comorbidity_score": {
+            "count": 5000.0,
+            "mean": 1.9938,
+            "std": 1.3816451601875692,
+            "min": 0.0,
+            "25%": 1.0,
+            "50%": 2.0,
+            "75%": 3.0,
+            "max": 8.0
+        },
+        "tumor_size": {
+            "count": 5000.0,
+            "mean": 6.4044479999999995,
+            "std": 2.262069965187081,
+            "min": 0.3,
+            "25%": 4.91,
+            "50%": 6.42,
+            "75%": 7.89,
+            "max": 15.0
+        },
+        "bmi": {
+            "count": 5000.0,
+            "mean": 25.50602,
+            "std": 4.416566196831448,
+            "min": 16.0,
+            "25%": 22.44,
+            "50%": 25.564999999999998,
+            "75%": 28.55,
+            "max": 40.96
+        },
+        "albumin": {
+            "count": 4859.0,
+            "mean": 3.7395781024902246,
+            "std": 0.547616985610573,
+            "min": 2.2,
+            "25%": 3.37,
+            "50%": 3.74,
+            "75%": 4.12,
+            "max": 5.2
+        },
+        "creatinine": {
+            "count": 5000.0,
+            "mean": 1.0765252,
+            "std": 0.2691565500125214,
+            "min": 0.45,
+            "25%": 0.889,
+            "50%": 1.074,
+            "75%": 1.257,
+            "max": 2.161
+        },
+        "neutrophil_count": {
+            "count": 5000.0,
+            "mean": 4.621988,
+            "std": 1.498242648592948,
+            "min": 1.0,
+            "25%": 3.58,
+            "50%": 4.61,
+            "75%": 5.64,
+            "max": 10.12
+        },
+        "lymphocyte_count": {
+            "count": 5000.0,
+            "mean": 1.605492,
+            "std": 0.635929995618909,
+            "min": 0.4,
+            "25%": 1.15,
+            "50%": 1.6,
+            "75%": 2.04,
+            "max": 4.2
+        },
+        "inflammatory_marker": {
+            "count": 5000.0,
+            "mean": 20.037742,
+            "std": 16.493858590265503,
+            "min": 1.33,
+            "25%": 10.33,
+            "50%": 15.965,
+            "75%": 24.86,
+            "max": 456.73
+        },
+        "genetic_risk_score": {
+            "count": 5000.0,
+            "mean": 57.25778599999999,
+            "std": 18.24447447113645,
+            "min": 0.0,
+            "25%": 45.15,
+            "50%": 57.52,
+            "75%": 69.8025,
+            "max": 100.0
+        },
+        "dose_intensity": {
+            "count": 5000.0,
+            "mean": 0.7770986000000001,
+            "std": 0.13313732755180843,
+            "min": 0.45,
+            "25%": 0.685,
+            "50%": 0.777,
+            "75%": 0.868,
+            "max": 1.2
+        },
+        "baseline_tumor_volume": {
+            "count": 5000.0,
+            "mean": 187.138562,
+            "std": 175.2686846560913,
+            "min": 1.0,
+            "25%": 60.9875,
+            "50%": 137.89,
+            "75%": 256.6125,
+            "max": 1000.0
+        }
+    },
+    "categorical_summaries": {
+        "sex": {
+            "Male": {
+                "count": 2530,
+                "pct": 50.6
+            },
+            "Female": {
+                "count": 2470,
+                "pct": 49.4
+            }
+        },
+        "cancer_type": {
+            "Lung Cancer": {
+                "count": 938,
+                "pct": 18.759999999999998
+            },
+            "Breast Cancer": {
+                "count": 922,
+                "pct": 18.44
+            },
+            "Colorectal Cancer": {
+                "count": 732,
+                "pct": 14.64
+            },
+            "Prostate Cancer": {
+                "count": 654,
+                "pct": 13.08
+            },
+            "Gastric Cancer": {
+                "count": 518,
+                "pct": 10.36
+            },
+            "Ovarian Cancer": {
+                "count": 432,
+                "pct": 8.64
+            },
+            "Liver Cancer": {
+                "count": 416,
+                "pct": 8.32
+            },
+            "Pancreatic Cancer": {
+                "count": 388,
+                "pct": 7.76
+            }
+        },
+        "cancer_stage": {
+            "III": {
+                "count": 1820,
+                "pct": 36.4
+            },
+            "II": {
+                "count": 1401,
+                "pct": 28.02
+            },
+            "IV": {
+                "count": 1191,
+                "pct": 23.82
+            },
+            "I": {
+                "count": 588,
+                "pct": 11.76
+            }
+        },
+        "treatment_type": {
+            "Chemotherapy": {
+                "count": 1556,
+                "pct": 31.119999999999997
+            },
+            "Immunotherapy": {
+                "count": 976,
+                "pct": 19.52
+            },
+            "Combination Therapy": {
+                "count": 935,
+                "pct": 18.7
+            },
+            "Targeted Therapy": {
+                "count": 897,
+                "pct": 17.94
+            },
+            "Hormone Therapy": {
+                "count": 636,
+                "pct": 12.72
+            }
+        },
+        "tumor_grade": {
+            "Intermediate": {
+                "count": 2162,
+                "pct": 43.24
+            },
+            "High": {
+                "count": 1770,
+                "pct": 35.4
+            },
+            "Low": {
+                "count": 1068,
+                "pct": 21.36
+            }
+        },
+        "lymph_node_involvement": {
+            "Yes": {
+                "count": 2883,
+                "pct": 57.66
+            },
+            "No": {
+                "count": 2117,
+                "pct": 42.34
+            }
+        },
+        "metastasis_status": {
+            "No": {
+                "count": 3315,
+                "pct": 66.3
+            },
+            "Yes": {
+                "count": 1685,
+                "pct": 33.7
+            }
+        },
+        "smoking_status": {
+            "Never": {
+                "count": 2498,
+                "pct": 49.96
+            },
+            "Former": {
+                "count": 1513,
+                "pct": 30.259999999999998
+            },
+            "Current": {
+                "count": 989,
+                "pct": 19.78
+            }
+        },
+        "treatment_line": {
+            "First-line": {
+                "count": 2297,
+                "pct": 45.94
+            },
+            "Second-line": {
+                "count": 1521,
+                "pct": 30.42
+            },
+            "Third-line": {
+                "count": 786,
+                "pct": 15.72
+            },
+            "Later-line": {
+                "count": 396,
+                "pct": 7.920000000000001
+            }
+        }
+    },
+    "correlation_findings": {
+        "tumor_size_vs_baseline_tumor_volume": 0.9177299911187373,
+        "baseline_tumor_volume_vs_tumor_size": 0.9177299911187373,
+        "renal_function_vs_creatinine": -0.3973860942927833,
+        "creatinine_vs_renal_function": -0.3973860942927833,
+        "genetic_risk_score_vs_mutation_burden": 0.17154072159877395,
+        "mutation_burden_vs_genetic_risk_score": 0.17154072159877395,
+        "ctDNA_level_vs_tumor_size": 0.07822801278678217,
+        "tumor_size_vs_ctDNA_level": 0.07822801278678217,
+        "tumor_size_vs_inflammatory_marker": 0.07647671911691539,
+        "inflammatory_marker_vs_tumor_size": 0.07647671911691539
+    },
+    "eda_conclusions": [
+        "Dataset maintains integrity with correct features and targets.",
+        "Missing values exist but are strictly limited to numerical predictors, preserving future ML capability.",
+        "Target distributions show natural clinical variation without extreme catastrophic imbalance, but enough variance to require careful sampling."
+    ]
+}
