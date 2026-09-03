@@ -1,5 +1,0 @@
-resource_type,resource_id,status,location
-Ambulance,AMB-1,Available,Zone 3
-Ambulance,AMB-2,Available,Zone 7
-ShelterBed,SHL-1,Available,Zone 3
-ShelterBed,SHL-2,Available,Zone 7
