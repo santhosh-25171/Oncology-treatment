@@ -1,0 +1,166 @@
+{
+    "toxicity_risk": [
+        {
+            "feature": "treatment_dose",
+            "mean_abs_shap": 0.15623672306537628
+        },
+        {
+            "feature": "hemoglobin",
+            "mean_abs_shap": 0.136043518781662
+        },
+        {
+            "feature": "renal_function",
+            "mean_abs_shap": 0.12542907893657684
+        },
+        {
+            "feature": "age",
+            "mean_abs_shap": 0.12093743681907654
+        },
+        {
+            "feature": "neutrophil_count",
+            "mean_abs_shap": 0.0953277200460434
+        },
+        {
+            "feature": "biomarker_interaction",
+            "mean_abs_shap": 0.09524603188037872
+        },
+        {
+            "feature": "bmi",
+            "mean_abs_shap": 0.09390822798013687
+        },
+        {
+            "feature": "liver_function",
+            "mean_abs_shap": 0.09148157387971878
+        },
+        {
+            "feature": "biomarker_2",
+            "mean_abs_shap": 0.09092426300048828
+        },
+        {
+            "feature": "platelet_count",
+            "mean_abs_shap": 0.08730511367321014
+        },
+        {
+            "feature": "genetic_risk_score",
+            "mean_abs_shap": 0.08569617569446564
+        },
+        {
+            "feature": "tumor_size",
+            "mean_abs_shap": 0.08534202724695206
+        },
+        {
+            "feature": "creatinine",
+            "mean_abs_shap": 0.08516643941402435
+        },
+        {
+            "feature": "lymphocyte_count",
+            "mean_abs_shap": 0.0830104872584343
+        },
+        {
+            "feature": "wbc_count",
+            "mean_abs_shap": 0.08145753294229507
+        },
+        {
+            "feature": "mutation_burden",
+            "mean_abs_shap": 0.08124645054340363
+        },
+        {
+            "feature": "ctDNA_level",
+            "mean_abs_shap": 0.0801796019077301
+        },
+        {
+            "feature": "biomarker_1",
+            "mean_abs_shap": 0.08015204221010208
+        },
+        {
+            "feature": "treatment_duration",
+            "mean_abs_shap": 0.07715488970279694
+        },
+        {
+            "feature": "inflammatory_marker",
+            "mean_abs_shap": 0.07679954916238785
+        }
+    ],
+    "therapy_response": [
+        {
+            "feature": "cancer_stage_IV",
+            "mean_abs_shap": 0.09399495533213414
+        },
+        {
+            "feature": "cancer_stage_II",
+            "mean_abs_shap": 0.07520792691624995
+        },
+        {
+            "feature": "bmi",
+            "mean_abs_shap": 0.06935967120965775
+        },
+        {
+            "feature": "biomarker_1",
+            "mean_abs_shap": 0.06532001178652265
+        },
+        {
+            "feature": "bmi_category_obese",
+            "mean_abs_shap": 0.05879650152925751
+        },
+        {
+            "feature": "metastasis_status_No",
+            "mean_abs_shap": 0.054559042938925655
+        },
+        {
+            "feature": "prior_treatment_count",
+            "mean_abs_shap": 0.04980992890821364
+        },
+        {
+            "feature": "age_group_gt_65",
+            "mean_abs_shap": 0.044940223907321775
+        },
+        {
+            "feature": "treatment_duration",
+            "mean_abs_shap": 0.044813763446975644
+        },
+        {
+            "feature": "cancer_stage_I",
+            "mean_abs_shap": 0.04464866614900693
+        },
+        {
+            "feature": "age",
+            "mean_abs_shap": 0.04316958459061767
+        },
+        {
+            "feature": "tumor_grade_Intermediate",
+            "mean_abs_shap": 0.04287155209178009
+        },
+        {
+            "feature": "tumor_size",
+            "mean_abs_shap": 0.0371803814638132
+        },
+        {
+            "feature": "smoking_status_Former",
+            "mean_abs_shap": 0.03694008068823564
+        },
+        {
+            "feature": "ctDNA_level",
+            "mean_abs_shap": 0.036603757824668355
+        },
+        {
+            "feature": "tumor_size_category_T2_medium",
+            "mean_abs_shap": 0.03602024293160322
+        },
+        {
+            "feature": "treatment_type_Targeted Therapy",
+            "mean_abs_shap": 0.03379208745355366
+        },
+        {
+            "feature": "smoking_status_Never",
+            "mean_abs_shap": 0.031972293156685275
+        },
+        {
+            "feature": "bmi_category_underweight",
+            "mean_abs_shap": 0.03098166534136047
+        },
+        {
+            "feature": "biomarker_interaction",
+            "mean_abs_shap": 0.029115489567594088
+        }
+    ]
+}

@@ -1,0 +1,62 @@
+{
+    "toxicity_risk": {
+        "patient_index": 4756,
+        "top_features_pushing_prediction": [
+            {
+                "feature": "renal_function",
+                "shap_value": 0.6493567824363708,
+                "feature_value": -1.7432555806227517
+            },
+            {
+                "feature": "hemoglobin",
+                "shap_value": 0.19076845049858093,
+                "feature_value": -0.4122164515424807
+            },
+            {
+                "feature": "bmi",
+                "shap_value": -0.18917132914066315,
+                "feature_value": 1.6162525432374564
+            },
+            {
+                "feature": "neutrophil_count",
+                "shap_value": 0.17450764775276184,
+                "feature_value": 0.6206330711741822
+            },
+            {
+                "feature": "treatment_dose",
+                "shap_value": 0.1558934599161148,
+                "feature_value": 1.6400720195249474
+            }
+        ]
+    },
+    "therapy_response": {
+        "patient_index": 4756,
+        "top_features_pushing_prediction": [
+            {
+                "feature": "cancer_stage_IV",
+                "shap_value": -0.3416687793514687,
+                "feature_value": 1.0
+            },
+            {
+                "feature": "bmi_category_obese",
+                "shap_value": 0.24819203852337104,
+                "feature_value": 1.0
+            },
+            {
+                "feature": "bmi",
+                "shap_value": -0.17818785958050304,
+                "feature_value": 1.6162525432374564
+            },
+            {
+                "feature": "biomarker_1",
+                "shap_value": -0.1426472809140164,
+                "feature_value": -1.3989544652621158
+            },
+            {
+                "feature": "metastasis_status_No",
+                "shap_value": 0.12305170142194852,
+                "feature_value": 0.0
+            }
+        ]
+    }
+}

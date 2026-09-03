@@ -1,0 +1,96 @@
+{
+    "status": "PASS",
+    "models_tested": [
+        "toxicity_risk: XGBoost",
+        "therapy_response: Logistic Regression"
+    ],
+    "errors": [],
+    "test_samples": 750,
+    "prediction_examples": {
+        "toxicity_risk": {
+            "first_5_predictions": [
+                "High",
+                "High",
+                "Low",
+                "Low",
+                "High"
+            ],
+            "first_5_probabilities": [
+                [
+                    0.5958999991416931,
+                    0.23999999463558197,
+                    0.16410000622272491
+                ],
+                [
+                    0.6657000184059143,
+                    0.3172000050544739,
+                    0.017000000923871994
+                ],
+                [
+                    0.3190000057220459,
+                    0.3675000071525574,
+                    0.31349998712539673
+                ],
+                [
+                    0.18799999356269836,
+                    0.7639999985694885,
+                    0.04800000041723251
+                ],
+                [
+                    0.7494000196456909,
+                    0.13249999284744263,
+                    0.11810000240802765
+                ]
+            ],
+            "classes": [
+                "High",
+                "Low",
+                "Moderate"
+            ]
+        },
+        "therapy_response": {
+            "first_5_predictions": [
+                "Partial Response",
+                "Partial Response",
+                "Partial Response",
+                "Partial Response",
+                "Partial Response"
+            ],
+            "first_5_probabilities": [
+                [
+                    0.3843,
+                    0.1754,
+                    0.4403
+                ],
+                [
+                    0.4132,
+                    0.1484,
+                    0.4383
+                ],
+                [
+                    0.4083,
+                    0.1692,
+                    0.4225
+                ],
+                [
+                    0.2109,
+                    0.3041,
+                    0.4849
+                ],
+                [
+                    0.2558,
+                    0.2176,
+                    0.5267
+                ]
+            ],
+            "classes": [
+                "Complete Response",
+                "Non-Responder",
+                "Partial Response"
+            ]
+        }
+    },
+    "generated_files": [
+        "C:\\Users\\Dell\\Documents\\SPECIAL\\personalized_precision_oncology\\data\\stage1_ml\\evaluation\\model_validation_report.json"
+    ]
+}
