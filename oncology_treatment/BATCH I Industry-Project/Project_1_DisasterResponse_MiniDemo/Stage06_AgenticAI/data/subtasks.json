@@ -1,0 +1,10 @@
+{
+  "zone": "Zone 7",
+  "risk": "Severe",
+  "subtasks": [
+    "Check resource inventory for available ambulance near Zone 7",
+    "Reserve 1 ambulance and dispatch to Zone 7 IMMEDIATELY",
+    "Check shelter capacity near Zone 7",
+    "Send evacuation alert to residents of Zone 7"
+  ]
+}

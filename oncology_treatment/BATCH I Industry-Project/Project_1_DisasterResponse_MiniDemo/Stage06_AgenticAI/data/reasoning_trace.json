@@ -1,0 +1,14 @@
+[
+  "[REASON] Step 1: Need to 'Check resource inventory for available ambulance near Zone 7'",
+  "[ACT] Tool call: log_action('Check resource inventory for available ambulance near Zone 7')",
+  "[OBSERVE] Logged successfully.",
+  "[REASON] Step 2: Need to 'Reserve 1 ambulance and dispatch to Zone 7 IMMEDIATELY'",
+  "[ACT] Tool call: dispatch_ambulance(AMB-1)",
+  "[OBSERVE] AMB-1 successfully dispatched.",
+  "[REASON] Step 3: Need to 'Check shelter capacity near Zone 7'",
+  "[ACT] Tool call: log_action('Check shelter capacity near Zone 7')",
+  "[OBSERVE] Logged successfully.",
+  "[REASON] Step 4: Need to 'Send evacuation alert to residents of Zone 7'",
+  "[ACT] Tool call: log_action('Send evacuation alert to residents of Zone 7')",
+  "[OBSERVE] Logged successfully."
+]

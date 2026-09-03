@@ -1,0 +1,44 @@
+{
+  "evaluation_type": "Stage 01 Patient Risk Score Evaluation",
+  "model_file": "risk_score_model.joblib",
+  "dataset": "oncology_cleaned_datasets.csv",
+  "random_state": 42,
+  "test_size": 0.2,
+  "features_used": [
+    "age",
+    "gender",
+    "cancer_type",
+    "cancer_stage",
+    "tumor_size_cm",
+    "smoking_status",
+    "alcohol_use",
+    "family_history",
+    "bmi",
+    "treatment_type",
+    "hospital_visits_per_year"
+  ],
+  "metrics": {
+    "accuracy": 0.44373219373219375,
+    "macro_precision": 0.45417323760862,
+    "macro_recall": 0.4611972945700445,
+    "macro_f1": 0.4436550686499506,
+    "weighted_f1": 0.4395608342262433,
+    "train_accuracy": 0.4688168210976479,
+    "test_accuracy": 0.44373219373219375,
+    "accuracy_gap": 0.025084627365454137,
+    "train_macro_f1": 0.4678835001173953,
+    "test_macro_f1": 0.4436550686499506,
+    "macro_f1_gap": 0.024228431467444744,
+    "fit_status": "UNDERFITTING"
+  },
+  "high_risk_recall": 0.31129476584022037,
+  "critical_recall": 0.6753731343283582,
+  "decision": "REVIEW",
+  "decision_checks": {
+    "macro_f1": false,
+    "macro_recall": false,
+    "high_risk_recall": false,
+    "critical_recall": false
+  },
+  "note": "PASS/REVIEW thresholds are project evaluation thresholds only; they are not clinical or regulatory acceptance criteria."
+}
