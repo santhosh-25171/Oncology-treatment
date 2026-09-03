@@ -1,0 +1,32 @@
+[
+    {
+        "target": "therapy_response",
+        "biomarker": "tumor_size_category_T2_medium",
+        "importance_score": 0.08929162848686965
+    },
+    {
+        "target": "therapy_response",
+        "biomarker": "tumor_grade_Intermediate",
+        "importance_score": 0.08567456453193463
+    },
+    {
+        "target": "therapy_response",
+        "biomarker": "biomarker_1",
+        "importance_score": 0.07577443928184348
+    },
+    {
+        "target": "therapy_response",
+        "biomarker": "tumor_size_category_T1_small",
+        "importance_score": 0.06775664049023018
+    },
+    {
+        "target": "toxicity_risk",
+        "biomarker": "biomarker_2",
+        "importance_score": 0.01889665052294731
+    },
+    {
+        "target": "toxicity_risk",
+        "biomarker": "biomarker_1",
+        "importance_score": 0.017737988382577896
+    }
+]

@@ -1,0 +1,24 @@
+{
+    "toxicity_risk": {
+        "Before_Tuning": {
+            "best_model": "XGBoost",
+            "test_macro_f1": 0.34621847583204457
+        },
+        "After_Tuning": {
+            "best_model": "XGBoost",
+            "test_macro_f1": 0.3723069865299891
+        },
+        "Improvement": 0.026088510697944545
+    },
+    "therapy_response": {
+        "Before_Tuning": {
+            "best_model": "Logistic Regression",
+            "test_macro_f1": 0.32360525701676957
+        },
+        "After_Tuning": {
+            "best_model": "XGBoost",
+            "test_macro_f1": 0.32604868227862444
+        },
+        "Improvement": 0.00244342526185487
+    }
+}

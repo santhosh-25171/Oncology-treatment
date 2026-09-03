@@ -1,0 +1,68 @@
+{
+    "input_features": {
+        "age": 73.6,
+        "sex": "Male",
+        "cancer_type": "Breast Cancer",
+        "cancer_stage": "III",
+        "performance_status": 2,
+        "treatment_type": "Immunotherapy",
+        "treatment_dose": 67.03,
+        "treatment_duration": 8.5,
+        "renal_function": 97.5,
+        "liver_function": 80.3,
+        "hemoglobin": 14.26,
+        "wbc_count": 9.75,
+        "platelet_count": 200.2,
+        "mutation_burden": 6.66,
+        "ctDNA_level": 2.209,
+        "biomarker_1": 57.95,
+        "biomarker_2": 54.16,
+        "prior_treatment_count": 0,
+        "comorbidity_score": 0,
+        "tumor_size": 6.01,
+        "tumor_grade": "Intermediate",
+        "lymph_node_involvement": "No",
+        "metastasis_status": "No",
+        "smoking_status": "Never",
+        "bmi": 25.34,
+        "albumin": 3.96,
+        "creatinine": 1.195,
+        "neutrophil_count": 7.31,
+        "lymphocyte_count": 0.4,
+        "inflammatory_marker": 20.81,
+        "genetic_risk_score": 63.07,
+        "treatment_line": "Third-line",
+        "dose_intensity": 0.635,
+        "baseline_tumor_volume": 129.32
+    },
+    "prediction": {
+        "toxicity_risk": {
+            "prediction": "Moderate",
+            "confidence": 0.397933691740036,
+            "probabilities": {
+                "High": 0.21673548221588135,
+                "Low": 0.38533082604408264,
+                "Moderate": 0.397933691740036
+            },
+            "important_factors": [
+                "renal_function",
+                "lymphocyte_count",
+                "hemoglobin"
+            ]
+        },
+        "therapy_response": {
+            "prediction": "Partial Response",
+            "confidence": 0.5799921154975891,
+            "probabilities": {
+                "Complete Response": 0.30703702569007874,
+                "Non-Responder": 0.11297084391117096,
+                "Partial Response": 0.5799921154975891
+            },
+            "important_factors": [
+                "cancer_stage_III",
+                "cancer_stage_IV",
+                "prior_treatment_count"
+            ]
+        }
+    }
+}

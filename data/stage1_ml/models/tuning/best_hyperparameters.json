@@ -1,0 +1,24 @@
+{
+    "toxicity_risk": {
+        "model": "XGBoost",
+        "parameters": {
+            "subsample": 1.0,
+            "n_estimators": 200,
+            "max_depth": 3,
+            "learning_rate": 0.2,
+            "colsample_bytree": 1.0
+        },
+        "test_macro_f1": 0.3723069865299891
+    },
+    "therapy_response": {
+        "model": "XGBoost",
+        "parameters": {
+            "subsample": 1.0,
+            "n_estimators": 200,
+            "max_depth": 3,
+            "learning_rate": 0.2,
+            "colsample_bytree": 1.0
+        },
+        "test_macro_f1": 0.32604868227862444
+    }
+}

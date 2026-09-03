@@ -1,0 +1,84 @@
+{
+    "toxicity_risk": {
+        "Logistic Regression": {
+            "best_params": {
+                "solver": "lbfgs",
+                "penalty": "l2",
+                "C": 0.1
+            },
+            "cv_macro_f1": 0.3641812322006919,
+            "test_macro_f1": 0.3527241908126731
+        },
+        "Random Forest": {
+            "best_params": {
+                "n_estimators": 50,
+                "min_samples_split": 5,
+                "max_depth": 20
+            },
+            "cv_macro_f1": 0.3367874383759508,
+            "test_macro_f1": 0.3475392962734904
+        },
+        "XGBoost": {
+            "best_params": {
+                "subsample": 1.0,
+                "n_estimators": 200,
+                "max_depth": 3,
+                "learning_rate": 0.2,
+                "colsample_bytree": 1.0
+            },
+            "cv_macro_f1": 0.3645027240099148,
+            "test_macro_f1": 0.3723069865299891
+        },
+        "LightGBM": {
+            "best_params": {
+                "num_leaves": 50,
+                "n_estimators": 200,
+                "max_depth": 10,
+                "learning_rate": 0.2
+            },
+            "cv_macro_f1": 0.35674841529574697,
+            "test_macro_f1": 0.37138138100453966
+        }
+    },
+    "therapy_response": {
+        "Logistic Regression": {
+            "best_params": {
+                "solver": "lbfgs",
+                "penalty": "l2",
+                "C": 0.1
+            },
+            "cv_macro_f1": 0.3156439238689102,
+            "test_macro_f1": 0.31545050080399156
+        },
+        "Random Forest": {
+            "best_params": {
+                "n_estimators": 50,
+                "min_samples_split": 2,
+                "max_depth": null
+            },
+            "cv_macro_f1": 0.3111635610744892,
+            "test_macro_f1": 0.3099090930044726
+        },
+        "XGBoost": {
+            "best_params": {
+                "subsample": 1.0,
+                "n_estimators": 200,
+                "max_depth": 3,
+                "learning_rate": 0.2,
+                "colsample_bytree": 1.0
+            },
+            "cv_macro_f1": 0.32938493863051876,
+            "test_macro_f1": 0.32604868227862444
+        },
+        "LightGBM": {
+            "best_params": {
+                "num_leaves": 50,
+                "n_estimators": 100,
+                "max_depth": -1,
+                "learning_rate": 0.1
+            },
+            "cv_macro_f1": 0.32280371256093043,
+            "test_macro_f1": 0.31764380862896163
+        }
+    }
+}
