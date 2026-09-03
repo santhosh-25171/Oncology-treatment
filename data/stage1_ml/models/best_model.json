@@ -1,0 +1,20 @@
+{
+    "toxicity_risk": {
+        "best_model": "XGBoost",
+        "best_f1_macro": 0.34621847583204457,
+        "classes": [
+            "High",
+            "Low",
+            "Moderate"
+        ]
+    },
+    "therapy_response": {
+        "best_model": "Logistic Regression",
+        "best_f1_macro": 0.32360525701676957,
+        "classes": [
+            "Complete Response",
+            "Non-Responder",
+            "Partial Response"
+        ]
+    }
+}

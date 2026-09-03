@@ -1,0 +1,242 @@
+[
+    {
+        "target": "toxicity_risk",
+        "model_name": "Logistic Regression",
+        "parameters": "{'C': 1.0, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'l1_ratio': 0.0, 'max_iter': 1000, 'n_jobs': None, 'penalty': 'deprecated', 'random_state': 42, 'solver': 'lbfgs', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}",
+        "metrics": {
+            "accuracy": 0.44266666666666665,
+            "precision_macro": 0.3559491056686143,
+            "recall_macro": 0.37480426714139997,
+            "f1_macro": 0.34589585973057346,
+            "roc_auc_macro": 0.5889864366295299,
+            "confusion_matrix": [
+                [
+                    156,
+                    127,
+                    11
+                ],
+                [
+                    121,
+                    172,
+                    10
+                ],
+                [
+                    54,
+                    95,
+                    4
+                ]
+            ]
+        },
+        "training_time": 0.07303476333618164
+    },
+    {
+        "target": "toxicity_risk",
+        "model_name": "Random Forest",
+        "parameters": "{'bootstrap': True, 'ccp_alpha': 0.0, 'class_weight': None, 'criterion': 'gini', 'max_depth': None, 'max_features': 'sqrt', 'max_leaf_nodes': None, 'max_samples': None, 'min_impurity_decrease': 0.0, 'min_samples_leaf': 1, 'min_samples_split': 2, 'min_weight_fraction_leaf': 0.0, 'monotonic_cst': None, 'n_estimators': 100, 'n_jobs': None, 'oob_score': False, 'random_state': 42, 'verbose': 0, 'warm_start': False}",
+        "metrics": {
+            "accuracy": 0.416,
+            "precision_macro": 0.3212664874096145,
+            "recall_macro": 0.34966747975317736,
+            "f1_macro": 0.31401016697501727,
+            "roc_auc_macro": 0.5458947143214414,
+            "confusion_matrix": [
+                [
+                    159,
+                    133,
+                    2
+                ],
+                [
+                    146,
+                    152,
+                    5
+                ],
+                [
+                    60,
+                    92,
+                    1
+                ]
+            ]
+        },
+        "training_time": 1.9978389739990234
+    },
+    {
+        "target": "toxicity_risk",
+        "model_name": "XGBoost",
+        "parameters": "{'objective': 'multi:softprob', 'base_score': None, 'booster': None, 'callbacks': None, 'colsample_bylevel': None, 'colsample_bynode': None, 'colsample_bytree': None, 'device': None, 'early_stopping_rounds': None, 'enable_categorical': True, 'eval_metric': 'mlogloss', 'feature_types': None, 'feature_weights': None, 'gamma': None, 'grow_policy': None, 'importance_type': None, 'interaction_constraints': None, 'learning_rate': None, 'max_bin': None, 'max_cat_threshold': None, 'max_cat_to_onehot': None, 'max_delta_step': None, 'max_depth': None, 'max_leaves': None, 'min_child_weight': None, 'missing': nan, 'monotone_constraints': None, 'multi_strategy': None, 'n_estimators': None, 'n_jobs': None, 'num_parallel_tree': None, 'random_state': 42, 'reg_alpha': None, 'reg_lambda': None, 'sampling_method': None, 'scale_pos_weight': None, 'subsample': None, 'tree_method': None, 'validate_parameters': None, 'verbosity': None, 'use_label_encoder': False}",
+        "metrics": {
+            "accuracy": 0.4226666666666667,
+            "precision_macro": 0.35058345806692,
+            "recall_macro": 0.36325751422681285,
+            "f1_macro": 0.34621847583204457,
+            "roc_auc_macro": 0.5499273065363107,
+            "confusion_matrix": [
+                [
+                    143,
+                    130,
+                    21
+                ],
+                [
+                    114,
+                    165,
+                    24
+                ],
+                [
+                    66,
+                    78,
+                    9
+                ]
+            ]
+        },
+        "training_time": 1.8286957740783691
+    },
+    {
+        "target": "toxicity_risk",
+        "model_name": "LightGBM",
+        "parameters": "{'boosting_type': 'gbdt', 'class_weight': None, 'colsample_bytree': 1.0, 'importance_type': 'split', 'learning_rate': 0.1, 'max_depth': -1, 'min_child_samples': 20, 'min_child_weight': 0.001, 'min_split_gain': 0.0, 'n_estimators': 100, 'n_jobs': None, 'num_leaves': 31, 'objective': None, 'random_state': 42, 'reg_alpha': 0.0, 'reg_lambda': 0.0, 'subsample': 1.0, 'subsample_for_bin': 200000, 'subsample_freq': 0, 'verbose': -1}",
+        "metrics": {
+            "accuracy": 0.41733333333333333,
+            "precision_macro": 0.3763629439207845,
+            "recall_macro": 0.3599356134092801,
+            "f1_macro": 0.34342779756010744,
+            "roc_auc_macro": 0.5627848586564249,
+            "confusion_matrix": [
+                [
+                    143,
+                    142,
+                    9
+                ],
+                [
+                    126,
+                    160,
+                    17
+                ],
+                [
+                    56,
+                    87,
+                    10
+                ]
+            ]
+        },
+        "training_time": 3.2493879795074463
+    },
+    {
+        "target": "therapy_response",
+        "model_name": "Logistic Regression",
+        "parameters": "{'C': 1.0, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'l1_ratio': 0.0, 'max_iter': 1000, 'n_jobs': None, 'penalty': 'deprecated', 'random_state': 42, 'solver': 'lbfgs', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}",
+        "metrics": {
+            "accuracy": 0.45866666666666667,
+            "precision_macro": 0.4667227055447867,
+            "recall_macro": 0.3588601038289076,
+            "f1_macro": 0.32360525701676957,
+            "roc_auc_macro": 0.5453127412284965,
+            "confusion_matrix": [
+                [
+                    86,
+                    1,
+                    180
+                ],
+                [
+                    24,
+                    2,
+                    111
+                ],
+                [
+                    89,
+                    1,
+                    256
+                ]
+            ]
+        },
+        "training_time": 0.09154772758483887
+    },
+    {
+        "target": "therapy_response",
+        "model_name": "Random Forest",
+        "parameters": "{'bootstrap': True, 'ccp_alpha': 0.0, 'class_weight': None, 'criterion': 'gini', 'max_depth': None, 'max_features': 'sqrt', 'max_leaf_nodes': None, 'max_samples': None, 'min_impurity_decrease': 0.0, 'min_samples_leaf': 1, 'min_samples_split': 2, 'min_weight_fraction_leaf': 0.0, 'monotonic_cst': None, 'n_estimators': 100, 'n_jobs': None, 'oob_score': False, 'random_state': 42, 'verbose': 0, 'warm_start': False}",
+        "metrics": {
+            "accuracy": 0.452,
+            "precision_macro": 0.45826477378537994,
+            "recall_macro": 0.3497229661185195,
+            "f1_macro": 0.3090072796913154,
+            "roc_auc_macro": 0.5218781570943621,
+            "confusion_matrix": [
+                [
+                    76,
+                    0,
+                    191
+                ],
+                [
+                    27,
+                    1,
+                    109
+                ],
+                [
+                    83,
+                    1,
+                    262
+                ]
+            ]
+        },
+        "training_time": 2.4454281330108643
+    },
+    {
+        "target": "therapy_response",
+        "model_name": "XGBoost",
+        "parameters": "{'objective': 'multi:softprob', 'base_score': None, 'booster': None, 'callbacks': None, 'colsample_bylevel': None, 'colsample_bynode': None, 'colsample_bytree': None, 'device': None, 'early_stopping_rounds': None, 'enable_categorical': True, 'eval_metric': 'mlogloss', 'feature_types': None, 'feature_weights': None, 'gamma': None, 'grow_policy': None, 'importance_type': None, 'interaction_constraints': None, 'learning_rate': None, 'max_bin': None, 'max_cat_threshold': None, 'max_cat_to_onehot': None, 'max_delta_step': None, 'max_depth': None, 'max_leaves': None, 'min_child_weight': None, 'missing': nan, 'monotone_constraints': None, 'multi_strategy': None, 'n_estimators': None, 'n_jobs': None, 'num_parallel_tree': None, 'random_state': 42, 'reg_alpha': None, 'reg_lambda': None, 'sampling_method': None, 'scale_pos_weight': None, 'subsample': None, 'tree_method': None, 'validate_parameters': None, 'verbosity': None, 'use_label_encoder': False}",
+        "metrics": {
+            "accuracy": 0.42533333333333334,
+            "precision_macro": 0.30857669889701156,
+            "recall_macro": 0.33905105011714554,
+            "f1_macro": 0.3153429706093734,
+            "roc_auc_macro": 0.5189324093599437,
+            "confusion_matrix": [
+                [
+                    101,
+                    15,
+                    151
+                ],
+                [
+                    37,
+                    2,
+                    98
+                ],
+                [
+                    113,
+                    17,
+                    216
+                ]
+            ]
+        },
+        "training_time": 2.351962089538574
+    },
+    {
+        "target": "therapy_response",
+        "model_name": "LightGBM",
+        "parameters": "{'boosting_type': 'gbdt', 'class_weight': None, 'colsample_bytree': 1.0, 'importance_type': 'split', 'learning_rate': 0.1, 'max_depth': -1, 'min_child_samples': 20, 'min_child_weight': 0.001, 'min_split_gain': 0.0, 'n_estimators': 100, 'n_jobs': None, 'num_leaves': 31, 'objective': None, 'random_state': 42, 'reg_alpha': 0.0, 'reg_lambda': 0.0, 'subsample': 1.0, 'subsample_for_bin': 200000, 'subsample_freq': 0, 'verbose': -1}",
+        "metrics": {
+            "accuracy": 0.416,
+            "precision_macro": 0.32149794352596045,
+            "recall_macro": 0.33382146836516796,
+            "f1_macro": 0.313053313053313,
+            "roc_auc_macro": 0.5052245871645938,
+            "confusion_matrix": [
+                [
+                    96,
+                    12,
+                    159
+                ],
+                [
+                    36,
+                    4,
+                    97
+                ],
+                [
+                    119,
+                    15,
+                    212
+                ]
+            ]
+        },
+        "training_time": 0.8164138793945312
+    }
+]
