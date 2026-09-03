@@ -1,1 +1,0 @@
-patient_id,age,gender,cancer_type,cancer_stage,tumor_size_cm,smoking_status,alcohol_use,family_history,bmi,diagnosis_date,treatment_type,hospital_visits_per_year,followup_months,survival_status,risk_level
