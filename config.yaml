@@ -1,0 +1,20 @@
+project:
+  name: "Personalized Precision Oncology"
+
+data_paths:
+  stage1_ml:
+    raw: "data/stage1_ml/raw/oncology_raw_5000_34_features.csv"
+    processed: "data/stage1_ml/processed/oncology_cleaned.csv"
+    models: "data/stage1_ml/models"
+    predictions: "data/stage1_ml/predictions"
+
+targets:
+  - "toxicity_risk"
+  - "therapy_response"
+
+model_configuration:
+  random_state: 42
+
+stage2_dl_placeholders:
+  image_size: [224, 224]
+  sequence_length: 128
