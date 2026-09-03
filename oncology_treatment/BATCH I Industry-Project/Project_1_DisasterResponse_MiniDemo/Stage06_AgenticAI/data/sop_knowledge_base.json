@@ -1,0 +1,6 @@
+{
+  "SEVERE_ZONE_RULE": "A Severe zone MUST receive an ambulance within priority order.",
+  "TIE_BREAK_RULE": "If two Severe zones compete for one ambulance, prioritize the zone with the HIGHER predicted water level (from Stage 2 DL).",
+  "SHELTER_RULE": "Never dispatch people to a shelter that is already at full capacity.",
+  "OVERRIDE_RULE": "A human commander can pause or override any agent decision at any time."
+}

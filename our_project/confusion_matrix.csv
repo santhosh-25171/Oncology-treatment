@@ -1,0 +1,5 @@
+,pred_Critical,pred_High,pred_Low,pred_Medium
+true_Critical,181,59,10,18
+true_High,158,113,24,68
+true_Low,51,30,175,106
+true_Medium,89,86,82,154
