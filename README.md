@@ -1,156 +1,29 @@
-# Personalized Precision Oncology Treatment Optimization
+# Personalized Precision Oncology
 
 ## Overview
+The Personalized Precision Oncology project aims to leverage advanced Machine Learning and Deep Learning architectures to optimize oncology treatment. By analyzing patient clinical data, the system predicts patient-specific outcomes to aid oncologists in creating tailored, safe, and effective treatment plans.
 
-An AI-based healthcare project that uses Machine Learning and Deep Learning to predict oncology treatment outcomes using patient clinical, biological, and treatment-related data.
+## Features
+- **Patient risk prediction**: Foresee the clinical risks associated with varying patient profiles.
+- **Treatment response prediction**: Estimate the likelihood of a tumor responding to a selected therapy (Complete, Partial, or Non-Responder).
+- **Toxicity prediction**: Flag patients at high risk of severe adverse toxicological events from prescribed treatments.
+- **Explainable AI**: Integrated SHAP-based explainability to provide full transparency into the clinical drivers behind every prediction, ensuring AI acts as a trusted clinical assistant.
 
-The system predicts:
+## Technology
+- **Python**
+- **Scikit-learn**
+- **XGBoost**
+- **LightGBM**
+- **SHAP**
 
-- Treatment Toxicity Risk
-- Therapy Response
+## Pipeline Summary
+**Stage 1: Machine Learning (Completed)**
+A fully functional, end-to-end ML pipeline built on clinical tabular data.
+- **Data Cleaning & EDA**: Handling missing values, outliers, and data distributions.
+- **Feature Engineering & Selection**: Deriving clinical features (e.g. BMI, treatment intensity) and rigorously isolating signal from noise.
+- **Model Training & Tuning**: Evaluated Logistic Regression, Random Forest, XGBoost, and LightGBM. Tuned using RandomizedSearchCV.
+- **Explainability**: SHAP integration to provide granular feature impacts for both global and local patient predictions.
+- **Prediction Pipeline**: A unified inference engine that accepts raw patient data and outputs structured, explainable clinical predictions.
 
-> This project is developed for academic and research purposes only and is not a replacement for clinical decisions.
-
----
-
-## Objectives
-
-- Clean and analyze oncology patient data
-- Perform exploratory data analysis
-- Build ML and DL models for treatment prediction
-- Identify important biomarkers and clinical factors
-- Develop a personalized oncology prediction framework
-
----
-
-## Workflow
-
-```
-Raw Dataset
-     ↓
-Data Cleaning
-     ↓
-EDA
-     ↓
-Feature Engineering
-     ↓
-Machine Learning
-     ↓
-Deep Learning
-     ↓
-Model Evaluation
-     ↓
-Prediction
-```
-
----
-
-## Dataset
-
-The dataset contains oncology patient information:
-
-- Patient demographics
-- Cancer characteristics
-- Treatment details
-- Laboratory values
-- Biomarkers
-- Genetic risk factors
-
-### Prediction Targets
-
-**1. Toxicity Risk**
-- Low
-- Moderate
-- High
-
-**2. Therapy Response**
-- Complete Response
-- Partial Response
-- Non-Responder
-
----
-
-## Project Structure
-
-```
-personalized_precision_oncology/
-
-├── data/
-├── stage1_ml/
-│   ├── data/
-│   ├── eda/
-│   ├── models/
-│   └── evaluation/
-│
-├── stage2_dl/
-├── integration/
-├── tests/
-├── notebooks/
-├── docs/
-├── requirements.txt
-└── README.md
-```
-
----
-
-## Technologies Used
-
-- Python
-- Pandas
-- NumPy
-- Scikit-learn
-- XGBoost
-- LightGBM
-- TensorFlow/PyTorch
-- Matplotlib
-- Seaborn
-
----
-
-## Machine Learning Pipeline
-
-Stage 1 includes:
-
-- Data Cleaning
-- Exploratory Data Analysis
-- Feature Engineering
-- Model Training
-- Model Evaluation
-
----
-
-## Deep Learning Pipeline
-
-Stage 2 focuses on:
-
-- Neural Network based prediction
-- Advanced pattern learning
-- Comparison with ML approaches
-
----
-
-## Evaluation Metrics
-
-Models are evaluated using:
-
-- Accuracy
-- Precision
-- Recall
-- F1-score
-- Confusion Matrix
-- ROC-AUC
-
----
-
-## Future Improvements
-
-- Real clinical dataset integration
-- Medical imaging support
-- Explainable AI
-- Clinical decision support interface
-
----
-
-## Disclaimer
-
-This project is an AI research prototype for academic purposes only. It should not be used as a medical diagnosis system.
+**Stage 2: Deep Learning (Future Work)**
+- To incorporate medical imaging, sequence modeling (LSTMs/Transformers), and multi-modal integration.
