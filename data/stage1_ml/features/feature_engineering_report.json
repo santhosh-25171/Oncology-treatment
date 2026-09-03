@@ -1,0 +1,30 @@
+{
+    "original_feature_count": 34,
+    "final_feature_count": 66,
+    "features_created": [
+        "age_group",
+        "bmi_category",
+        "tumor_size_category",
+        "treatment_intensity",
+        "high_clinical_risk",
+        "biomarker_interaction"
+    ],
+    "features_removed": {
+        "by_variance": [],
+        "by_correlation": [
+            "baseline_tumor_volume",
+            "sex_Male",
+            "lymph_node_involvement_Yes",
+            "metastasis_status_Yes",
+            "tumor_size_category_T3_large"
+        ]
+    },
+    "imputation": "Median for numerical, Constant ('unknown') for categorical",
+    "scaling": "StandardScaler",
+    "encoding": "OneHotEncoder",
+    "dataset_splits": {
+        "train_size": 3499,
+        "val_size": 751,
+        "test_size": 750
+    }
+}
