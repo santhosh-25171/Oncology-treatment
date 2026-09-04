@@ -1,0 +1,117 @@
+{
+    "image_analysis": {
+        "dataset_size": 780,
+        "split_counts": {
+            "train": 546,
+            "val": 78,
+            "test": 156
+        },
+        "class_distribution": {
+            "counts": {
+                "malignant": 210,
+                "normal_benign": 570
+            },
+            "percentages": {
+                "malignant": 26.923076923076923,
+                "normal_benign": 73.07692307692307
+            },
+            "imbalance_ratio": 2.7142857142857144
+        },
+        "properties": {
+            "original_resolution": "28x28",
+            "channels": 1,
+            "pixel_min": 1.0,
+            "pixel_max": 255.0,
+            "pixel_mean": 85.00966702470461,
+            "pixel_std": 52.45830341778479
+        },
+        "quality": {
+            "corrupted_images": 0,
+            "missing_images": 0,
+            "duplicate_images_detected": 1
+        },
+        "leakage_assessment": {
+            "patient_ids_available": false,
+            "note": "Patient-level leakage cannot be independently verified from available BreastMNIST metadata as patient IDs are not provided."
+        }
+    },
+    "sequence_analysis": {
+        "patient_statistics": {
+            "total_patients": 1000,
+            "split_counts": {
+                "train": 700,
+                "val": 150,
+                "test": 150
+            },
+            "target_counts": {
+                "responder": 402,
+                "non_responder": 598
+            },
+            "target_percentages": {
+                "responder": 40.2,
+                "non_responder": 59.8
+            }
+        },
+        "sequence_statistics": {
+            "total_observations": 6010,
+            "duplicate_records": 7,
+            "min_length": 4,
+            "max_length": 8,
+            "mean_length": 6.01,
+            "median_length": 6.0
+        },
+        "missingness": {
+            "clinical_missing_measurements": {
+                "ctdna_level": 610,
+                "biomarker_2": 613,
+                "tumor_volume": 290
+            },
+            "padding_introduced": 1990
+        },
+        "temporal_features": {
+            "ctdna_level": {
+                "mean": 641.2020206069622,
+                "std": 6484.390123205565,
+                "min": 0.0,
+                "max": 403149.74541867536
+            },
+            "biomarker_2": {
+                "mean": 5.327888251749741,
+                "std": 2.8535150041358457,
+                "min": 0.0,
+                "max": 13.287088042007406
+            },
+            "tumor_volume": {
+                "mean": 13.680842140671622,
+                "std": 57.88807156764248,
+                "min": 0.1,
+                "max": 3574.705266692881
+            }
+        },
+        "synthetic_data_quality": {
+            "feature_target_correlations": {
+                "ctdna_level": -0.14158220843440295,
+                "biomarker_2": -0.0017326820335049036,
+                "tumor_volume": -0.22852446128619366
+            },
+            "assessment": "The correlation magnitudes are sufficiently low to moderate, confirming no single feature acts as a perfect trivial threshold. Significant standard deviation overlap exists in trajectories.",
+            "too_easy_to_classify": false,
+            "too_strongly_correlated": false,
+            "dominated_by_single_feature": false,
+            "sufficiently_variable": true
+        }
+    },
+    "leakage_checks": {
+        "patient_ids_cross_splits": false,
+        "target_leaked_in_features": false,
+        "test_info_used_for_preprocessing": false
+    },
+    "limitations": [
+        "MedMNIST images are highly compressed 28x28 patches lacking diagnostic pathology detail. Resizing interpolates rather than recovers this.",
+        "Longitudinal dataset is completely synthetic. It evaluates temporal model aggregation capabilities, not clinical reality."
+    ],
+    "recommendations": {
+        "CNN": "Use weighted cross-entropy to handle the ~2.7:1 class imbalance. Rely on F1-score/Precision/Recall metrics.",
+        "LSTM_Transformer": "Implement explicit padding masks to ignore NaN-imputed padded time steps. Bidirectional layers recommended due to trajectory noise."
+    }
+}

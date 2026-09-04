@@ -1,0 +1,56 @@
+{
+    "image_dataset": {
+        "name": "BreastMNIST (MedMNIST v2)",
+        "source": "https://zenodo.org/record/6496656/files/breastmnist.npz",
+        "original_resolution": "28x28",
+        "cnn_resolution": "128x128",
+        "channels": 1,
+        "classes": [
+            "malignant",
+            "normal_benign"
+        ],
+        "split_counts": {
+            "train": 546,
+            "val": 78,
+            "test": 156
+        },
+        "class_distribution": {
+            "malignant": 210,
+            "normal_benign": 570
+        },
+        "corrupted_images": 0
+    },
+    "sequence_dataset": {
+        "synthetic": true,
+        "patients": 1000,
+        "features": [
+            "ctdna_level",
+            "biomarker_2",
+            "tumor_volume"
+        ],
+        "time_steps": 8,
+        "target_distribution": {
+            "train": {
+                "Responder": 279,
+                "Non-Responder": 421
+            },
+            "val": {
+                "Responder": 61,
+                "Non-Responder": 89
+            },
+            "test": {
+                "Responder": 62,
+                "Non-Responder": 88
+            }
+        },
+        "missingness": {
+            "total_nans": 7483,
+            "missingness_ratio": 0.3118
+        },
+        "patient_leakage": false
+    },
+    "limitations": [
+        "BreastMNIST 28x28 resolution loses detailed textural pathology information. Resizing to 128x128 via bicubic interpolation strictly enables structural CNN compatibility and does NOT recover missing medical detail.",
+        "The longitudinal sequence dataset is entirely SYNTHETIC. Although improved with varied patient baselines, noise, and trajectory overlaps, it is NOT CLINICALLY VALIDATED."
+    ]
+}
