@@ -6,7 +6,7 @@
     },
     {
         "target": "therapy_response",
-        "biomarker": "tumor_grade_Intermediate",
+        "biomarker": "tumor_grade_intermediate",
         "importance_score": 0.08567456453193463
     },
     {

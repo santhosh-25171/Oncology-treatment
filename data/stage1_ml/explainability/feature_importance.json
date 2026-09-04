@@ -9,15 +9,15 @@
             "importance": 0.02616092935204506
         },
         {
-            "feature": "cancer_type_Ovarian Cancer",
+            "feature": "cancer_type_ovarian cancer",
             "importance": 0.022398995235562325
         },
         {
-            "feature": "cancer_stage_I",
+            "feature": "cancer_stage_i",
             "importance": 0.022337768226861954
         },
         {
-            "feature": "metastasis_status_No",
+            "feature": "metastasis_status_no",
             "importance": 0.020185023546218872
         },
         {
@@ -29,7 +29,7 @@
             "importance": 0.01889665052294731
         },
         {
-            "feature": "treatment_line_Second-line",
+            "feature": "treatment_line_second-line",
             "importance": 0.018454287201166153
         },
         {
@@ -49,15 +49,15 @@
             "importance": 0.017737988382577896
         },
         {
-            "feature": "treatment_line_Later-line",
+            "feature": "treatment_line_later-line",
             "importance": 0.017701542004942894
         },
         {
-            "feature": "cancer_type_Gastric Cancer",
+            "feature": "cancer_type_gastric cancer",
             "importance": 0.01760554313659668
         },
         {
-            "feature": "treatment_type_Combination Therapy",
+            "feature": "treatment_type_combination therapy",
             "importance": 0.01745680160820484
         },
         {
@@ -69,25 +69,25 @@
             "importance": 0.01728781685233116
         },
         {
-            "feature": "smoking_status_Current",
+            "feature": "smoking_status_current",
             "importance": 0.01707720197737217
         },
         {
-            "feature": "treatment_line_Third-line",
+            "feature": "treatment_line_third-line",
             "importance": 0.016670821234583855
         },
         {
-            "feature": "cancer_type_Lung Cancer",
+            "feature": "cancer_type_lung cancer",
             "importance": 0.016543222591280937
         }
     ],
     "therapy_response": [
         {
-            "feature": "cancer_stage_IV",
+            "feature": "cancer_stage_iv",
             "importance": 0.28832808384090225
         },
         {
-            "feature": "cancer_stage_I",
+            "feature": "cancer_stage_i",
             "importance": 0.20651556960687759
         },
         {
@@ -99,15 +99,15 @@
             "importance": 0.1923969290878845
         },
         {
-            "feature": "cancer_stage_II",
+            "feature": "cancer_stage_ii",
             "importance": 0.1708494477879372
         },
         {
-            "feature": "metastasis_status_No",
+            "feature": "metastasis_status_no",
             "importance": 0.1224395039024364
         },
         {
-            "feature": "cancer_type_Prostate Cancer",
+            "feature": "cancer_type_prostate cancer",
             "importance": 0.11681153518976256
         },
         {
@@ -115,19 +115,19 @@
             "importance": 0.11582531934876748
         },
         {
-            "feature": "cancer_type_Ovarian Cancer",
+            "feature": "cancer_type_ovarian cancer",
             "importance": 0.1041859973762352
         },
         {
-            "feature": "cancer_type_Pancreatic Cancer",
+            "feature": "cancer_type_pancreatic cancer",
             "importance": 0.09743310673931188
         },
         {
-            "feature": "treatment_type_Targeted Therapy",
+            "feature": "treatment_type_targeted therapy",
             "importance": 0.09407596729831195
         },
         {
-            "feature": "treatment_type_Hormone Therapy",
+            "feature": "treatment_type_hormone therapy",
             "importance": 0.0916029983016699
         },
         {
@@ -135,15 +135,15 @@
             "importance": 0.08929162848686965
         },
         {
-            "feature": "smoking_status_Former",
+            "feature": "smoking_status_former",
             "importance": 0.08879827088518183
         },
         {
-            "feature": "tumor_grade_Intermediate",
+            "feature": "tumor_grade_intermediate",
             "importance": 0.08567456453193463
         },
         {
-            "feature": "treatment_type_Immunotherapy",
+            "feature": "treatment_type_immunotherapy",
             "importance": 0.08545160716077553
         },
         {
