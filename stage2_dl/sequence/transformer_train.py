@@ -1,95 +1,67 @@
 import os
 import sys
-import json
 import torch
 import numpy as np
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import DataLoader
 import torch.nn as nn
 import torch.optim as optim
 from sklearn.metrics import f1_score
 import matplotlib.pyplot as plt
 
-# Adjust sys.path to ensure absolute imports work
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
-from stage2_dl.data.image_loader import OncologyImageLoader
-from stage2_dl.data.preprocessing import ImagePreprocessor
-from stage2_dl.vision.cnn_model import LightweightCNN
-from stage2_dl.vision.augmentation import get_train_transforms
+from stage2_dl.data.sequence_loader import OncologySequenceLoader
+from stage2_dl.data.preprocessing import SequencePreprocessor
+from stage2_dl.sequence.transformer_model import SequenceTransformer
+from stage2_dl.sequence.train import SequenceDataset, calculate_class_weights, set_seed
 
-class BreastMNISTDataset(Dataset):
-    def __init__(self, data_list, preprocessor, augment=None):
-        self.data = data_list
-        self.preprocessor = preprocessor
-        self.augment = augment
-
-    def __len__(self):
-        return len(self.data)
-
-    def __getitem__(self, idx):
-        item = self.data[idx]
-        img_np = self.preprocessor.preprocess(item['path'])
-        img_tensor = torch.from_numpy(img_np).float()
-        
-        if self.augment:
-            img_tensor = self.augment(img_tensor)
-            
-        label_tensor = torch.tensor(item['label'], dtype=torch.long)
-        return img_tensor, label_tensor
-
-def set_seed(seed=42):
-    np.random.seed(seed)
-    torch.manual_seed(seed)
-    if torch.cuda.is_available():
-        torch.cuda.manual_seed_all(seed)
-
-def calculate_class_weights(train_data_list):
-    labels = [item['label'] for item in train_data_list]
-    class_counts = np.bincount(labels)
-    total = len(labels)
-    weights = total / (len(class_counts) * class_counts)
-    return torch.FloatTensor(weights)
-
-def train():
+def train_transformer():
     set_seed(42)
     
     base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    img_dir = os.path.join(base_dir, 'data', 'stage2_dl', 'images')
+    seq_path = os.path.join(base_dir, 'data', 'stage2_dl', 'sequences', 'raw', 'synthetic_longitudinal_oncology.csv')
     artifacts_dir = os.path.join(base_dir, 'stage2_dl', 'artifacts')
     os.makedirs(os.path.join(artifacts_dir, 'models'), exist_ok=True)
     os.makedirs(os.path.join(artifacts_dir, 'figures'), exist_ok=True)
 
-    # 1. Load Data
-    loader = OncologyImageLoader(img_dir)
-    train_data, _ = loader.load_dataset('train')
-    val_data, _ = loader.load_dataset('val')
+    # Load Data
+    loader = OncologySequenceLoader(seq_path)
+    (X_tr, y_tr, _), (X_va, y_va, _), _ = loader.load_and_split()
     
-    preprocessor = ImagePreprocessor(target_size=(128, 128))
-    train_transforms = get_train_transforms()
+    preprocessor = SequencePreprocessor()
     
-    train_dataset = BreastMNISTDataset(train_data, preprocessor, augment=train_transforms)
-    val_dataset = BreastMNISTDataset(val_data, preprocessor, augment=None)
+    train_dataset = SequenceDataset(X_tr, y_tr, preprocessor, is_train=True)
+    val_dataset = SequenceDataset(X_va, y_va, preprocessor, is_train=False)
     
     batch_size = 32
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
     
-    # 2. Model & Training Config
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = LightweightCNN(num_classes=2).to(device)
     
-    class_weights = calculate_class_weights(train_data).to(device)
+    # Modest Transformer config
+    config = {
+        'input_size': 3, 
+        'd_model': 32, 
+        'nhead': 4, 
+        'num_layers': 2, 
+        'dim_feedforward': 128, 
+        'dropout': 0.1, 
+        'num_classes': 2
+    }
+    model = SequenceTransformer(**config).to(device)
+    
+    class_weights = calculate_class_weights(y_tr).to(device)
     criterion = nn.CrossEntropyLoss(weight=class_weights)
     
     optimizer = optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-4)
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='max', factor=0.5, patience=5)
     
-    num_epochs = 50
-    early_stopping_patience = 10
+    num_epochs = 100
+    early_stopping_patience = 15
     best_val_macro_f1 = 0.0
     epochs_no_improve = 0
     
-    # Histories
     train_losses, val_losses = [], []
     train_f1s, val_f1s = [], []
     
@@ -98,10 +70,11 @@ def train():
         running_loss = 0.0
         all_train_preds, all_train_labels = [], []
         
-        for inputs, labels in train_loader:
+        for inputs, labels, lengths in train_loader:
             inputs, labels = inputs.to(device), labels.to(device)
             optimizer.zero_grad()
-            outputs = model(inputs)
+            
+            outputs = model(inputs, lengths=lengths)
             loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
@@ -114,14 +87,14 @@ def train():
         epoch_train_loss = running_loss / len(train_dataset)
         epoch_train_f1 = f1_score(all_train_labels, all_train_preds, average='macro')
         
-        # Validation
         model.eval()
         running_val_loss = 0.0
         all_val_preds, all_val_labels = [], []
+        
         with torch.no_grad():
-            for inputs, labels in val_loader:
+            for inputs, labels, lengths in val_loader:
                 inputs, labels = inputs.to(device), labels.to(device)
-                outputs = model(inputs)
+                outputs = model(inputs, lengths=lengths)
                 loss = criterion(outputs, labels)
                 
                 running_val_loss += loss.item() * inputs.size(0)
@@ -139,21 +112,21 @@ def train():
         train_f1s.append(epoch_train_f1)
         val_f1s.append(epoch_val_f1)
         
-        print(f"Epoch {epoch+1:02d} | Train Loss: {epoch_train_loss:.4f} | Train F1: {epoch_train_f1:.4f} | Val Loss: {epoch_val_loss:.4f} | Val F1: {epoch_val_f1:.4f}")
+        print(f"Epoch {epoch+1:03d} | Train Loss: {epoch_train_loss:.4f} | Val F1: {epoch_val_f1:.4f}")
         
-        # Checkpointing
         if epoch_val_f1 > best_val_macro_f1:
             best_val_macro_f1 = epoch_val_f1
             epochs_no_improve = 0
-            checkpoint_path = os.path.join(artifacts_dir, 'models', 'best_cnn_model.pth')
+            
+            checkpoint_path = os.path.join(artifacts_dir, 'models', 'best_transformer_model.pth')
             torch.save({
                 'epoch': epoch,
                 'model_state_dict': model.state_dict(),
-                'optimizer_state_dict': optimizer.state_dict(),
                 'best_val_macro_f1': best_val_macro_f1,
-                'class_mapping': loader.classes,
-                'input_shape': (1, 128, 128),
-                'random_seed': 42
+                'class_mapping': {0: 'Non-Responder', 1: 'Responder'},
+                'preprocessor_means': preprocessor.feature_means,
+                'preprocessor_stds': preprocessor.feature_stds,
+                'model_config': config
             }, checkpoint_path)
         else:
             epochs_no_improve += 1
@@ -161,25 +134,24 @@ def train():
                 print(f"Early stopping triggered at epoch {epoch+1}")
                 break
                 
-    # 3. Plotting Curves
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
     ax1.plot(train_losses, label='Train Loss')
     ax1.plot(val_losses, label='Val Loss')
-    ax1.set_title('Loss vs Epochs')
+    ax1.set_title('Loss vs Epochs (Transformer)')
     ax1.set_xlabel('Epoch')
     ax1.set_ylabel('Loss')
     ax1.legend()
     
     ax2.plot(train_f1s, label='Train Macro F1')
     ax2.plot(val_f1s, label='Val Macro F1')
-    ax2.set_title('Macro F1 vs Epochs')
+    ax2.set_title('Macro F1 vs Epochs (Transformer)')
     ax2.set_xlabel('Epoch')
     ax2.set_ylabel('Macro F1')
     ax2.legend()
     
     plt.tight_layout()
-    plt.savefig(os.path.join(artifacts_dir, 'figures', 'training_curves.png'))
+    plt.savefig(os.path.join(artifacts_dir, 'figures', 'transformer_training_curves.png'))
     plt.close()
 
 if __name__ == "__main__":
-    train()
+    train_transformer()

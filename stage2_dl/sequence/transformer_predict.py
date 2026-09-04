@@ -6,23 +6,23 @@ import numpy as np
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
 from stage2_dl.data.preprocessing import SequencePreprocessor
-from stage2_dl.sequence.lstm_model import LongitudinalLSTM
+from stage2_dl.sequence.transformer_model import SequenceTransformer
 
-class LSTMPredictor:
+class TransformerPredictor:
     def __init__(self, checkpoint_path=None):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         
         if checkpoint_path is None:
             base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-            checkpoint_path = os.path.join(base_dir, 'stage2_dl', 'artifacts', 'models', 'best_lstm_model.pth')
+            checkpoint_path = os.path.join(base_dir, 'stage2_dl', 'artifacts', 'models', 'best_transformer_model.pth')
             
         if not os.path.exists(checkpoint_path):
             raise FileNotFoundError(f"Checkpoint not found at {checkpoint_path}")
             
         checkpoint = torch.load(checkpoint_path, map_location=self.device, weights_only=False)
-        config = checkpoint.get('model_config', {'input_size': 3, 'hidden_size': 64, 'num_layers': 1, 'dropout_rate': 0.5})
+        config = checkpoint['model_config']
         
-        self.model = LongitudinalLSTM(**config).to(self.device)
+        self.model = SequenceTransformer(**config).to(self.device)
         self.model.load_state_dict(checkpoint['model_state_dict'])
         self.model.eval()
         
@@ -34,13 +34,7 @@ class LSTMPredictor:
         self.classes = {0: 'Non-Responder', 1: 'Responder'}
 
     def predict_sequence(self, sequence_array):
-        """
-        sequence_array: raw numpy array of shape (seq_len, num_features)
-        Returns prediction dictionary.
-        """
-        # Add batch dimension -> (1, seq_len, num_features)
         x_raw = np.expand_dims(sequence_array, axis=0)
-        
         lengths = (~np.isnan(x_raw)).any(axis=2).sum(axis=1)
         x_scaled = self.preprocessor.transform(x_raw)
         
