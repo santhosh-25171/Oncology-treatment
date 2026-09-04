@@ -13,9 +13,9 @@
         "by_variance": [],
         "by_correlation": [
             "baseline_tumor_volume",
-            "sex_Male",
-            "lymph_node_involvement_Yes",
-            "metastasis_status_Yes",
+            "sex_male",
+            "lymph_node_involvement_yes",
+            "metastasis_status_yes",
             "tumor_size_category_T3_large"
         ]
     },

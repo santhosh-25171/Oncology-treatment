@@ -322,151 +322,151 @@
     },
     "categorical_summaries": {
         "sex": {
-            "Male": {
+            "male": {
                 "count": 2530,
                 "pct": 50.6
             },
-            "Female": {
+            "female": {
                 "count": 2470,
                 "pct": 49.4
             }
         },
         "cancer_type": {
-            "Lung Cancer": {
+            "lung cancer": {
                 "count": 938,
                 "pct": 18.759999999999998
             },
-            "Breast Cancer": {
+            "breast cancer": {
                 "count": 922,
                 "pct": 18.44
             },
-            "Colorectal Cancer": {
+            "colorectal cancer": {
                 "count": 732,
                 "pct": 14.64
             },
-            "Prostate Cancer": {
+            "prostate cancer": {
                 "count": 654,
                 "pct": 13.08
             },
-            "Gastric Cancer": {
+            "gastric cancer": {
                 "count": 518,
                 "pct": 10.36
             },
-            "Ovarian Cancer": {
+            "ovarian cancer": {
                 "count": 432,
                 "pct": 8.64
             },
-            "Liver Cancer": {
+            "liver cancer": {
                 "count": 416,
                 "pct": 8.32
             },
-            "Pancreatic Cancer": {
+            "pancreatic cancer": {
                 "count": 388,
                 "pct": 7.76
             }
         },
         "cancer_stage": {
-            "III": {
+            "iii": {
                 "count": 1820,
                 "pct": 36.4
             },
-            "II": {
+            "ii": {
                 "count": 1401,
                 "pct": 28.02
             },
-            "IV": {
+            "iv": {
                 "count": 1191,
                 "pct": 23.82
             },
-            "I": {
+            "i": {
                 "count": 588,
                 "pct": 11.76
             }
         },
         "treatment_type": {
-            "Chemotherapy": {
+            "chemotherapy": {
                 "count": 1556,
                 "pct": 31.119999999999997
             },
-            "Immunotherapy": {
+            "immunotherapy": {
                 "count": 976,
                 "pct": 19.52
             },
-            "Combination Therapy": {
+            "combination therapy": {
                 "count": 935,
                 "pct": 18.7
             },
-            "Targeted Therapy": {
+            "targeted therapy": {
                 "count": 897,
                 "pct": 17.94
             },
-            "Hormone Therapy": {
+            "hormone therapy": {
                 "count": 636,
                 "pct": 12.72
             }
         },
         "tumor_grade": {
-            "Intermediate": {
+            "intermediate": {
                 "count": 2162,
                 "pct": 43.24
             },
-            "High": {
+            "high": {
                 "count": 1770,
                 "pct": 35.4
             },
-            "Low": {
+            "low": {
                 "count": 1068,
                 "pct": 21.36
             }
         },
         "lymph_node_involvement": {
-            "Yes": {
+            "yes": {
                 "count": 2883,
                 "pct": 57.66
             },
-            "No": {
+            "no": {
                 "count": 2117,
                 "pct": 42.34
             }
         },
         "metastasis_status": {
-            "No": {
+            "no": {
                 "count": 3315,
                 "pct": 66.3
             },
-            "Yes": {
+            "yes": {
                 "count": 1685,
                 "pct": 33.7
             }
         },
         "smoking_status": {
-            "Never": {
+            "never": {
                 "count": 2498,
                 "pct": 49.96
             },
-            "Former": {
+            "former": {
                 "count": 1513,
                 "pct": 30.259999999999998
             },
-            "Current": {
+            "current": {
                 "count": 989,
                 "pct": 19.78
             }
         },
         "treatment_line": {
-            "First-line": {
+            "first-line": {
                 "count": 2297,
                 "pct": 45.94
             },
-            "Second-line": {
+            "second-line": {
                 "count": 1521,
                 "pct": 30.42
             },
-            "Third-line": {
+            "third-line": {
                 "count": 786,
                 "pct": 15.72
             },
-            "Later-line": {
+            "later-line": {
                 "count": 396,
                 "pct": 7.920000000000001
             }

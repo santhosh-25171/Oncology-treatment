@@ -43,8 +43,8 @@ By natively integrating SHAP, the pipeline ensures no prediction is a "black box
             "Partial Response": 0.5799921154975891
         },
         "important_factors": [
-            "cancer_stage_III",
-            "cancer_stage_IV",
+            "cancer_stage_iii",
+            "cancer_stage_iv",
             "prior_treatment_count"
         ]
     }

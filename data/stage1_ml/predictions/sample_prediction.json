@@ -1,11 +1,11 @@
 {
     "input_features": {
         "age": 73.6,
-        "sex": "Male",
-        "cancer_type": "Breast Cancer",
-        "cancer_stage": "III",
+        "sex": "male",
+        "cancer_type": "breast cancer",
+        "cancer_stage": "iii",
         "performance_status": 2,
-        "treatment_type": "Immunotherapy",
+        "treatment_type": "immunotherapy",
         "treatment_dose": 67.03,
         "treatment_duration": 8.5,
         "renal_function": 97.5,
@@ -20,10 +20,10 @@
         "prior_treatment_count": 0,
         "comorbidity_score": 0,
         "tumor_size": 6.01,
-        "tumor_grade": "Intermediate",
-        "lymph_node_involvement": "No",
-        "metastasis_status": "No",
-        "smoking_status": "Never",
+        "tumor_grade": "intermediate",
+        "lymph_node_involvement": "no",
+        "metastasis_status": "no",
+        "smoking_status": "never",
         "bmi": 25.34,
         "albumin": 3.96,
         "creatinine": 1.195,
@@ -31,7 +31,7 @@
         "lymphocyte_count": 0.4,
         "inflammatory_marker": 20.81,
         "genetic_risk_score": 63.07,
-        "treatment_line": "Third-line",
+        "treatment_line": "third-line",
         "dose_intensity": 0.635,
         "baseline_tumor_volume": 129.32
     },
@@ -59,8 +59,8 @@
                 "Partial Response": 0.5799921154975891
             },
             "important_factors": [
-                "cancer_stage_III",
-                "cancer_stage_IV",
+                "cancer_stage_iii",
+                "cancer_stage_iv",
                 "prior_treatment_count"
             ]
         }

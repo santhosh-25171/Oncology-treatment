@@ -15,21 +15,21 @@ Our analysis revealed critical drivers for both targets.
 **Top Features for Toxicity Risk (XGBoost):**
 - `age_group_lt_50` (Score: 0.0374)
 - `high_clinical_risk` (Score: 0.0262)
-- `cancer_type_Ovarian Cancer` (Score: 0.0224)
-- `cancer_stage_I` (Score: 0.0223)
-- `metastasis_status_No` (Score: 0.0202)
+- `cancer_type_ovarian cancer` (Score: 0.0224)
+- `cancer_stage_i` (Score: 0.0223)
+- `metastasis_status_no` (Score: 0.0202)
 
 **Top Features for Therapy Response (Logistic Regression):**
-- `cancer_stage_IV` (Score: 0.2883)
-- `cancer_stage_I` (Score: 0.2065)
+- `cancer_stage_iv` (Score: 0.2883)
+- `cancer_stage_i` (Score: 0.2065)
 - `bmi_category_underweight` (Score: 0.1991)
 - `bmi_category_obese` (Score: 0.1924)
-- `cancer_stage_II` (Score: 0.1708)
+- `cancer_stage_ii` (Score: 0.1708)
 
 ## 5. Biomarker Leaderboard
 The most influential biological and molecular features driving predictions across both models are:
 - **tumor_size_category_T2_medium** -> Predicts: therapy_response (Score: 0.0893)
-- **tumor_grade_Intermediate** -> Predicts: therapy_response (Score: 0.0857)
+- **tumor_grade_intermediate** -> Predicts: therapy_response (Score: 0.0857)
 - **biomarker_1** -> Predicts: therapy_response (Score: 0.0758)
 - **tumor_size_category_T1_small** -> Predicts: therapy_response (Score: 0.0678)
 - **biomarker_2** -> Predicts: toxicity_risk (Score: 0.0189)
@@ -45,8 +45,8 @@ Consider Patient ID #{pat_idx} from our holdout dataset.
 - `treatment_dose` (Value: 1.64) pushed the model's confidence by SHAP value: 0.1559
 
 **Therapy Response Prediction Drivers**:
-- `cancer_stage_IV` (Value: 1.00) pushed the model's confidence by SHAP value: -0.3417
+- `cancer_stage_iv` (Value: 1.00) pushed the model's confidence by SHAP value: -0.3417
 - `bmi_category_obese` (Value: 1.00) pushed the model's confidence by SHAP value: 0.2482
 - `bmi` (Value: 1.62) pushed the model's confidence by SHAP value: -0.1782
 - `biomarker_1` (Value: -1.40) pushed the model's confidence by SHAP value: -0.1426
-- `metastasis_status_No` (Value: 0.00) pushed the model's confidence by SHAP value: 0.1231
+- `metastasis_status_no` (Value: 0.00) pushed the model's confidence by SHAP value: 0.1231

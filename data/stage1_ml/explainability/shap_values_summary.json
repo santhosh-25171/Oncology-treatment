@@ -83,11 +83,11 @@
     ],
     "therapy_response": [
         {
-            "feature": "cancer_stage_IV",
+            "feature": "cancer_stage_iv",
             "mean_abs_shap": 0.09399495533213414
         },
         {
-            "feature": "cancer_stage_II",
+            "feature": "cancer_stage_ii",
             "mean_abs_shap": 0.07520792691624995
         },
         {
@@ -103,7 +103,7 @@
             "mean_abs_shap": 0.05879650152925751
         },
         {
-            "feature": "metastasis_status_No",
+            "feature": "metastasis_status_no",
             "mean_abs_shap": 0.054559042938925655
         },
         {
@@ -119,7 +119,7 @@
             "mean_abs_shap": 0.044813763446975644
         },
         {
-            "feature": "cancer_stage_I",
+            "feature": "cancer_stage_i",
             "mean_abs_shap": 0.04464866614900693
         },
         {
@@ -127,7 +127,7 @@
             "mean_abs_shap": 0.04316958459061767
         },
         {
-            "feature": "tumor_grade_Intermediate",
+            "feature": "tumor_grade_intermediate",
             "mean_abs_shap": 0.04287155209178009
         },
         {
@@ -135,7 +135,7 @@
             "mean_abs_shap": 0.0371803814638132
         },
         {
-            "feature": "smoking_status_Former",
+            "feature": "smoking_status_former",
             "mean_abs_shap": 0.03694008068823564
         },
         {
@@ -147,11 +147,11 @@
             "mean_abs_shap": 0.03602024293160322
         },
         {
-            "feature": "treatment_type_Targeted Therapy",
+            "feature": "treatment_type_targeted therapy",
             "mean_abs_shap": 0.03379208745355366
         },
         {
-            "feature": "smoking_status_Never",
+            "feature": "smoking_status_never",
             "mean_abs_shap": 0.031972293156685275
         },
         {
