@@ -9,3 +9,5 @@ venv/
 *.tmp
 *.temp
 *.log
+catboost_info/
+

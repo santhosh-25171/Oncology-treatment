@@ -68,6 +68,7 @@
         "tumor_size_category_T2_medium"
     ],
     "targets": [
+        "overall_patient_risk",
         "toxicity_risk",
         "therapy_response"
     ]

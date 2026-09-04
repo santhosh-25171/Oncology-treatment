@@ -26,7 +26,7 @@ We created 6 medically meaningful features:
 - Categorical features were encoded using `OneHotEncoder`. This converts string labels into binary vectors.
 
 ### Scaling Methods
-- Numerical features were standardized using `StandardScaler` (zero mean, unit variance). Medical feature distributions are preserved relative to each other, but the scale is normalized for distance-based ML algorithms and gradient descent optimization.
+- Numerical features were standardized using `StandardScaler` (zero mean, unit variance).
 
 ### Feature Selection
 - **Variance Check**: Removed 0 features with near-zero variance.

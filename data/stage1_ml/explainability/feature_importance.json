@@ -1,166 +1,248 @@
 {
-    "toxicity_risk": [
+    "overall_patient_risk": [
         {
-            "feature": "age_group_lt_50",
-            "importance": 0.037384070456027985
+            "feature": "cancer_type_pancreatic cancer",
+            "importance": 0.02104520983994007
         },
         {
-            "feature": "high_clinical_risk",
-            "importance": 0.02616092935204506
+            "feature": "tumor_grade_high",
+            "importance": 0.02048991061747074
         },
         {
-            "feature": "cancer_type_ovarian cancer",
-            "importance": 0.022398995235562325
+            "feature": "hemoglobin",
+            "importance": 0.02047690376639366
         },
         {
-            "feature": "cancer_stage_i",
-            "importance": 0.022337768226861954
-        },
-        {
-            "feature": "metastasis_status_no",
-            "importance": 0.020185023546218872
-        },
-        {
-            "feature": "age",
-            "importance": 0.019686870276927948
-        },
-        {
-            "feature": "biomarker_2",
-            "importance": 0.01889665052294731
-        },
-        {
-            "feature": "treatment_line_second-line",
-            "importance": 0.018454287201166153
-        },
-        {
-            "feature": "comorbidity_score",
-            "importance": 0.01826062984764576
-        },
-        {
-            "feature": "treatment_dose",
-            "importance": 0.0181974396109581
-        },
-        {
-            "feature": "liver_function",
-            "importance": 0.01797075942158699
+            "feature": "smoking_status_former",
+            "importance": 0.01923152059316635
         },
         {
             "feature": "biomarker_1",
-            "importance": 0.017737988382577896
+            "importance": 0.018980568274855614
         },
         {
-            "feature": "treatment_line_later-line",
-            "importance": 0.017701542004942894
+            "feature": "bmi_category_normal",
+            "importance": 0.018794259056448936
         },
         {
-            "feature": "cancer_type_gastric cancer",
-            "importance": 0.01760554313659668
+            "feature": "cancer_stage_i",
+            "importance": 0.018658842891454697
         },
         {
-            "feature": "treatment_type_combination therapy",
-            "importance": 0.01745680160820484
+            "feature": "biomarker_interaction",
+            "importance": 0.01859893463551998
         },
         {
-            "feature": "albumin",
-            "importance": 0.017414167523384094
+            "feature": "tumor_grade_low",
+            "importance": 0.018368566408753395
         },
         {
-            "feature": "renal_function",
-            "importance": 0.01728781685233116
+            "feature": "treatment_line_second-line",
+            "importance": 0.01830819807946682
         },
         {
-            "feature": "smoking_status_current",
-            "importance": 0.01707720197737217
+            "feature": "treatment_type_chemotherapy",
+            "importance": 0.018246132880449295
         },
         {
-            "feature": "treatment_line_third-line",
-            "importance": 0.016670821234583855
+            "feature": "bmi_category_overweight",
+            "importance": 0.01824517920613289
         },
         {
             "feature": "cancer_type_lung cancer",
-            "importance": 0.016543222591280937
+            "importance": 0.018115950748324394
+        },
+        {
+            "feature": "smoking_status_current",
+            "importance": 0.017993910238146782
+        },
+        {
+            "feature": "cancer_stage_iii",
+            "importance": 0.01792973466217518
+        },
+        {
+            "feature": "metastasis_status_no",
+            "importance": 0.017897654324769974
+        },
+        {
+            "feature": "treatment_intensity",
+            "importance": 0.01774168387055397
+        },
+        {
+            "feature": "cancer_stage_ii",
+            "importance": 0.0177410040050745
+        },
+        {
+            "feature": "treatment_dose",
+            "importance": 0.01771126128733158
+        },
+        {
+            "feature": "comorbidity_score",
+            "importance": 0.01765982247889042
+        }
+    ],
+    "toxicity_risk": [
+        {
+            "feature": "treatment_dose",
+            "importance": 7.6345268174642795
+        },
+        {
+            "feature": "renal_function",
+            "importance": 5.4229754791666815
+        },
+        {
+            "feature": "hemoglobin",
+            "importance": 5.225126693548624
+        },
+        {
+            "feature": "age",
+            "importance": 4.1866193855559946
+        },
+        {
+            "feature": "performance_status",
+            "importance": 4.119209877431935
+        },
+        {
+            "feature": "biomarker_1",
+            "importance": 3.1669935980398494
+        },
+        {
+            "feature": "inflammatory_marker",
+            "importance": 3.1600856246255358
+        },
+        {
+            "feature": "bmi",
+            "importance": 3.1592955379468366
+        },
+        {
+            "feature": "dose_intensity",
+            "importance": 3.123519720743997
+        },
+        {
+            "feature": "biomarker_2",
+            "importance": 3.0720495967658126
+        },
+        {
+            "feature": "platelet_count",
+            "importance": 3.0638423536372463
+        },
+        {
+            "feature": "liver_function",
+            "importance": 2.926976243496692
+        },
+        {
+            "feature": "prior_treatment_count",
+            "importance": 2.904086176836326
+        },
+        {
+            "feature": "mutation_burden",
+            "importance": 2.8566866094494086
+        },
+        {
+            "feature": "treatment_duration",
+            "importance": 2.8133461266024775
+        },
+        {
+            "feature": "tumor_size",
+            "importance": 2.666359548245905
+        },
+        {
+            "feature": "comorbidity_score",
+            "importance": 2.6608185172012693
+        },
+        {
+            "feature": "treatment_intensity",
+            "importance": 2.657805510377856
+        },
+        {
+            "feature": "ctDNA_level",
+            "importance": 2.5867540688547908
+        },
+        {
+            "feature": "albumin",
+            "importance": 2.579463611226505
         }
     ],
     "therapy_response": [
         {
-            "feature": "cancer_stage_iv",
-            "importance": 0.28832808384090225
+            "feature": "ctDNA_level",
+            "importance": 0.041858320617709305
         },
         {
-            "feature": "cancer_stage_i",
-            "importance": 0.20651556960687759
-        },
-        {
-            "feature": "bmi_category_underweight",
-            "importance": 0.19911095977738094
-        },
-        {
-            "feature": "bmi_category_obese",
-            "importance": 0.1923969290878845
-        },
-        {
-            "feature": "cancer_stage_ii",
-            "importance": 0.1708494477879372
-        },
-        {
-            "feature": "metastasis_status_no",
-            "importance": 0.1224395039024364
-        },
-        {
-            "feature": "cancer_type_prostate cancer",
-            "importance": 0.11681153518976256
-        },
-        {
-            "feature": "age_group_gt_65",
-            "importance": 0.11582531934876748
-        },
-        {
-            "feature": "cancer_type_ovarian cancer",
-            "importance": 0.1041859973762352
-        },
-        {
-            "feature": "cancer_type_pancreatic cancer",
-            "importance": 0.09743310673931188
-        },
-        {
-            "feature": "treatment_type_targeted therapy",
-            "importance": 0.09407596729831195
-        },
-        {
-            "feature": "treatment_type_hormone therapy",
-            "importance": 0.0916029983016699
-        },
-        {
-            "feature": "tumor_size_category_T2_medium",
-            "importance": 0.08929162848686965
-        },
-        {
-            "feature": "smoking_status_former",
-            "importance": 0.08879827088518183
-        },
-        {
-            "feature": "tumor_grade_intermediate",
-            "importance": 0.08567456453193463
-        },
-        {
-            "feature": "treatment_type_immunotherapy",
-            "importance": 0.08545160716077553
+            "feature": "creatinine",
+            "importance": 0.04000369385928494
         },
         {
             "feature": "biomarker_1",
-            "importance": 0.07577443928184348
+            "importance": 0.03872216936866103
+        },
+        {
+            "feature": "mutation_burden",
+            "importance": 0.038536463113406055
+        },
+        {
+            "feature": "genetic_risk_score",
+            "importance": 0.03834483750178497
+        },
+        {
+            "feature": "tumor_size",
+            "importance": 0.03799574211961118
         },
         {
             "feature": "bmi",
-            "importance": 0.07141903990237285
+            "importance": 0.03798422129468017
         },
         {
-            "feature": "tumor_size_category_T1_small",
-            "importance": 0.06775664049023018
+            "feature": "hemoglobin",
+            "importance": 0.0378541509697935
         },
         {
-            "feature": "prior_treatment_count",
-            "importance": 0.06488106576299087
+            "feature": "renal_function",
+            "importance": 0.03710006271509843
+        },
+        {
+            "feature": "treatment_dose",
+            "importance": 0.036898393018582706
+        },
+        {
+            "feature": "treatment_intensity",
+            "importance": 0.03654808041471777
+        },
+        {
+            "feature": "dose_intensity",
+            "importance": 0.03433335916600064
+        },
+        {
+            "feature": "inflammatory_marker",
+            "importance": 0.03369320535067418
+        },
+        {
+            "feature": "biomarker_interaction",
+            "importance": 0.03323265560589837
+        },
+        {
+            "feature": "biomarker_2",
+            "importance": 0.0328332757776561
+        },
+        {
+            "feature": "platelet_count",
+            "importance": 0.032219299760269444
+        },
+        {
+            "feature": "liver_function",
+            "importance": 0.03186556505393057
+        },
+        {
+            "feature": "treatment_duration",
+            "importance": 0.03185032974042569
+        },
+        {
+            "feature": "wbc_count",
+            "importance": 0.031165587219356684
+        },
+        {
+            "feature": "neutrophil_count",
+            "importance": 0.029962681677556995
         }
     ]
 }

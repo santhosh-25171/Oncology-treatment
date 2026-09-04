@@ -23,7 +23,7 @@ if PROJECT_ROOT not in sys.path:
 
 API_URL = "http://localhost:8000"
 
-@st.cache_resource(show_spinner="Loading Stage 1 ML Model & Preprocessing Pipeline...")
+@st.cache_resource(show_spinner="Loading Stage 1 ML Calibrated Pipeline...")
 def get_prediction_pipeline():
     """Lazy loader for OncologyPredictionPipeline for direct standalone execution."""
     try:
@@ -51,20 +51,36 @@ def run_inference(patient_payload):
     pipeline = get_prediction_pipeline()
     if pipeline is not None:
         raw_result = pipeline.predict(patient_payload)
+        ov = raw_result["overall_patient_risk"]
         tox = raw_result["toxicity_risk"]
         ther = raw_result["therapy_response"]
         
         response = {
-            "risk_score": round(tox["confidence"], 4),
-            "risk_class": tox["prediction"],
-            "probabilities": tox["probabilities"],
-            "top_contributing_biomarkers": tox["important_factors"],
+            "overall_patient_risk": {
+                "prediction": ov["prediction"],
+                "risk_probability": ov["risk_probability"],
+                "threshold": ov.get("threshold", 0.48),
+                "confidence": ov["confidence"],
+                "probabilities": ov["probabilities"],
+                "important_factors": ov["important_factors"],
+                "debug_info": ov.get("debug_info", {})
+            },
+            "toxicity_risk": {
+                "prediction": tox["prediction"],
+                "confidence": tox["confidence"],
+                "probabilities": tox["probabilities"]
+            },
             "therapy_response": {
                 "prediction": ther["prediction"],
-                "confidence": round(ther["confidence"], 4),
-                "probabilities": ther["probabilities"],
-                "important_factors": ther["important_factors"]
-            }
+                "confidence": ther["confidence"],
+                "probabilities": ther["probabilities"]
+            },
+            "risk_score": ov["risk_probability"],
+            "risk_class": ov["prediction"],
+            "threshold": ov.get("threshold", 0.48),
+            "probabilities": ov["probabilities"],
+            "top_contributing_biomarkers": ov["important_factors"],
+            "debug_info": ov.get("debug_info", {})
         }
         return response, "Standalone Python ML Engine"
     else:
@@ -91,7 +107,15 @@ def get_leaderboard_data():
             return {"feature_importance": json.load(f)}
     return None
 
-# Styling
+def get_model_comparison_data():
+    """Loads model benchmark results for the scorecard tab."""
+    comp_path = os.path.join(PROJECT_ROOT, "data", "stage1_ml", "models", "model_comparison.json")
+    if os.path.exists(comp_path):
+        with open(comp_path, "r") as f:
+            return json.load(f)
+    return None
+
+# Custom CSS Styling
 st.markdown("""
 <style>
     .main-title {
@@ -137,7 +161,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown('<div class="main-title">🩺 Personalized Precision Medicine for Oncology</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-title">Interactive Clinical Dashboard: Patient Toxicity Risk Assessment, Therapy Response & SHAP Biomarker Explainability</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-title">Stage 1 ML: Calibrated Overall Patient Risk Prediction, Toxicity Assessment & SHAP Explainability</div>', unsafe_allow_html=True)
 
 # Sidebar
 st.sidebar.header("⚙️ Presets & Configuration")
@@ -155,96 +179,173 @@ except Exception:
     st.sidebar.info("⚡ Standalone Direct ML Mode Active")
 
 st.sidebar.markdown("---")
-st.sidebar.subheader("👤 Load Patient Clinical Presets")
+st.sidebar.subheader("👤 Deterministic Clinical Test Presets")
 
 preset = st.sidebar.selectbox(
     "Select Clinical Preset Profile:",
-    ["Custom Profile", "Sample Patient (Baseline)", "High Toxicity Risk Profile", "Low Toxicity Risk Profile", "Elderly Patient Profile"]
+    ["Custom Profile", "LOW_RISK_TEST", "MODERATE_RISK_TEST", "HIGH_RISK_TEST"]
 )
 
-# Preset data dict
+# TASK 7 & 8: Define coherent, fully-populated test presets
 default_patient = {
-    "age": 68.5,
-    "sex": "female",
-    "cancer_type": "breast cancer",
-    "cancer_stage": "iii",
-    "performance_status": 2,
-    "treatment_type": "immunotherapy",
-    "treatment_dose": 65.0,
-    "treatment_duration": 8.0,
-    "renal_function": 85.0,
+    "age": 58.0,
+    "sex": "male",
+    "cancer_type": "colon cancer",
+    "cancer_stage": "ii",
+    "performance_status": 1,
+    "treatment_type": "chemotherapy",
+    "treatment_dose": 50.0,
+    "treatment_duration": 6.0,
+    "renal_function": 80.0,
     "liver_function": 70.0,
     "hemoglobin": 12.0,
-    "wbc_count": 8.2,
-    "platelet_count": 195.0,
-    "mutation_burden": 8.4,
-    "ctDNA_level": 3.1,
-    "biomarker_1": 62.0,
-    "biomarker_2": 58.0,
-    "prior_treatment_count": 2,
-    "comorbidity_score": 3,
-    "tumor_size": 5.2,
-    "tumor_grade": "high",
-    "lymph_node_involvement": "yes",
-    "metastasis_status": "yes",
+    "wbc_count": 7.8,
+    "platelet_count": 210.0,
+    "mutation_burden": 5.0,
+    "ctDNA_level": 1.8,
+    "biomarker_1": 45.0,
+    "biomarker_2": 40.0,
+    "prior_treatment_count": 1,
+    "comorbidity_score": 1,
+    "tumor_size": 3.2,
+    "tumor_grade": "intermediate",
+    "lymph_node_involvement": "no",
+    "metastasis_status": "no",
     "smoking_status": "former",
-    "bmi": 26.8,
-    "albumin": 3.6,
-    "creatinine": 1.2,
-    "neutrophil_count": 6.1,
-    "lymphocyte_count": 0.8,
-    "inflammatory_marker": 25.4,
-    "genetic_risk_score": 72.0,
-    "treatment_line": "second-line",
-    "dose_intensity": 0.75,
-    "baseline_tumor_volume": 145.0
+    "bmi": 26.5,
+    "albumin": 3.8,
+    "creatinine": 1.1,
+    "neutrophil_count": 5.2,
+    "lymphocyte_count": 1.4,
+    "inflammatory_marker": 18.0,
+    "genetic_risk_score": 52.0,
+    "treatment_line": "first-line",
+    "dose_intensity": 0.85,
+    "baseline_tumor_volume": 65.0
 }
 
-if preset == "High Toxicity Risk Profile":
+if preset == "LOW_RISK_TEST":
     default_patient.update({
-        "age": 79.0,
-        "performance_status": 3,
-        "comorbidity_score": 4,
-        "renal_function": 42.0,
-        "liver_function": 38.0,
-        "hemoglobin": 9.2,
-        "ctDNA_level": 8.5,
-        "metastasis_status": "yes",
-        "lymphocyte_count": 0.3,
-        "inflammatory_marker": 45.0
-    })
-elif preset == "Low Toxicity Risk Profile":
-    default_patient.update({
-        "age": 42.0,
+        "age": 36.0,
+        "sex": "female",
+        "cancer_type": "breast cancer",
+        "cancer_stage": "i",
         "performance_status": 0,
+        "treatment_type": "hormone therapy",
+        "treatment_dose": 20.0,
+        "treatment_duration": 12.0,
+        "renal_function": 110.0,
+        "liver_function": 100.0,
+        "hemoglobin": 14.5,
+        "wbc_count": 6.5,
+        "platelet_count": 250.0,
+        "mutation_burden": 1.2,
+        "ctDNA_level": 0.1,
+        "biomarker_1": 12.0,
+        "biomarker_2": 15.0,
+        "prior_treatment_count": 0,
         "comorbidity_score": 0,
-        "renal_function": 115.0,
-        "liver_function": 95.0,
-        "hemoglobin": 14.8,
-        "ctDNA_level": 0.4,
+        "tumor_size": 1.1,
+        "tumor_grade": "low",
+        "lymph_node_involvement": "no",
         "metastasis_status": "no",
+        "smoking_status": "never",
+        "bmi": 22.0,
+        "albumin": 4.5,
+        "creatinine": 0.8,
+        "neutrophil_count": 3.5,
         "lymphocyte_count": 2.2,
-        "inflammatory_marker": 8.0
+        "inflammatory_marker": 3.0,
+        "genetic_risk_score": 20.0,
+        "treatment_line": "first-line",
+        "dose_intensity": 1.0,
+        "baseline_tumor_volume": 15.0
     })
-elif preset == "Elderly Patient Profile":
+elif preset == "MODERATE_RISK_TEST":
     default_patient.update({
-        "age": 82.5,
-        "performance_status": 2,
-        "comorbidity_score": 3,
-        "renal_function": 55.0,
-        "hemoglobin": 10.5,
-        "prior_treatment_count": 3
+        "age": 58.0,
+        "sex": "male",
+        "cancer_type": "colon cancer",
+        "cancer_stage": "ii",
+        "performance_status": 1,
+        "treatment_type": "chemotherapy",
+        "treatment_dose": 50.0,
+        "treatment_duration": 6.0,
+        "renal_function": 80.0,
+        "liver_function": 70.0,
+        "hemoglobin": 12.0,
+        "wbc_count": 7.8,
+        "platelet_count": 210.0,
+        "mutation_burden": 5.0,
+        "ctDNA_level": 1.8,
+        "biomarker_1": 45.0,
+        "biomarker_2": 40.0,
+        "prior_treatment_count": 1,
+        "comorbidity_score": 1,
+        "tumor_size": 3.2,
+        "tumor_grade": "intermediate",
+        "lymph_node_involvement": "no",
+        "metastasis_status": "no",
+        "smoking_status": "former",
+        "bmi": 26.5,
+        "albumin": 3.8,
+        "creatinine": 1.1,
+        "neutrophil_count": 5.2,
+        "lymphocyte_count": 1.4,
+        "inflammatory_marker": 18.0,
+        "genetic_risk_score": 52.0,
+        "treatment_line": "first-line",
+        "dose_intensity": 0.85,
+        "baseline_tumor_volume": 65.0
+    })
+elif preset == "HIGH_RISK_TEST":
+    default_patient.update({
+        "age": 78.0,
+        "sex": "female",
+        "cancer_type": "lung cancer",
+        "cancer_stage": "iv",
+        "performance_status": 3,
+        "treatment_type": "combination therapy",
+        "treatment_dose": 120.0,
+        "treatment_duration": 3.0,
+        "renal_function": 40.0,
+        "liver_function": 35.0,
+        "hemoglobin": 8.5,
+        "wbc_count": 14.2,
+        "platelet_count": 110.0,
+        "mutation_burden": 15.4,
+        "ctDNA_level": 8.5,
+        "biomarker_1": 130.0,
+        "biomarker_2": 115.0,
+        "prior_treatment_count": 4,
+        "comorbidity_score": 5,
+        "tumor_size": 7.5,
+        "tumor_grade": "high",
+        "lymph_node_involvement": "yes",
+        "metastasis_status": "yes",
+        "smoking_status": "current",
+        "bmi": 32.4,
+        "albumin": 2.8,
+        "creatinine": 2.1,
+        "neutrophil_count": 9.5,
+        "lymphocyte_count": 0.4,
+        "inflammatory_marker": 55.0,
+        "genetic_risk_score": 88.0,
+        "treatment_line": "later-line",
+        "dose_intensity": 0.5,
+        "baseline_tumor_volume": 250.0
     })
 
 # Navigation Tabs
-tab_pred, tab_leaderboard, tab_batch = st.tabs([
-    "📋 Patient Prediction & Clinical Risk", 
+tab_pred, tab_scorecard, tab_leaderboard, tab_batch = st.tabs([
+    "📋 Patient Risk Prediction", 
+    "🏆 Model Benchmarks & Scorecards",
     "🧬 Global Biomarker Leaderboard",
     "📁 Batch CSV Evaluation"
 ])
 
 with tab_pred:
-    st.subheader("1. Clinical Input & Patient Profile")
+    st.subheader("1. Patient Clinical Profile Input")
     
     col1, col2, col3 = st.columns(3)
     
@@ -252,7 +353,7 @@ with tab_pred:
         st.markdown("##### 👤 Demographics & Diagnostics")
         age = st.number_input("Age (years)", min_value=18.0, max_value=100.0, value=float(default_patient["age"]))
         sex = st.selectbox("Biological Sex", ["male", "female"], index=0 if default_patient["sex"]=="male" else 1)
-        cancer_type = st.selectbox("Cancer Type", ["breast cancer", "lung cancer", "ovarian cancer", "prostate cancer", "gastric cancer", "pancreatic cancer"], index=0)
+        cancer_type = st.selectbox("Cancer Type", ["breast cancer", "lung cancer", "ovarian cancer", "prostate cancer", "gastric cancer", "pancreatic cancer", "colon cancer"], index=["breast cancer", "lung cancer", "ovarian cancer", "prostate cancer", "gastric cancer", "pancreatic cancer", "colon cancer"].index(default_patient["cancer_type"]))
         cancer_stage = st.selectbox("Cancer Stage", ["i", "ii", "iii", "iv"], index=["i", "ii", "iii", "iv"].index(default_patient["cancer_stage"]))
         performance_status = st.slider("ECOG Performance Status (0-4)", 0, 4, int(default_patient["performance_status"]))
         tumor_grade = st.selectbox("Tumor Grade", ["low", "intermediate", "high"], index=["low", "intermediate", "high"].index(default_patient["tumor_grade"]))
@@ -260,8 +361,8 @@ with tab_pred:
         
     with col2:
         st.markdown("##### 💊 Treatment & Medical History")
-        treatment_type = st.selectbox("Treatment Modality", ["chemotherapy", "immunotherapy", "targeted therapy", "combination therapy", "hormone therapy"], index=1)
-        treatment_line = st.selectbox("Line of Therapy", ["first-line", "second-line", "third-line", "later-line"], index=1)
+        treatment_type = st.selectbox("Treatment Modality", ["chemotherapy", "immunotherapy", "targeted therapy", "combination therapy", "hormone therapy"], index=["chemotherapy", "immunotherapy", "targeted therapy", "combination therapy", "hormone therapy"].index(default_patient["treatment_type"]))
+        treatment_line = st.selectbox("Line of Therapy", ["first-line", "second-line", "third-line", "later-line"], index=["first-line", "second-line", "third-line", "later-line"].index(default_patient["treatment_line"]))
         treatment_dose = st.number_input("Treatment Dose (mg/m2)", min_value=1.0, max_value=500.0, value=float(default_patient["treatment_dose"]))
         treatment_duration = st.number_input("Treatment Duration (months)", min_value=0.5, max_value=60.0, value=float(default_patient["treatment_duration"]))
         dose_intensity = st.number_input("Relative Dose Intensity", min_value=0.1, max_value=2.0, value=float(default_patient["dose_intensity"]))
@@ -295,12 +396,11 @@ with tab_pred:
             baseline_tumor_volume = st.number_input("Baseline Tumor Volume (cm3)", value=float(default_patient["baseline_tumor_volume"]))
             metastasis_status = st.selectbox("Metastasis Status", ["no", "yes"], index=1 if default_patient["metastasis_status"]=="yes" else 0)
             lymph_node_involvement = st.selectbox("Lymph Node Involvement", ["no", "yes"], index=1 if default_patient["lymph_node_involvement"]=="yes" else 0)
-            smoking_status = st.selectbox("Smoking Status", ["never", "former", "current"], index=1)
+            smoking_status = st.selectbox("Smoking Status", ["never", "former", "current"], index=["never", "former", "current"].index(default_patient["smoking_status"]))
 
     st.markdown("---")
     
-    # Predict button
-    if st.button("🚀 Calculate Real-Time Patient Risk & Response", type="primary", use_container_width=True):
+    if st.button("🚀 Calculate Overall Patient Risk & Response", type="primary", use_container_width=True):
         patient_dict = {
             "age": age,
             "sex": sex,
@@ -338,71 +438,135 @@ with tab_pred:
             "baseline_tumor_volume": baseline_tumor_volume
         }
         
-        with st.spinner("Analyzing patient clinical profile through XGBoost models & computing SHAP feature contributions..."):
+        with st.spinner("Executing calibrated ML model inference & computing SHAP feature contributions..."):
             try:
                 result, engine_used = run_inference(patient_dict)
                 
                 st.caption(f"⚡ Inference executed using: **{engine_used}**")
-                st.markdown("### 2. Clinical Prediction Results")
+                st.markdown("### 2. Decision Support Clinical Predictions")
+                
+                # Primary Target Card: Overall Patient Risk
+                ov_info = result.get("overall_patient_risk", {
+                    "prediction": result.get("risk_class", "High"),
+                    "risk_probability": result.get("risk_score", 0.5),
+                    "threshold": result.get("threshold", 0.48),
+                    "probabilities": result.get("probabilities", {}),
+                    "important_factors": result.get("top_contributing_biomarkers", []),
+                    "debug_info": result.get("debug_info", {})
+                })
+                
+                ov_class = ov_info["prediction"]
+                ov_prob = ov_info["risk_probability"]
+                thresh = ov_info.get("threshold", 0.48)
+                debug_info = ov_info.get("debug_info", {})
+                
+                card_class = "card-low"
+                icon = "🟢"
+                if ov_class == "Moderate":
+                    card_class = "card-moderate"
+                    icon = "🟡"
+                elif ov_class == "High":
+                    card_class = "card-high"
+                    icon = "🔴"
+                    
+                st.markdown(f"""
+                <div class="{card_class}">
+                    <h2>{icon} Primary Decision Class: OVERALL PATIENT RISK — {ov_class.upper()}</h2>
+                    <div class="metric-num">Calibrated High-Risk Probability: {ov_prob * 100:.1f}%</div>
+                    <p style="margin-top:0.4rem;">Decision Threshold: <b>{thresh * 100:.1f}%</b> | Classification Rule: <i>If High-Risk Prob ≥ {thresh * 100:.1f}% → High, else Moderate/Low</i>.</p>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                # TASK 9: Add Developer Diagnostic & Inference Audit Expander
+                with st.expander("🛠️ Developer Diagnostics & Inference Calibration Audit"):
+                    st.markdown("#### Inference Decision Flow & Calibration Audit")
+                    st.json({
+                        "champion_model": debug_info.get("model_name", "Calibrated XGBoost (Platt Scaling)"),
+                        "calibration_method": debug_info.get("calibration", "Sigmoidal Logistic Calibration"),
+                        "raw_high_risk_probability": debug_info.get("raw_high_risk_prob", ov_prob),
+                        "calibrated_high_risk_probability": debug_info.get("calibrated_high_risk_prob", ov_prob),
+                        "decision_threshold": thresh,
+                        "assigned_risk_class": ov_class,
+                        "threshold_rule_evaluated": f"High Risk Prob ({ov_prob*100:.1f}%) >= Threshold ({thresh*100:.1f}%) => {ov_class == 'High'}"
+                    })
+                
+                st.markdown("<br>", unsafe_allow_html=True)
                 
                 res1, res2 = st.columns(2)
                 
-                risk_class = result["risk_class"]
-                risk_score = result["risk_score"]
-                probs = result["probabilities"]
-                top_biomarkers = result["top_contributing_biomarkers"]
-                therapy = result["therapy_response"]
+                tox = result["toxicity_risk"]
+                ther = result["therapy_response"]
                 
                 with res1:
-                    card_class = "card-low"
-                    icon = "🟢"
-                    if risk_class == "Moderate":
-                        card_class = "card-moderate"
-                        icon = "🟡"
-                    elif risk_class == "High":
-                        card_class = "card-high"
-                        icon = "🔴"
-                        
-                    st.markdown(f"""
-                    <div class="{card_class}">
-                        <h3>{icon} Toxicity Risk Level: {risk_class.upper()}</h3>
-                        <div class="metric-num">{risk_score * 100:.1f}% Confidence</div>
-                        <p style="margin-top:0.4rem;">Model prediction for adverse drug reaction / treatment toxicity risk.</p>
-                    </div>
-                    """, unsafe_allow_html=True)
+                    st.markdown("##### ⚠️ Secondary Target: Toxicity Risk")
+                    st.info(f"**Predicted Toxicity Class:** `{tox['prediction']}` | **Confidence:** `{tox['confidence']*100:.1f}%`")
                     
-                    st.markdown("##### 📊 Toxicity Class Probabilities")
-                    df_probs = pd.DataFrame({
-                        "Risk Class": list(probs.keys()),
-                        "Probability (%)": [v * 100 for v in probs.values()]
+                    df_tox_p = pd.DataFrame({
+                        "Class": list(tox["probabilities"].keys()),
+                        "Probability (%)": [v * 100 for v in tox["probabilities"].values()]
                     })
-                    fig_probs = px.bar(
-                        df_probs, x="Risk Class", y="Probability (%)", color="Risk Class",
-                        color_discrete_map={"Low": "#10B981", "Moderate": "#F59E0B", "High": "#EF4444"},
-                        text_auto=".1f"
-                    )
-                    fig_probs.update_layout(height=260, showlegend=False, yaxis_title="Probability (%)")
-                    st.plotly_chart(fig_probs, use_container_width=True)
+                    fig_tox = px.bar(df_tox_p, x="Class", y="Probability (%)", color="Class",
+                                     color_discrete_map={"Low": "#10B981", "Moderate": "#F59E0B", "High": "#EF4444"},
+                                     text_auto=".1f")
+                    fig_tox.update_layout(height=230, showlegend=False)
+                    st.plotly_chart(fig_tox, use_container_width=True)
 
                 with res2:
-                    st.markdown(f"""
-                    <div class="card-low" style="border-left-color: #3B82F6; background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); color: #1E40AF;">
-                        <h3>🎯 Therapy Response: {therapy['prediction']}</h3>
-                        <div class="metric-num">{therapy['confidence'] * 100:.1f}% Confidence</div>
-                        <p style="margin-top:0.4rem;">Predicted patient therapy outcome trajectory.</p>
-                    </div>
-                    """, unsafe_allow_html=True)
+                    st.markdown("##### 🎯 Secondary Target: Therapy Response")
+                    st.info(f"**Predicted Response Class:** `{ther['prediction']}` | **Confidence:** `{ther['confidence']*100:.1f}%`")
                     
-                    st.markdown("##### 🧬 Patient SHAP Key Contributing Factors")
-                    st.markdown("**Top Toxicity Risk Factors:**")
-                    for i, factor in enumerate(top_biomarkers, 1):
-                        st.info(f"**Factor #{i}:** `{factor}`")
-                        
-                    st.markdown("**Top Therapy Response Factors:**")
-                    st.write(", ".join([f"`{f}`" for f in therapy["important_factors"]]))
+                    df_ther_p = pd.DataFrame({
+                        "Response": list(ther["probabilities"].keys()),
+                        "Probability (%)": [v * 100 for v in ther["probabilities"].values()]
+                    })
+                    fig_ther = px.bar(df_ther_p, x="Response", y="Probability (%)", color="Response",
+                                      color_discrete_map={"Complete Response": "#10B981", "Partial Response": "#3B82F6", "Non-Responder": "#EF4444"},
+                                      text_auto=".1f")
+                    fig_ther.update_layout(height=230, showlegend=False)
+                    st.plotly_chart(fig_ther, use_container_width=True)
+                    
+                st.markdown("##### 🧬 Top Contributing Patient Factors (SHAP Drivers)")
+                factors = ov_info.get("important_factors", [])
+                for i, f in enumerate(factors, 1):
+                    feat_name = f.get("feature", str(f))
+                    direction = f.get("direction", "active")
+                    st.markdown(f"- **Factor #{i}:** `{feat_name}` — *({direction})*")
                     
             except Exception as e:
                 st.error(f"Inference failed: {e}")
+
+with tab_scorecard:
+    st.subheader("🏆 Model Benchmarking & Performance Scorecards")
+    st.markdown("Empirical comparison across 5 machine learning models evaluated with 5-Fold Stratified Cross-Validation & Unseen Holdout Evaluation.")
+    
+    comp_data = get_model_comparison_data()
+    if comp_data:
+        t_target = st.selectbox("Select Target Benchmark:", ["overall_patient_risk", "toxicity_risk", "therapy_response"])
+        if t_target in comp_data:
+            models_dict = comp_data[t_target]
+            rows = []
+            for mname, mval in models_dict.items():
+                m = mval["metrics"]
+                cv = mval.get("cv_results", {})
+                rows.append({
+                    "Model": mname,
+                    "High-Risk Recall": round(m.get("high_risk_recall", 0.0) * 100, 2),
+                    "Macro F1": round(m.get("f1_macro", 0.0), 4),
+                    "Accuracy": round(m.get("accuracy", 0.0) * 100, 2),
+                    "Brier Score (Calibration)": round(m.get("brier_score", 0.0), 4),
+                    "ROC-AUC": round(m.get("roc_auc_macro", 0.0), 4),
+                    "CV F1 (Mean)": round(cv.get("cv_f1_macro_mean", 0.0), 4)
+                })
+            df_comp = pd.DataFrame(rows).sort_values(by="High-Risk Recall", ascending=False)
+            st.dataframe(df_comp, use_container_width=True)
+            
+            st.markdown("##### 📊 High-Risk Recall vs Brier Score Calibration")
+            fig_sc = px.bar(df_comp, x="Model", y="High-Risk Recall", color="Model", text_auto=".1f",
+                            title=f"Holdout High-Risk Recall (%) for {t_target}")
+            fig_sc.update_layout(height=350)
+            st.plotly_chart(fig_sc, use_container_width=True)
+    else:
+        st.warning("Model comparison data file not found.")
 
 with tab_leaderboard:
     st.subheader("🧬 Global SHAP Biomarker Leaderboard")
@@ -439,7 +603,7 @@ with tab_leaderboard:
 
 with tab_batch:
     st.subheader("📁 Batch Patient CSV Evaluation")
-    st.markdown("Upload a CSV file containing multiple patient profiles to run bulk toxicity risk & therapy response predictions.")
+    st.markdown("Upload a CSV file containing multiple patient profiles to run bulk patient risk & therapy response predictions.")
     
     uploaded_file = st.file_uploader("Upload Patients CSV", type=["csv"])
     if uploaded_file is not None:
@@ -454,18 +618,19 @@ with tab_batch:
                     for idx, row in df_batch.iterrows():
                         p_dict = row.to_dict()
                         res, _ = run_inference(p_dict)
+                        ov = res.get("overall_patient_risk", {})
                         results_list.append({
                             "patient_index": idx,
-                            "toxicity_risk": res["risk_class"],
-                            "toxicity_confidence": res["risk_score"],
-                            "therapy_response": res["therapy_response"]["prediction"],
-                            "therapy_confidence": res["therapy_response"]["confidence"]
+                            "overall_patient_risk": ov.get("prediction", res.get("risk_class")),
+                            "risk_probability": ov.get("risk_probability", res.get("risk_score")),
+                            "threshold": ov.get("threshold", 0.48),
+                            "toxicity_risk": res["toxicity_risk"]["prediction"],
+                            "therapy_response": res["therapy_response"]["prediction"]
                         })
                     df_res = pd.DataFrame(results_list)
                     st.success("Batch processing complete!")
                     st.dataframe(df_res, use_container_width=True)
                     
-                    # Download CSV
                     csv_data = df_res.to_csv(index=False).encode('utf-8')
                     st.download_button("📥 Download Predictions CSV", data=csv_data, file_name="batch_predictions.csv", mime="text/csv")
         except Exception as e:

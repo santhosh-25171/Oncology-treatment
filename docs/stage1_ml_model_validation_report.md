@@ -17,8 +17,9 @@ The serialized `.joblib` files were dynamically unpacked. For each target, the p
 - The model accepts the exact feature array shape of the transformed testing data.
 
 **Models Tested**:
-- toxicity_risk: XGBoost
-- therapy_response: Logistic Regression
+- overall_patient_risk: XGBoost
+- toxicity_risk: CatBoost
+- therapy_response: Random Forest
 
 ## 5. How Predictions were Generated
 The script invoked the model inference API to generate both crisp class predictions and continuous probabilities. 

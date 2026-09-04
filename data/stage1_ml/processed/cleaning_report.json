@@ -5,7 +5,7 @@
     ],
     "final_shape": [
         5000,
-        36
+        37
     ],
     "duplicate_rows_removed": 12,
     "missing_values_before_cleaning": {
@@ -82,7 +82,8 @@
         "dose_intensity": 0,
         "baseline_tumor_volume": 0,
         "toxicity_risk": 0,
-        "therapy_response": 0
+        "therapy_response": 0,
+        "overall_patient_risk": 0
     },
     "detected_invalid_values": {},
     "categorical_columns": [
@@ -124,11 +125,13 @@
         "baseline_tumor_volume"
     ],
     "target_columns": [
+        "overall_patient_risk",
         "toxicity_risk",
         "therapy_response"
     ],
     "cleaning_operations_performed": [
-        "Verified 34 features and 2 targets.",
+        "Verified 34 features and 3 targets.",
+        "Constructed primary target 'overall_patient_risk' combining toxicity risk & therapy response.",
         "Removed exact duplicate rows.",
         "Converted columns to proper numeric types where applicable.",
         "Identified negative/invalid values in numerical columns and replaced with NaN.",

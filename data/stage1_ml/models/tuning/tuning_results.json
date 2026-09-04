@@ -1,84 +1,194 @@
 {
-    "toxicity_risk": {
+    "overall_patient_risk": {
         "Logistic Regression": {
             "best_params": {
                 "solver": "lbfgs",
-                "penalty": "l2",
-                "C": 0.1
+                "C": 0.01
             },
-            "cv_macro_f1": 0.3641812322006919,
-            "test_macro_f1": 0.3527241908126731
+            "cv_macro_f1": 0.37175819377235875,
+            "test_macro_f1": 0.36776878516008954,
+            "test_accuracy": 0.408,
+            "high_risk_recall": 0.4986737400530504,
+            "selection_score": 0.43322126260656996
         },
         "Random Forest": {
             "best_params": {
-                "n_estimators": 50,
+                "n_estimators": 100,
                 "min_samples_split": 5,
-                "max_depth": 20
+                "max_depth": 8
             },
-            "cv_macro_f1": 0.3367874383759508,
-            "test_macro_f1": 0.3475392962734904
+            "cv_macro_f1": 0.37611841769347987,
+            "test_macro_f1": 0.3650308491177039,
+            "test_accuracy": 0.464,
+            "high_risk_recall": 0.6206896551724138,
+            "selection_score": 0.49286025214505885
         },
         "XGBoost": {
             "best_params": {
                 "subsample": 1.0,
-                "n_estimators": 200,
-                "max_depth": 3,
-                "learning_rate": 0.2,
+                "n_estimators": 150,
+                "max_depth": 5,
+                "learning_rate": 0.05,
                 "colsample_bytree": 1.0
             },
-            "cv_macro_f1": 0.3645027240099148,
-            "test_macro_f1": 0.3723069865299891
+            "cv_macro_f1": 0.32727850475146186,
+            "test_macro_f1": 0.3143015433068866,
+            "test_accuracy": 0.488,
+            "high_risk_recall": 0.7824933687002652,
+            "selection_score": 0.5483974560035759
         },
         "LightGBM": {
             "best_params": {
-                "num_leaves": 50,
-                "n_estimators": 200,
-                "max_depth": 10,
-                "learning_rate": 0.2
+                "num_leaves": 31,
+                "n_estimators": 50,
+                "max_depth": -1,
+                "learning_rate": 0.05
             },
-            "cv_macro_f1": 0.35674841529574697,
-            "test_macro_f1": 0.37138138100453966
+            "cv_macro_f1": 0.3755995958139805,
+            "test_macro_f1": 0.36638600734986276,
+            "test_accuracy": 0.4493333333333333,
+            "high_risk_recall": 0.6021220159151194,
+            "selection_score": 0.48425401163249104
+        },
+        "CatBoost": {
+            "best_params": {
+                "learning_rate": 0.1,
+                "l2_leaf_reg": 5,
+                "depth": 4
+            },
+            "cv_macro_f1": 0.3931144077141455,
+            "test_macro_f1": 0.3605679314234574,
+            "test_accuracy": 0.42,
+            "high_risk_recall": 0.5490716180371353,
+            "selection_score": 0.45481977473029633
+        }
+    },
+    "toxicity_risk": {
+        "Logistic Regression": {
+            "best_params": {
+                "solver": "lbfgs",
+                "C": 0.01
+            },
+            "cv_macro_f1": 0.3854169920186542,
+            "test_macro_f1": 0.39230765612375196,
+            "test_accuracy": 0.4,
+            "high_risk_recall": 0.48013245033112584,
+            "selection_score": 0.4362200532274389
+        },
+        "Random Forest": {
+            "best_params": {
+                "n_estimators": 100,
+                "min_samples_split": 5,
+                "max_depth": 8
+            },
+            "cv_macro_f1": 0.39308426375318173,
+            "test_macro_f1": 0.37760969309066544,
+            "test_accuracy": 0.404,
+            "high_risk_recall": 0.5496688741721855,
+            "selection_score": 0.4636392836314255
+        },
+        "XGBoost": {
+            "best_params": {
+                "subsample": 1.0,
+                "n_estimators": 150,
+                "max_depth": 5,
+                "learning_rate": 0.05,
+                "colsample_bytree": 1.0
+            },
+            "cv_macro_f1": 0.3423649633202528,
+            "test_macro_f1": 0.35835595776772244,
+            "test_accuracy": 0.44133333333333336,
+            "high_risk_recall": 0.5397350993377483,
+            "selection_score": 0.4490455285527354
+        },
+        "LightGBM": {
+            "best_params": {
+                "num_leaves": 20,
+                "n_estimators": 100,
+                "max_depth": -1,
+                "learning_rate": 0.05
+            },
+            "cv_macro_f1": 0.3865588296326454,
+            "test_macro_f1": 0.37715408182206517,
+            "test_accuracy": 0.3893333333333333,
+            "high_risk_recall": 0.4602649006622517,
+            "selection_score": 0.4187094912421584
+        },
+        "CatBoost": {
+            "best_params": {
+                "learning_rate": 0.03,
+                "l2_leaf_reg": 1,
+                "depth": 6
+            },
+            "cv_macro_f1": 0.3953295280225736,
+            "test_macro_f1": 0.41238828445307013,
+            "test_accuracy": 0.42533333333333334,
+            "high_risk_recall": 0.5331125827814569,
+            "selection_score": 0.47275043361726354
         }
     },
     "therapy_response": {
         "Logistic Regression": {
             "best_params": {
                 "solver": "lbfgs",
-                "penalty": "l2",
-                "C": 0.1
+                "C": 0.01
             },
-            "cv_macro_f1": 0.3156439238689102,
-            "test_macro_f1": 0.31545050080399156
+            "cv_macro_f1": 0.3479201437902427,
+            "test_macro_f1": 0.31827261584241384,
+            "test_accuracy": 0.33066666666666666,
+            "high_risk_recall": 0.46441947565543074,
+            "selection_score": 0.3913460457489223
         },
         "Random Forest": {
             "best_params": {
-                "n_estimators": 50,
-                "min_samples_split": 2,
-                "max_depth": null
+                "n_estimators": 100,
+                "min_samples_split": 5,
+                "max_depth": 8
             },
-            "cv_macro_f1": 0.3111635610744892,
-            "test_macro_f1": 0.3099090930044726
+            "cv_macro_f1": 0.3785847928824154,
+            "test_macro_f1": 0.3832058503371542,
+            "test_accuracy": 0.428,
+            "high_risk_recall": 0.5168539325842697,
+            "selection_score": 0.45002989146071193
         },
         "XGBoost": {
             "best_params": {
                 "subsample": 1.0,
-                "n_estimators": 200,
-                "max_depth": 3,
-                "learning_rate": 0.2,
+                "n_estimators": 150,
+                "max_depth": 5,
+                "learning_rate": 0.05,
                 "colsample_bytree": 1.0
             },
-            "cv_macro_f1": 0.32938493863051876,
-            "test_macro_f1": 0.32604868227862444
+            "cv_macro_f1": 0.3136935244623754,
+            "test_macro_f1": 0.29472724253488475,
+            "test_accuracy": 0.436,
+            "high_risk_recall": 0.25842696629213485,
+            "selection_score": 0.2765771044135098
         },
         "LightGBM": {
             "best_params": {
-                "num_leaves": 50,
+                "num_leaves": 20,
                 "n_estimators": 100,
                 "max_depth": -1,
-                "learning_rate": 0.1
+                "learning_rate": 0.05
             },
-            "cv_macro_f1": 0.32280371256093043,
-            "test_macro_f1": 0.31764380862896163
+            "cv_macro_f1": 0.36216629895890046,
+            "test_macro_f1": 0.3476710395501567,
+            "test_accuracy": 0.37066666666666664,
+            "high_risk_recall": 0.40823970037453183,
+            "selection_score": 0.37795536996234425
+        },
+        "CatBoost": {
+            "best_params": {
+                "learning_rate": 0.08,
+                "l2_leaf_reg": 3,
+                "depth": 6
+            },
+            "cv_macro_f1": 0.36449124570124425,
+            "test_macro_f1": 0.37582917043692304,
+            "test_accuracy": 0.4026666666666667,
+            "high_risk_recall": 0.47191011235955055,
+            "selection_score": 0.4238696413982368
         }
     }
 }

@@ -9,6 +9,7 @@ data_paths:
     predictions: "data/stage1_ml/predictions"
 
 targets:
+  - "overall_patient_risk"
   - "toxicity_risk"
   - "therapy_response"
 
