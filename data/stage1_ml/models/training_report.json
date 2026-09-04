@@ -27,7 +27,7 @@
                 ]
             ]
         },
-        "training_time": 0.07303476333618164
+        "training_time": 0.06410813331604004
     },
     {
         "target": "toxicity_risk",
@@ -57,7 +57,7 @@
                 ]
             ]
         },
-        "training_time": 1.9978389739990234
+        "training_time": 1.155247449874878
     },
     {
         "target": "toxicity_risk",
@@ -87,7 +87,7 @@
                 ]
             ]
         },
-        "training_time": 1.8286957740783691
+        "training_time": 1.3611743450164795
     },
     {
         "target": "toxicity_risk",
@@ -117,7 +117,7 @@
                 ]
             ]
         },
-        "training_time": 3.2493879795074463
+        "training_time": 2.654531955718994
     },
     {
         "target": "therapy_response",
@@ -147,7 +147,7 @@
                 ]
             ]
         },
-        "training_time": 0.09154772758483887
+        "training_time": 0.06210613250732422
     },
     {
         "target": "therapy_response",
@@ -177,7 +177,7 @@
                 ]
             ]
         },
-        "training_time": 2.4454281330108643
+        "training_time": 1.2834064960479736
     },
     {
         "target": "therapy_response",
@@ -207,7 +207,7 @@
                 ]
             ]
         },
-        "training_time": 2.351962089538574
+        "training_time": 1.2863938808441162
     },
     {
         "target": "therapy_response",
@@ -237,6 +237,6 @@
                 ]
             ]
         },
-        "training_time": 0.8164138793945312
+        "training_time": 0.6278598308563232
     }
 ]
