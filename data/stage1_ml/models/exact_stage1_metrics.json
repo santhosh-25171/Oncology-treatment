@@ -1,0 +1,68 @@
+{
+    "overall_patient_risk": {
+        "model_name": "Calibrated XGBoost",
+        "test_samples": 750,
+        "accuracy": 0.508,
+        "balanced_accuracy": 0.36896950599309947,
+        "precision_macro": 0.3231818181818182,
+        "recall_macro": 0.36896950599309947,
+        "f1_macro": 0.3358982550198851,
+        "high_risk_precision": 0.5345454545454545,
+        "high_risk_recall": 0.7798408488063661,
+        "high_risk_f1": 0.6343042071197411,
+        "roc_auc": 0.5635642231517285,
+        "pr_auc": 0.5879527424883196,
+        "brier_score": 0.5935260672043589,
+        "calibration_status": "Calibrated (Platt Scaling / Sigmoidal)",
+        "cv_macro_f1_mean": 0.32727850475146186,
+        "classes": [
+            "High",
+            "Low",
+            "Moderate"
+        ]
+    },
+    "toxicity_risk": {
+        "model_name": "Calibrated CatBoost",
+        "test_samples": 750,
+        "accuracy": 0.45866666666666667,
+        "balanced_accuracy": 0.3803840032855896,
+        "precision_macro": 0.3107372077960313,
+        "recall_macro": 0.3803840032855896,
+        "f1_macro": 0.3390836571294007,
+        "high_risk_precision": 0.5065359477124183,
+        "high_risk_recall": 0.5132450331125827,
+        "high_risk_f1": 0.5098684210526315,
+        "roc_auc": 0.5843346248251324,
+        "pr_auc": 0.4860053346986085,
+        "brier_score": 0.6267781145379738,
+        "calibration_status": "Calibrated (Platt Scaling / Sigmoidal)",
+        "cv_macro_f1_mean": 0.3953295280225736,
+        "classes": [
+            "High",
+            "Low",
+            "Moderate"
+        ]
+    },
+    "therapy_response": {
+        "model_name": "Calibrated Random Forest",
+        "test_samples": 750,
+        "accuracy": 0.4653333333333333,
+        "balanced_accuracy": 0.32923887513489497,
+        "precision_macro": 0.23016944069575648,
+        "recall_macro": 0.32923887513489497,
+        "f1_macro": 0.2160942359870293,
+        "high_risk_precision": 0.0,
+        "high_risk_recall": 0.0,
+        "high_risk_f1": 0.0,
+        "roc_auc": 0.556550999388397,
+        "pr_auc": 0.1967522903318354,
+        "brier_score": 0.6166721840337294,
+        "calibration_status": "Calibrated (Platt Scaling / Sigmoidal)",
+        "cv_macro_f1_mean": 0.3785847928824154,
+        "classes": [
+            "Complete Response",
+            "Non-Responder",
+            "Partial Response"
+        ]
+    }
+}

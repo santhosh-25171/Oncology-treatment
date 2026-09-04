@@ -123,7 +123,9 @@ def health_check():
         "status": "healthy",
         "service": "precision-oncology-api",
         "pipeline_loaded": pipeline is not None,
-        "version": "1.0.0"
+        "primary_target": "overall_patient_risk",
+        "secondary_targets": ["toxicity_risk", "therapy_response"],
+        "version": "2.0.0"
     }
 
 @app.get("/leaderboard")
@@ -147,7 +149,7 @@ def get_biomarker_leaderboard():
 def predict_patient_risk(payload: Dict[str, Any] = Body(...)):
     """
     Accepts patient clinical & genomic feature payload JSON and returns
-    predicted toxicity risk class, probability, therapy response, and SHAP top biomarkers.
+    predicted Overall Patient Risk class, risk probability, toxicity risk, therapy response, and top contributing factors.
     """
     global pipeline
     if pipeline is None:
@@ -155,21 +157,40 @@ def predict_patient_risk(payload: Dict[str, Any] = Body(...)):
         
     try:
         raw_result = pipeline.predict(payload)
+        ov = raw_result["overall_patient_risk"]
         tox = raw_result["toxicity_risk"]
         ther = raw_result["therapy_response"]
         
         response = {
-            "risk_score": round(tox["confidence"], 4),
-            "risk_class": tox["prediction"],
-            "probabilities": tox["probabilities"],
-            "top_contributing_biomarkers": tox["important_factors"],
+            "overall_patient_risk": {
+                "prediction": ov["prediction"],
+                "risk_probability": ov["risk_probability"],
+                "threshold": ov.get("threshold", 0.48),
+                "confidence": ov["confidence"],
+                "probabilities": ov["probabilities"],
+                "important_factors": ov["important_factors"],
+                "debug_info": ov.get("debug_info", {})
+            },
+            "toxicity_risk": {
+                "prediction": tox["prediction"],
+                "confidence": tox["confidence"],
+                "probabilities": tox["probabilities"]
+            },
             "therapy_response": {
                 "prediction": ther["prediction"],
-                "confidence": round(ther["confidence"], 4),
-                "probabilities": ther["probabilities"],
-                "important_factors": ther["important_factors"]
-            }
+                "confidence": ther["confidence"],
+                "probabilities": ther["probabilities"]
+            },
+            # Legacy compatibility fields
+            "risk_score": ov["risk_probability"],
+            "risk_class": ov["prediction"],
+            "threshold": ov.get("threshold", 0.48),
+            "probabilities": ov["probabilities"],
+            "top_contributing_biomarkers": ov["important_factors"],
+            "debug_info": ov.get("debug_info", {})
         }
         return response
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Prediction error: {str(e)}")
+
+

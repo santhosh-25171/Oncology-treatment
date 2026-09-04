@@ -36,7 +36,7 @@ def main():
         test_df = df[df['dataset_split'] == 'test']
         report["test_samples"] = len(test_df)
         
-        targets = ['toxicity_risk', 'therapy_response']
+        targets = ['overall_patient_risk', 'toxicity_risk', 'therapy_response']
         X_test = test_df.drop(columns=targets + ['dataset_split'])
         
         # We need to drop columns that have '[' or ']' or '<' for XGBoost as fixed in train.py
@@ -48,12 +48,15 @@ def main():
             report["models_tested"].append(f"{target}: {best_model_name}")
             
             # Load model and encoder
-            model_filename = f"{target}_{best_model_name.replace(' ', '_').lower()}.joblib"
-            model_path = os.path.join(models_dir, model_filename)
+            cal_model_path = os.path.join(models_dir, "tuning", f"calibrated_{target}_model.joblib")
+            if not os.path.exists(cal_model_path):
+                target_alias = "overall_patient_risk" if target == "overall_patient_risk" else ("toxicity" if target == "toxicity_risk" else "therapy_response")
+                cal_model_path = os.path.join(models_dir, "tuning", f"calibrated_{target_alias}_model.joblib")
+                
             encoder_path = os.path.join(models_dir, f"{target}_label_encoder.joblib")
             
-            print(f"Loading {model_filename}...")
-            model = joblib.load(model_path)
+            print(f"Loading {os.path.basename(cal_model_path)}...")
+            model = joblib.load(cal_model_path)
             le = joblib.load(encoder_path)
             
             # Predict

@@ -10,9 +10,30 @@ def load_data(file_path: str) -> pd.DataFrame:
         raise FileNotFoundError(f"Raw dataset not found at {file_path}")
     return pd.read_csv(file_path)
 
-def verify_columns(df: pd.DataFrame, expected_features: int = 34, expected_targets: int = 2):
+def compute_overall_risk(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Construct clinically meaningful primary target 'overall_patient_risk':
+    - High: High toxicity risk OR treatment non-responder
+    - Low: Low toxicity risk AND complete response
+    - Moderate: Intermediate risk profile
+    """
+    df_clean = df.copy()
+    def get_risk(row):
+        tox = str(row['toxicity_risk']).strip()
+        ther = str(row['therapy_response']).strip()
+        if tox == 'high' or ther == 'non-responder' or tox == 'High' or ther == 'Non-Responder':
+            return 'High'
+        elif (tox == 'low' or tox == 'Low') and (ther == 'complete response' or ther == 'Complete Response'):
+            return 'Low'
+        else:
+            return 'Moderate'
+            
+    df_clean['overall_patient_risk'] = df_clean.apply(get_risk, axis=1)
+    return df_clean
+
+def verify_columns(df: pd.DataFrame, expected_features: int = 34, expected_targets: int = 3):
     """Verify that the dataset has the exact expected number of features and targets."""
-    target_cols = ['toxicity_risk', 'therapy_response']
+    target_cols = ['overall_patient_risk', 'toxicity_risk', 'therapy_response']
     
     # Check if target columns are present
     for target in target_cols:
@@ -47,16 +68,11 @@ def handle_invalid_numerical(df: pd.DataFrame, numerical_cols: list) -> pd.DataF
     # Check for negative values in columns that logically cannot be negative
     for col in numerical_cols:
         if df_clean[col].dtype.kind in 'biufc':  # numeric types
-            # Not all numeric columns must be non-negative, but for typical oncology features like 
-            # age, bmi, counts, sizes, negative is invalid.
-            # Comorbidity_score could be negative? Let's assume standard clinical variables.
-            # If the value is < 0 for physical measures, it is invalid.
             neg_mask = df_clean[col] < 0
             count_invalid = neg_mask.sum()
             
             if count_invalid > 0:
                 invalid_detected[col] = int(count_invalid)
-                # Replace invalid values with NaN so they are handled in the ML pipeline imputation
                 df_clean.loc[neg_mask, col] = np.nan
                 
     return df_clean, invalid_detected
@@ -68,11 +84,8 @@ def clean_categorical(df: pd.DataFrame, categorical_cols: list) -> pd.DataFrame:
     """
     df_clean = df.copy()
     for col in categorical_cols:
-        # Strip whitespace and convert to lower case for consistency
-        # only if it's string-like
         if df_clean[col].dtype == 'object':
             df_clean[col] = df_clean[col].astype(str).str.strip().str.lower()
-            # Restore np.nan if they were converted to string 'nan'
             df_clean.loc[df_clean[col] == 'nan', col] = np.nan
     return df_clean
 
@@ -94,9 +107,6 @@ def handle_missing_values(df: pd.DataFrame, categorical_cols: list, numerical_co
         if col in df_clean.columns:
             df_clean[col] = df_clean[col].fillna('unknown')
         
-    # 3. Numerical: Left as NaN to avoid data leakage before train/test split.
-    # No action needed here, but documented for transparency.
-    
     return df_clean
 
 def run_cleaning_pipeline(raw_path: str, processed_path: str, report_path: str):
@@ -106,59 +116,51 @@ def run_cleaning_pipeline(raw_path: str, processed_path: str, report_path: str):
     original_shape = df.shape
     print(f"Original shape: {original_shape}")
     
-    target_cols = ['toxicity_risk', 'therapy_response']
+    raw_targets = ['toxicity_risk', 'therapy_response']
     
-    # Wait, earlier I noticed from my script run that ALL columns were inferred as 'str'
-    # dtype='str' in pd.read_csv output. Let's force pandas to infer correctly, or 
-    # try converting to numeric where possible.
-    # If read_csv was reading them as object, let's fix that.
-    
-    # Let's infer objects that are actually numbers
     for col in df.columns:
-        if col not in target_cols:
+        if col not in raw_targets:
             try:
                 df_numeric = pd.to_numeric(df[col])
                 df[col] = df_numeric
             except ValueError:
                 pass
                 
-    all_features = [c for c in df.columns if c not in target_cols]
+    all_features = [c for c in df.columns if c not in raw_targets]
     
     numerical_cols = df[all_features].select_dtypes(include=['number']).columns.tolist()
     categorical_cols = df[all_features].select_dtypes(exclude=['number']).columns.tolist()
     
     missing_before = df.isnull().sum().to_dict()
     
-    # Pipeline steps
-    verify_columns(df, expected_features=34, expected_targets=2)
+    # Clean duplicates & handle invalid values
     df = remove_duplicates(df)
-    
-    # Check for invalid numeric values
     df, invalid_detected = handle_invalid_numerical(df, numerical_cols)
-    
-    # Clean categorical
     df = clean_categorical(df, categorical_cols)
     
-    # Get duplicates removed count correctly
     df_raw_loaded = load_data(raw_path)
     duplicates_removed = df_raw_loaded.shape[0] - df_raw_loaded.drop_duplicates(keep='first').shape[0]
     
-    # Handle missing values
     df = handle_missing_values(df, categorical_cols, numerical_cols)
+    
+    # Compute overall_patient_risk primary target
+    df = compute_overall_risk(df)
+    target_cols = ['overall_patient_risk', 'toxicity_risk', 'therapy_response']
+    
+    # Verify structure
+    verify_columns(df, expected_features=34, expected_targets=3)
     
     missing_after = df.isnull().sum().to_dict()
     final_shape = df.shape
     
     print(f"Final shape: {final_shape}")
     
-    # Ensure processed directory exists
     os.makedirs(os.path.dirname(processed_path), exist_ok=True)
     os.makedirs(os.path.dirname(report_path), exist_ok=True)
     
     print(f"Saving cleaned dataset to {processed_path}...")
     df.to_csv(processed_path, index=False)
     
-    # Prepare and save report
     report = {
         "original_shape": original_shape,
         "final_shape": final_shape,
@@ -170,7 +172,8 @@ def run_cleaning_pipeline(raw_path: str, processed_path: str, report_path: str):
         "numerical_columns": numerical_cols,
         "target_columns": target_cols,
         "cleaning_operations_performed": [
-            "Verified 34 features and 2 targets.",
+            "Verified 34 features and 3 targets.",
+            "Constructed primary target 'overall_patient_risk' combining toxicity risk & therapy response.",
             "Removed exact duplicate rows.",
             "Converted columns to proper numeric types where applicable.",
             "Identified negative/invalid values in numerical columns and replaced with NaN.",
@@ -185,7 +188,6 @@ def run_cleaning_pipeline(raw_path: str, processed_path: str, report_path: str):
     with open(report_path, 'w') as f:
         json.dump(report, f, indent=4)
         
-    # Final summary for terminal
     print("-" * 30)
     print("CLEANING SUMMARY:")
     print(f"Raw rows: {original_shape[0]}")

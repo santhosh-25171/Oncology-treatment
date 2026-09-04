@@ -1,0 +1,161 @@
+{
+    "overall_patient_risk": {
+        "strategy": "most_frequent_majority_class",
+        "metrics": {
+            "accuracy": 0.5026666666666667,
+            "balanced_accuracy": 0.3333333333333333,
+            "precision_macro": 0.16755555555555557,
+            "recall_macro": 0.3333333333333333,
+            "f1_macro": 0.2230109435078379,
+            "precision_weighted": 0.2526737777777778,
+            "recall_weighted": 0.5026666666666667,
+            "f1_weighted": 0.33630050280981955,
+            "roc_auc_macro": 0.5,
+            "pr_auc_macro": 0.6666666666666666,
+            "brier_score": 0.33155555555555555,
+            "high_risk_recall": 1.0,
+            "high_risk_precision": 0.5026666666666667,
+            "high_risk_f1": 0.6690328305235137,
+            "class_metrics": {
+                "High": {
+                    "precision": 0.5026666666666667,
+                    "recall": 1.0,
+                    "f1": 0.6690328305235137
+                },
+                "Low": {
+                    "precision": 0.0,
+                    "recall": 0.0,
+                    "f1": 0.0
+                },
+                "Moderate": {
+                    "precision": 0.0,
+                    "recall": 0.0,
+                    "f1": 0.0
+                }
+            },
+            "confusion_matrix": [
+                [
+                    377,
+                    0,
+                    0
+                ],
+                [
+                    107,
+                    0,
+                    0
+                ],
+                [
+                    266,
+                    0,
+                    0
+                ]
+            ]
+        }
+    },
+    "toxicity_risk": {
+        "strategy": "most_frequent_majority_class",
+        "metrics": {
+            "accuracy": 0.4013333333333333,
+            "balanced_accuracy": 0.3333333333333333,
+            "precision_macro": 0.13377777777777777,
+            "recall_macro": 0.3333333333333333,
+            "f1_macro": 0.1909292737075801,
+            "precision_weighted": 0.16106844444444443,
+            "recall_weighted": 0.4013333333333333,
+            "f1_weighted": 0.22987884554392646,
+            "roc_auc_macro": 0.5,
+            "pr_auc_macro": 0.6666666666666666,
+            "brier_score": 0.39911111111111114,
+            "high_risk_recall": 0.0,
+            "high_risk_precision": 0.0,
+            "high_risk_f1": 0.0,
+            "class_metrics": {
+                "High": {
+                    "precision": 0.0,
+                    "recall": 0.0,
+                    "f1": 0.0
+                },
+                "Low": {
+                    "precision": 0.4013333333333333,
+                    "recall": 1.0,
+                    "f1": 0.5727878211227403
+                },
+                "Moderate": {
+                    "precision": 0.0,
+                    "recall": 0.0,
+                    "f1": 0.0
+                }
+            },
+            "confusion_matrix": [
+                [
+                    0,
+                    302,
+                    0
+                ],
+                [
+                    0,
+                    301,
+                    0
+                ],
+                [
+                    0,
+                    147,
+                    0
+                ]
+            ]
+        }
+    },
+    "therapy_response": {
+        "strategy": "most_frequent_majority_class",
+        "metrics": {
+            "accuracy": 0.472,
+            "balanced_accuracy": 0.3333333333333333,
+            "precision_macro": 0.15733333333333333,
+            "recall_macro": 0.3333333333333333,
+            "f1_macro": 0.21376811594202896,
+            "precision_weighted": 0.22278399999999998,
+            "recall_weighted": 0.472,
+            "f1_weighted": 0.30269565217391303,
+            "roc_auc_macro": 0.5,
+            "pr_auc_macro": 0.6666666666666666,
+            "brier_score": 0.35200000000000004,
+            "high_risk_recall": 0.3333333333333333,
+            "high_risk_precision": 0.15733333333333333,
+            "high_risk_f1": 0.21376811594202896,
+            "class_metrics": {
+                "Complete Response": {
+                    "precision": 0.0,
+                    "recall": 0.0,
+                    "f1": 0.0
+                },
+                "Non-Responder": {
+                    "precision": 0.0,
+                    "recall": 0.0,
+                    "f1": 0.0
+                },
+                "Partial Response": {
+                    "precision": 0.472,
+                    "recall": 1.0,
+                    "f1": 0.6413043478260869
+                }
+            },
+            "confusion_matrix": [
+                [
+                    0,
+                    0,
+                    267
+                ],
+                [
+                    0,
+                    0,
+                    129
+                ],
+                [
+                    0,
+                    0,
+                    354
+                ]
+            ]
+        }
+    }
+}

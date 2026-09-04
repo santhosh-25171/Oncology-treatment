@@ -74,25 +74,19 @@ def main():
     print(f"Loading cleaned dataset from {data_path}...")
     df = pd.read_csv(data_path)
     
-    original_feature_count = df.shape[1] - 2 # subtracting 2 target variables
+    targets = ['overall_patient_risk', 'toxicity_risk', 'therapy_response']
+    original_feature_count = df.shape[1] - len(targets)
     
-    targets = ['toxicity_risk', 'therapy_response']
     X = df.drop(columns=targets)
     y = df[targets]
     
-    # Generate stratification label
-    stratify_col = y['toxicity_risk'].astype(str) + "_" + y['therapy_response'].astype(str)
-    # Check if any class has less than 2 members
-    if stratify_col.value_counts().min() < 2:
-        stratify_col = y['toxicity_risk'] # Fallback
-        
+    # Generate stratification label using primary target overall_patient_risk
+    stratify_col = y['overall_patient_risk'].astype(str)
+    
     print("Splitting dataset into Train (70%), Val (15%), Test (15%)...")
     X_temp, X_test, y_temp, y_test = train_test_split(X, y, test_size=0.15, stratify=stratify_col, random_state=42)
     
-    stratify_col_temp = y_temp['toxicity_risk'].astype(str) + "_" + y_temp['therapy_response'].astype(str)
-    if stratify_col_temp.value_counts().min() < 2:
-        stratify_col_temp = y_temp['toxicity_risk']
-        
+    stratify_col_temp = y_temp['overall_patient_risk'].astype(str)
     X_train, X_val, y_train, y_val = train_test_split(X_temp, y_temp, test_size=0.1765, stratify=stratify_col_temp, random_state=42) # 0.15 / 0.85 approx 0.1765
     
     # 1. Feature Engineering (Derived features)
@@ -106,7 +100,6 @@ def main():
     categorical_cols = X_train_eng.select_dtypes(exclude=[np.number]).columns.tolist()
     
     engineered_features_list = [c for c in X_train_eng.columns if c not in X.columns]
-    
     print(f"Engineered {len(engineered_features_list)} new features: {engineered_features_list}")
     
     # 2. Missing Value Handling (Numerical)
@@ -179,9 +172,6 @@ def main():
     val_out = pd.concat([X_val_processed, y_val], axis=1)
     test_out = pd.concat([X_test_processed, y_test], axis=1)
     
-    # Saving outputs
-    # The prompt asks for: processed_features.csv, feature_names.json, feature_engineering_report.json
-    # We will merge them all in processed_features.csv with a split column
     train_out['dataset_split'] = 'train'
     val_out['dataset_split'] = 'val'
     test_out['dataset_split'] = 'test'
@@ -217,7 +207,6 @@ def main():
     with open(report_path, 'w') as f:
         json.dump(report, f, indent=4)
         
-    # Generate Markdown Documentation
     md_content = f"""# Stage 1 ML — Feature Engineering
 
 ## 1. Objective
@@ -244,7 +233,7 @@ We created {len(engineered_features_list)} medically meaningful features:
 - Categorical features were encoded using `OneHotEncoder`. This converts string labels into binary vectors.
 
 ### Scaling Methods
-- Numerical features were standardized using `StandardScaler` (zero mean, unit variance). Medical feature distributions are preserved relative to each other, but the scale is normalized for distance-based ML algorithms and gradient descent optimization.
+- Numerical features were standardized using `StandardScaler` (zero mean, unit variance).
 
 ### Feature Selection
 - **Variance Check**: Removed {len(removed_by_var)} features with near-zero variance.
@@ -265,11 +254,6 @@ We created {len(engineered_features_list)} medically meaningful features:
     print(f"Final feature count: {final_feature_count}")
     print(f"Features created: {len(engineered_features_list)}")
     print(f"Features removed: {len(removed_by_var) + len(to_drop)}")
-    print("Output file locations:")
-    print(f"  - {processed_features_path}")
-    print(f"  - {feature_names_path}")
-    print(f"  - {report_path}")
-    print(f"  - {md_report_path}")
     print("------------------------------")
     
 if __name__ == "__main__":

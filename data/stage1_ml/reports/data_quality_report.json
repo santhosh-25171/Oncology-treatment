@@ -1,0 +1,66 @@
+{
+    "total_rows": 5012,
+    "total_columns": 36,
+    "duplicate_rows": 12,
+    "missing_values_by_column": {
+        "renal_function": 123,
+        "liver_function": 117,
+        "hemoglobin": 135,
+        "ctDNA_level": 103,
+        "biomarker_1": 120,
+        "biomarker_2": 120,
+        "albumin": 141
+    },
+    "constant_columns": [],
+    "low_variance_columns": [],
+    "outlier_counts_iqr": {
+        "age": 28,
+        "performance_status": 197,
+        "treatment_dose": 48,
+        "treatment_duration": 18,
+        "renal_function": 39,
+        "liver_function": 21,
+        "hemoglobin": 48,
+        "wbc_count": 12,
+        "platelet_count": 20,
+        "mutation_burden": 170,
+        "ctDNA_level": 290,
+        "biomarker_1": 37,
+        "biomarker_2": 15,
+        "prior_treatment_count": 8,
+        "comorbidity_score": 14,
+        "tumor_size": 37,
+        "bmi": 7,
+        "albumin": 13,
+        "creatinine": 18,
+        "neutrophil_count": 21,
+        "lymphocyte_count": 22,
+        "inflammatory_marker": 266,
+        "genetic_risk_score": 18,
+        "dose_intensity": 15,
+        "baseline_tumor_volume": 264
+    },
+    "target_distributions": {
+        "overall_patient_risk": {
+            "High": 2511,
+            "Moderate": 1775,
+            "Low": 714
+        },
+        "toxicity_risk": {
+            "Low": 2025,
+            "High": 1954,
+            "Moderate": 1021
+        },
+        "therapy_response": {
+            "Partial Response": 2306,
+            "Complete Response": 1777,
+            "Non-Responder": 917
+        }
+    },
+    "justification_for_transformations": [
+        "12 exact duplicate rows removed to prevent patient duplication across splits.",
+        "Negative values in non-negative physical traits replaced with NaN for median imputation.",
+        "Categorical missing values imputed as 'unknown' to avoid leakages.",
+        "Derived target 'overall_patient_risk' constructed from joint toxicity & therapy response criteria."
+    ]
+}

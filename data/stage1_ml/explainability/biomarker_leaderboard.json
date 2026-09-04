@@ -1,32 +1,137 @@
 [
     {
-        "target": "therapy_response",
-        "biomarker": "tumor_size_category_T2_medium",
-        "importance_score": 0.08929162848686965
+        "target": "toxicity_risk",
+        "biomarker": "treatment_dose",
+        "importance_score": 7.6345268174642795
     },
     {
-        "target": "therapy_response",
-        "biomarker": "tumor_grade_intermediate",
-        "importance_score": 0.08567456453193463
+        "target": "toxicity_risk",
+        "biomarker": "renal_function",
+        "importance_score": 5.4229754791666815
     },
     {
-        "target": "therapy_response",
+        "target": "toxicity_risk",
         "biomarker": "biomarker_1",
-        "importance_score": 0.07577443928184348
+        "importance_score": 3.1669935980398494
     },
     {
-        "target": "therapy_response",
-        "biomarker": "tumor_size_category_T1_small",
-        "importance_score": 0.06775664049023018
+        "target": "toxicity_risk",
+        "biomarker": "dose_intensity",
+        "importance_score": 3.123519720743997
     },
     {
         "target": "toxicity_risk",
         "biomarker": "biomarker_2",
-        "importance_score": 0.01889665052294731
+        "importance_score": 3.0720495967658126
     },
     {
         "target": "toxicity_risk",
+        "biomarker": "liver_function",
+        "importance_score": 2.926976243496692
+    },
+    {
+        "target": "toxicity_risk",
+        "biomarker": "mutation_burden",
+        "importance_score": 2.8566866094494086
+    },
+    {
+        "target": "toxicity_risk",
+        "biomarker": "tumor_size",
+        "importance_score": 2.666359548245905
+    },
+    {
+        "target": "toxicity_risk",
+        "biomarker": "comorbidity_score",
+        "importance_score": 2.6608185172012693
+    },
+    {
+        "target": "toxicity_risk",
+        "biomarker": "ctDNA_level",
+        "importance_score": 2.5867540688547908
+    },
+    {
+        "target": "therapy_response",
+        "biomarker": "ctDNA_level",
+        "importance_score": 0.041858320617709305
+    },
+    {
+        "target": "therapy_response",
         "biomarker": "biomarker_1",
-        "importance_score": 0.017737988382577896
+        "importance_score": 0.03872216936866103
+    },
+    {
+        "target": "therapy_response",
+        "biomarker": "mutation_burden",
+        "importance_score": 0.038536463113406055
+    },
+    {
+        "target": "therapy_response",
+        "biomarker": "genetic_risk_score",
+        "importance_score": 0.03834483750178497
+    },
+    {
+        "target": "therapy_response",
+        "biomarker": "tumor_size",
+        "importance_score": 0.03799574211961118
+    },
+    {
+        "target": "therapy_response",
+        "biomarker": "renal_function",
+        "importance_score": 0.03710006271509843
+    },
+    {
+        "target": "therapy_response",
+        "biomarker": "treatment_dose",
+        "importance_score": 0.036898393018582706
+    },
+    {
+        "target": "therapy_response",
+        "biomarker": "dose_intensity",
+        "importance_score": 0.03433335916600064
+    },
+    {
+        "target": "therapy_response",
+        "biomarker": "biomarker_interaction",
+        "importance_score": 0.03323265560589837
+    },
+    {
+        "target": "therapy_response",
+        "biomarker": "biomarker_2",
+        "importance_score": 0.0328332757776561
+    },
+    {
+        "target": "therapy_response",
+        "biomarker": "liver_function",
+        "importance_score": 0.03186556505393057
+    },
+    {
+        "target": "overall_patient_risk",
+        "biomarker": "tumor_grade_high",
+        "importance_score": 0.02048991061747074
+    },
+    {
+        "target": "overall_patient_risk",
+        "biomarker": "biomarker_1",
+        "importance_score": 0.018980568274855614
+    },
+    {
+        "target": "overall_patient_risk",
+        "biomarker": "biomarker_interaction",
+        "importance_score": 0.01859893463551998
+    },
+    {
+        "target": "overall_patient_risk",
+        "biomarker": "tumor_grade_low",
+        "importance_score": 0.018368566408753395
+    },
+    {
+        "target": "overall_patient_risk",
+        "biomarker": "treatment_dose",
+        "importance_score": 0.01771126128733158
+    },
+    {
+        "target": "overall_patient_risk",
+        "biomarker": "comorbidity_score",
+        "importance_score": 0.01765982247889042
     }
 ]

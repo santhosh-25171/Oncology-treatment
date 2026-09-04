@@ -1,7 +1,20 @@
 {
-    "toxicity_risk": {
+    "overall_patient_risk": {
         "best_model": "XGBoost",
-        "best_f1_macro": 0.34621847583204457,
+        "calibration": "Calibrated Classifier CV (Platt Scaling)",
+        "best_f1_macro": 0.3358982550198851,
+        "high_risk_recall": 0.7825,
+        "classes": [
+            "High",
+            "Low",
+            "Moderate"
+        ]
+    },
+    "toxicity_risk": {
+        "best_model": "CatBoost",
+        "calibration": "Calibrated Classifier CV (Platt Scaling)",
+        "best_f1_macro": 0.41238828445307013,
+        "high_risk_recall": 0.5331125827814569,
         "classes": [
             "High",
             "Low",
@@ -9,8 +22,10 @@
         ]
     },
     "therapy_response": {
-        "best_model": "Logistic Regression",
-        "best_f1_macro": 0.32360525701676957,
+        "best_model": "Random Forest",
+        "calibration": "Calibrated Classifier CV (Platt Scaling)",
+        "best_f1_macro": 0.3832058503371542,
+        "high_risk_recall": 0.5168539325842697,
         "classes": [
             "Complete Response",
             "Non-Responder",
