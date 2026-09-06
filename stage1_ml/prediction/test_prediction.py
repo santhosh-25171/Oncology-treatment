@@ -1,7 +1,13 @@
 import os
+import sys
 import json
 import pandas as pd
-from prediction import OncologyPredictionPipeline
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+from stage1_ml.prediction.prediction import OncologyPredictionPipeline
 
 def main():
     base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

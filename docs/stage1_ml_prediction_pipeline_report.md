@@ -20,33 +20,57 @@ By natively integrating SHAP, the pipeline ensures no prediction is a "black box
 ## 5. Sample Output
 ```json
 {
-    "toxicity_risk": {
+    "overall_patient_risk": {
         "prediction": "Moderate",
-        "confidence": 0.397933691740036,
+        "risk_probability": 0.4621,
+        "threshold": 0.48,
+        "confidence": 0.4621,
         "probabilities": {
-            "High": 0.21673548221588135,
-            "Low": 0.38533082604408264,
-            "Moderate": 0.397933691740036
+            "High": 0.46212241157359785,
+            "Low": 0.1465363035901748,
+            "Moderate": 0.3913412848362274
         },
         "important_factors": [
-            "renal_function",
-            "lymphocyte_count",
-            "hemoglobin"
-        ]
+            {
+                "feature": "comorbidity_score",
+                "direction": "baseline"
+            },
+            {
+                "feature": "ctDNA_level",
+                "direction": "baseline"
+            },
+            {
+                "feature": "performance_status",
+                "direction": "increases_risk"
+            }
+        ],
+        "debug_info": {
+            "model_name": "Calibrated XGBoost (Platt Scaling)",
+            "calibration": "Sigmoidal Logistic Calibration",
+            "raw_high_risk_prob": 0.4034,
+            "calibrated_high_risk_prob": 0.4621,
+            "decision_threshold": 0.48,
+            "final_risk_class": "Moderate",
+            "is_threshold_applied": false
+        }
+    },
+    "toxicity_risk": {
+        "prediction": "Low",
+        "confidence": 0.4042,
+        "probabilities": {
+            "High": 0.3564572615074981,
+            "Low": 0.4042453405886433,
+            "Moderate": 0.23929739790385862
+        }
     },
     "therapy_response": {
         "prediction": "Partial Response",
-        "confidence": 0.5799921154975891,
+        "confidence": 0.4706,
         "probabilities": {
-            "Complete Response": 0.30703702569007874,
-            "Non-Responder": 0.11297084391117096,
-            "Partial Response": 0.5799921154975891
-        },
-        "important_factors": [
-            "cancer_stage_iii",
-            "cancer_stage_iv",
-            "prior_treatment_count"
-        ]
+            "Complete Response": 0.3663630424095686,
+            "Non-Responder": 0.16299216097763594,
+            "Partial Response": 0.4706447966127955
+        }
     }
 }
 ```

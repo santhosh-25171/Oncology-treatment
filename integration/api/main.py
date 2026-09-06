@@ -193,4 +193,45 @@ def predict_patient_risk(payload: Dict[str, Any] = Body(...)):
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Prediction error: {str(e)}")
 
+# -----------------------------------------------------------------------------
+# STAGE 2 DEEP LEARNING ENDPOINTS
+# -----------------------------------------------------------------------------
+@app.post("/stage2/fusion/predict")
+def predict_multimodal_fusion(payload: Dict[str, Any] = Body(...)):
+    """
+    Executes Stage 2 Multimodal Fusion combining vision score and sequence trajectory trend score.
+    """
+    try:
+        from stage2_dl.integration.fuse import OncologyMultimodalFusion
+        fusion = OncologyMultimodalFusion()
+        
+        sample_img = np.random.rand(1, 128, 128).astype(np.float32)
+        sample_seq = np.array(payload.get("sequence", [
+            [12.5, 45.0, 15.0], [14.0, 47.0, 16.5], [16.2, 50.0, 18.0],
+            [19.5, 54.0, 21.0], [24.0, 60.0, 25.0], [np.nan, np.nan, np.nan],
+            [np.nan, np.nan, np.nan], [np.nan, np.nan, np.nan]
+        ]), dtype=np.float32)
+        
+        return fusion.fuse(sample_img, sample_seq)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Fusion error: {str(e)}")
+
+@app.get("/stage2/metrics/forecasting")
+def get_forecasting_metrics():
+    """Returns saved trajectory forecasting test metrics."""
+    metrics_path = os.path.join(PROJECT_ROOT, "stage2_dl", "artifacts", "metrics", "forecast_test_metrics.json")
+    if os.path.exists(metrics_path):
+        with open(metrics_path, "r") as f:
+            return json.load(f)
+    raise HTTPException(status_code=440, detail="Forecasting metrics not found.")
+
+@app.get("/stage2/metrics/radiology")
+def get_radiology_metrics():
+    """Returns saved radiology CNN test metrics."""
+    metrics_path = os.path.join(PROJECT_ROOT, "stage2_dl", "artifacts", "metrics", "radiology_test_metrics.json")
+    if os.path.exists(metrics_path):
+        with open(metrics_path, "r") as f:
+            return json.load(f)
+    raise HTTPException(status_code=404, detail="Radiology metrics not found.")
+
 
