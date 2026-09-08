@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 from pathlib import Path
 
-base_dir = Path(r"C:\Users\Dell\Documents\SPECIAL\personalized_precision_oncology\stage2_dl")
+base_dir = Path(__file__).resolve().parent.parent
 import sys
 sys.path.append(str(base_dir))
 
@@ -72,7 +72,7 @@ def test_fusion_backward_pass(models):
 
 def test_no_patient_leakage():
     import pandas as pd
-    data_dir = base_dir / "data" / "dl_oncology_dataset_v2"
+    data_dir = base_dir / "sample_data"
     splits_df = pd.read_csv(data_dir / "train_validation_test_split.csv")
     train_pats = set(splits_df[splits_df['split'] == 'train']['patient_id'])
     val_pats = set(splits_df[splits_df['split'] == 'validation']['patient_id'])

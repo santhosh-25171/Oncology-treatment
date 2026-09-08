@@ -1,6 +1,6 @@
 # 🏥 Integration Module — Live Clinical API & Dashboard
 
-This directory contains the production-ready integration layer for the **Personalized Precision Oncology** machine learning project. It exposes the trained Stage 1 ML models via a **FastAPI microservice** and an interactive **Streamlit Clinical Dashboard**.
+This directory contains the production-ready integration layer for the **Personalized Precision Oncology** project. It exposes the trained **Stage 1 Classical ML models** and **Stage 2 Deep Learning models** (CNN, Transformer, Multimodal Fusion, Grad-CAM) via a **FastAPI microservice**, a **reusable API client**, and an interactive **Streamlit Clinical Dashboard**.
 
 ---
 
@@ -8,32 +8,45 @@ This directory contains the production-ready integration layer for the **Persona
 
 > **IMPORTANT**: This `integration/` directory is completely decoupled from the root codebase. 
 > - **No existing files outside `integration/` were modified, renamed, or moved.**
-> - Model checkpoints, data preprocessing files, and training scripts in `data/stage1_ml/` and `stage1_ml/` are accessed strictly **read-only in place**.
+> - Model checkpoints, data preprocessing files, and training scripts in `data/stage1_ml/` and `stage2_dl/` are accessed strictly **read-only in place**.
 
 ---
 
 ## 🏗️ Architecture & Component Overview
 
-```
+```text
 integration/
 ├── api/
-│   ├── main.py              # FastAPI microservice (POST /predict, GET /leaderboard, GET /health)
+│   ├── main.py              # FastAPI microservice (Stage 1 & Stage 2 endpoints)
+│   ├── stage2_dl_manager.py # In-memory DL Model Manager (CNN, Transformer, Fusion, Grad-CAM)
 │   └── requirements.txt     # Dependencies for FastAPI server
+├── client/
+│   ├── __init__.py          # Client module init
+│   └── api_client.py        # Reusable OncologyAPIClient with DL_API_URL
 ├── dashboard/
-│   ├── app.py               # Interactive Streamlit frontend UI
+│   ├── app.py               # Interactive Streamlit frontend UI (Tabs 1–6)
 │   └── requirements.txt     # Dependencies for Streamlit dashboard
+├── tests/
+│   ├── __init__.py          # Tests module init
+│   └── test_api_dl.py       # Integration test suite (10/10 tests passing)
 ├── Dockerfile               # Production Docker container for hospital IT infrastructure
 └── README.md                # Integration documentation
 ```
 
 ### 1. Model Artifact Dependencies Expected (Read-Only)
 
-The API service expects the following trained model artifacts to be present in the repository:
+**Stage 1 Classical ML**:
 - **Tuned Toxicity Model**: `data/stage1_ml/models/tuning/tuned_toxicity_model.joblib`
 - **Tuned Therapy Response Model**: `data/stage1_ml/models/tuning/tuned_therapy_response_model.joblib`
 - **Label Encoders**: `data/stage1_ml/models/toxicity_risk_label_encoder.joblib` & `therapy_response_label_encoder.joblib`
-- **Reference Preprocessing Dataset**: `data/stage1_ml/processed/oncology_cleaned.csv`
-- **Global Biomarker Leaderboard**: `data/stage1_ml/explainability/biomarker_leaderboard.json`
+- **Biomarker Leaderboard**: `data/stage1_ml/explainability/biomarker_leaderboard.json`
+
+**Stage 2 Deep Learning**:
+- **Histopathology CNN**: `stage2_dl/artifacts/models/cnn_best.pt`
+- **Biomarker Transformer**: `stage2_dl/artifacts/models/transformer_best.pt`
+- **Multimodal Fusion**: `stage2_dl/artifacts/models/fusion/multimodal_fusion_best.pt`
+- **Temporal Preprocessing**: `stage2_dl/artifacts/models/temporal_preprocessing/`
+
 
 ---
 

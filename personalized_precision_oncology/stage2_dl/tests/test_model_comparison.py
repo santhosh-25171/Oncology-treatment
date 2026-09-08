@@ -2,7 +2,7 @@ import os
 import json
 from pathlib import Path
 
-base_dir = Path(r"C:\Users\Dell\Documents\SPECIAL\personalized_precision_oncology\stage2_dl")
+base_dir = Path(__file__).resolve().parent.parent
 results_dir = base_dir / "artifacts" / "results"
 models_dir = base_dir / "artifacts" / "models"
 comp_dir = results_dir / "comparison"

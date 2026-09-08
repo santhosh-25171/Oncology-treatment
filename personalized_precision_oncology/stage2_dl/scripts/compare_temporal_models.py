@@ -9,7 +9,7 @@ from pathlib import Path
 import pandas as pd
 from sklearn.metrics import confusion_matrix
 
-base_dir = Path(r"C:\Users\Dell\Documents\SPECIAL\personalized_precision_oncology\stage2_dl")
+base_dir = Path(__file__).resolve().parent.parent
 import sys
 sys.path.append(str(base_dir))
 
@@ -36,7 +36,7 @@ with open(tx_metrics_path, "r") as f:
     tx_metrics = json.load(f)
 
 # Optional: Run Inference Benchmark
-data_dir = base_dir / "data" / "dl_oncology_dataset_v2"
+data_dir = base_dir / "sample_data"
 prep_dir = base_dir / "artifacts" / "models" / "temporal_preprocessing"
 import pickle
 with open(prep_dir / "temporal_scaler.pkl", "rb") as f:

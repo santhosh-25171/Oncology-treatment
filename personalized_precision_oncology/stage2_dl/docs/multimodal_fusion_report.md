@@ -20,8 +20,8 @@ Multimodal fusion integrates distinct data modalities to improve predictive capa
 | Model | Accuracy | Macro-F1 | ROC-AUC |
 |---|---|---|---|
 | CNN-only | 0.0000 | 0.0000 | 0.0000 |
-| Transformer-only | 1.0000 | 1.0000 | 1.0000 |
-| **Fusion** | **1.0000** | **1.0000** | **1.0000** |
+| Transformer-only | 0.8571 | 0.8558 | 0.9273 |
+| **Fusion** | **0.8571** | **0.8558** | **0.9455** |
 
 ## Limitations
 - Synthetic dataset

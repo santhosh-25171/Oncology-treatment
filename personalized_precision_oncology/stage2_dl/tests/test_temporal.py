@@ -3,8 +3,8 @@ import pytest
 import pandas as pd
 from pathlib import Path
 
-base_dir = Path(r"C:\Users\Dell\Documents\SPECIAL\personalized_precision_oncology\stage2_dl")
-data_dir = base_dir / "data" / "dl_oncology_dataset_v2"
+base_dir = Path(__file__).resolve().parent.parent
+data_dir = base_dir / "sample_data"
 
 def test_temporal_dataset_exists():
     assert (data_dir / "temporal" / "biomarker_timeseries.csv").exists()

@@ -16,7 +16,7 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, roc_auc_score
 
-base_dir = Path(r"C:\Users\Dell\Documents\SPECIAL\personalized_precision_oncology\stage2_dl")
+base_dir = Path(__file__).resolve().parent.parent
 sys.path.append(str(base_dir))
 
 from src.models.fusion import BaselineCNN, MultimodalFusionModel
@@ -24,7 +24,7 @@ from src.models.transformer import TransformerProgressionModel
 from src.data.fusion_dataset import MultimodalFusionDataset, fusion_collate_fn
 
 # Configure Paths
-data_dir = base_dir / "data" / "dl_oncology_dataset_v2"
+data_dir = base_dir / "sample_data"
 artifacts_dir = base_dir / "artifacts"
 prep_dir = artifacts_dir / "models" / "temporal_preprocessing"
 models_dir = artifacts_dir / "models"

@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 from pathlib import Path
 
-base_dir = Path(r"C:\Users\Dell\Documents\SPECIAL\personalized_precision_oncology\stage2_dl")
+base_dir = Path(__file__).resolve().parent.parent
 import sys
 sys.path.append(str(base_dir))
 

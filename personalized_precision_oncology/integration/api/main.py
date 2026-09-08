@@ -2,21 +2,22 @@ import os
 import sys
 import json
 from typing import Dict, Any, List, Optional
-from fastapi import FastAPI, HTTPException, Body
+from fastapi import FastAPI, HTTPException, Body, File, UploadFile, Form
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-# Ensure project root is in Python path to import stage1_ml in place
+# Ensure project root is in Python path to import stage1_ml and integration in place
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from stage1_ml.prediction.prediction import OncologyPredictionPipeline
+from integration.api.stage2_dl_manager import Stage2DLManager
 
 app = FastAPI(
     title="Personalized Precision Medicine API for Oncology",
-    version="1.0.0",
-    description="FastAPI service serving Stage 1 ML model for patient toxicity risk prediction and therapy response classification with SHAP explainability."
+    version="2.0.0",
+    description="FastAPI service serving Stage 1 ML clinical risk models and Stage 2 Deep Learning models (CNN, Transformer, Multimodal Fusion, Grad-CAM)."
 )
 
 # Enable CORS for frontend integration
@@ -28,17 +29,25 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize Prediction Pipeline lazily / on startup
+# Initialize Prediction Pipelines on startup
 pipeline: Optional[OncologyPredictionPipeline] = None
+dl_manager: Optional[Stage2DLManager] = None
 
 @app.on_event("startup")
-def load_pipeline():
-    global pipeline
+def load_pipelines():
+    global pipeline, dl_manager
     try:
         pipeline = OncologyPredictionPipeline(base_dir=PROJECT_ROOT)
-        print("[SUCCESS] Precision Oncology Prediction Pipeline loaded in API.")
+        print("[SUCCESS] Stage 1 ML Prediction Pipeline loaded in API.")
     except Exception as e:
-        print(f"[ERROR] Failed to load prediction pipeline: {e}")
+        print(f"[ERROR] Failed to load Stage 1 ML pipeline: {e}")
+
+    try:
+        dl_manager = Stage2DLManager()
+        print("[SUCCESS] Stage 2 Deep Learning Manager loaded in API.")
+    except Exception as e:
+        print(f"[ERROR] Failed to load Stage 2 DL manager: {e}")
+
 
 class PatientFeaturePayload(BaseModel):
     age: float = Field(..., example=65.0, description="Patient age in years")
@@ -118,15 +127,43 @@ class PatientFeaturePayload(BaseModel):
 
 @app.get("/health")
 def health_check():
-    """Uptime health check endpoint"""
+    """Dynamic uptime and component health check endpoint for ML and DL pipelines"""
+    global pipeline, dl_manager
+    if dl_manager is None:
+        try:
+            dl_manager = Stage2DLManager()
+        except Exception as e:
+            print(f"[ERROR] Failed to load Stage 2 DL manager in health check: {e}")
+
+    if pipeline is None:
+        try:
+            pipeline = OncologyPredictionPipeline(base_dir=PROJECT_ROOT)
+        except Exception as e:
+            print(f"[ERROR] Failed to load Stage 1 pipeline in health check: {e}")
+
+    dl_status = dl_manager.get_health_status() if dl_manager is not None else {
+        "status": "degraded",
+        "stage2_dl": False,
+        "cnn_loaded": False,
+        "transformer_loaded": False,
+        "fusion_loaded": False,
+        "temporal_prep_loaded": False
+    }
+
+    is_healthy = (pipeline is not None) and (dl_status.get("status") == "ok")
+
     return {
-        "status": "healthy",
+        "status": "ok" if is_healthy else "degraded",
         "service": "precision-oncology-api",
-        "pipeline_loaded": pipeline is not None,
-        "primary_target": "overall_patient_risk",
-        "secondary_targets": ["toxicity_risk", "therapy_response"],
+        "stage1_ml": pipeline is not None,
+        "stage2_dl": dl_status.get("stage2_dl", False),
+        "cnn_loaded": dl_status.get("cnn_loaded", False),
+        "transformer_loaded": dl_status.get("transformer_loaded", False),
+        "fusion_loaded": dl_status.get("fusion_loaded", False),
+        "temporal_prep_loaded": dl_status.get("temporal_prep_loaded", False),
         "version": "2.0.0"
     }
+
 
 @app.get("/leaderboard")
 def get_biomarker_leaderboard():
@@ -192,5 +229,116 @@ def predict_patient_risk(payload: Dict[str, Any] = Body(...)):
         return response
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Prediction error: {str(e)}")
+
+# =========================================================================
+# STAGE 2 DEEP LEARNING ENDPOINTS (CNN, TRANSFORMER, FUSION, GRAD-CAM)
+# =========================================================================
+
+@app.post("/predict-image")
+async def predict_image(file: UploadFile = File(...)):
+    """
+    Accepts an uploaded histopathology image (PNG/JPG/JPEG), performs 6-class CNN classification,
+    and returns predicted class, confidence, all class probabilities, and Grad-CAM attention heatmap overlay.
+    """
+    global dl_manager
+    if dl_manager is None:
+        dl_manager = Stage2DLManager()
+
+    if not file or not file.filename:
+        raise HTTPException(status_code=400, detail="No file was provided.")
+
+    allowed_extensions = {".png", ".jpg", ".jpeg"}
+    ext = os.path.splitext(file.filename)[1].lower()
+    if ext not in allowed_extensions:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Unsupported file format '{ext}'. Only PNG, JPG, and JPEG images are supported."
+        )
+
+    try:
+        contents = await file.read()
+        if len(contents) == 0:
+            raise HTTPException(status_code=400, detail="Uploaded image file is empty.")
+        if len(contents) > 15 * 1024 * 1024:
+            raise HTTPException(status_code=400, detail="Image file exceeds maximum allowable size (15 MB).")
+
+        result = dl_manager.predict_image(contents)
+        return result
+    except HTTPException:
+        raise
+    except ValueError as ve:
+        raise HTTPException(status_code=400, detail=str(ve))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Image prediction failed: {str(e)}")
+
+@app.post("/predict-trajectory")
+def predict_trajectory(payload: Dict[str, Any] = Body(...)):
+    """
+    Accepts longitudinal biomarker observations and uses the trained Transformer model
+    to forecast 90-day disease progression risk.
+    """
+    global dl_manager
+    if dl_manager is None:
+        dl_manager = Stage2DLManager()
+
+    records = payload.get("records") if isinstance(payload, dict) else payload
+    if not isinstance(records, list) or len(records) == 0:
+        raise HTTPException(
+            status_code=400,
+            detail="Payload must contain a non-empty list of longitudinal observation records under 'records'."
+        )
+
+    try:
+        result = dl_manager.predict_trajectory(records)
+        return result
+    except ValueError as ve:
+        raise HTTPException(status_code=400, detail=str(ve))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Trajectory prediction failed: {str(e)}")
+
+@app.post("/predict-multimodal")
+async def predict_multimodal(
+    file: UploadFile = File(...),
+    temporal_data: str = Form(...)
+):
+    """
+    Fuses spatial pathology biopsy features with longitudinal temporal biomarker series
+    using the Multimodal Fusion model for unified progression risk assessment.
+    """
+    global dl_manager
+    if dl_manager is None:
+        dl_manager = Stage2DLManager()
+
+    if not file or not file.filename:
+        raise HTTPException(status_code=400, detail="Missing required image file for multimodal prediction.")
+
+    allowed_extensions = {".png", ".jpg", ".jpeg"}
+    ext = os.path.splitext(file.filename)[1].lower()
+    if ext not in allowed_extensions:
+        raise HTTPException(status_code=400, detail=f"Unsupported image format '{ext}'.")
+
+    try:
+        records = json.loads(temporal_data)
+        if isinstance(records, dict) and "records" in records:
+            records = records["records"]
+        if not isinstance(records, list) or len(records) == 0:
+            raise HTTPException(status_code=400, detail="temporal_data must contain a non-empty list of records.")
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=400, detail="temporal_data must be valid JSON formatted records list.")
+
+    try:
+        contents = await file.read()
+        if len(contents) == 0:
+            raise HTTPException(status_code=400, detail="Uploaded image file is empty.")
+
+        result = dl_manager.predict_multimodal(contents, records)
+        return result
+    except HTTPException:
+        raise
+    except ValueError as ve:
+        raise HTTPException(status_code=400, detail=str(ve))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Multimodal prediction failed: {str(e)}")
+
 
 

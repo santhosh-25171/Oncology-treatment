@@ -1,9 +1,6 @@
-import torch.nn as nn
+from src.models.fusion import MultimodalFusionModel
 
-class MultimodalFusion(nn.Module):
-    def __init__(self, cnn_feature_dim, sequence_feature_dim, num_classes):
-        super(MultimodalFusion, self).__init__()
-        # Combines CNN representation + Temporal representation
-        
-    def forward(self, image_x, temporal_x):
-        pass
+# Alias for backwards compatibility
+MultimodalFusion = MultimodalFusionModel
+
+__all__ = ["MultimodalFusion", "MultimodalFusionModel"]

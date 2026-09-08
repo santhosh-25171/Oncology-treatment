@@ -26,14 +26,14 @@ Both models utilized the absolute same synthetic patient splits, preprocessing s
 
 | Metric | LSTM | Transformer |
 |---|---|---|
-| Accuracy | 1.0000 | 1.0000 |
-| Precision | 1.0000 | 1.0000 |
-| Recall | 1.0000 | 1.0000 |
-| Macro-F1 | 1.0000 | 1.0000 |
-| ROC-AUC | 1.0000 | 1.0000 |
-| Best Epoch | 1 | 1 |
+| Accuracy | 0.8095 | 0.8571 |
+| Precision | 0.8889 | 1.0000 |
+| Recall | 0.7273 | 0.7273 |
+| Macro-F1 | 0.8091 | 0.8558 |
+| ROC-AUC | 0.8818 | 0.9273 |
+| Best Epoch | 4 | 2 |
 | Training Time | N/A | N/A |
-| Inference (ms/patient)| 0.9634 | 0.9094 |
+| Inference (ms/patient)| 60.6909 | 16.6718 |
 
 ## 8. Performance Visualization
 - ![Metrics Comparison](../artifacts/results/comparison/model_metrics_comparison.png)
@@ -41,8 +41,8 @@ Both models utilized the absolute same synthetic patient splits, preprocessing s
 
 ## 9. Training/Inference Efficiency
 Training timestamps were omitted from exact metric recording, so inference time was explicitly benchmarked.
-- **LSTM Inference**: 0.9634 ms per patient.
-- **Transformer Inference**: 0.9094 ms per patient.
+- **LSTM Inference**: 60.6909 ms per patient.
+- **Transformer Inference**: 16.6718 ms per patient.
 - ![Inference Speed](../artifacts/results/comparison/inference_time_comparison.png)
 
 ## 10. Strengths and Weaknesses
@@ -56,7 +56,7 @@ Training timestamps were omitted from exact metric recording, so inference time 
 - **Weaknesses**: Computationally expensive for simple tasks, demands explicit positional encodings, can overfit small sequence collections.
 
 ## 11. Final Selection
-**Predictive Winner**: Tie
+**Predictive Winner**: Transformer
 No performance winner can be established from predictive metrics alone, as both networks reliably converged on the underlying synthetic pattern.
 **Speed Winner**: Transformer
 

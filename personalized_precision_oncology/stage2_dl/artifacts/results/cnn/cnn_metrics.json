@@ -1,8 +1,8 @@
 {
     "dataset": {
-        "train_samples": 300,
-        "val_samples": 120,
-        "test_samples": 120,
+        "train_samples": 297,
+        "val_samples": 90,
+        "test_samples": 108,
         "classes": [
             "normal",
             "benign",
@@ -15,28 +15,28 @@
     "training": {
         "device": "cpu",
         "batch_size": 32,
-        "best_epoch": 10,
-        "total_time_seconds": 338.52630162239075
+        "best_epoch": 9,
+        "total_time_seconds": 356.5448966026306
     },
     "validation_metrics": {
-        "macro_f1": 0.9749895768188451
+        "macro_f1": 0.95511174747375
     },
     "test_metrics": {
-        "accuracy": 0.975,
-        "macro_f1": 0.9747594439507149,
-        "weighted_f1": 0.9747594439507148
+        "accuracy": 0.9907407407407407,
+        "macro_f1": 0.9903501516404742,
+        "weighted_f1": 0.9907713751799774
     },
     "per_class_test": {
         "normal": {
             "precision": 1.0,
-            "recall": 0.95,
-            "f1-score": 0.9743589743589743,
+            "recall": 1.0,
+            "f1-score": 1.0,
             "support": 20.0
         },
         "benign": {
-            "precision": 0.9523809523809523,
+            "precision": 1.0,
             "recall": 1.0,
-            "f1-score": 0.975609756097561,
+            "f1-score": 1.0,
             "support": 20.0
         },
         "malignant": {
@@ -46,21 +46,21 @@
             "support": 20.0
         },
         "tumor_margin": {
-            "precision": 0.9523809523809523,
+            "precision": 1.0,
             "recall": 1.0,
-            "f1-score": 0.975609756097561,
-            "support": 20.0
+            "f1-score": 1.0,
+            "support": 13.0
         },
         "necrotic": {
-            "precision": 0.9523809523809523,
+            "precision": 0.9375,
             "recall": 1.0,
-            "f1-score": 0.975609756097561,
-            "support": 20.0
+            "f1-score": 0.967741935483871,
+            "support": 15.0
         },
         "inflammatory": {
             "precision": 1.0,
-            "recall": 0.9,
-            "f1-score": 0.9473684210526315,
+            "recall": 0.95,
+            "f1-score": 0.9743589743589743,
             "support": 20.0
         }
     }

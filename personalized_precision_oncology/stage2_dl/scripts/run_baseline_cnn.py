@@ -18,8 +18,8 @@ from torchvision import transforms
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, classification_report
 
 # Configure Paths
-base_dir = Path(r"C:\Users\Dell\Documents\SPECIAL\personalized_precision_oncology\stage2_dl")
-data_dir = base_dir / "data" / "dl_oncology_dataset_v2"
+base_dir = Path(__file__).resolve().parent.parent
+data_dir = base_dir / "sample_data"
 artifacts_dir = base_dir / "artifacts"
 models_dir = artifacts_dir / "models"
 results_dir = artifacts_dir / "results" / "cnn"
@@ -69,7 +69,14 @@ class OncologyImageDataset(Dataset):
         
     def __getitem__(self, idx):
         row = self.df.iloc[idx]
-        img_path = self.data_dir / row['image_path']
+        raw_path = Path(row['image_path'])
+        if raw_path.exists():
+            img_path = raw_path
+        elif (self.data_dir / row['image_path']).exists():
+            img_path = self.data_dir / row['image_path']
+        else:
+            img_path = self.data_dir.parent.parent / raw_path
+            
         label = class_to_idx[row['tissue_class']]
         
         try:

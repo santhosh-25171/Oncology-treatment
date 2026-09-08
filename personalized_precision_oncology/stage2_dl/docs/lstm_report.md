@@ -23,14 +23,14 @@ LSTMs intrinsically persist hidden states across time, capturing critical rates 
 - Optimizer: Adam (lr=0.001)
 - Loss: Weighted CrossEntropyLoss to address class imbalance.
 - Batch size: 32
-- Best Epoch: 1
+- Best Epoch: 4
 
 ## Evaluation Results (Test Set)
-- **Accuracy**: 1.0000
-- **Precision**: 1.0000
-- **Recall**: 1.0000
-- **Macro-F1**: 1.0000
-- **ROC-AUC**: 1.0000
+- **Accuracy**: 0.8095
+- **Precision**: 0.8889
+- **Recall**: 0.7273
+- **Macro-F1**: 0.8091
+- **ROC-AUC**: 0.8818
 
 ![Confusion Matrix](../artifacts/results/lstm/confusion_matrix.png)
 

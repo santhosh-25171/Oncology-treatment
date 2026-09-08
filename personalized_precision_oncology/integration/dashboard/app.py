@@ -1,8 +1,11 @@
 import os
 import sys
+import io
 import json
+import base64
 import pandas as pd
 import numpy as np
+from PIL import Image
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
@@ -21,7 +24,11 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-API_URL = "http://localhost:8000"
+from integration.client.api_client import OncologyAPIClient, DL_API_URL
+
+API_URL = DL_API_URL
+api_client = OncologyAPIClient(base_url=DL_API_URL)
+
 
 @st.cache_resource(show_spinner="Loading Stage 1 ML Calibrated Pipeline...")
 def get_prediction_pipeline():
@@ -167,16 +174,17 @@ st.markdown('<div class="sub-title">Stage 1 ML: Calibrated Overall Patient Risk 
 st.sidebar.header("⚙️ Presets & Configuration")
 
 # Check execution backend status
-backend_type = "Python Direct ML Engine"
-try:
-    h = requests.get(f"{API_URL}/health", timeout=1)
-    if h.status_code == 200:
-        backend_type = "FastAPI Service (Port 8000)"
-        st.sidebar.success("🟢 API Server Connected (Port 8000)")
-    else:
-        st.sidebar.info("⚡ Standalone Direct ML Mode Active")
-except Exception:
-    st.sidebar.info("⚡ Standalone Direct ML Mode Active")
+health_info = api_client.health_check()
+if health_info.get("status") == "ok":
+    st.sidebar.success("🟢 API Server Connected (Port 8000)")
+    st.sidebar.caption("✅ Stage 1 ML & Stage 2 DL Services Active")
+elif health_info.get("status") == "degraded":
+    st.sidebar.warning("⚠️ API Service Degraded")
+    st.sidebar.caption("Some models may not be fully initialized.")
+else:
+    st.sidebar.info("⚡ Direct Inference Mode Active")
+    st.sidebar.caption("FastAPI is not detected at localhost:8000")
+
 
 st.sidebar.markdown("---")
 st.sidebar.subheader("👤 Deterministic Clinical Test Presets")
@@ -337,12 +345,15 @@ elif preset == "HIGH_RISK_TEST":
     })
 
 # Navigation Tabs
-tab_pred, tab_scorecard, tab_leaderboard, tab_batch = st.tabs([
-    "📋 Patient Risk Prediction", 
+tab_pred, tab_scorecard, tab_leaderboard, tab_batch, tab_histology, tab_trajectory = st.tabs([
+    "📋 Patient Risk Prediction (ML)", 
     "🏆 Model Benchmarks & Scorecards",
     "🧬 Global Biomarker Leaderboard",
-    "📁 Batch CSV Evaluation"
+    "📁 Batch CSV Evaluation",
+    "🔬 Histopathology Image Analysis (DL)",
+    "📈 Longitudinal Biomarker & Multimodal (DL)"
 ])
+
 
 with tab_pred:
     st.subheader("1. Patient Clinical Profile Input")
@@ -635,3 +646,299 @@ with tab_batch:
                     st.download_button("📥 Download Predictions CSV", data=csv_data, file_name="batch_predictions.csv", mime="text/csv")
         except Exception as e:
             st.error(f"Error processing CSV: {e}")
+
+
+# =========================================================================
+# TAB 5: HISTOPATHOLOGY IMAGE ANALYSIS (STAGE 2 DEEP LEARNING)
+# =========================================================================
+with tab_histology:
+    st.subheader("🔬 Histopathology Image Analysis")
+    st.markdown("##### AI-assisted six-class tissue classification with visual explainability")
+    st.caption("Stage 2 Deep Learning Convolutional Neural Network (BaselineCNN) with Grad-CAM activation mapping")
+
+    col_input, col_display = st.columns([1, 1])
+
+    sample_img_dir = os.path.join(PROJECT_ROOT, "stage2_dl", "sample_data", "images", "test")
+    sample_images = []
+    if os.path.exists(sample_img_dir):
+        sample_images = sorted([f for f in os.listdir(sample_img_dir) if f.lower().endswith(('.jpg', '.jpeg', '.png'))])
+
+    selected_image_bytes = None
+    selected_image_name = "biopsy_patch.jpg"
+
+    with col_input:
+        st.markdown("#### 1. Biopsy Patch Selection")
+        input_source = st.radio("Image Source:", ["Pre-loaded Test Biopsy Samples", "Upload Custom Pathology Image"], horizontal=True)
+
+        if input_source == "Pre-loaded Test Biopsy Samples" and sample_images:
+            selected_sample = st.selectbox("Select Test Biopsy Patch:", sample_images, index=0)
+            selected_image_name = selected_sample
+            img_path = os.path.join(sample_img_dir, selected_sample)
+            with open(img_path, "rb") as f:
+                selected_image_bytes = f.read()
+        else:
+            uploaded_img = st.file_uploader("Upload Biopsy Patch (PNG/JPG/JPEG)", type=["png", "jpg", "jpeg"])
+            if uploaded_img is not None:
+                selected_image_bytes = uploaded_img.read()
+                selected_image_name = uploaded_img.name
+
+        if selected_image_bytes:
+            pil_preview = Image.open(io.BytesIO(selected_image_bytes)).convert("RGB")
+            st.image(pil_preview, caption=f"Selected Biopsy Patch: {selected_image_name} (224x224)", use_container_width=True)
+
+    with col_display:
+        st.markdown("#### 2. Model Prediction & Attention")
+        if selected_image_bytes:
+            if st.button("🚀 Analyze Biopsy Image (CNN + Grad-CAM)", type="primary", use_container_width=True):
+                with st.spinner("Executing CNN inference & generating Grad-CAM activation heatmap via FastAPI..."):
+                    try:
+                        res = api_client.predict_image(selected_image_bytes, filename=selected_image_name)
+                        st.session_state["last_image_pred"] = res
+                        st.session_state["last_image_bytes"] = selected_image_bytes
+                    except ConnectionError as ce:
+                        st.error(str(ce))
+                    except Exception as e:
+                        st.error(f"Image analysis error: {e}")
+
+        if "last_image_pred" in st.session_state and st.session_state["last_image_pred"]:
+            pred_data = st.session_state["last_image_pred"]
+            pred_class = pred_data.get("prediction", "Unknown").upper()
+            confidence = pred_data.get("confidence", 0.0) * 100
+
+            # Badge color
+            alert_class = "card-high" if pred_class in ["MALIGNANT", "NECROTIC", "TUMOR_MARGIN"] else ("card-low" if pred_class in ["NORMAL", "BENIGN"] else "card-moderate")
+
+            st.markdown(f"""
+            <div class="{alert_class}">
+                <div style="font-size: 1.1rem; font-weight: 700;">PREDICTED HISTOPATHOLOGY TISSUE</div>
+                <div class="metric-num">{pred_class}</div>
+                <div style="font-size: 1.0rem; font-weight: 600;">Model Confidence: {confidence:.1f}%</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+            st.markdown("---")
+            st.markdown("##### Six-Class Probability Distribution")
+            probs = pred_data.get("class_probabilities", {})
+            if probs:
+                df_probs = pd.DataFrame({
+                    "Tissue Class": [c.replace("_", " ").title() for c in probs.keys()],
+                    "Probability": [v * 100 for v in probs.values()]
+                }).sort_values(by="Probability", ascending=True)
+
+                fig_probs = px.bar(
+                    df_probs,
+                    x="Probability",
+                    y="Tissue Class",
+                    orientation="h",
+                    text=[f"{p:.1f}%" for p in df_probs["Probability"]],
+                    color="Probability",
+                    color_continuous_scale="Blues",
+                    labels={"Probability": "Probability (%)", "Tissue Class": "Tissue Class"}
+                )
+                fig_probs.update_layout(height=280, margin=dict(l=10, r=10, t=10, b=10), showlegend=False)
+                fig_probs.update_traces(textposition='outside')
+                st.plotly_chart(fig_probs, use_container_width=True)
+
+    # Grad-CAM Dual Viewer Section
+    if "last_image_pred" in st.session_state and st.session_state["last_image_pred"]:
+        pred_data = st.session_state["last_image_pred"]
+        st.markdown("---")
+        st.markdown("### 3. Model Attention & Visual Explainability (Grad-CAM)")
+        st.caption("Highlighted regions represent spatial convolutional feature areas that contributed most strongly to the CNN classification.")
+
+        g_col1, g_col2 = st.columns(2)
+        with g_col1:
+            if "last_image_bytes" in st.session_state:
+                orig_pil = Image.open(io.BytesIO(st.session_state["last_image_bytes"])).convert("RGB")
+                st.image(orig_pil, caption="Original Biopsy Patch", use_container_width=True)
+
+        with g_col2:
+            if pred_data.get("gradcam_available") and pred_data.get("gradcam_overlay"):
+                overlay_bytes = base64.b64decode(pred_data["gradcam_overlay"])
+                overlay_pil = Image.open(io.BytesIO(overlay_bytes))
+                st.image(overlay_pil, caption="Grad-CAM Saliency Overlay (Target: block3.0)", use_container_width=True)
+            else:
+                st.info("Grad-CAM overlay is currently not available for this image.")
+
+        st.warning("""
+        ⚠️ **Research Prototype Notice**: This system uses synthetic pathology-style data for educational and research prototyping. 
+        Outputs are generated for methodology validation and must **not** be used as a medical diagnosis or treatment decision.
+        """)
+
+
+# =========================================================================
+# TAB 6: LONGITUDINAL BIOMARKER & MULTIMODAL ANALYSIS (STAGE 2 DEEP LEARNING)
+# =========================================================================
+with tab_trajectory:
+    st.subheader("📈 Longitudinal Biomarker & Multimodal Analysis")
+    st.markdown("##### Temporal biomarker modeling with Transformer and multimodal fusion")
+    st.caption("Stage 2 Deep Learning Multi-Head Attention Transformer for 90-day recurrence forecasting and cross-modal fusion")
+
+    # Load sample temporal data
+    ts_csv_path = os.path.join(PROJECT_ROOT, "stage2_dl", "sample_data", "temporal", "biomarker_timeseries.csv")
+    df_temporal_all = None
+    sample_patients = []
+    if os.path.exists(ts_csv_path):
+        df_temporal_all = pd.read_csv(ts_csv_path)
+        sample_patients = sorted(df_temporal_all["patient_id"].unique().tolist())
+
+    st.markdown("### Section A: Longitudinal Biomarker Trajectory (Transformer)")
+    t_col1, t_col2 = st.columns([1, 2])
+
+    selected_records = []
+    current_patient_id = "P00401"
+
+    with t_col1:
+        st.markdown("##### 1. Patient Trajectory Source")
+        traj_source = st.radio("Select Source:", ["Sample Patient Cohort", "Upload CSV Sequence"], horizontal=True)
+
+        if traj_source == "Sample Patient Cohort" and sample_patients:
+            current_patient_id = st.selectbox("Select Patient Profile:", sample_patients, index=0)
+            if df_temporal_all is not None:
+                p_df = df_temporal_all[df_temporal_all["patient_id"] == current_patient_id].sort_values(by="study_day").reset_index(drop=True)
+                selected_records = p_df.to_dict(orient="records")
+        else:
+            uploaded_traj_csv = st.file_uploader("Upload Biomarker Sequence CSV", type=["csv"])
+            if uploaded_traj_csv is not None:
+                user_df = pd.read_csv(uploaded_traj_csv)
+                selected_records = user_df.to_dict(orient="records")
+                current_patient_id = "CUSTOM_UPLOAD"
+
+        if selected_records:
+            st.write(f"**Patient ID**: `{current_patient_id}` | **Visits recorded**: `{len(selected_records)}`")
+
+            if st.button("⚡ Forecast 90-Day Progression (Transformer)", type="primary", use_container_width=True):
+                with st.spinner("Computing temporal sequence attention via FastAPI..."):
+                    try:
+                        t_res = api_client.predict_trajectory(selected_records)
+                        st.session_state["last_traj_pred"] = t_res
+                        st.session_state["last_traj_records"] = selected_records
+                        st.session_state["last_patient_id"] = current_patient_id
+                    except ConnectionError as ce:
+                        st.error(str(ce))
+                    except Exception as e:
+                        st.error(f"Trajectory prediction error: {e}")
+
+    with t_col2:
+        st.markdown("##### 2. Longitudinal Biomarker Trends")
+        if selected_records:
+            df_plot = pd.DataFrame(selected_records)
+            time_col = "study_day" if "study_day" in df_plot.columns else ("timestep" if "timestep" in df_plot.columns else None)
+
+            # Available biomarker columns
+            candidate_markers = ["ctDNA_level", "tumor_volume_cm3", "CEA", "CYFRA21_1", "CRP", "LDH"]
+            present_markers = [m for m in candidate_markers if m in df_plot.columns]
+
+            if time_col and present_markers:
+                fig_traj = go.Figure()
+                for marker in present_markers:
+                    fig_traj.add_trace(go.Scatter(
+                        x=df_plot[time_col],
+                        y=df_plot[marker],
+                        mode="lines+markers",
+                        name=marker
+                    ))
+                fig_traj.update_layout(
+                    title=f"Biomarker Trajectories for Patient {current_patient_id}",
+                    xaxis_title="Study Day" if time_col == "study_day" else "Timestep",
+                    yaxis_title="Biomarker Value / Concentration",
+                    height=300,
+                    margin=dict(l=10, r=10, t=30, b=10),
+                    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+                )
+                st.plotly_chart(fig_traj, use_container_width=True)
+            else:
+                st.dataframe(df_plot.head(8), use_container_width=True)
+
+    # Trajectory Prediction Results Card
+    if "last_traj_pred" in st.session_state and st.session_state["last_traj_pred"]:
+        t_data = st.session_state["last_traj_pred"]
+        prog_prob = t_data.get("progression_probability", 0.0) * 100
+        prog_class = t_data.get("prediction", "Unknown")
+        conf = t_data.get("confidence", 0.0) * 100
+
+        t_card_class = "card-high" if prog_class == "Progression" else "card-low"
+
+        st.markdown(f"""
+        <div class="{t_card_class}">
+            <div style="font-size: 1.1rem; font-weight: 700;">TRANSFORMER 90-DAY PROGRESSION FORECAST</div>
+            <div class="metric-num">{prog_class.upper()}</div>
+            <div style="font-size: 1.0rem; font-weight: 600;">Progression Probability: {prog_prob:.1f}% | Confidence: {conf:.1f}%</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # Section B: Multimodal Fusion
+    st.markdown("---")
+    st.markdown("### Section B: Multimodal Fusion (Joint Biopsy + Longitudinal Trajectory)")
+    st.caption("Integrates histopathology spatial embeddings with longitudinal Transformer representations into a unified risk forecast.")
+
+    m_col1, m_col2 = st.columns([1, 1])
+
+    with m_col1:
+        st.markdown("##### 1. Modality Configuration")
+        # Check if an image is available from Tab 5 or let user pick
+        sample_img_dir = os.path.join(PROJECT_ROOT, "stage2_dl", "sample_data", "images", "test")
+        sample_images = []
+        if os.path.exists(sample_img_dir):
+            sample_images = sorted([f for f in os.listdir(sample_img_dir) if f.lower().endswith(('.jpg', '.jpeg', '.png'))])
+
+        fusion_image_bytes = st.session_state.get("last_image_bytes", None)
+        fusion_img_name = "Selected Biopsy"
+
+        if not fusion_image_bytes and sample_images:
+            chosen_img = st.selectbox("Select Biopsy Image for Fusion:", sample_images, index=0)
+            fusion_img_name = chosen_img
+            with open(os.path.join(sample_img_dir, chosen_img), "rb") as f:
+                fusion_image_bytes = f.read()
+
+        if fusion_image_bytes:
+            st.image(Image.open(io.BytesIO(fusion_image_bytes)).convert("RGB"), caption=f"Biopsy Modality: {fusion_img_name}", width=180)
+
+        fusion_records = st.session_state.get("last_traj_records", selected_records)
+        st.write(f"**Longitudinal Modality**: Patient `{st.session_state.get('last_patient_id', current_patient_id)}` ({len(fusion_records)} timesteps)")
+
+        if st.button("🚀 Run Multimodal Fusion Analysis", type="primary", use_container_width=True):
+            if not fusion_image_bytes or not fusion_records:
+                st.error("Both biopsy image and longitudinal records must be provided for Multimodal Fusion.")
+            else:
+                with st.spinner("Extracting dual spatial & temporal representations and running Multimodal Fusion..."):
+                    try:
+                        mm_res = api_client.predict_multimodal(fusion_image_bytes, fusion_records, image_filename=fusion_img_name)
+                        st.session_state["last_mm_pred"] = mm_res
+                    except ConnectionError as ce:
+                        st.error(str(ce))
+                    except Exception as e:
+                        st.error(f"Multimodal Fusion error: {e}")
+
+    with m_col2:
+        st.markdown("##### 2. Unified Multimodal Risk Assessment")
+        if "last_mm_pred" in st.session_state and st.session_state["last_mm_pred"]:
+            mm_data = st.session_state["last_mm_pred"]
+            fused_pred = mm_data.get("prediction", "Unknown")
+            fused_prob = mm_data.get("progression_probability", 0.0) * 100
+            fused_conf = mm_data.get("confidence", 0.0) * 100
+            img_p = mm_data.get("image_prediction", "N/A").upper()
+            temp_p = mm_data.get("temporal_prediction", "N/A")
+
+            fused_card = "card-high" if fused_pred == "Progression" else "card-low"
+
+            st.markdown(f"""
+            <div class="{fused_card}">
+                <div style="font-size: 1.1rem; font-weight: 700;">MULTIMODAL FUSED PREDICTION</div>
+                <div class="metric-num">{fused_pred.upper()}</div>
+                <div style="font-size: 1.0rem; font-weight: 600;">Joint Progression Probability: {fused_prob:.1f}% | Confidence: {fused_conf:.1f}%</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown("###### Cross-Modal Consistency Breakdown:")
+            c1, c2 = st.columns(2)
+            with c1:
+                st.metric("Histopathology Branch (CNN)", img_p, f"{mm_data.get('image_confidence', 0.0)*100:.1f}% conf")
+            with c2:
+                st.metric("Longitudinal Branch (Transformer)", temp_p, f"{mm_data.get('temporal_confidence', 0.0)*100:.1f}% conf")
+
+    st.warning("""
+    ⚠️ **Research Prototype Notice**: This system uses synthetic oncology research data for educational and model-development purposes.
+    Outputs are not clinically validated and must not be used as a medical diagnosis or treatment decision.
+    """)

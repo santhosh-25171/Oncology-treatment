@@ -36,14 +36,14 @@ Because patients have varying sequence lengths, padding creates artificial "empt
 - Loss: Weighted CrossEntropyLoss
 - Batch size: 32
 - Epochs: 10 (Patience: 3)
-- Best Epoch: 1
+- Best Epoch: 2
 
 ## 10. Results (Test Set)
-- **Accuracy**: 1.0000
+- **Accuracy**: 0.8571
 - **Precision**: 1.0000
-- **Recall**: 1.0000
-- **Macro-F1**: 1.0000
-- **ROC-AUC**: 1.0000
+- **Recall**: 0.7273
+- **Macro-F1**: 0.8558
+- **ROC-AUC**: 0.9273
 
 ![Confusion Matrix](../artifacts/results/transformer/confusion_matrix.png)
 

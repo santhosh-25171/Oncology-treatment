@@ -1,0 +1,61 @@
+{
+    "target_layer": "block3.0",
+    "model_architecture": "BaselineCNN",
+    "num_evaluated_classes": 6,
+    "results": [
+        {
+            "patient_id": "P01344",
+            "true_class": "normal",
+            "predicted_class": "normal",
+            "confidence": 0.5330635905265808,
+            "image_path": "stage2_dl\\sample_data\\images\\test\\P01344_T01344_007.jpg",
+            "output_plot": "C:\\Users\\santh\\OneDrive - Rathinam Group Of Institutions\\Desktop\\Oncology patient prediction\\Oncology-treatment\\personalized_precision_oncology\\stage2_dl\\artifacts\\results\\gradcam\\gradcam_normal.png",
+            "peak_activation": 1.0
+        },
+        {
+            "patient_id": "P01344",
+            "true_class": "benign",
+            "predicted_class": "benign",
+            "confidence": 0.6858410835266113,
+            "image_path": "stage2_dl\\sample_data\\images\\test\\P01344_T01344_003.jpg",
+            "output_plot": "C:\\Users\\santh\\OneDrive - Rathinam Group Of Institutions\\Desktop\\Oncology patient prediction\\Oncology-treatment\\personalized_precision_oncology\\stage2_dl\\artifacts\\results\\gradcam\\gradcam_benign.png",
+            "peak_activation": 1.0
+        },
+        {
+            "patient_id": "P01344",
+            "true_class": "malignant",
+            "predicted_class": "malignant",
+            "confidence": 0.8703662157058716,
+            "image_path": "stage2_dl\\sample_data\\images\\test\\P01344_T01344_004.jpg",
+            "output_plot": "C:\\Users\\santh\\OneDrive - Rathinam Group Of Institutions\\Desktop\\Oncology patient prediction\\Oncology-treatment\\personalized_precision_oncology\\stage2_dl\\artifacts\\results\\gradcam\\gradcam_malignant.png",
+            "peak_activation": 1.0
+        },
+        {
+            "patient_id": "P01344",
+            "true_class": "tumor_margin",
+            "predicted_class": "tumor_margin",
+            "confidence": 0.6038585901260376,
+            "image_path": "stage2_dl\\sample_data\\images\\test\\P01344_T01344_005.jpg",
+            "output_plot": "C:\\Users\\santh\\OneDrive - Rathinam Group Of Institutions\\Desktop\\Oncology patient prediction\\Oncology-treatment\\personalized_precision_oncology\\stage2_dl\\artifacts\\results\\gradcam\\gradcam_tumor_margin.png",
+            "peak_activation": 1.0
+        },
+        {
+            "patient_id": "P01344",
+            "true_class": "necrotic",
+            "predicted_class": "necrotic",
+            "confidence": 0.7410890460014343,
+            "image_path": "stage2_dl\\sample_data\\images\\test\\P01344_T01344_002.jpg",
+            "output_plot": "C:\\Users\\santh\\OneDrive - Rathinam Group Of Institutions\\Desktop\\Oncology patient prediction\\Oncology-treatment\\personalized_precision_oncology\\stage2_dl\\artifacts\\results\\gradcam\\gradcam_necrotic.png",
+            "peak_activation": 0.0
+        },
+        {
+            "patient_id": "P01344",
+            "true_class": "inflammatory",
+            "predicted_class": "inflammatory",
+            "confidence": 0.9935216307640076,
+            "image_path": "stage2_dl\\sample_data\\images\\test\\P01344_T01344_001.jpg",
+            "output_plot": "C:\\Users\\santh\\OneDrive - Rathinam Group Of Institutions\\Desktop\\Oncology patient prediction\\Oncology-treatment\\personalized_precision_oncology\\stage2_dl\\artifacts\\results\\gradcam\\gradcam_inflammatory.png",
+            "peak_activation": 1.0
+        }
+    ]
+}

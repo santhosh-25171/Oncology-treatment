@@ -1,4 +1,5 @@
 import torch
+from pathlib import Path
 from torch.utils.data import Dataset
 from PIL import Image
 from torchvision import transforms
@@ -38,7 +39,13 @@ class MultimodalFusionDataset(Dataset):
             pat_spat = self.spatial_grouped[pid]
             img_tensors = []
             for _, row in pat_spat.iterrows():
-                img_path = self.data_dir / row['image_path']
+                raw_path = Path(row['image_path'])
+                if raw_path.exists():
+                    img_path = raw_path
+                elif (self.data_dir / row['image_path']).exists():
+                    img_path = self.data_dir / row['image_path']
+                else:
+                    img_path = Path(self.data_dir).resolve().parent.parent / raw_path
                 try:
                     img = Image.open(img_path).convert("RGB")
                     img_tensors.append(self.transform(img))

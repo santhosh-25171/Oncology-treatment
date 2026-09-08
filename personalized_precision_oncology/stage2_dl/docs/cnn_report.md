@@ -5,9 +5,9 @@ To establish a baseline spatial modeling pipeline using a simple Convolutional N
 
 ## 2. Dataset Used
 - **Source**: Stage 02 Synthetic Oncology Dataset
-- **Train**: 300 images
-- **Validation**: 120 images
-- **Test**: 120 images
+- **Train**: 297 images
+- **Validation**: 90 images
+- **Test**: 108 images
 
 ## 3. Why CNN is Suitable
 CNNs exploit spatial hierarchies and local pixel correlations, making them natively ideal for extracting cellular and morphological patterns from pathology images.
@@ -43,13 +43,13 @@ A custom `OncologyImageDataset` handles lazy loading from disk. Missing/corrupte
 
 ## 17-18. Training Process
 - **Epochs**: max 10 (Early stopping patience = 3)
-- **Best Epoch**: 10
+- **Best Epoch**: 9
 - **Device**: cpu
 
 ## 19-21. Results
-- **Test Accuracy**: 0.9750
-- **Test Macro-F1**: 0.9748
-- **Test Weighted-F1**: 0.9748
+- **Test Accuracy**: 0.9907
+- **Test Macro-F1**: 0.9904
+- **Test Weighted-F1**: 0.9908
 
 ![Confusion Matrix](../artifacts/results/cnn/confusion_matrix.png)
 ![Loss Curve](../artifacts/results/cnn/loss_curve.png)
