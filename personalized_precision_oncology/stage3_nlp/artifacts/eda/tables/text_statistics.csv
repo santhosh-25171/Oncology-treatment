@@ -1,0 +1,4 @@
+Metric,Min,Max,Mean,Median,Std Dev
+Word Count,13,87,39.43,37.0,12.69
+Character Count,80,591,274.75,262.0,92.51
+Sentence Count,3,11,5.91,6.0,1.49
