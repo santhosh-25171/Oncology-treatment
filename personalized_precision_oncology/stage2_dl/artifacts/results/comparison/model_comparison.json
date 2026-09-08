@@ -1,0 +1,27 @@
+{
+    "lstm": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "macro_f1": 1.0,
+        "roc_auc": 1.0,
+        "best_epoch": 1
+    },
+    "transformer": {
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "macro_f1": 1.0,
+        "roc_auc": 1.0,
+        "best_epoch": 1
+    },
+    "inference_benchmark": {
+        "total_patients": 300,
+        "lstm_total_inference_sec": 0.28902530670166016,
+        "lstm_ms_per_patient": 0.9634176890055339,
+        "transformer_total_inference_sec": 0.2728133201599121,
+        "transformer_ms_per_patient": 0.9093777338663737
+    },
+    "perf_winner": "Tie",
+    "speed_winner": "Transformer"
+}

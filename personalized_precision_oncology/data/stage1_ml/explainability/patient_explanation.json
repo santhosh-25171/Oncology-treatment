@@ -1,0 +1,92 @@
+{
+    "overall_patient_risk": {
+        "patient_index": 4756,
+        "factors_contributing_to_prediction": [
+            {
+                "feature": "tumor_size",
+                "shap_impact_score": 0.15086573362350464,
+                "feature_value": 1.250358093880147
+            },
+            {
+                "feature": "liver_function",
+                "shap_impact_score": 0.07903353124856949,
+                "feature_value": -1.5851539883961014
+            },
+            {
+                "feature": "hemoglobin",
+                "shap_impact_score": -0.07866989821195602,
+                "feature_value": 0.0937601611314482
+            },
+            {
+                "feature": "biomarker_1",
+                "shap_impact_score": 0.07340382039546967,
+                "feature_value": -0.8876936675898643
+            },
+            {
+                "feature": "performance_status",
+                "shap_impact_score": 0.070142462849617,
+                "feature_value": 0.4976119161142865
+            }
+        ]
+    },
+    "toxicity_risk": {
+        "patient_index": 4756,
+        "factors_contributing_to_prediction": [
+            {
+                "feature": "treatment_dose",
+                "shap_impact_score": 0.03589607026880226,
+                "feature_value": 1.0860771969762535
+            },
+            {
+                "feature": "renal_function",
+                "shap_impact_score": -0.014376576644132569,
+                "feature_value": 1.5553435865472458
+            },
+            {
+                "feature": "tumor_size",
+                "shap_impact_score": 0.013221322289008996,
+                "feature_value": 1.250358093880147
+            },
+            {
+                "feature": "high_clinical_risk",
+                "shap_impact_score": 0.01032260498021777,
+                "feature_value": 2.3511667475164035
+            },
+            {
+                "feature": "bmi",
+                "shap_impact_score": 0.009027675103432237,
+                "feature_value": -0.5339314784111987
+            }
+        ]
+    },
+    "therapy_response": {
+        "patient_index": 4756,
+        "factors_contributing_to_prediction": [
+            {
+                "feature": "creatinine",
+                "shap_impact_score": 0.01810741145821717,
+                "feature_value": -2.070444480794936
+            },
+            {
+                "feature": "tumor_size",
+                "shap_impact_score": -0.014496610708080967,
+                "feature_value": 1.250358093880147
+            },
+            {
+                "feature": "renal_function",
+                "shap_impact_score": 0.012932111998953737,
+                "feature_value": 1.5553435865472458
+            },
+            {
+                "feature": "cancer_stage_II",
+                "shap_impact_score": -0.01089344290030372,
+                "feature_value": 0.0
+            },
+            {
+                "feature": "cancer_stage_IV",
+                "shap_impact_score": 0.010450309322481704,
+                "feature_value": 0.0
+            }
+        ]
+    }
+}

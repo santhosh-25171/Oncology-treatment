@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+venv/
+.venv/
+.env
+.vscode/
+.idea/
+.ipynb_checkpoints/
+*.tmp
+*.temp
+*.log
+catboost_info/
+
+# Large generated DL image dataset
+stage2_dl/data/dl_oncology_dataset_v2/spatial/images/

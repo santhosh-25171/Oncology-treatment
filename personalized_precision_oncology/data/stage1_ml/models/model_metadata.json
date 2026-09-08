@@ -1,0 +1,47 @@
+{
+    "project_name": "Personalized Precision Medicine for Oncology",
+    "stage": "Stage 1 ML",
+    "pipeline_version": "2.0.0-calibrated",
+    "targets": [
+        "overall_patient_risk",
+        "toxicity_risk",
+        "therapy_response"
+    ],
+    "features_count": 66,
+    "unseen_holdout_samples": 750,
+    "champion_models": {
+        "overall_patient_risk": {
+            "champion_model": "XGBoost",
+            "accuracy": 0.5093333333333333,
+            "balanced_accuracy": 0.34181275469841715,
+            "precision_macro": 0.3621571027431781,
+            "recall_macro": 0.34181275469841715,
+            "f1_macro": 0.24895602423628263,
+            "high_risk_recall": 0.9840848806366048,
+            "roc_auc": 0.5635642231517285,
+            "brier_score": 0.19784202240145296
+        },
+        "toxicity_risk": {
+            "champion_model": "Random Forest",
+            "accuracy": 0.44666666666666666,
+            "balanced_accuracy": 0.3704722301672864,
+            "precision_macro": 0.30380422736706364,
+            "recall_macro": 0.3704722301672864,
+            "f1_macro": 0.32876342530996316,
+            "high_risk_recall": 0.46357615894039733,
+            "roc_auc": 0.5890551238664119,
+            "brier_score": 0.2088555580619654
+        },
+        "therapy_response": {
+            "champion_model": "Random Forest",
+            "accuracy": 0.4693333333333333,
+            "balanced_accuracy": 0.3314500941619586,
+            "precision_macro": 0.1568627450980392,
+            "recall_macro": 0.3314500941619586,
+            "f1_macro": 0.21294615849969753,
+            "high_risk_recall": 0.0,
+            "roc_auc": 0.5541613336185921,
+            "brier_score": 0.205711422458946
+        }
+    }
+}

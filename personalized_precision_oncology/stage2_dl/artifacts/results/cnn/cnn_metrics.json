@@ -1,0 +1,67 @@
+{
+    "dataset": {
+        "train_samples": 300,
+        "val_samples": 120,
+        "test_samples": 120,
+        "classes": [
+            "normal",
+            "benign",
+            "malignant",
+            "tumor_margin",
+            "necrotic",
+            "inflammatory"
+        ]
+    },
+    "training": {
+        "device": "cpu",
+        "batch_size": 32,
+        "best_epoch": 10,
+        "total_time_seconds": 338.52630162239075
+    },
+    "validation_metrics": {
+        "macro_f1": 0.9749895768188451
+    },
+    "test_metrics": {
+        "accuracy": 0.975,
+        "macro_f1": 0.9747594439507149,
+        "weighted_f1": 0.9747594439507148
+    },
+    "per_class_test": {
+        "normal": {
+            "precision": 1.0,
+            "recall": 0.95,
+            "f1-score": 0.9743589743589743,
+            "support": 20.0
+        },
+        "benign": {
+            "precision": 0.9523809523809523,
+            "recall": 1.0,
+            "f1-score": 0.975609756097561,
+            "support": 20.0
+        },
+        "malignant": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1-score": 1.0,
+            "support": 20.0
+        },
+        "tumor_margin": {
+            "precision": 0.9523809523809523,
+            "recall": 1.0,
+            "f1-score": 0.975609756097561,
+            "support": 20.0
+        },
+        "necrotic": {
+            "precision": 0.9523809523809523,
+            "recall": 1.0,
+            "f1-score": 0.975609756097561,
+            "support": 20.0
+        },
+        "inflammatory": {
+            "precision": 1.0,
+            "recall": 0.9,
+            "f1-score": 0.9473684210526315,
+            "support": 20.0
+        }
+    }
+}

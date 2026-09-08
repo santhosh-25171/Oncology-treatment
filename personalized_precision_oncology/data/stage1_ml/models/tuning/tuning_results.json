@@ -1,0 +1,158 @@
+{
+    "overall_patient_risk": {
+        "Logistic Regression": {
+            "best_params": {
+                "solver": "lbfgs",
+                "C": 0.01
+            },
+            "cv_macro_f1": 0.37175819377235875,
+            "test_macro_f1": 0.36776878516008954,
+            "test_accuracy": 0.408,
+            "high_risk_recall": 0.4986737400530504,
+            "selection_score": 0.43322126260656996
+        },
+        "Random Forest": {
+            "best_params": {
+                "n_estimators": 200,
+                "min_samples_split": 2,
+                "max_depth": 8
+            },
+            "cv_macro_f1": 0.38217373443336716,
+            "test_macro_f1": 0.3455269726324664,
+            "test_accuracy": 0.42533333333333334,
+            "high_risk_recall": 0.5729442970822282,
+            "selection_score": 0.4592356348573473
+        },
+        "XGBoost": {
+            "best_params": {
+                "subsample": 1.0,
+                "n_estimators": 150,
+                "max_depth": 5,
+                "learning_rate": 0.05,
+                "colsample_bytree": 1.0
+            },
+            "cv_macro_f1": 0.32727850475146186,
+            "test_macro_f1": 0.3143015433068866,
+            "test_accuracy": 0.488,
+            "high_risk_recall": 0.7824933687002652,
+            "selection_score": 0.5483974560035759
+        },
+        "LightGBM": {
+            "best_params": {
+                "num_leaves": 31,
+                "n_estimators": 50,
+                "max_depth": -1,
+                "learning_rate": 0.05
+            },
+            "cv_macro_f1": 0.3755995958139805,
+            "test_macro_f1": 0.36638600734986276,
+            "test_accuracy": 0.4493333333333333,
+            "high_risk_recall": 0.6021220159151194,
+            "selection_score": 0.48425401163249104
+        }
+    },
+    "toxicity_risk": {
+        "Logistic Regression": {
+            "best_params": {
+                "solver": "lbfgs",
+                "C": 0.01
+            },
+            "cv_macro_f1": 0.3854169920186542,
+            "test_macro_f1": 0.39230765612375196,
+            "test_accuracy": 0.4,
+            "high_risk_recall": 0.48013245033112584,
+            "selection_score": 0.4362200532274389
+        },
+        "Random Forest": {
+            "best_params": {
+                "n_estimators": 100,
+                "min_samples_split": 5,
+                "max_depth": 8
+            },
+            "cv_macro_f1": 0.39403690826049054,
+            "test_macro_f1": 0.4062606601827074,
+            "test_accuracy": 0.43066666666666664,
+            "high_risk_recall": 0.5927152317880795,
+            "selection_score": 0.4994879459853935
+        },
+        "XGBoost": {
+            "best_params": {
+                "subsample": 1.0,
+                "n_estimators": 150,
+                "max_depth": 5,
+                "learning_rate": 0.05,
+                "colsample_bytree": 1.0
+            },
+            "cv_macro_f1": 0.3423649633202528,
+            "test_macro_f1": 0.35835595776772244,
+            "test_accuracy": 0.44133333333333336,
+            "high_risk_recall": 0.5397350993377483,
+            "selection_score": 0.4490455285527354
+        },
+        "LightGBM": {
+            "best_params": {
+                "num_leaves": 20,
+                "n_estimators": 100,
+                "max_depth": -1,
+                "learning_rate": 0.05
+            },
+            "cv_macro_f1": 0.3865588296326454,
+            "test_macro_f1": 0.37715408182206517,
+            "test_accuracy": 0.3893333333333333,
+            "high_risk_recall": 0.4602649006622517,
+            "selection_score": 0.4187094912421584
+        }
+    },
+    "therapy_response": {
+        "Logistic Regression": {
+            "best_params": {
+                "solver": "lbfgs",
+                "C": 0.01
+            },
+            "cv_macro_f1": 0.3479201437902427,
+            "test_macro_f1": 0.31827261584241384,
+            "test_accuracy": 0.33066666666666666,
+            "high_risk_recall": 0.46441947565543074,
+            "selection_score": 0.3913460457489223
+        },
+        "Random Forest": {
+            "best_params": {
+                "n_estimators": 100,
+                "min_samples_split": 5,
+                "max_depth": 8
+            },
+            "cv_macro_f1": 0.3652779912063914,
+            "test_macro_f1": 0.34061494584031954,
+            "test_accuracy": 0.364,
+            "high_risk_recall": 0.5093632958801498,
+            "selection_score": 0.42498912086023466
+        },
+        "XGBoost": {
+            "best_params": {
+                "subsample": 1.0,
+                "n_estimators": 150,
+                "max_depth": 5,
+                "learning_rate": 0.05,
+                "colsample_bytree": 1.0
+            },
+            "cv_macro_f1": 0.3136935244623754,
+            "test_macro_f1": 0.29472724253488475,
+            "test_accuracy": 0.436,
+            "high_risk_recall": 0.25842696629213485,
+            "selection_score": 0.2765771044135098
+        },
+        "LightGBM": {
+            "best_params": {
+                "num_leaves": 20,
+                "n_estimators": 100,
+                "max_depth": -1,
+                "learning_rate": 0.05
+            },
+            "cv_macro_f1": 0.36216629895890046,
+            "test_macro_f1": 0.3476710395501567,
+            "test_accuracy": 0.37066666666666664,
+            "high_risk_recall": 0.40823970037453183,
+            "selection_score": 0.37795536996234425
+        }
+    }
+}

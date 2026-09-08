@@ -1,0 +1,54 @@
+{
+    "overall_patient_risk": {
+        "prediction": "Moderate",
+        "risk_probability": 0.4621,
+        "threshold": 0.48,
+        "confidence": 0.4621,
+        "probabilities": {
+            "High": 0.46212241157359785,
+            "Low": 0.1465363035901748,
+            "Moderate": 0.3913412848362274
+        },
+        "important_factors": [
+            {
+                "feature": "comorbidity_score",
+                "direction": "baseline"
+            },
+            {
+                "feature": "ctDNA_level",
+                "direction": "baseline"
+            },
+            {
+                "feature": "performance_status",
+                "direction": "increases_risk"
+            }
+        ],
+        "debug_info": {
+            "model_name": "Calibrated XGBoost (Platt Scaling)",
+            "calibration": "Sigmoidal Logistic Calibration",
+            "raw_high_risk_prob": 0.4034,
+            "calibrated_high_risk_prob": 0.4621,
+            "decision_threshold": 0.48,
+            "final_risk_class": "Moderate",
+            "is_threshold_applied": false
+        }
+    },
+    "toxicity_risk": {
+        "prediction": "Low",
+        "confidence": 0.4116,
+        "probabilities": {
+            "High": 0.3714369160554006,
+            "Low": 0.41156396340524165,
+            "Moderate": 0.21699912053935777
+        }
+    },
+    "therapy_response": {
+        "prediction": "Partial Response",
+        "confidence": 0.4564,
+        "probabilities": {
+            "Complete Response": 0.3841152366608749,
+            "Non-Responder": 0.1595127398646713,
+            "Partial Response": 0.4563720234744539
+        }
+    }
+}

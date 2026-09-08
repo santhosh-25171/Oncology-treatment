@@ -1,0 +1,35 @@
+{
+    "overall_patient_risk": {
+        "Before_Tuning": {
+            "model": "XGBoost",
+            "test_macro_f1": 0.33346421514148555
+        },
+        "After_Tuning": {
+            "model": "XGBoost",
+            "test_macro_f1": 0.3143015433068866
+        },
+        "Improvement": -0.0192
+    },
+    "toxicity_risk": {
+        "Before_Tuning": {
+            "model": "Random Forest",
+            "test_macro_f1": 0.3714247011093695
+        },
+        "After_Tuning": {
+            "model": "Random Forest",
+            "test_macro_f1": 0.4062606601827074
+        },
+        "Improvement": 0.0348
+    },
+    "therapy_response": {
+        "Before_Tuning": {
+            "model": "Random Forest",
+            "test_macro_f1": 0.31965892223655684
+        },
+        "After_Tuning": {
+            "model": "Random Forest",
+            "test_macro_f1": 0.34061494584031954
+        },
+        "Improvement": 0.021
+    }
+}

@@ -1,0 +1,248 @@
+{
+    "overall_patient_risk": [
+        {
+            "feature": "hemoglobin",
+            "mean_abs_shap": 0.07124197483062744
+        },
+        {
+            "feature": "renal_function",
+            "mean_abs_shap": 0.06337288022041321
+        },
+        {
+            "feature": "biomarker_1",
+            "mean_abs_shap": 0.04730759933590889
+        },
+        {
+            "feature": "liver_function",
+            "mean_abs_shap": 0.04632428660988808
+        },
+        {
+            "feature": "treatment_dose",
+            "mean_abs_shap": 0.04322171211242676
+        },
+        {
+            "feature": "creatinine",
+            "mean_abs_shap": 0.041367996484041214
+        },
+        {
+            "feature": "age",
+            "mean_abs_shap": 0.03920953720808029
+        },
+        {
+            "feature": "biomarker_2",
+            "mean_abs_shap": 0.03561408817768097
+        },
+        {
+            "feature": "inflammatory_marker",
+            "mean_abs_shap": 0.033973328769207
+        },
+        {
+            "feature": "treatment_intensity",
+            "mean_abs_shap": 0.03298407420516014
+        },
+        {
+            "feature": "tumor_size",
+            "mean_abs_shap": 0.03217700496315956
+        },
+        {
+            "feature": "lymphocyte_count",
+            "mean_abs_shap": 0.03098038025200367
+        },
+        {
+            "feature": "genetic_risk_score",
+            "mean_abs_shap": 0.03011583723127842
+        },
+        {
+            "feature": "ctDNA_level",
+            "mean_abs_shap": 0.029982388019561768
+        },
+        {
+            "feature": "performance_status",
+            "mean_abs_shap": 0.02971848100423813
+        },
+        {
+            "feature": "prior_treatment_count",
+            "mean_abs_shap": 0.02877219207584858
+        },
+        {
+            "feature": "wbc_count",
+            "mean_abs_shap": 0.028682880103588104
+        },
+        {
+            "feature": "dose_intensity",
+            "mean_abs_shap": 0.027444178238511086
+        },
+        {
+            "feature": "biomarker_interaction",
+            "mean_abs_shap": 0.026981111615896225
+        },
+        {
+            "feature": "treatment_duration",
+            "mean_abs_shap": 0.022600170224905014
+        }
+    ],
+    "toxicity_risk": [
+        {
+            "feature": "treatment_dose",
+            "mean_abs_shap": 0.014912372374085355
+        },
+        {
+            "feature": "renal_function",
+            "mean_abs_shap": 0.012654771984256737
+        },
+        {
+            "feature": "hemoglobin",
+            "mean_abs_shap": 0.009497335999678098
+        },
+        {
+            "feature": "performance_status",
+            "mean_abs_shap": 0.008033025197981191
+        },
+        {
+            "feature": "age",
+            "mean_abs_shap": 0.005535267633858679
+        },
+        {
+            "feature": "treatment_duration",
+            "mean_abs_shap": 0.004725439764764047
+        },
+        {
+            "feature": "treatment_intensity",
+            "mean_abs_shap": 0.004655909554885527
+        },
+        {
+            "feature": "biomarker_2",
+            "mean_abs_shap": 0.004323205347189253
+        },
+        {
+            "feature": "bmi",
+            "mean_abs_shap": 0.003595065275636253
+        },
+        {
+            "feature": "high_clinical_risk",
+            "mean_abs_shap": 0.0033855394879524535
+        },
+        {
+            "feature": "biomarker_1",
+            "mean_abs_shap": 0.0033617534816602003
+        },
+        {
+            "feature": "prior_treatment_count",
+            "mean_abs_shap": 0.003241129124690642
+        },
+        {
+            "feature": "genetic_risk_score",
+            "mean_abs_shap": 0.0031610888056338446
+        },
+        {
+            "feature": "liver_function",
+            "mean_abs_shap": 0.00299145528907327
+        },
+        {
+            "feature": "biomarker_interaction",
+            "mean_abs_shap": 0.0029828720864896663
+        },
+        {
+            "feature": "inflammatory_marker",
+            "mean_abs_shap": 0.0029786635670122756
+        },
+        {
+            "feature": "creatinine",
+            "mean_abs_shap": 0.0029114736198483458
+        },
+        {
+            "feature": "tumor_size",
+            "mean_abs_shap": 0.002637165185767289
+        },
+        {
+            "feature": "dose_intensity",
+            "mean_abs_shap": 0.0025437981182052506
+        },
+        {
+            "feature": "ctDNA_level",
+            "mean_abs_shap": 0.0024524891240293584
+        }
+    ],
+    "therapy_response": [
+        {
+            "feature": "cancer_stage_IV",
+            "mean_abs_shap": 0.015112100762669903
+        },
+        {
+            "feature": "cancer_stage_II",
+            "mean_abs_shap": 0.007318348531434295
+        },
+        {
+            "feature": "ctDNA_level",
+            "mean_abs_shap": 0.007288348858427796
+        },
+        {
+            "feature": "tumor_size",
+            "mean_abs_shap": 0.006602054769291171
+        },
+        {
+            "feature": "biomarker_1",
+            "mean_abs_shap": 0.005309425040650024
+        },
+        {
+            "feature": "bmi",
+            "mean_abs_shap": 0.0044091506226965355
+        },
+        {
+            "feature": "cancer_stage_I",
+            "mean_abs_shap": 0.0042050181326682015
+        },
+        {
+            "feature": "renal_function",
+            "mean_abs_shap": 0.0035599394650302884
+        },
+        {
+            "feature": "treatment_intensity",
+            "mean_abs_shap": 0.003463300340660549
+        },
+        {
+            "feature": "treatment_duration",
+            "mean_abs_shap": 0.003441666252660651
+        },
+        {
+            "feature": "inflammatory_marker",
+            "mean_abs_shap": 0.0034343558823465834
+        },
+        {
+            "feature": "creatinine",
+            "mean_abs_shap": 0.0031611870545891637
+        },
+        {
+            "feature": "dose_intensity",
+            "mean_abs_shap": 0.0030307835498821624
+        },
+        {
+            "feature": "age",
+            "mean_abs_shap": 0.0027532277080584535
+        },
+        {
+            "feature": "wbc_count",
+            "mean_abs_shap": 0.002566617834593992
+        },
+        {
+            "feature": "mutation_burden",
+            "mean_abs_shap": 0.0025587484050526724
+        },
+        {
+            "feature": "cancer_stage_III",
+            "mean_abs_shap": 0.0024431960366184673
+        },
+        {
+            "feature": "biomarker_2",
+            "mean_abs_shap": 0.0022712302152248093
+        },
+        {
+            "feature": "albumin",
+            "mean_abs_shap": 0.0021890846509238994
+        },
+        {
+            "feature": "hemoglobin",
+            "mean_abs_shap": 0.0020320653312143177
+        }
+    ]
+}
