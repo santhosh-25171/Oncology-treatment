@@ -13,11 +13,12 @@ if PROJECT_ROOT not in sys.path:
 
 from stage1_ml.prediction.prediction import OncologyPredictionPipeline
 from integration.api.stage2_dl_manager import Stage2DLManager
+from integration.api.stage3_nlp_manager import Stage3NLPManager
 
 app = FastAPI(
     title="Personalized Precision Medicine API for Oncology",
-    version="2.0.0",
-    description="FastAPI service serving Stage 1 ML clinical risk models and Stage 2 Deep Learning models (CNN, Transformer, Multimodal Fusion, Grad-CAM)."
+    version="2.1.0",
+    description="FastAPI service serving Stage 1 ML clinical risk models, Stage 2 Deep Learning models (CNN, Transformer, Multimodal Fusion, Grad-CAM), and Stage 3 Clinical NLP models (Urgency Triage & Clinical NER)."
 )
 
 # Enable CORS for frontend integration
@@ -32,10 +33,11 @@ app.add_middleware(
 # Initialize Prediction Pipelines on startup
 pipeline: Optional[OncologyPredictionPipeline] = None
 dl_manager: Optional[Stage2DLManager] = None
+nlp_manager: Optional[Stage3NLPManager] = None
 
 @app.on_event("startup")
 def load_pipelines():
-    global pipeline, dl_manager
+    global pipeline, dl_manager, nlp_manager
     try:
         pipeline = OncologyPredictionPipeline(base_dir=PROJECT_ROOT)
         print("[SUCCESS] Stage 1 ML Prediction Pipeline loaded in API.")
@@ -47,6 +49,20 @@ def load_pipelines():
         print("[SUCCESS] Stage 2 Deep Learning Manager loaded in API.")
     except Exception as e:
         print(f"[ERROR] Failed to load Stage 2 DL manager: {e}")
+
+    try:
+        nlp_manager = Stage3NLPManager()
+        print("[SUCCESS] Stage 3 Clinical NLP Manager loaded in API.")
+    except Exception as e:
+        print(f"[ERROR] Failed to load Stage 3 NLP manager: {e}")
+
+
+class ClinicalNotePayload(BaseModel):
+    text: str = Field(
+        ...,
+        example="Patient developed severe nausea after receiving 50 mg cisplatin. EGFR L858R mutation detected.",
+        description="Clinical progress note, consultation text, or adverse event description."
+    )
 
 
 class PatientFeaturePayload(BaseModel):
@@ -127,8 +143,8 @@ class PatientFeaturePayload(BaseModel):
 
 @app.get("/health")
 def health_check():
-    """Dynamic uptime and component health check endpoint for ML and DL pipelines"""
-    global pipeline, dl_manager
+    """Dynamic uptime and component health check endpoint for ML, DL, and NLP pipelines"""
+    global pipeline, dl_manager, nlp_manager
     if dl_manager is None:
         try:
             dl_manager = Stage2DLManager()
@@ -141,6 +157,12 @@ def health_check():
         except Exception as e:
             print(f"[ERROR] Failed to load Stage 1 pipeline in health check: {e}")
 
+    if nlp_manager is None:
+        try:
+            nlp_manager = Stage3NLPManager()
+        except Exception as e:
+            print(f"[ERROR] Failed to load Stage 3 NLP manager in health check: {e}")
+
     dl_status = dl_manager.get_health_status() if dl_manager is not None else {
         "status": "degraded",
         "stage2_dl": False,
@@ -150,18 +172,27 @@ def health_check():
         "temporal_prep_loaded": False
     }
 
-    is_healthy = (pipeline is not None) and (dl_status.get("status") == "ok")
+    nlp_status = nlp_manager.get_health_status() if nlp_manager is not None else {
+        "status": "degraded",
+        "stage3_nlp": False,
+        "classifier_loaded": False,
+        "ner_loaded": False
+    }
+
+    is_healthy = (pipeline is not None) and (dl_status.get("status") == "ok") and (nlp_status.get("status") == "ok")
 
     return {
         "status": "ok" if is_healthy else "degraded",
         "service": "precision-oncology-api",
         "stage1_ml": pipeline is not None,
         "stage2_dl": dl_status.get("stage2_dl", False),
+        "stage3_nlp": nlp_status.get("stage3_nlp", False),
         "cnn_loaded": dl_status.get("cnn_loaded", False),
         "transformer_loaded": dl_status.get("transformer_loaded", False),
         "fusion_loaded": dl_status.get("fusion_loaded", False),
+        "nlp_loaded": nlp_status.get("stage3_nlp", False),
         "temporal_prep_loaded": dl_status.get("temporal_prep_loaded", False),
-        "version": "2.0.0"
+        "version": "2.1.0"
     }
 
 
@@ -339,6 +370,69 @@ async def predict_multimodal(
         raise HTTPException(status_code=400, detail=str(ve))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Multimodal prediction failed: {str(e)}")
+
+
+# =========================================================================
+# STAGE 3 CLINICAL NLP ENDPOINTS
+# =========================================================================
+
+@app.post("/api/v1/nlp/predict")
+@app.post("/predict-nlp")
+def predict_nlp(payload: ClinicalNotePayload):
+    """
+    Combined Clinical NLP endpoint: classifies consultation note urgency (LOW, MODERATE, HIGH)
+    and extracts oncology named entities (GENE_MUTATION, DRUG_NAME, DOSAGE_LEVEL, ADVERSE_EVENT)
+    with exact character offsets.
+    """
+    global nlp_manager
+    if nlp_manager is None:
+        nlp_manager = Stage3NLPManager()
+
+    try:
+        result = nlp_manager.predict_nlp(payload.text)
+        return result
+    except RuntimeError as re:
+        raise HTTPException(status_code=503, detail=str(re))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Clinical NLP prediction failed: {str(e)}")
+
+
+@app.post("/api/v1/nlp/urgency")
+@app.post("/predict-urgency")
+def predict_urgency(payload: ClinicalNotePayload):
+    """
+    Classifies clinical progress note urgency level with real probability distribution and confidence.
+    """
+    global nlp_manager
+    if nlp_manager is None:
+        nlp_manager = Stage3NLPManager()
+
+    try:
+        result = nlp_manager.predict_urgency(payload.text)
+        return result
+    except RuntimeError as re:
+        raise HTTPException(status_code=503, detail=str(re))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Urgency classification failed: {str(e)}")
+
+
+@app.post("/api/v1/nlp/ner")
+@app.post("/extract-entities")
+def extract_entities(payload: ClinicalNotePayload):
+    """
+    Extracts clinical oncology named entities with token spans, character offsets, and category counts.
+    """
+    global nlp_manager
+    if nlp_manager is None:
+        nlp_manager = Stage3NLPManager()
+
+    try:
+        result = nlp_manager.extract_entities(payload.text)
+        return result
+    except RuntimeError as re:
+        raise HTTPException(status_code=503, detail=str(re))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Entity extraction failed: {str(e)}")
 
 
 
