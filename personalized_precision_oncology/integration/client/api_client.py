@@ -28,6 +28,7 @@ class OncologyAPIClient:
         self._local_stage1 = None
         self._local_stage2 = None
         self._local_stage3 = None
+        self._local_stage4 = None
 
     def health_check(self) -> Dict[str, Any]:
         """Queries GET /health and returns backend runtime status, falling back to local inspection."""
@@ -44,6 +45,7 @@ class OncologyAPIClient:
                 "stage1_ml": False,
                 "stage2_dl": False,
                 "stage3_nlp": False,
+                "stage4_slm": False,
                 "detail": f"HTTP {resp.status_code}: {resp.text}"
             }
         except requests.exceptions.ConnectionError:
@@ -59,6 +61,7 @@ class OncologyAPIClient:
                 "stage1_ml": False,
                 "stage2_dl": False,
                 "stage3_nlp": False,
+                "stage4_slm": False,
                 "detail": str(e)
             }
 
@@ -67,6 +70,7 @@ class OncologyAPIClient:
         s1_ok = False
         s2_ok = False
         s3_ok = False
+        s4_ok = False
         cnn_ok = False
         tf_ok = False
         fus_ok = False
@@ -97,16 +101,24 @@ class OncologyAPIClient:
         except Exception:
             pass
 
+        try:
+            s4_adapter = PROJECT_ROOT / "stage4_slm" / "models" / "qwen2.5_0.5b" / "adapter" / "adapter_model.safetensors"
+            s4_ok = s4_adapter.exists()
+        except Exception:
+            pass
+
         return {
-            "status": "ok" if (s1_ok and s2_ok and s3_ok) else "degraded",
+            "status": "ok" if (s1_ok and s2_ok and s3_ok and s4_ok) else "degraded",
             "service": "precision-oncology-local",
             "stage1_ml": s1_ok,
             "stage2_dl": s2_ok,
             "stage3_nlp": s3_ok,
+            "stage4_slm": s4_ok,
             "cnn_loaded": cnn_ok,
             "transformer_loaded": tf_ok,
             "fusion_loaded": fus_ok,
             "nlp_loaded": nlp_ok,
+            "slm_loaded": s4_ok,
             "temporal_prep_loaded": True,
             "version": "2.1.0-local"
         }
@@ -383,6 +395,79 @@ class OncologyAPIClient:
             return res
         except Exception as ex:
             raise ConnectionError(f"FastAPI is offline and local NLP engine failed: {ex}")
+
+    # =========================================================================
+    # STAGE 4 SLM METHODS
+    # =========================================================================
+
+    def predict_slm_briefing(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Calls POST /api/v1/slm/briefing with actual Stage 1, 2, and 3 responses
+        and clinical report to synthesize a 1-2 sentence precision oncology briefing.
+        Falls back to local Stage 4 SLM Manager when FastAPI service is unreachable.
+        """
+        url = f"{self.base_url}/api/v1/slm/briefing"
+        try:
+            resp = requests.post(url, json=payload, timeout=self.timeout)
+            if resp.status_code == 200:
+                res = resp.json()
+                res["backend"] = "FastAPI"
+                return res
+            error_msg = resp.json().get("detail", resp.text) if resp.headers.get("content-type") == "application/json" else resp.text
+            raise RuntimeError(f"API Error ({resp.status_code}): {error_msg}")
+        except requests.exceptions.ConnectionError:
+            return self._predict_slm_briefing_local(payload)
+        except Exception as e:
+            raise RuntimeError(str(e))
+
+    def _get_local_stage4(self):
+        if self._local_stage4 is None:
+            from integration.api.stage4_slm_manager import Stage4SLMManager
+            self._local_stage4 = Stage4SLMManager()
+        return self._local_stage4
+
+    def _predict_slm_briefing_local(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        """Local offline execution for Stage 4 SLM (100% air-gapped)."""
+        try:
+            from stage4_slm.adapter.context_adapter import adapt_stage123_to_stage4_context, validate_stage_responses
+
+            # Support both production payload (stage1_result, ...) and test adapted payload (stage1_context, ...)
+            if "stage1_result" in payload:
+                is_valid, errors = validate_stage_responses(
+                    stage1_resp=payload.get("stage1_result"),
+                    stage2_resp=payload.get("stage2_result"),
+                    stage3_resp=payload.get("stage3_result"),
+                    clinical_report=payload.get("clinical_report")
+                )
+                if not is_valid:
+                    raise ValueError(f"Incomplete upstream stage context: {', '.join(errors)}")
+
+                s1_ctx, s2_ctx, s3_ctx = adapt_stage123_to_stage4_context(
+                    stage1_api_result=payload["stage1_result"],
+                    stage2_api_result=payload["stage2_result"],
+                    stage3_api_result=payload["stage3_result"]
+                )
+            elif "stage1_context" in payload:
+                # Controlled testing pathway
+                s1_ctx = payload["stage1_context"]
+                s2_ctx = payload["stage2_context"]
+                s3_ctx = payload["stage3_context"]
+            else:
+                raise ValueError("Payload missing required upstream stage responses.")
+
+            m = self._get_local_stage4()
+            res = m.generate_briefing(
+                patient_id=payload.get("patient_id", "SYNTH_PATIENT"),
+                clinical_report=payload.get("clinical_report", ""),
+                stage1_context=s1_ctx,
+                stage2_context=s2_ctx,
+                stage3_context=s3_ctx,
+                source_type=payload.get("source_type", "consultation")
+            )
+            res["backend"] = "Local Python Engine"
+            return res
+        except Exception as ex:
+            raise ConnectionError(f"FastAPI is offline and local SLM engine failed: {ex}")
 
 
 # Default singleton instance

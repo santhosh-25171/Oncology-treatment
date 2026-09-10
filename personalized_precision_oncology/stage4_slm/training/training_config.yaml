@@ -1,0 +1,59 @@
+# Stage 4 SLM — Fine-Tuning & Local Inference Configuration
+# Project: Personalized Precision Medicine for Oncology Treatment Optimization
+# Role: Stage 4 SLM Engineer
+# Model: Qwen2.5-0.5B-Instruct (Parameter-Efficient LoRA / CPU-Calibrated)
+# Classification: SYNTHETIC RESEARCH DATA — NOT FOR CLINICAL USE
+
+model:
+  model_id: "Qwen/Qwen2.5-0.5B-Instruct"
+  architecture: "Qwen2ForCausalLM"
+  total_parameters: 494032768
+  torch_dtype: "float32"
+  device: "cpu"
+
+peft_lora:
+  r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  bias: "none"
+  task_type: "CAUSAL_LM"
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+  trainable_parameters: 8798208
+  trainable_percentage: 1.7497
+
+data:
+  train_path: "stage4_slm/data/splits/train.csv"
+  validation_path: "stage4_slm/data/splits/validation.csv"
+  test_path: "stage4_slm/data/splits/test.csv"
+  max_seq_length: 512
+  completion_only_loss_masking: true
+
+training:
+  seed: 42
+  learning_rate: 0.0002
+  weight_decay: 0.01
+  max_steps: 25
+  eval_every_steps: 5
+  save_every_steps: 5
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 2
+  effective_batch_size: 2
+  max_grad_norm: 1.0
+  warmup_steps: 2
+  lr_scheduler_type: "cosine"
+  max_train_samples: null
+  max_val_samples: null
+
+output:
+  output_dir: "stage4_slm/models/qwen2.5_0.5b"
+  adapter_dir: "stage4_slm/models/qwen2.5_0.5b/adapter"
+  tokenizer_dir: "stage4_slm/models/qwen2.5_0.5b/tokenizer"
+  logs_dir: "stage4_slm/training/training_logs"
+  report_path: "stage4_slm/training/training_report.md"

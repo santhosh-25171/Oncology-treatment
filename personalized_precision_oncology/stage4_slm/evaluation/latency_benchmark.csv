@@ -1,0 +1,12 @@
+benchmark_metric,value
+cold_start_seconds,5.46
+warm_mean_seconds,5.58
+warm_median_seconds,5.71
+p95_seconds,6.11
+p99_seconds,6.11
+min_seconds,5.01
+max_seconds,6.11
+mean_tokens_per_second,3.99
+target_5s_compliance,FAIL (5-second target NOT YET ACHIEVED on current CPU hardware)
+Mean Generation Latency (s),5.58
+Cold Start Latency (s),5.46

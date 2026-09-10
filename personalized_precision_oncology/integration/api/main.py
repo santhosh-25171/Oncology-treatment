@@ -14,11 +14,13 @@ if PROJECT_ROOT not in sys.path:
 from stage1_ml.prediction.prediction import OncologyPredictionPipeline
 from integration.api.stage2_dl_manager import Stage2DLManager
 from integration.api.stage3_nlp_manager import Stage3NLPManager
+from integration.api.stage4_slm_manager import Stage4SLMManager
+from stage4_slm.adapter.context_adapter import adapt_stage123_to_stage4_context, validate_stage_responses
 
 app = FastAPI(
     title="Personalized Precision Medicine API for Oncology",
     version="2.1.0",
-    description="FastAPI service serving Stage 1 ML clinical risk models, Stage 2 Deep Learning models (CNN, Transformer, Multimodal Fusion, Grad-CAM), and Stage 3 Clinical NLP models (Urgency Triage & Clinical NER)."
+    description="FastAPI service serving Stage 1 ML clinical risk models, Stage 2 Deep Learning models (CNN, Transformer, Multimodal Fusion, Grad-CAM), Stage 3 Clinical NLP models (Urgency Triage & Clinical NER), and Stage 4 SLM (Bedside Precision Oncology Briefings)."
 )
 
 # Enable CORS for frontend integration
@@ -34,10 +36,11 @@ app.add_middleware(
 pipeline: Optional[OncologyPredictionPipeline] = None
 dl_manager: Optional[Stage2DLManager] = None
 nlp_manager: Optional[Stage3NLPManager] = None
+slm_manager: Optional[Stage4SLMManager] = None
 
 @app.on_event("startup")
 def load_pipelines():
-    global pipeline, dl_manager, nlp_manager
+    global pipeline, dl_manager, nlp_manager, slm_manager
     try:
         pipeline = OncologyPredictionPipeline(base_dir=PROJECT_ROOT)
         print("[SUCCESS] Stage 1 ML Prediction Pipeline loaded in API.")
@@ -55,6 +58,12 @@ def load_pipelines():
         print("[SUCCESS] Stage 3 Clinical NLP Manager loaded in API.")
     except Exception as e:
         print(f"[ERROR] Failed to load Stage 3 NLP manager: {e}")
+
+    try:
+        slm_manager = Stage4SLMManager()
+        print("[SUCCESS] Stage 4 SLM Manager loaded in API.")
+    except Exception as e:
+        print(f"[ERROR] Failed to load Stage 4 SLM manager: {e}")
 
 
 class ClinicalNotePayload(BaseModel):
@@ -144,7 +153,7 @@ class PatientFeaturePayload(BaseModel):
 @app.get("/health")
 def health_check():
     """Dynamic uptime and component health check endpoint for ML, DL, and NLP pipelines"""
-    global pipeline, dl_manager, nlp_manager
+    global pipeline, dl_manager, nlp_manager, slm_manager
     if dl_manager is None:
         try:
             dl_manager = Stage2DLManager()
@@ -163,6 +172,12 @@ def health_check():
         except Exception as e:
             print(f"[ERROR] Failed to load Stage 3 NLP manager in health check: {e}")
 
+    if slm_manager is None:
+        try:
+            slm_manager = Stage4SLMManager()
+        except Exception as e:
+            print(f"[ERROR] Failed to load Stage 4 SLM manager in health check: {e}")
+
     dl_status = dl_manager.get_health_status() if dl_manager is not None else {
         "status": "degraded",
         "stage2_dl": False,
@@ -179,6 +194,12 @@ def health_check():
         "ner_loaded": False
     }
 
+    slm_status = slm_manager.get_health_status() if slm_manager is not None else {
+        "status": "degraded",
+        "stage4_slm": False,
+        "slm_loaded": False
+    }
+
     is_healthy = (pipeline is not None) and (dl_status.get("status") == "ok") and (nlp_status.get("status") == "ok")
 
     return {
@@ -187,10 +208,12 @@ def health_check():
         "stage1_ml": pipeline is not None,
         "stage2_dl": dl_status.get("stage2_dl", False),
         "stage3_nlp": nlp_status.get("stage3_nlp", False),
+        "stage4_slm": slm_status.get("stage4_slm", False),
         "cnn_loaded": dl_status.get("cnn_loaded", False),
         "transformer_loaded": dl_status.get("transformer_loaded", False),
         "fusion_loaded": dl_status.get("fusion_loaded", False),
         "nlp_loaded": nlp_status.get("stage3_nlp", False),
+        "slm_loaded": slm_status.get("stage4_slm", False),
         "temporal_prep_loaded": dl_status.get("temporal_prep_loaded", False),
         "version": "2.1.0"
     }
@@ -433,6 +456,109 @@ def extract_entities(payload: ClinicalNotePayload):
         raise HTTPException(status_code=503, detail=str(re))
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Entity extraction failed: {str(e)}")
+
+
+# =========================================================================
+# STAGE 4 SLM SYNTHESIS ENDPOINTS
+# =========================================================================
+
+class Stage4ProductionPayload(BaseModel):
+    patient_id: str = Field("SYNTH_PATIENT", example="SYNTH_PATIENT_01", description="Unique patient identifier")
+    clinical_report: str = Field(..., example="Patient diagnosed with invasive ductal carcinoma...", description="Raw or transcribed clinical consultation text")
+    source_type: str = Field("consultation", example="consultation", description="Note type or source")
+    stage1_result: Dict[str, Any] = Field(..., description="Actual validated runtime response from Stage 1 ML")
+    stage2_result: Dict[str, Any] = Field(..., description="Actual validated runtime response from Stage 2 DL")
+    stage3_result: Dict[str, Any] = Field(..., description="Actual validated runtime response from Stage 3 NLP")
+
+
+class Stage4AdaptedPayload(BaseModel):
+    patient_id: str = Field("SYNTH_PATIENT", example="SYNTH_PATIENT_01", description="For unit/adapter testing only")
+    clinical_report: str = Field(..., description="Clinical report text")
+    source_type: str = Field("consultation")
+    stage1_context: Dict[str, Any] = Field(..., description="Pre-adapted Stage 1 context")
+    stage2_context: Dict[str, Any] = Field(..., description="Pre-adapted Stage 2 context")
+    stage3_context: Dict[str, Any] = Field(..., description="Pre-adapted Stage 3 context")
+
+
+@app.post("/api/v1/slm/briefing")
+@app.post("/predict-briefing")
+def predict_briefing(payload: Stage4ProductionPayload):
+    """
+    Production Stage 4 SLM briefing endpoint.
+    Accepts actual validated outputs from Stage 1 ML, Stage 2 DL, and Stage 3 NLP,
+    validates upstream schema completeness, transforms via context adapter,
+    and synthesizes a 1-2 sentence precision oncology briefing using local frozen SLM.
+    """
+    global slm_manager
+    if slm_manager is None:
+        try:
+            slm_manager = Stage4SLMManager()
+        except Exception as e:
+            raise HTTPException(status_code=503, detail=f"Stage 4 SLM Manager could not be initialized: {e}")
+
+    # Strict upstream response validation (Correction 2 & 11: no synthetic shortcuts, no fabricated values)
+    is_valid, validation_errors = validate_stage_responses(
+        stage1_resp=payload.stage1_result,
+        stage2_resp=payload.stage2_result,
+        stage3_resp=payload.stage3_result,
+        clinical_report=payload.clinical_report
+    )
+    if not is_valid:
+        raise HTTPException(
+            status_code=422,
+            detail={
+                "error": "Cannot generate Stage 4 briefing due to missing or invalid upstream stage context.",
+                "validation_errors": validation_errors,
+                "upstream_preserved": True
+            }
+        )
+
+    try:
+        s1_ctx, s2_ctx, s3_ctx = adapt_stage123_to_stage4_context(
+            stage1_api_result=payload.stage1_result,
+            stage2_api_result=payload.stage2_result,
+            stage3_api_result=payload.stage3_result
+        )
+        briefing_res = slm_manager.generate_briefing(
+            patient_id=payload.patient_id,
+            clinical_report=payload.clinical_report,
+            stage1_context=s1_ctx,
+            stage2_context=s2_ctx,
+            stage3_context=s3_ctx,
+            source_type=payload.source_type
+        )
+        return briefing_res
+    except RuntimeError as re:
+        raise HTTPException(status_code=503, detail=str(re))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Stage 4 SLM briefing generation failed: {str(e)}")
+
+
+@app.post("/api/v1/slm/briefing/test-adapted")
+def predict_briefing_test_adapted(payload: Stage4AdaptedPayload):
+    """
+    Internal unit and adapter testing endpoint ONLY.
+    Accepts pre-adapted contexts for controlled testing (Correction 2: does not bypass production schema).
+    """
+    global slm_manager
+    if slm_manager is None:
+        try:
+            slm_manager = Stage4SLMManager()
+        except Exception as e:
+            raise HTTPException(status_code=503, detail=f"Stage 4 SLM Manager could not be initialized: {e}")
+
+    try:
+        briefing_res = slm_manager.generate_briefing(
+            patient_id=payload.patient_id,
+            clinical_report=payload.clinical_report,
+            stage1_context=payload.stage1_context,
+            stage2_context=payload.stage2_context,
+            stage3_context=payload.stage3_context,
+            source_type=payload.source_type
+        )
+        return briefing_res
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 

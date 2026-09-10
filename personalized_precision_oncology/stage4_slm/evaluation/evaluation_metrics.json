@@ -1,0 +1,136 @@
+{
+  "evaluation_scope": {
+    "dataset": "stage4_slm/data/splits/test.csv",
+    "total_records_evaluated": 10,
+    "total_test_partition_records": 950,
+    "coverage_percentage": 1.05,
+    "model": "Qwen/Qwen2.5-0.5B-Instruct + LoRA",
+    "checkpoint": "stage4_slm/models/qwen2.5_0.5b/adapter",
+    "device": "cpu",
+    "cpu_threads": 6,
+    "cold_start_load_seconds": 5.464373350143433
+  },
+  "metrics": {
+    "rouge1": {
+      "mean": 0.4489,
+      "median": 0.4566,
+      "std": 0.0853,
+      "min": 0.3333,
+      "max": 0.6111,
+      "p25": 0.4035,
+      "p75": 0.4803,
+      "p95": 0.5761,
+      "p99": 0.6041
+    },
+    "rouge2": {
+      "mean": 0.2907,
+      "median": 0.291,
+      "std": 0.1396,
+      "min": 0.0588,
+      "max": 0.4706,
+      "p25": 0.2626,
+      "p75": 0.4048,
+      "p95": 0.4517,
+      "p99": 0.4668
+    },
+    "rougeL": {
+      "mean": 0.4236,
+      "median": 0.4376,
+      "std": 0.119,
+      "min": 0.2,
+      "max": 0.6111,
+      "p25": 0.3903,
+      "p75": 0.4803,
+      "p95": 0.5761,
+      "p99": 0.6041
+    },
+    "bleu": {
+      "mean": 0.0449,
+      "median": 0.0273,
+      "std": 0.0378,
+      "min": 0.0117,
+      "max": 0.1313,
+      "p25": 0.017,
+      "p75": 0.0636,
+      "p95": 0.1052,
+      "p99": 0.1261
+    },
+    "entity_precision": {
+      "mean": 0.2,
+      "median": 0.0,
+      "std": 0.4216,
+      "min": 0.0,
+      "max": 1.0,
+      "p25": 0.0,
+      "p75": 0.0,
+      "p95": 1.0,
+      "p99": 1.0
+    },
+    "entity_recall": {
+      "mean": 0.6,
+      "median": 0.5,
+      "std": 0.3258,
+      "min": 0.0,
+      "max": 1.0,
+      "p25": 0.5,
+      "p75": 0.9167,
+      "p95": 1.0,
+      "p99": 1.0
+    },
+    "entity_f1": {
+      "mean": 0.2,
+      "median": 0.0,
+      "std": 0.4216,
+      "min": 0.0,
+      "max": 1.0,
+      "p25": 0.0,
+      "p75": 0.0,
+      "p95": 1.0,
+      "p99": 1.0
+    },
+    "entity_preservation": {
+      "mean": 0.6,
+      "median": 0.5,
+      "std": 0.3258,
+      "min": 0.0,
+      "max": 1.0,
+      "p25": 0.5,
+      "p75": 0.9167,
+      "p95": 1.0,
+      "p99": 1.0
+    },
+    "generation_time_seconds": {
+      "mean": 5.5813,
+      "median": 5.7122,
+      "std": 0.4712,
+      "min": 5.0113,
+      "max": 6.1109,
+      "p25": 5.1043,
+      "p75": 5.9676,
+      "p95": 6.1109,
+      "p99": 6.1109
+    },
+    "latency_ms": {
+      "mean": 5581.258,
+      "median": 5712.16,
+      "std": 471.2326,
+      "min": 5011.26,
+      "max": 6110.9,
+      "p25": 5104.35,
+      "p75": 5967.62,
+      "p95": 6110.9,
+      "p99": 6110.9
+    },
+    "tokens_per_second": {
+      "mean": 3.994,
+      "median": 4.09,
+      "std": 0.3109,
+      "min": 3.59,
+      "max": 4.38,
+      "p25": 3.72,
+      "p75": 4.19,
+      "p95": 4.38,
+      "p99": 4.38
+    }
+  }
+}
