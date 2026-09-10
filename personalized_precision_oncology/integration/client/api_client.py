@@ -10,7 +10,8 @@ logger = logging.getLogger("oncology_api_client")
 
 # Centralized API Base URL configuration
 DL_API_URL = os.environ.get("DL_API_URL", "http://localhost:8000").rstrip("/")
-DEFAULT_TIMEOUT = 30  # seconds
+DEFAULT_TIMEOUT = 30  # seconds for standard endpoints
+SLM_TIMEOUT = 120     # seconds for Stage 4 SLM briefing (CPU inference takes 40-60s)
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 
@@ -408,7 +409,7 @@ class OncologyAPIClient:
         """
         url = f"{self.base_url}/api/v1/slm/briefing"
         try:
-            resp = requests.post(url, json=payload, timeout=self.timeout)
+            resp = requests.post(url, json=payload, timeout=SLM_TIMEOUT)
             if resp.status_code == 200:
                 res = resp.json()
                 res["backend"] = "FastAPI"
