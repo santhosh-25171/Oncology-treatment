@@ -28,6 +28,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from integration.client.api_client import OncologyAPIClient, DL_API_URL
+from integration.dashboard.stage4_view import render_stage4_page
 
 api_client = OncologyAPIClient(base_url=DL_API_URL)
 
@@ -308,9 +309,17 @@ STAGE_3_PAGES = {
     "🏷️ Stage 3 — Oncology NER"
 }
 
+STAGE_4_PAGES = {
+    "🧠 Stage 4 — Clinical Decision Support (SLM)",
+    "❓ Stage 4 — Patient Context Q&A",
+    "🔍 Stage 4 — Risk & Finding Explanation",
+    "📋 Stage 4 — Follow-up & Recovery Planning",
+    "🔗 Stage 4 — Evidence & Traceability"
+}
+
 ALL_PAGE_KEYS = (
     {"🏠 Dashboard Home", "🌐 Unified Patient Analysis", "🩺 System & Model Health", "ℹ️ About & Research Disclaimer"}
-    | STAGE_1_PAGES | STAGE_2_PAGES | STAGE_3_PAGES
+    | STAGE_1_PAGES | STAGE_2_PAGES | STAGE_3_PAGES | STAGE_4_PAGES
 )
 
 # 1. Initialize Navigation State in session_state
@@ -320,6 +329,8 @@ if "stage2_expanded" not in st.session_state:
     st.session_state["stage2_expanded"] = False
 if "stage3_expanded" not in st.session_state:
     st.session_state["stage3_expanded"] = False
+if "stage4_expanded" not in st.session_state:
+    st.session_state["stage4_expanded"] = False
 
 if "active_page" not in st.session_state:
     # Check query params for deep linking, else default to Dashboard Home
@@ -336,6 +347,8 @@ elif st.session_state["active_page"] in STAGE_2_PAGES:
     st.session_state["stage2_expanded"] = True
 elif st.session_state["active_page"] in STAGE_3_PAGES:
     st.session_state["stage3_expanded"] = True
+elif st.session_state["active_page"] in STAGE_4_PAGES:
+    st.session_state["stage4_expanded"] = True
 
 active_page = st.session_state["active_page"]
 
@@ -349,6 +362,8 @@ def navigate_to(page_key: str):
         st.session_state["stage2_expanded"] = True
     elif page_key in STAGE_3_PAGES:
         st.session_state["stage3_expanded"] = True
+    elif page_key in STAGE_4_PAGES:
+        st.session_state["stage4_expanded"] = True
     st.rerun()
 
 # 3. Render Sidebar UI
@@ -453,6 +468,37 @@ if st.session_state["stage3_expanded"]:
         ):
             navigate_to(key)
 
+# --- STAGE 4: Clinical Decision Support (SLM) ---
+st.sidebar.markdown('<div class="stage-divider"></div>', unsafe_allow_html=True)
+s4_is_active = active_page in STAGE_4_PAGES
+s4_arrow = "▼" if st.session_state["stage4_expanded"] else "▶"
+s4_badge = " ●" if s4_is_active else ""
+s4_title = f"🧠 STAGE 4 — Clinical Decision Support (SLM) {s4_arrow}{s4_badge}"
+
+if st.sidebar.button(s4_title, key="btn_toggle_stage4", use_container_width=True):
+    st.session_state["stage4_expanded"] = not st.session_state["stage4_expanded"]
+    if active_page not in STAGE_4_PAGES:
+        navigate_to("🧠 Stage 4 — Clinical Decision Support (SLM)")
+    else:
+        st.rerun()
+
+if st.session_state["stage4_expanded"]:
+    s4_subpages = [
+        ("\u00A0\u00A0\u00A0\u00A0🧠 Clinical Decision Support", "🧠 Stage 4 — Clinical Decision Support (SLM)"),
+        ("\u00A0\u00A0\u00A0\u00A0❓ Patient Context Q&A", "❓ Stage 4 — Patient Context Q&A"),
+        ("\u00A0\u00A0\u00A0\u00A0🔍 Risk & Finding Explanation", "🔍 Stage 4 — Risk & Finding Explanation"),
+        ("\u00A0\u00A0\u00A0\u00A0📋 Follow-up & Care Planning", "📋 Stage 4 — Follow-up & Recovery Planning"),
+        ("\u00A0\u00A0\u00A0\u00A0🔗 Evidence & Traceability", "🔗 Stage 4 — Evidence & Traceability")
+    ]
+    for label, key in s4_subpages:
+        if st.sidebar.button(
+            label,
+            key=f"nav_s4_{key}",
+            type="primary" if active_page == key else "secondary",
+            use_container_width=True
+        ):
+            navigate_to(key)
+
 # --- Bottom System & Research Items ---
 st.sidebar.markdown('<div class="stage-divider"></div>', unsafe_allow_html=True)
 
@@ -502,7 +548,7 @@ if nav_section == "🏠 Dashboard Home":
 
     # Model Status Cards (from live health check)
     st.markdown("### 📊 Live Model System Health")
-    s_col1, s_col2, s_col3, s_col4, s_col5, s_col6 = st.columns(6)
+    s_col1, s_col2, s_col3, s_col4, s_col5, s_col6, s_col7 = st.columns(7)
 
     def status_card(name, is_online, desc):
         status_text = "LOADED" if is_online else "OFFLINE"
@@ -526,12 +572,14 @@ if nav_section == "🏠 Dashboard Home":
     with s_col5:
         st.markdown(status_card("Stage 3 NLP", health_data.get("stage3_nlp", False), "Urgency & NER"), unsafe_allow_html=True)
     with s_col6:
+        st.markdown(status_card("Stage 4 SLM", health_data.get("stage4_slm", False) or health_data.get("slm_loaded", False), "Clinical Decision Support"), unsafe_allow_html=True)
+    with s_col7:
         st.markdown(status_card("Backend API", "FastAPI" in backend_label or health_data.get("status") == "ok", backend_label), unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("### 🚀 Platform Capabilities Overview")
 
-    c1, c2, c3 = st.columns(3)
+    c1, c2, c3, c4 = st.columns(4)
     with c1:
         st.markdown("""
         <div class="card-info">
@@ -576,6 +624,24 @@ if nav_section == "🏠 Dashboard Home":
                 <li>Genomic Mutation Extraction (e.g. EGFR L858R)</li>
                 <li>Oncology Drug & Dosage Recognition</li>
                 <li>Adverse Event Character Span Identification</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with c4:
+        st.markdown("""
+        <div class="card-info">
+            <h4 style="margin: 0 0 0.5rem 0; color: #1E3A8A;">Stage 4 — Small Language Model (SLM)</h4>
+            <p style="font-size: 0.9rem; line-height: 1.5;">
+                Specialized language intelligence for oncology research workflows, combining outputs from previous stages to generate concise clinical summaries, explain model findings, answer context-based questions, and provide research-oriented decision-support information.
+            </p>
+            <ul style="font-size: 0.85rem; padding-left: 1.2rem;">
+                <li>Clinical Case Summarization</li>
+                <li>Cross-Stage Context Reasoning</li>
+                <li>Clinical Decision Support</li>
+                <li>Patient Context Q&A</li>
+                <li>Model Finding Explanation</li>
+                <li>Research-Oriented Follow-up Planning</li>
             </ul>
         </div>
         """, unsafe_allow_html=True)
@@ -1611,7 +1677,14 @@ elif nav_section == "🏷️ Stage 3 — Oncology NER":
 
 
 # =========================================================================
-# 14. SYSTEM & MODEL HEALTH
+# 14. STAGE 4 — CLINICAL DECISION SUPPORT (SLM)
+# =========================================================================
+elif nav_section in STAGE_4_PAGES:
+    render_stage4_page(nav_section, api_client)
+
+
+# =========================================================================
+# 15. SYSTEM & MODEL HEALTH
 # =========================================================================
 elif nav_section == "🩺 System & Model Health":
     st.markdown('<div class="main-title">System Health & API Status</div>', unsafe_allow_html=True)
@@ -1629,12 +1702,13 @@ elif nav_section == "🩺 System & Model Health":
         {"Stage": "Stage 2 Deep Learning", "Model": "Cross-Modal Multimodal Fusion", "Status": "Online" if h_data.get("fusion_loaded") else "Offline"},
         {"Stage": "Stage 3 Clinical NLP", "Model": "TF-IDF Urgency Classifier", "Status": "Online" if h_data.get("nlp_loaded") else "Offline"},
         {"Stage": "Stage 3 Clinical NLP", "Model": "spaCy Clinical Oncology NER", "Status": "Online" if h_data.get("nlp_loaded") else "Offline"},
+        {"Stage": "Stage 4 Small Language Model", "Model": "Qwen2.5-0.5B-Instruct + LoRA", "Status": "Online" if (h_data.get("stage4_slm") or h_data.get("slm_loaded")) else "Offline"},
     ]
     st.dataframe(pd.DataFrame(components), use_container_width=True)
 
 
 # =========================================================================
-# 15. ABOUT & RESEARCH DISCLAIMER
+# 16. ABOUT & RESEARCH DISCLAIMER
 # =========================================================================
 elif nav_section == "ℹ️ About & Research Disclaimer":
     st.markdown('<div class="main-title">About & Research Prototype Safeguards</div>', unsafe_allow_html=True)
@@ -1643,10 +1717,11 @@ elif nav_section == "ℹ️ About & Research Disclaimer":
 
     st.markdown("""
     ### 🔬 System Architecture
-    The **Personalized Precision Oncology Research Platform** integrates three distinct tiers of biomedical AI:
+    The **Personalized Precision Oncology Research Platform** integrates four distinct tiers of biomedical AI:
     1. **Stage 1 (Classical ML)**: Predicts progression risk, toxicity, and therapy response using calibrated ensemble models trained on structured patient records.
     2. **Stage 2 (Deep Learning)**: Evaluates digital histopathology biopsy patches via Convolutional Neural Networks (CNN) with Grad-CAM explainability, forecasts 90-day disease trajectory via Multi-Head Attention Transformers, and fuses modalities with cross-attention fusion.
     3. **Stage 3 (Clinical NLP)**: Triages progress consultation notes into urgency categories and extracts clinical entities (genomic alterations, antineoplastic drugs, dosages, and adverse events) using customized spaCy pipelines.
+    4. **Stage 4 (Small Language Model — SLM)**: Specialized language intelligence that synthesizes cross-stage diagnostic predictions, explains multi-modal findings, answers patient-context queries, and generates research-oriented clinical decision support briefings using local causal language intelligence.
 
     ---
 
