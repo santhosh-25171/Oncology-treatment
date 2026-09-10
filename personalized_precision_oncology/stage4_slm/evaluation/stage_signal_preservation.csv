@@ -1,4 +1,4 @@
 signal,expected,preservation_percentage,status
-Stage 1 ML (Mortality/Recurrence/Risk Category),Reflect risk or mortality,10.0,PARTIAL
+Stage 1 ML (Mortality/Recurrence/Risk Category),Reflect risk or mortality,8.33,PARTIAL
 Stage 2 DL (Progression Trajectory/Efficacy),Reflect progression or stable disease,100.0,PASS
-Stage 3 NLP (Urgency Priority & Entities),Reflect triage urgency,0.0,PARTIAL
+Stage 3 NLP (Urgency Priority & Entities),Reflect triage urgency,6.25,PARTIAL

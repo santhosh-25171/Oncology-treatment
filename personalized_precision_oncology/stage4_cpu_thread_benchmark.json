@@ -1,0 +1,67 @@
+{
+  "host_cpu_cores": 12,
+  "best_thread_count": 6,
+  "thread_benchmarks": {
+    "1": {
+      "threads": 1,
+      "mean_seconds": 12.62,
+      "median_seconds": 12.788,
+      "min_seconds": 12.262,
+      "max_seconds": 12.81,
+      "runs": [
+        12.81,
+        12.788,
+        12.262
+      ]
+    },
+    "2": {
+      "threads": 2,
+      "mean_seconds": 14.469,
+      "median_seconds": 14.759,
+      "min_seconds": 11.444,
+      "max_seconds": 17.204,
+      "runs": [
+        17.204,
+        14.759,
+        11.444
+      ]
+    },
+    "4": {
+      "threads": 4,
+      "mean_seconds": 13.349,
+      "median_seconds": 11.984,
+      "min_seconds": 10.908,
+      "max_seconds": 17.155,
+      "runs": [
+        17.155,
+        11.984,
+        10.908
+      ]
+    },
+    "6": {
+      "threads": 6,
+      "mean_seconds": 11.012,
+      "median_seconds": 10.499,
+      "min_seconds": 9.537,
+      "max_seconds": 13.001,
+      "runs": [
+        13.001,
+        10.499,
+        9.537
+      ]
+    },
+    "8": {
+      "threads": 8,
+      "mean_seconds": 11.203,
+      "median_seconds": 11.067,
+      "min_seconds": 7.348,
+      "max_seconds": 15.195,
+      "runs": [
+        7.348,
+        11.067,
+        15.195
+      ]
+    }
+  },
+  "selection_rationale": "6 threads achieved lowest mean latency without CPU hyperthread thrashing, reserving remaining cores for OS, FastAPI, and Streamlit."
+}

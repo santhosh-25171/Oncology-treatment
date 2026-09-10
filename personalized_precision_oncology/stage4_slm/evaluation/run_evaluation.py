@@ -166,7 +166,7 @@ class FullTestEvaluator:
                 sentence_count = 2
 
             # Format compliance checks
-            has_prompt_leakage = ("### Instruction:" in raw_text or "### Target" in raw_text)
+            has_prompt_leakage = ("### Instruction:" in raw_text or "### Target" in raw_text or "<|im_start|>" in raw_text or "<|im_end|>" in raw_text or "[PATIENT CONTEXT]" in raw_text)
             has_json_leakage = ("{" in raw_text and "}" in raw_text and ":" in raw_text)
             format_valid = (sentence_count in [1, 2]) and not has_prompt_leakage and not has_json_leakage and len(cleaned_summary) > 10
 
@@ -318,9 +318,10 @@ class FullTestEvaluator:
                     cur_df.to_csv(output_csv, index=False)
                     
                     # Update jsonl
-                    with open(jsonl_path, "w", encoding="utf-8") as f:
-                        for rec in evaluated_records:
-                            f.write(json.dumps(rec) + "\n")
+                    for j_path in [jsonl_path, EVAL_DIR / "full_test_results.jsonl"]:
+                        with open(j_path, "w", encoding="utf-8") as f:
+                            for rec in evaluated_records:
+                                f.write(json.dumps(rec) + "\n")
 
                     elapsed = time.time() - start_time
                     avg_spd = elapsed / max(len(evaluated_records), 1)
@@ -329,9 +330,10 @@ class FullTestEvaluator:
         final_df = pd.DataFrame(evaluated_records)
         final_df.to_csv(output_csv, index=False)
 
-        with open(jsonl_path, "w", encoding="utf-8") as f:
-            for rec in evaluated_records:
-                f.write(json.dumps(rec) + "\n")
+        for j_path in [jsonl_path, EVAL_DIR / "full_test_results.jsonl"]:
+            with open(j_path, "w", encoding="utf-8") as f:
+                for rec in evaluated_records:
+                    f.write(json.dumps(rec) + "\n")
 
         print(f"[Done] Evaluated {len(final_df)} records saved to: {output_csv} and {jsonl_path}")
         return final_df
@@ -451,9 +453,52 @@ class FullTestEvaluator:
         with open(RESULTS_DIR / "latency_metrics.json", "w", encoding="utf-8") as f:
             json.dump(lat_payload, f, indent=2)
 
+        # 6. Required final_metrics.json matching TASK 1 requirements exactly
+        empty_output_rate = float((pred_df["generated_summary"].fillna("").astype(str).str.strip() == "").mean() * 100)
+        generation_failure_rate = float((~pred_df["format_valid"]).mean() * 100)
+        sentence_compliance = float((pred_df["sentence_count"].isin([1, 2]) & pred_df["format_valid"]).mean() * 100)
+        avg_word_count = float(pred_df["generated_summary"].fillna("").astype(str).apply(lambda s: len(s.split())).mean())
+        contradiction_rate = float((pred_df["faithfulness_status"] == "CONTRADICTORY").mean() * 100)
+        unsupported_rate = float((pred_df["faithfulness_status"] == "UNSUPPORTED_CLAIM").mean() * 100)
+        hallucination_rate = contradiction_rate + unsupported_rate
+        grounding_faithfulness = float((pred_df["faithfulness_status"] == "FULLY_SUPPORTED").mean() * 100)
+
+        final_metrics = {
+            "evaluation_scope": {
+                "dataset": "stage4_slm/data/splits/test.csv",
+                "total_records_evaluated": len(pred_df),
+                "total_test_partition_records": len(self.df_test),
+                "coverage_percentage": round(len(pred_df) / len(self.df_test) * 100, 2),
+                "model": "Qwen/Qwen2.5-0.5B-Instruct + LoRA",
+                "checkpoint": "stage4_slm/models/qwen2.5_0.5b/adapter",
+                "requirement_sentence_count": "1-2 sentences",
+            },
+            "metrics": {
+                "ROUGE-1": round(float(pred_df["rouge1"].mean()), 4),
+                "ROUGE-2": round(float(pred_df["rouge2"].mean()), 4),
+                "ROUGE-L": round(float(pred_df["rougeL"].mean()), 4),
+                "BLEU": round(float(pred_df["bleu"].mean()), 4),
+                "Entity Precision": round(float(pred_df["entity_precision"].mean()), 4),
+                "Entity Recall": round(float(pred_df["entity_recall"].mean()), 4),
+                "Entity F1": round(float(pred_df["entity_f1"].mean()), 4),
+                "Entity Preservation": round(float(pred_df["entity_preservation"].mean()), 4),
+                "Grounding/Faithfulness": round(grounding_faithfulness, 2),
+                "Unsupported Information Rate": round(unsupported_rate, 2),
+                "Hallucination Rate": round(hallucination_rate, 2),
+                "Contradiction Rate": round(contradiction_rate, 2),
+                "Empty Output Rate": round(empty_output_rate, 2),
+                "Generation Failure Rate": round(generation_failure_rate, 2),
+                "1–2 Sentence Compliance": round(sentence_compliance, 2),
+                "Average Output Word Count": round(avg_word_count, 2),
+            },
+        }
+        with open(EVAL_DIR / "final_metrics.json", "w", encoding="utf-8") as f:
+            json.dump(final_metrics, f, indent=2)
+
         # Format failure rate
         format_fail_rate = round(float((~pred_df["format_valid"]).mean() * 100), 2)
         print(f"[Metrics] Format compliance: {100.0 - format_fail_rate:.2f}% | Format failure rate: {format_fail_rate:.2f}%")
+        print(f"[Metrics] Saved final_metrics.json to {EVAL_DIR / 'final_metrics.json'}")
         print("[Metrics] All evaluation artifacts successfully generated.")
 
 

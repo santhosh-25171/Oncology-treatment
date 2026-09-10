@@ -1,0 +1,45 @@
+# Stage 4 SLM — Full Scale GPU Training Configuration
+# Model: Qwen/Qwen2.5-0.5B-Instruct + LoRA
+# Dataset: 7,896 Train Records / 1,010 Validation Records
+
+model:
+  base_model: "Qwen/Qwen2.5-0.5B-Instruct"
+  torch_dtype: "bfloat16"  # Use "float16" on NVIDIA T4, "bfloat16" on Ampere/Hopper (A100/H100)
+  device_map: "auto"
+  max_seq_length: 512
+
+lora:
+  r: 8
+  lora_alpha: 16
+  lora_dropout: 0.05
+  bias: "none"
+  task_type: "CAUSAL_LM"
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+
+training:
+  train_dataset: "stage4_slm/data/splits/train.csv"
+  val_dataset: "stage4_slm/data/splits/val.csv"
+  output_dir: "stage4_slm/models/qwen2.5_0.5b/final_full_train"
+  num_train_epochs: 3
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 4
+  gradient_accumulation_steps: 4  # Effective batch size = 16
+  learning_rate: 0.0002
+  weight_decay: 0.01
+  warmup_ratio: 0.05
+  lr_scheduler_type: "cosine"
+  fp16: false
+  bf16: true
+  gradient_checkpointing: true
+  logging_steps: 25
+  eval_steps: 200
+  save_steps: 200
+  save_total_limit: 3
+  seed: 42

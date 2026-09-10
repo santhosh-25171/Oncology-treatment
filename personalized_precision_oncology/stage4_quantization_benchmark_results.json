@@ -1,0 +1,11 @@
+{
+  "hardware": "CPU (Intel Core i7-11800H, 6 threads)",
+  "fp32_mean_latency": 18.004,
+  "fp32_min_latency": 10.347,
+  "fp32_output_sample": "Patient has stage 1 (ML) disease on osimertinib showing partial response but watch for grade 3 diarrhea.",
+  "int8_mean_latency": 5.549,
+  "int8_min_latency": 4.768,
+  "int8_output_sample": "Patient with metastatic colorectal cancer showing progression with new hepatic lesions.",
+  "speedup_percentage": 69.18,
+  "target_5s_achieved_in_int8": false
+}

@@ -1,0 +1,29 @@
+{
+  "evaluation_scope": {
+    "dataset": "stage4_slm/data/splits/test.csv",
+    "total_records_evaluated": 240,
+    "total_test_partition_records": 950,
+    "coverage_percentage": 25.26,
+    "model": "Qwen/Qwen2.5-0.5B-Instruct + LoRA",
+    "checkpoint": "stage4_slm/models/qwen2.5_0.5b/adapter",
+    "requirement_sentence_count": "1-2 sentences"
+  },
+  "metrics": {
+    "ROUGE-1": 0.4928,
+    "ROUGE-2": 0.3088,
+    "ROUGE-L": 0.4665,
+    "BLEU": 0.0901,
+    "Entity Precision": 0.2375,
+    "Entity Recall": 0.5406,
+    "Entity F1": 0.1712,
+    "Entity Preservation": 0.5406,
+    "Grounding/Faithfulness": 62.5,
+    "Unsupported Information Rate": 0.0,
+    "Hallucination Rate": 12.92,
+    "Contradiction Rate": 12.92,
+    "Empty Output Rate": 0.0,
+    "Generation Failure Rate": 0.0,
+    "1\u20132 Sentence Compliance": 100.0,
+    "Average Output Word Count": 12.22
+  }
+}
