@@ -1,0 +1,40 @@
+STRESS TEST SCENARIO: WILDCARD MULTI-FACTORIAL RESISTANCE & PHENOTYPE TRANSFORMATION
+
+SCENARIO OBJECTIVE:
+The Wildcard Challenge: Probe maximum model reasoning capability under extreme multi-factorial complexity involving simultaneous targeted resistance, bypass RTK activation, conflicting immunogenomic markers, and histological lineage transformation (adenocarcinoma to neuroendocrine/small-cell lung cancer).
+
+TARGET BLIND SPOT:
+Blind Spot ID: {{blind_spot_id}}
+Pattern: {{blind_spot_pattern}}
+Classification: {{blind_spot_category}} ({{coverage_status}})
+Source Provenance: {{source_provenance}}
+Reasoning Context: {{blind_spot_reason}}
+
+PATIENT & CLINICAL CONTEXT:
+Patient Profile: {{patient_context}}
+Baseline Genomic Profile: {{genomic_profile}}
+Biomarker Status: {{biomarkers}}
+Prior Treatment History: {{treatment_context}}
+Current Clinical Status: Rapid clinical progression following long-term EGFR TKI therapy; repeat core needle biopsy of expanding liver lesion demonstrates small-cell lung cancer (SCLC) morphology with complete loss of RB1 and TP53 expression alongside persistent EGFR L858R.
+
+REFERENCE BASELINE DATASET BENCHMARK:
+{{reference_baseline}}
+
+MANDATORY RESPONSE STRUCTURE:
+
+The evaluation response must strictly enforce the Three-Tier Evidence Separation:
+
+1. [SUPPORTED EVIDENCE]
+   - Detail the molecular biology of histological SCLC transformation under selective pressure from EGFR TKIs (inactivation of RB1 and TP53, down-regulation of EGFR pathway dependency).
+   - Document standard-of-care systemic chemotherapy benchmarks for transformed SCLC (platinum-etoposide regimens).
+   - Characterize the documented retention of original EGFR activating mutations despite lineage plasticity.
+
+2. [SYNTHETIC ASSUMPTION]
+   - Detail the modeled multi-clonal progression: co-existence of adenocarcinoma clones harboring tertiary EGFR C797S and transformed neuroendocrine clones with RB1/TP53 double-null status.
+   - Introduce modeled high tumor mutational burden and variable ctDNA shedding kinetics as synthetic evaluation parameters.
+
+3. [UNKNOWN / INSUFFICIENT EVIDENCE]
+   - Identify the severe evidence gap: optimal concurrent or sequential management of mixed histology (adenocarcinoma + transformed SCLC) has no prospective Phase III trial guidance.
+   - Note the role of immune checkpoint inhibitors in transformed SCLC remains uncertain and controversial with limited clinical response data.
+   - Classify early-stage longitudinal ctDNA tracking in this setting as "source_limitation: variable not available in baseline cohort".
+   - Highlight the vital necessity of molecular tumor board review and exploratory Phase I/II clinical trial consideration.

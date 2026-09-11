@@ -1,0 +1,59 @@
+{
+  "total_blind_spots": 24,
+  "blind_spots_converted_into_prompts": 5,
+  "prompt_categories": {
+    "extreme_targeted_resistance": 1,
+    "compound_driver_mutations": 1,
+    "conflicting_biomarker_evidence": 1,
+    "sparse_unobserved_alterations": 1,
+    "wildcard_complex_resistance": 1
+  },
+  "rare_mutation_coverage": 9,
+  "compound_mutation_coverage": 3,
+  "resistance_coverage": 7,
+  "conflicting_evidence_coverage": 1,
+  "sparse_evidence_coverage": 6,
+  "wildcard_coverage": 1,
+  "prompts": [
+    {
+      "prompt_id": "PMPT001",
+      "prompt_name": "Extreme Targeted Drug Resistance (Tertiary C797S + MET Bypass)",
+      "template_file": "extreme_resistance_prompt.txt",
+      "target_blind_spot_id": "BS014",
+      "stress_dimension": "On-target covalent binding pocket disruption + bypass receptor tyrosine kinase activation",
+      "evidence_boundary_status": "enforced"
+    },
+    {
+      "prompt_id": "PMPT002",
+      "prompt_name": "Compound Mutations & Dual Oncogenic Driver Co-occurrence",
+      "template_file": "compound_mutation_prompt.txt",
+      "target_blind_spot_id": "BS011",
+      "stress_dimension": "Concurrent canonical drivers (KRAS + STK11 + KEAP1) violating standard mutual exclusivity",
+      "evidence_boundary_status": "enforced"
+    },
+    {
+      "prompt_id": "PMPT003",
+      "prompt_name": "Conflicting Immunogenomic & Targeted Biomarker Signals",
+      "template_file": "conflicting_evidence_prompt.txt",
+      "target_blind_spot_id": "BS023",
+      "stress_dimension": "Opposing predictive signals: TMB-High (>=10 mut/Mb) vs PD-L1 TPS 0% with STK11 loss",
+      "evidence_boundary_status": "enforced"
+    },
+    {
+      "prompt_id": "PMPT004",
+      "prompt_name": "Ultra-Rare / Unobserved Genomic Alterations in Baseline",
+      "template_file": "sparse_evidence_prompt.txt",
+      "target_blind_spot_id": "BS007",
+      "stress_dimension": "Pan-cancer actionable gene fusions (NTRK1/2/3, NRG1) not observed in reference baseline",
+      "evidence_boundary_status": "enforced"
+    },
+    {
+      "prompt_id": "PMPT005",
+      "prompt_name": "Wildcard Multi-Factorial Resistance & Histological Transformation",
+      "template_file": "wildcard_prompt.txt",
+      "target_blind_spot_id": "BS018",
+      "stress_dimension": "Simultaneous tertiary resistance, RB1/TP53 double-null loss, and histological SCLC lineage plasticity",
+      "evidence_boundary_status": "enforced"
+    }
+  ]
+}

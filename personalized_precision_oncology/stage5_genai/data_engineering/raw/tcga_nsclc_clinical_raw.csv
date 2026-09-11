@@ -1,0 +1,53 @@
+bcr_patient_barcode,cancer_type,age_at_index,gender,race,ajcc_pathologic_stage,tobacco_smoking_history,pack_years_smoked,vital_status,overall_survival_months,progression_free_months,ctdna_maf_percent,pdl1_tps_percent
+TCGA-44-2655,LUAD,68,Male,WHITE,Stage IB,Current Reformed Smoker,35.0,Alive,24.3,18.5,not_available_in_source,not_available_in_source
+TCGA-44-2656,LUAD,73,Female,WHITE,Stage IIIA,Current Smoker,50.0,Dead,14.2,9.1,not_available_in_source,not_available_in_source
+TCGA-44-2657,LUAD,64,Female,BLACK OR AFRICAN AMERICAN,Stage IA,Lifelong Non-Smoker,0.0,Alive,48.6,44.2,not_available_in_source,not_available_in_source
+TCGA-44-2661,LUAD,59,Male,WHITE,Stage IIB,Current Reformed Smoker,40.0,Dead,19.8,12.4,not_available_in_source,not_available_in_source
+TCGA-44-2662,LUAD,71,Male,WHITE,Stage IB,Current Smoker,60.0,Alive,31.5,22.0,not_available_in_source,not_available_in_source
+TCGA-44-2665,LUAD,62,Female,ASIAN,Stage IA,Lifelong Non-Smoker,0.0,Alive,55.1,51.3,not_available_in_source,not_available_in_source
+TCGA-44-2666,LUAD,77,Male,WHITE,Stage IV,Current Reformed Smoker,45.0,Dead,8.4,4.2,not_available_in_source,not_available_in_source
+TCGA-44-2668,LUAD,65,Female,WHITE,Stage IIIA,Current Reformed Smoker,25.0,Dead,16.7,11.0,not_available_in_source,not_available_in_source
+TCGA-50-5930,LUAD,55,Male,WHITE,Stage IA,Current Reformed Smoker,20.0,Alive,62.3,58.9,not_available_in_source,not_available_in_source
+TCGA-50-5931,LUAD,81,Female,WHITE,Stage IB,Current Reformed Smoker,30.0,Dead,21.0,15.6,not_available_in_source,not_available_in_source
+TCGA-50-5932,LUAD,67,Male,BLACK OR AFRICAN AMERICAN,Stage IIA,Current Smoker,45.0,Dead,18.3,13.1,not_available_in_source,not_available_in_source
+TCGA-50-5933,LUAD,70,Female,WHITE,Stage IIB,Current Reformed Smoker,40.0,Alive,36.4,28.7,not_available_in_source,not_available_in_source
+TCGA-50-5935,LUAD,58,Female,ASIAN,Stage IA,Lifelong Non-Smoker,0.0,Alive,68.2,65.0,not_available_in_source,not_available_in_source
+TCGA-50-5936,LUAD,74,Male,WHITE,Stage IIIB,Current Smoker,55.0,Dead,11.5,6.8,not_available_in_source,not_available_in_source
+TCGA-50-5939,LUAD,69,Male,WHITE,Stage IV,Current Reformed Smoker,50.0,Dead,9.2,5.1,not_available_in_source,not_available_in_source
+TCGA-50-5941,LUAD,63,Female,WHITE,Stage IB,Current Reformed Smoker,22.0,Alive,41.7,35.2,not_available_in_source,not_available_in_source
+TCGA-50-5942,LUAD,76,Male,WHITE,Stage IIA,Current Smoker,70.0,Dead,15.9,10.4,not_available_in_source,not_available_in_source
+TCGA-50-5944,LUAD,52,Female,WHITE,Stage IA,Lifelong Non-Smoker,0.0,Alive,72.4,69.1,not_available_in_source,not_available_in_source
+TCGA-50-5946,LUAD,66,Male,BLACK OR AFRICAN AMERICAN,Stage IIIA,Current Reformed Smoker,38.0,Dead,17.4,11.8,not_available_in_source,not_available_in_source
+TCGA-55-6968,LUAD,72,Male,WHITE,Stage IV,Current Smoker,65.0,Dead,7.1,3.8,not_available_in_source,not_available_in_source
+TCGA-55-6969,LUAD,61,Female,ASIAN,Stage IB,Lifelong Non-Smoker,0.0,Alive,50.3,46.0,not_available_in_source,not_available_in_source
+TCGA-55-6970,LUAD,68,Male,WHITE,Stage IIB,Current Reformed Smoker,42.0,Dead,22.5,16.2,not_available_in_source,not_available_in_source
+TCGA-55-6971,LUAD,57,Female,WHITE,Stage IA,Current Reformed Smoker,15.0,Alive,64.0,60.1,not_available_in_source,not_available_in_source
+TCGA-55-6972,LUAD,75,Male,WHITE,Stage IIIA,Current Smoker,80.0,Dead,13.0,7.5,not_available_in_source,not_available_in_source
+TCGA-55-6975,LUAD,60,Female,WHITE,Stage IIA,Current Reformed Smoker,28.0,Alive,38.9,31.4,not_available_in_source,not_available_in_source
+TCGA-55-6978,LUAD,79,Male,WHITE,Stage IV,Current Reformed Smoker,52.0,Dead,6.3,3.1,not_available_in_source,not_available_in_source
+TCGA-55-6979,LUAD,64,Male,BLACK OR AFRICAN AMERICAN,Stage IB,Current Smoker,40.0,Alive,33.2,26.5,not_available_in_source,not_available_in_source
+TCGA-55-6980,LUAD,70,Female,WHITE,Stage IA,Lifelong Non-Smoker,0.0,Alive,58.7,55.4,not_available_in_source,not_available_in_source
+TCGA-55-6981,LUAD,67,Male,WHITE,Stage IIIA,Current Reformed Smoker,48.0,Dead,18.1,12.0,not_available_in_source,not_available_in_source
+TCGA-55-6982,LUAD,73,Female,WHITE,Stage IV,Current Smoker,60.0,Dead,10.1,5.6,not_available_in_source,not_available_in_source
+TCGA-18-3406,LUSC,69,Male,WHITE,Stage IB,Current Smoker,55.0,Alive,28.4,21.3,not_available_in_source,not_available_in_source
+TCGA-18-3407,LUSC,74,Male,WHITE,Stage IIIA,Current Smoker,75.0,Dead,12.8,8.2,not_available_in_source,not_available_in_source
+TCGA-18-3408,LUSC,62,Female,WHITE,Stage IIB,Current Smoker,45.0,Dead,17.5,12.0,not_available_in_source,not_available_in_source
+TCGA-18-3409,LUSC,70,Male,BLACK OR AFRICAN AMERICAN,Stage IA,Current Reformed Smoker,35.0,Alive,45.0,40.1,not_available_in_source,not_available_in_source
+TCGA-18-3410,LUSC,76,Male,WHITE,Stage IV,Current Smoker,90.0,Dead,7.9,4.1,not_available_in_source,not_available_in_source
+TCGA-18-3411,LUSC,65,Female,WHITE,Stage IB,Current Smoker,50.0,Alive,32.1,25.4,not_available_in_source,not_available_in_source
+TCGA-18-3412,LUSC,82,Male,WHITE,Stage IIA,Current Reformed Smoker,60.0,Dead,14.6,9.8,not_available_in_source,not_available_in_source
+TCGA-18-3414,LUSC,58,Male,WHITE,Stage IA,Current Smoker,30.0,Alive,52.3,47.8,not_available_in_source,not_available_in_source
+TCGA-18-3415,LUSC,71,Female,WHITE,Stage IIIA,Current Smoker,65.0,Dead,15.2,10.1,not_available_in_source,not_available_in_source
+TCGA-18-3416,LUSC,67,Male,WHITE,Stage IIB,Current Reformed Smoker,40.0,Alive,27.8,20.5,not_available_in_source,not_available_in_source
+TCGA-18-3417,LUSC,75,Male,BLACK OR AFRICAN AMERICAN,Stage IV,Current Smoker,80.0,Dead,5.8,2.9,not_available_in_source,not_available_in_source
+TCGA-18-3419,LUSC,63,Female,WHITE,Stage IB,Current Smoker,42.0,Alive,36.9,30.0,not_available_in_source,not_available_in_source
+TCGA-18-3421,LUSC,78,Male,WHITE,Stage IIIA,Current Smoker,70.0,Dead,11.2,6.7,not_available_in_source,not_available_in_source
+TCGA-21-1070,LUSC,66,Male,WHITE,Stage IA,Current Reformed Smoker,38.0,Alive,49.1,43.7,not_available_in_source,not_available_in_source
+TCGA-21-1071,LUSC,72,Female,WHITE,Stage IIB,Current Smoker,55.0,Dead,19.4,13.6,not_available_in_source,not_available_in_source
+TCGA-21-1072,LUSC,80,Male,WHITE,Stage IV,Current Smoker,85.0,Dead,6.9,3.5,not_available_in_source,not_available_in_source
+TCGA-21-1075,LUSC,64,Male,WHITE,Stage IB,Current Reformed Smoker,45.0,Alive,30.5,23.8,not_available_in_source,not_available_in_source
+TCGA-21-1076,LUSC,68,Female,BLACK OR AFRICAN AMERICAN,Stage IIA,Current Smoker,48.0,Dead,21.3,15.0,not_available_in_source,not_available_in_source
+TCGA-21-1077,LUSC,73,Male,WHITE,Stage IIIA,Current Smoker,68.0,Dead,13.7,8.9,not_available_in_source,not_available_in_source
+TCGA-21-1078,LUSC,59,Female,WHITE,Stage IA,Current Reformed Smoker,25.0,Alive,58.0,52.4,not_available_in_source,not_available_in_source
+TCGA-44-2655,LUAD,68,Male,WHITE,Stage IB,Current Reformed Smoker,35.0,Alive,24.3,18.5,not_available_in_source,not_available_in_source
+TCGA-ERR-9999,LUAD,-5,MALE,WHITE,Stage X,Unknown,,Alive,12.0,10.0,not_available_in_source,not_available_in_source

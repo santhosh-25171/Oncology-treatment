@@ -1,0 +1,867 @@
+{
+  "metadata": {
+    "timestamp": "2026-09-11T17:01:44.159506+00:00",
+    "pipeline": "Stage 5 Genomic EDA & Blind Spot Detection",
+    "evidence_separation_enforced": true
+  },
+  "genomic_and_clinical_coverage": {
+    "feature_availability_audit": {
+      "age": {
+        "feature": "age",
+        "status": "available",
+        "available_records": 75,
+        "missing_or_unassayed_records": 0,
+        "coverage_percentage": 100.0
+      },
+      "sex": {
+        "feature": "sex",
+        "status": "available",
+        "available_records": 75,
+        "missing_or_unassayed_records": 0,
+        "coverage_percentage": 100.0
+      },
+      "cancer_stage": {
+        "feature": "cancer_stage",
+        "status": "available",
+        "available_records": 75,
+        "missing_or_unassayed_records": 0,
+        "coverage_percentage": 100.0
+      },
+      "histology": {
+        "feature": "histology",
+        "status": "available",
+        "available_records": 75,
+        "missing_or_unassayed_records": 0,
+        "coverage_percentage": 100.0
+      },
+      "pack_years": {
+        "feature": "pack_years",
+        "status": "available",
+        "available_records": 50,
+        "missing_or_unassayed_records": 25,
+        "coverage_percentage": 66.67
+      },
+      "vital_status": {
+        "feature": "vital_status",
+        "status": "available",
+        "available_records": 50,
+        "missing_or_unassayed_records": 25,
+        "coverage_percentage": 66.67
+      },
+      "overall_survival_months": {
+        "feature": "overall_survival_months",
+        "status": "available",
+        "available_records": 50,
+        "missing_or_unassayed_records": 25,
+        "coverage_percentage": 66.67
+      },
+      "primary_driver_gene": {
+        "feature": "primary_driver_gene",
+        "status": "available",
+        "available_records": 75,
+        "missing_or_unassayed_records": 0,
+        "coverage_percentage": 100.0
+      },
+      "tmb_mut_per_mb": {
+        "feature": "tmb_mut_per_mb",
+        "status": "available",
+        "available_records": 25,
+        "missing_or_unassayed_records": 50,
+        "coverage_percentage": 33.33
+      },
+      "pdl1_tps_percent": {
+        "feature": "pdl1_tps_percent",
+        "status": "available",
+        "available_records": 25,
+        "missing_or_unassayed_records": 50,
+        "coverage_percentage": 33.33
+      },
+      "ctdna_maf_percent": {
+        "feature": "ctdna_maf_percent",
+        "status": "available",
+        "available_records": 24,
+        "missing_or_unassayed_records": 51,
+        "coverage_percentage": 32.0
+      }
+    },
+    "cancer_type_coverage": {
+      "total_cohort_patients": 75,
+      "source_stratified_counts": {
+        "TCGA-LUAD (Primary Resection WES)": 30,
+        "TCGA-LUSC (Primary Resection WES)": 20,
+        "MSK-IMPACT (Advanced/Metastatic Targeted Panel)": 25
+      },
+      "subtype_summary": {
+        "adenocarcinoma_count": 52,
+        "squamous_count": 23,
+        "large_cell_neuroendocrine": 0
+      }
+    },
+    "stage_genomic_coverage": {
+      "overall_stage_counts": {
+        "Stage IV": 33,
+        "Stage IA": 11,
+        "Stage IB": 10,
+        "Stage IIIA": 9,
+        "Stage IIB": 6,
+        "Stage IIA": 5,
+        "Stage IIIB": 1
+      },
+      "stage_by_source_crosstab": {
+        "MSK-IMPACT Targeted Sequencing (cBioPortal)": {
+          "Stage IA": 0,
+          "Stage IB": 0,
+          "Stage IIA": 0,
+          "Stage IIB": 0,
+          "Stage IIIA": 0,
+          "Stage IIIB": 0,
+          "Stage IV": 25
+        },
+        "TCGA-GDC PanCancer Atlas": {
+          "Stage IA": 11,
+          "Stage IB": 10,
+          "Stage IIA": 5,
+          "Stage IIB": 6,
+          "Stage IIIA": 9,
+          "Stage IIIB": 1,
+          "Stage IV": 8
+        }
+      },
+      "stage_group_breakdown": {
+        "early_stage_resectable": {
+          "count": 32,
+          "percent": 42.67
+        },
+        "locally_advanced": {
+          "count": 10,
+          "percent": 13.33
+        },
+        "metastatic_distant": {
+          "count": 33,
+          "percent": 44.0
+        }
+      }
+    }
+  },
+  "mutation_landscape": {
+    "vaf_feature_audit": {
+      "status": "source_limitation",
+      "reason": "Variable 'variant_allele_fraction' not available in unified patient cohort reference baseline"
+    },
+    "rare_mutations": [
+      {
+        "variant_identifier": "BRAF:p.V600E",
+        "gene": "BRAF",
+        "protein_change": "p.V600E",
+        "observed_count": 2,
+        "frequency_percent": 2.67,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "MET:p.D1010H",
+        "gene": "MET",
+        "protein_change": "p.D1010H",
+        "observed_count": 2,
+        "frequency_percent": 2.67,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "TP53:p.R175H",
+        "gene": "TP53",
+        "protein_change": "p.R175H",
+        "observed_count": 2,
+        "frequency_percent": 2.67,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "ERBB2:p.Y772_A775dup",
+        "gene": "ERBB2",
+        "protein_change": "p.Y772_A775dup",
+        "observed_count": 2,
+        "frequency_percent": 2.67,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "RET:KIF5B-RET",
+        "gene": "RET",
+        "protein_change": "KIF5B-RET",
+        "observed_count": 2,
+        "frequency_percent": 2.67,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "FGFR1:Amplification",
+        "gene": "FGFR1",
+        "protein_change": "Amplification",
+        "observed_count": 2,
+        "frequency_percent": 2.67,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "KRAS:p.G12A",
+        "gene": "KRAS",
+        "protein_change": "p.G12A",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "BRAF:p.G469A",
+        "gene": "BRAF",
+        "protein_change": "p.G469A",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "TP53:p.R213*",
+        "gene": "TP53",
+        "protein_change": "p.R213*",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "EGFR:p.L747_P753delinsS",
+        "gene": "EGFR",
+        "protein_change": "p.L747_P753delinsS",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "MET:p.D1010Y",
+        "gene": "MET",
+        "protein_change": "p.D1010Y",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "TP53:p.R273C",
+        "gene": "TP53",
+        "protein_change": "p.R273C",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "TP53:p.Q192*",
+        "gene": "TP53",
+        "protein_change": "p.Q192*",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "TP53:p.R248Q",
+        "gene": "TP53",
+        "protein_change": "p.R248Q",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "PIK3CA:p.H1047R",
+        "gene": "PIK3CA",
+        "protein_change": "p.H1047R",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "TP53:p.R282W",
+        "gene": "TP53",
+        "protein_change": "p.R282W",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "NFE2L2:p.R34Q",
+        "gene": "NFE2L2",
+        "protein_change": "p.R34Q",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "TP53:p.Y220C",
+        "gene": "TP53",
+        "protein_change": "p.Y220C",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "CDKN2A:p.P114fs",
+        "gene": "CDKN2A",
+        "protein_change": "p.P114fs",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "TP53:p.R273H",
+        "gene": "TP53",
+        "protein_change": "p.R273H",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "KEAP1:p.D236H",
+        "gene": "KEAP1",
+        "protein_change": "p.D236H",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "TP53:p.R342*",
+        "gene": "TP53",
+        "protein_change": "p.R342*",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "TP53:p.C275Y",
+        "gene": "TP53",
+        "protein_change": "p.C275Y",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "NFE2L2:p.E79Q",
+        "gene": "NFE2L2",
+        "protein_change": "p.E79Q",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "TP53:p.G245S",
+        "gene": "TP53",
+        "protein_change": "p.G245S",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "CDKN2A:p.E69*",
+        "gene": "CDKN2A",
+        "protein_change": "p.E69*",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "TP53:p.S241fs",
+        "gene": "TP53",
+        "protein_change": "p.S241fs",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "PIK3CA:p.E542K",
+        "gene": "PIK3CA",
+        "protein_change": "p.E542K",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "EGFR:p.A763_Y764insFQEA",
+        "gene": "EGFR",
+        "protein_change": "p.A763_Y764insFQEA",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "ROS1:CD74-ROS1",
+        "gene": "ROS1",
+        "protein_change": "CD74-ROS1",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      },
+      {
+        "variant_identifier": "NFE2L2:p.E79K",
+        "gene": "NFE2L2",
+        "protein_change": "p.E79K",
+        "observed_count": 1,
+        "frequency_percent": 1.33,
+        "classification": "rare"
+      }
+    ],
+    "candidate_targets_evaluation": [
+      {
+        "target_gene": "NTRK1",
+        "alteration_type": "Fusion",
+        "clinical_utility": "TRK inhibitor sensitivity (Larotrectinib / Entrectinib)",
+        "coverage_status": "not_observed",
+        "finding": "not_observed_in_reference_baseline",
+        "reason": "Target NTRK1 (Fusion) was evaluated against baseline and is not observed in reference dataset (0 records)."
+      },
+      {
+        "target_gene": "NTRK2",
+        "alteration_type": "Fusion",
+        "clinical_utility": "TRK inhibitor sensitivity",
+        "coverage_status": "not_observed",
+        "finding": "not_observed_in_reference_baseline",
+        "reason": "Target NTRK2 (Fusion) was evaluated against baseline and is not observed in reference dataset (0 records)."
+      },
+      {
+        "target_gene": "NTRK3",
+        "alteration_type": "Fusion",
+        "clinical_utility": "TRK inhibitor sensitivity",
+        "coverage_status": "not_observed",
+        "finding": "not_observed_in_reference_baseline",
+        "reason": "Target NTRK3 (Fusion) was evaluated against baseline and is not observed in reference dataset (0 records)."
+      },
+      {
+        "target_gene": "NRG1",
+        "alteration_type": "Fusion",
+        "clinical_utility": "HER3-directed therapy / Zenocutuzumab target",
+        "coverage_status": "not_observed",
+        "finding": "not_observed_in_reference_baseline",
+        "reason": "Target NRG1 (Fusion) was evaluated against baseline and is not observed in reference dataset (0 records)."
+      },
+      {
+        "target_gene": "RET",
+        "alteration_type": "Fusion",
+        "clinical_utility": "RET inhibitor sensitivity (Selpercatinib / Pralsetinib)",
+        "coverage_status": "rare",
+        "finding": "Observed in reference baseline with rare representation (1 instances).",
+        "reason": "Target RET has limited representation (1 records)."
+      },
+      {
+        "target_gene": "ERBB2",
+        "alteration_type": "Exon 20 Insertion",
+        "clinical_utility": "HER2 ADC / Trastuzumab deruxtecan",
+        "coverage_status": "rare",
+        "finding": "Observed in reference baseline with rare representation (0 instances).",
+        "reason": "Target ERBB2 has limited representation (0 records)."
+      },
+      {
+        "target_gene": "BRAF",
+        "alteration_type": "Class II / Non-V600E Mutation",
+        "clinical_utility": "MEK inhibitor response heterogeneity",
+        "coverage_status": "rare",
+        "finding": "Observed in reference baseline with rare representation (1 instances).",
+        "reason": "Target BRAF has limited representation (1 records)."
+      },
+      {
+        "target_gene": "EGFR",
+        "alteration_type": "Exon 20 Insertion",
+        "clinical_utility": "EGFR/MET bispecific (Amivantamab) / Mobocertinib",
+        "coverage_status": "rare",
+        "finding": "Observed in reference baseline with rare representation (0 instances).",
+        "reason": "Target EGFR has limited representation (0 records)."
+      },
+      {
+        "target_gene": "MET",
+        "alteration_type": "High-level Amplification (Gene Copy >= 10)",
+        "clinical_utility": "MET TKI sensitivity / EGFR bypass",
+        "coverage_status": "rare",
+        "finding": "Observed in reference baseline with rare representation (1 instances).",
+        "reason": "Target MET has limited representation (1 records)."
+      }
+    ]
+  },
+  "mutation_cooccurrence": {
+    "observed_cooccurrences": [
+      {
+        "combination": "EGFR",
+        "observed_instances": 5,
+        "prevalence_percent": 6.67,
+        "coverage_status": "well_represented",
+        "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+      },
+      {
+        "combination": "KRAS",
+        "observed_instances": 3,
+        "prevalence_percent": 4.0,
+        "coverage_status": "rare",
+        "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+      },
+      {
+        "combination": "KRAS + STK11",
+        "observed_instances": 2,
+        "prevalence_percent": 2.67,
+        "coverage_status": "rare",
+        "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+      },
+      {
+        "combination": "KEAP1 + KRAS",
+        "observed_instances": 2,
+        "prevalence_percent": 2.67,
+        "coverage_status": "rare",
+        "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+      },
+      {
+        "combination": "ALK",
+        "observed_instances": 2,
+        "prevalence_percent": 2.67,
+        "coverage_status": "rare",
+        "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+      },
+      {
+        "combination": "KRAS + TP53",
+        "observed_instances": 1,
+        "prevalence_percent": 1.33,
+        "coverage_status": "sparse",
+        "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+      },
+      {
+        "combination": "EGFR + TP53",
+        "observed_instances": 1,
+        "prevalence_percent": 1.33,
+        "coverage_status": "sparse",
+        "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+      },
+      {
+        "combination": "KEAP1 + KRAS + STK11",
+        "observed_instances": 1,
+        "prevalence_percent": 1.33,
+        "coverage_status": "sparse",
+        "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+      },
+      {
+        "combination": "STK11 + TP53",
+        "observed_instances": 1,
+        "prevalence_percent": 1.33,
+        "coverage_status": "sparse",
+        "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+      },
+      {
+        "combination": "NFE2L2 + TP53",
+        "observed_instances": 1,
+        "prevalence_percent": 1.33,
+        "coverage_status": "sparse",
+        "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+      },
+      {
+        "combination": "PIK3CA + TP53",
+        "observed_instances": 1,
+        "prevalence_percent": 1.33,
+        "coverage_status": "sparse",
+        "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+      },
+      {
+        "combination": "CDKN2A + TP53",
+        "observed_instances": 1,
+        "prevalence_percent": 1.33,
+        "coverage_status": "sparse",
+        "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+      },
+      {
+        "combination": "SOX2 + TP53",
+        "observed_instances": 1,
+        "prevalence_percent": 1.33,
+        "coverage_status": "sparse",
+        "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+      },
+      {
+        "combination": "EGFR + MET",
+        "observed_instances": 1,
+        "prevalence_percent": 1.33,
+        "coverage_status": "sparse",
+        "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+      },
+      {
+        "combination": "EGFR + HER2",
+        "observed_instances": 1,
+        "prevalence_percent": 1.33,
+        "coverage_status": "sparse",
+        "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+      },
+      {
+        "combination": "ROS1",
+        "observed_instances": 1,
+        "prevalence_percent": 1.33,
+        "coverage_status": "sparse",
+        "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+      },
+      {
+        "combination": "BRAF_V600E + EGFR",
+        "observed_instances": 1,
+        "prevalence_percent": 1.33,
+        "coverage_status": "sparse",
+        "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+      }
+    ],
+    "candidate_cooccurrences_evaluation": [
+      {
+        "combination": "EGFR + KRAS",
+        "alteration_type": "Dual canonical oncogenic driver co-mutation",
+        "clinical_context": "Classically mutually exclusive; rare co-alteration (<1% NSCLC) with uncertain targeted therapy hierarchy",
+        "coverage_status": "well_represented",
+        "finding": "Well represented (5 instances).",
+        "reason": "Combination EGFR + KRAS was evaluated against baseline and is Well represented (5 instances).."
+      },
+      {
+        "combination": "ALK + EGFR",
+        "alteration_type": "Simultaneous ALK rearrangement and EGFR kinase domain activating mutation",
+        "clinical_context": "Rare concurrent drivers (<0.5% NSCLC); creates therapeutic dilemma between ALK vs EGFR TKI",
+        "coverage_status": "well_represented",
+        "finding": "Well represented (5 instances).",
+        "reason": "Combination ALK + EGFR was evaluated against baseline and is Well represented (5 instances).."
+      },
+      {
+        "combination": "BRAF + EGFR",
+        "alteration_type": "Concurrent BRAF V600E and EGFR Exon 19 del / L858R",
+        "clinical_context": "Rare dual driver or bypass mechanism requiring combination BRAF/MEK + EGFR TKI",
+        "coverage_status": "well_represented",
+        "finding": "Well represented (5 instances).",
+        "reason": "Combination BRAF + EGFR was evaluated against baseline and is Well represented (5 instances).."
+      },
+      {
+        "combination": "KRAS + STK11 + KEAP1",
+        "alteration_type": "Pan-negative immunotherapy resistant triad",
+        "clinical_context": "Extreme primary immunotherapy resistance and poor survival despite high TMB",
+        "coverage_status": "rare",
+        "finding": "Rarely observed in baseline (3 instances).",
+        "reason": "Combination KRAS + STK11 + KEAP1 was evaluated against baseline and is Rarely observed in baseline (3 instances).."
+      },
+      {
+        "combination": "EGFR (L858R + T790M + C797S)",
+        "alteration_type": "Triple compound cis/trans EGFR TKI resistance alteration",
+        "clinical_context": "Tertiary Osimertinib resistance; cis-C797S is refractory to all approved TKIs",
+        "coverage_status": "well_represented",
+        "finding": "Well represented (5 instances).",
+        "reason": "Combination EGFR (L858R + T790M + C797S) was evaluated against baseline and is Well represented (5 instances).."
+      },
+      {
+        "combination": "KRAS (G12C + Y99C)",
+        "alteration_type": "Secondary switch II pocket mutation under KRAS G12C inhibition",
+        "clinical_context": "Prevents covalent drug binding to cysteine 12; acquired Sotorasib resistance",
+        "coverage_status": "rare",
+        "finding": "Rarely observed in baseline (3 instances).",
+        "reason": "Combination KRAS (G12C + Y99C) was evaluated against baseline and is Rarely observed in baseline (3 instances).."
+      },
+      {
+        "combination": "ALK (EML4-ALK + G1202R)",
+        "alteration_type": "Secondary solvent-front steric hindrance mutation under Alectinib",
+        "clinical_context": "Refractory to 1st/2nd gen ALK TKIs; sensitive to 3rd gen Lorlatinib",
+        "coverage_status": "rare",
+        "finding": "Rarely observed in baseline (2 instances).",
+        "reason": "Combination ALK (EML4-ALK + G1202R) was evaluated against baseline and is Rarely observed in baseline (2 instances).."
+      }
+    ]
+  },
+  "treatment_resistance": {
+    "observed_resistance_mechanisms": [
+      {
+        "mechanism": NaN,
+        "cohort_observed_count": 10,
+        "coverage_status": "well_represented",
+        "evidence_support": "Documented in MSK-IMPACT NSCLC cohort and CIViC/ClinVar registry"
+      },
+      {
+        "mechanism": "On-target T790M gatekeeper",
+        "cohort_observed_count": 1,
+        "coverage_status": "sparse",
+        "evidence_support": "Documented in MSK-IMPACT NSCLC cohort and CIViC/ClinVar registry"
+      },
+      {
+        "mechanism": "On-target C797S tertiary resistance",
+        "cohort_observed_count": 1,
+        "coverage_status": "sparse",
+        "evidence_support": "Documented in MSK-IMPACT NSCLC cohort and CIViC/ClinVar registry"
+      },
+      {
+        "mechanism": "Secondary KRAS switch II pocket mutation",
+        "cohort_observed_count": 1,
+        "coverage_status": "sparse",
+        "evidence_support": "Documented in MSK-IMPACT NSCLC cohort and CIViC/ClinVar registry"
+      },
+      {
+        "mechanism": "Solvent-front steric hindrance",
+        "cohort_observed_count": 1,
+        "coverage_status": "sparse",
+        "evidence_support": "Documented in MSK-IMPACT NSCLC cohort and CIViC/ClinVar registry"
+      },
+      {
+        "mechanism": "Intrinsic STK11/KEAP1 co-mutation resistance",
+        "cohort_observed_count": 1,
+        "coverage_status": "sparse",
+        "evidence_support": "Documented in MSK-IMPACT NSCLC cohort and CIViC/ClinVar registry"
+      },
+      {
+        "mechanism": "Bypass RTK MET amplification",
+        "cohort_observed_count": 1,
+        "coverage_status": "sparse",
+        "evidence_support": "Documented in MSK-IMPACT NSCLC cohort and CIViC/ClinVar registry"
+      },
+      {
+        "mechanism": "Compound cis-T790M/C797S resistance",
+        "cohort_observed_count": 1,
+        "coverage_status": "sparse",
+        "evidence_support": "Documented in MSK-IMPACT NSCLC cohort and CIViC/ClinVar registry"
+      },
+      {
+        "mechanism": "KRAS G12D allelic shift",
+        "cohort_observed_count": 1,
+        "coverage_status": "sparse",
+        "evidence_support": "Documented in MSK-IMPACT NSCLC cohort and CIViC/ClinVar registry"
+      },
+      {
+        "mechanism": "Bypass RTK HER2 amplification",
+        "cohort_observed_count": 1,
+        "coverage_status": "sparse",
+        "evidence_support": "Documented in MSK-IMPACT NSCLC cohort and CIViC/ClinVar registry"
+      },
+      {
+        "mechanism": "Solvent-front G2032R resistance",
+        "cohort_observed_count": 1,
+        "coverage_status": "sparse",
+        "evidence_support": "Documented in MSK-IMPACT NSCLC cohort and CIViC/ClinVar registry"
+      },
+      {
+        "mechanism": "Histological phenotype switch to SCLC",
+        "cohort_observed_count": 1,
+        "coverage_status": "sparse",
+        "evidence_support": "Documented in MSK-IMPACT NSCLC cohort and CIViC/ClinVar registry"
+      },
+      {
+        "mechanism": "Secondary RAS GTPase activating mutation",
+        "cohort_observed_count": 1,
+        "coverage_status": "sparse",
+        "evidence_support": "Documented in MSK-IMPACT NSCLC cohort and CIViC/ClinVar registry"
+      },
+      {
+        "mechanism": "ATP binding site L718Q resistance",
+        "cohort_observed_count": 1,
+        "coverage_status": "sparse",
+        "evidence_support": "Documented in MSK-IMPACT NSCLC cohort and CIViC/ClinVar registry"
+      },
+      {
+        "mechanism": "Secondary ALK kinase domain mutation",
+        "cohort_observed_count": 1,
+        "coverage_status": "sparse",
+        "evidence_support": "Documented in MSK-IMPACT NSCLC cohort and CIViC/ClinVar registry"
+      },
+      {
+        "mechanism": "Bypass MAPK activation via BRAF V600E",
+        "cohort_observed_count": 1,
+        "coverage_status": "sparse",
+        "evidence_support": "Documented in MSK-IMPACT NSCLC cohort and CIViC/ClinVar registry"
+      }
+    ],
+    "candidate_resistance_evaluation": [
+      {
+        "mechanism": "EGFR C797S Tertiary Resistance",
+        "drug_class": "3rd-Gen EGFR TKI (Osimertinib)",
+        "expected_phenotype": "Disrupts covalent binding to C797 in ATP binding cleft",
+        "coverage_status": "sparse",
+        "finding": "Observed in MSK-IMPACT cohort baseline (sparse representation).",
+        "reason": "Resistance pattern EGFR C797S Tertiary Resistance was audited and is Observed in MSK-IMPACT cohort baseline (sparse representation).."
+      },
+      {
+        "mechanism": "Bypass RTK MET Amplification",
+        "drug_class": "EGFR TKI / Osimertinib",
+        "expected_phenotype": "Activates downstream ERBB3/PI3K pathway independently of EGFR",
+        "coverage_status": "sparse",
+        "finding": "Observed in MSK-IMPACT cohort baseline (sparse representation).",
+        "reason": "Resistance pattern Bypass RTK MET Amplification was audited and is Observed in MSK-IMPACT cohort baseline (sparse representation).."
+      },
+      {
+        "mechanism": "KRAS Y99C Secondary Mutation",
+        "drug_class": "KRAS G12C Inhibitor (Sotorasib / Adagrasib)",
+        "expected_phenotype": "Spatial perturbation of switch II pocket preventing drug entry",
+        "coverage_status": "sparse",
+        "finding": "Observed in MSK-IMPACT cohort baseline (sparse representation).",
+        "reason": "Resistance pattern KRAS Y99C Secondary Mutation was audited and is Observed in MSK-IMPACT cohort baseline (sparse representation).."
+      },
+      {
+        "mechanism": "ALK G1202R Solvent Front Mutation",
+        "drug_class": "2nd-Gen ALK TKI (Alectinib / Brigatinib)",
+        "expected_phenotype": "Bulky arginine residue causes steric clash with 1st/2nd gen TKIs",
+        "coverage_status": "sparse",
+        "finding": "Observed in MSK-IMPACT cohort baseline (sparse representation).",
+        "reason": "Resistance pattern ALK G1202R Solvent Front Mutation was audited and is Observed in MSK-IMPACT cohort baseline (sparse representation).."
+      },
+      {
+        "mechanism": "Histological SCLC Transformation",
+        "drug_class": "EGFR TKI / Targeted Therapy",
+        "expected_phenotype": "Loss of RB1 and TP53 leading to phenotypic lineage plasticity",
+        "coverage_status": "sparse",
+        "finding": "Observed in MSK-IMPACT cohort baseline (sparse representation).",
+        "reason": "Resistance pattern Histological SCLC Transformation was audited and is Observed in MSK-IMPACT cohort baseline (sparse representation).."
+      },
+      {
+        "mechanism": "Fourth-Generation EGFR Allosteric Inhibitor Resistance",
+        "drug_class": "4th-Gen EGFR Inhibitors (BLU-945, BBT-176)",
+        "expected_phenotype": "Allosteric binding site alterations",
+        "coverage_status": "sparse",
+        "finding": "Present in curated CIViC/ClinVar evidence registry but unobserved in direct cohort records.",
+        "reason": "Resistance pattern Fourth-Generation EGFR Allosteric Inhibitor Resistance was audited and is Present in curated CIViC/ClinVar evidence registry but unobserved in direct cohort records.."
+      },
+      {
+        "mechanism": "ADC Internalization & Payload Resistance",
+        "drug_class": "HER2 ADC (Trastuzumab deruxtecan) / TROP2 ADC",
+        "expected_phenotype": "Down-regulation of target antigen, SLFN11 loss, or efflux pump upregulation",
+        "coverage_status": "not_observed",
+        "finding": "not_observed_in_reference_baseline",
+        "reason": "Resistance pattern ADC Internalization & Payload Resistance (HER2 ADC (Trastuzumab deruxtecan) / TROP2 ADC) is not observed in reference baseline; unobserved in dataset does not imply biological impossibility."
+      }
+    ]
+  },
+  "biomarker_coverage": {
+    "tmb_coverage": {
+      "status": "available",
+      "assayed_patients": 25,
+      "unassayed_or_missing_patients": 50,
+      "coverage_percent": 33.33,
+      "median": 7.0,
+      "mean": 7.71,
+      "min": 2.8,
+      "max": 15.6,
+      "tmb_high_count_gte_10": 7,
+      "tmb_high_percent": 28.0,
+      "tmb_low_count_lt_10": 18
+    },
+    "pdl1_coverage": {
+      "status": "available",
+      "assayed_patients": 25,
+      "unassayed_or_missing_patients": 50,
+      "coverage_percent": 33.33,
+      "median": 25.0,
+      "mean": 34.2,
+      "categories": {
+        "negative_lt_1pct": {
+          "count": 3,
+          "percent": 12.0
+        },
+        "low_1_to_49pct": {
+          "count": 15,
+          "percent": 60.0
+        },
+        "high_gte_50pct": {
+          "count": 7,
+          "percent": 28.0
+        }
+      }
+    },
+    "ctdna_coverage": {
+      "status": "available",
+      "assayed_patients": 24,
+      "unassayed_or_missing_patients": 51,
+      "coverage_percent": 32.0,
+      "median_maf": 4.95,
+      "mean_maf": 5.51,
+      "min_maf": 1.2,
+      "max_maf": 14.5
+    },
+    "inflammatory_biomarkers_coverage": {
+      "status": "source_limitation",
+      "reason": "Patient-level inflammatory markers (NLR, CRP, LDH) not available in supplied reference baseline cohort",
+      "published_literature_benchmark_status": "Available in oncology_biomarkers_evidence_raw.csv (KEYNOTE-024, JTO 2018)"
+    }
+  }
+}

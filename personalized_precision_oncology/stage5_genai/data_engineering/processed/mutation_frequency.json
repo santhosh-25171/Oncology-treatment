@@ -1,0 +1,344 @@
+{
+  "title": "Historical Somatic Mutation Frequencies (NSCLC)",
+  "total_profiled_patients": 75,
+  "gene_level_frequencies": [
+    {
+      "gene": "KRAS",
+      "observed_count": 18,
+      "frequency_percent": 24.0
+    },
+    {
+      "gene": "EGFR",
+      "observed_count": 17,
+      "frequency_percent": 22.67
+    },
+    {
+      "gene": "TP53",
+      "observed_count": 13,
+      "frequency_percent": 17.33
+    },
+    {
+      "gene": "PIK3CA",
+      "observed_count": 5,
+      "frequency_percent": 6.67
+    },
+    {
+      "gene": "BRAF",
+      "observed_count": 3,
+      "frequency_percent": 4.0
+    },
+    {
+      "gene": "MET",
+      "observed_count": 3,
+      "frequency_percent": 4.0
+    },
+    {
+      "gene": "ALK",
+      "observed_count": 3,
+      "frequency_percent": 4.0
+    },
+    {
+      "gene": "NFE2L2",
+      "observed_count": 3,
+      "frequency_percent": 4.0
+    },
+    {
+      "gene": "ERBB2",
+      "observed_count": 2,
+      "frequency_percent": 2.67
+    },
+    {
+      "gene": "RET",
+      "observed_count": 2,
+      "frequency_percent": 2.67
+    },
+    {
+      "gene": "CDKN2A",
+      "observed_count": 2,
+      "frequency_percent": 2.67
+    },
+    {
+      "gene": "FGFR1",
+      "observed_count": 2,
+      "frequency_percent": 2.67
+    },
+    {
+      "gene": "KEAP1",
+      "observed_count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "gene": "ROS1",
+      "observed_count": 1,
+      "frequency_percent": 1.33
+    }
+  ],
+  "variant_level_frequencies": [
+    {
+      "variant_identifier": "KRAS:p.G12C",
+      "gene": "KRAS",
+      "protein_change": "p.G12C",
+      "count": 11,
+      "frequency_percent": 14.67
+    },
+    {
+      "variant_identifier": "EGFR:p.L858R",
+      "gene": "EGFR",
+      "protein_change": "p.L858R",
+      "count": 8,
+      "frequency_percent": 10.67
+    },
+    {
+      "variant_identifier": "EGFR:p.E746_A750del",
+      "gene": "EGFR",
+      "protein_change": "p.E746_A750del",
+      "count": 7,
+      "frequency_percent": 9.33
+    },
+    {
+      "variant_identifier": "KRAS:p.G12V",
+      "gene": "KRAS",
+      "protein_change": "p.G12V",
+      "count": 3,
+      "frequency_percent": 4.0
+    },
+    {
+      "variant_identifier": "KRAS:p.G12D",
+      "gene": "KRAS",
+      "protein_change": "p.G12D",
+      "count": 3,
+      "frequency_percent": 4.0
+    },
+    {
+      "variant_identifier": "ALK:EML4-ALK",
+      "gene": "ALK",
+      "protein_change": "EML4-ALK",
+      "count": 3,
+      "frequency_percent": 4.0
+    },
+    {
+      "variant_identifier": "PIK3CA:p.E545K",
+      "gene": "PIK3CA",
+      "protein_change": "p.E545K",
+      "count": 3,
+      "frequency_percent": 4.0
+    },
+    {
+      "variant_identifier": "BRAF:p.V600E",
+      "gene": "BRAF",
+      "protein_change": "p.V600E",
+      "count": 2,
+      "frequency_percent": 2.67
+    },
+    {
+      "variant_identifier": "MET:p.D1010H",
+      "gene": "MET",
+      "protein_change": "p.D1010H",
+      "count": 2,
+      "frequency_percent": 2.67
+    },
+    {
+      "variant_identifier": "TP53:p.R175H",
+      "gene": "TP53",
+      "protein_change": "p.R175H",
+      "count": 2,
+      "frequency_percent": 2.67
+    },
+    {
+      "variant_identifier": "ERBB2:p.Y772_A775dup",
+      "gene": "ERBB2",
+      "protein_change": "p.Y772_A775dup",
+      "count": 2,
+      "frequency_percent": 2.67
+    },
+    {
+      "variant_identifier": "RET:KIF5B-RET",
+      "gene": "RET",
+      "protein_change": "KIF5B-RET",
+      "count": 2,
+      "frequency_percent": 2.67
+    },
+    {
+      "variant_identifier": "FGFR1:Amplification",
+      "gene": "FGFR1",
+      "protein_change": "Amplification",
+      "count": 2,
+      "frequency_percent": 2.67
+    },
+    {
+      "variant_identifier": "KRAS:p.G12A",
+      "gene": "KRAS",
+      "protein_change": "p.G12A",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "BRAF:p.G469A",
+      "gene": "BRAF",
+      "protein_change": "p.G469A",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "TP53:p.R213*",
+      "gene": "TP53",
+      "protein_change": "p.R213*",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "EGFR:p.L747_P753delinsS",
+      "gene": "EGFR",
+      "protein_change": "p.L747_P753delinsS",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "MET:p.D1010Y",
+      "gene": "MET",
+      "protein_change": "p.D1010Y",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "TP53:p.R273C",
+      "gene": "TP53",
+      "protein_change": "p.R273C",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "TP53:p.Q192*",
+      "gene": "TP53",
+      "protein_change": "p.Q192*",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "TP53:p.R248Q",
+      "gene": "TP53",
+      "protein_change": "p.R248Q",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "PIK3CA:p.H1047R",
+      "gene": "PIK3CA",
+      "protein_change": "p.H1047R",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "TP53:p.R282W",
+      "gene": "TP53",
+      "protein_change": "p.R282W",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "NFE2L2:p.R34Q",
+      "gene": "NFE2L2",
+      "protein_change": "p.R34Q",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "TP53:p.Y220C",
+      "gene": "TP53",
+      "protein_change": "p.Y220C",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "CDKN2A:p.P114fs",
+      "gene": "CDKN2A",
+      "protein_change": "p.P114fs",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "TP53:p.R273H",
+      "gene": "TP53",
+      "protein_change": "p.R273H",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "KEAP1:p.D236H",
+      "gene": "KEAP1",
+      "protein_change": "p.D236H",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "TP53:p.R342*",
+      "gene": "TP53",
+      "protein_change": "p.R342*",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "TP53:p.C275Y",
+      "gene": "TP53",
+      "protein_change": "p.C275Y",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "NFE2L2:p.E79Q",
+      "gene": "NFE2L2",
+      "protein_change": "p.E79Q",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "TP53:p.G245S",
+      "gene": "TP53",
+      "protein_change": "p.G245S",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "CDKN2A:p.E69*",
+      "gene": "CDKN2A",
+      "protein_change": "p.E69*",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "TP53:p.S241fs",
+      "gene": "TP53",
+      "protein_change": "p.S241fs",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "PIK3CA:p.E542K",
+      "gene": "PIK3CA",
+      "protein_change": "p.E542K",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "EGFR:p.A763_Y764insFQEA",
+      "gene": "EGFR",
+      "protein_change": "p.A763_Y764insFQEA",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "ROS1:CD74-ROS1",
+      "gene": "ROS1",
+      "protein_change": "CD74-ROS1",
+      "count": 1,
+      "frequency_percent": 1.33
+    },
+    {
+      "variant_identifier": "NFE2L2:p.E79K",
+      "gene": "NFE2L2",
+      "protein_change": "p.E79K",
+      "count": 1,
+      "frequency_percent": 1.33
+    }
+  ]
+}

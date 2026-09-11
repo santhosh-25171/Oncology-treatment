@@ -1,0 +1,117 @@
+{
+  "title": "Oncology Biomarker Baseline Distributions",
+  "cohort_measured_biomarkers": {
+    "tmb_mut_per_mb": {
+      "variable": "tmb_mut_per_mb",
+      "sample_size": 25,
+      "mean": 7.71,
+      "std": 3.75,
+      "median": 7.0,
+      "q1": 4.8,
+      "q3": 10.8,
+      "iqr": 6.0,
+      "min": 2.8,
+      "max": 15.6
+    },
+    "pdl1_tps_percent": {
+      "summary_statistics": {
+        "variable": "pdl1_tps_percent",
+        "sample_size": 25,
+        "mean": 34.2,
+        "std": 30.78,
+        "median": 25.0,
+        "q1": 10.0,
+        "q3": 50.0,
+        "iqr": 40.0,
+        "min": 0.0,
+        "max": 95.0
+      },
+      "clinical_category_breakdown": [
+        {
+          "category": "Negative (<1%)",
+          "count": 3,
+          "percentage": 12.0
+        },
+        {
+          "category": "Low Expression (1-49%)",
+          "count": 15,
+          "percentage": 60.0
+        },
+        {
+          "category": "High Expression (>=50%)",
+          "count": 7,
+          "percentage": 28.0
+        }
+      ]
+    },
+    "ctdna_maf_percent": {
+      "variable": "ctdna_maf_percent",
+      "sample_size": 24,
+      "mean": 5.51,
+      "std": 3.58,
+      "median": 4.95,
+      "q1": 2.72,
+      "q3": 7.0,
+      "iqr": 4.28,
+      "min": 1.2,
+      "max": 14.5
+    },
+    "inflammatory_markers_nlr_crp_ldh": "not_available_in_source"
+  },
+  "published_literature_reference_distributions": [
+    {
+      "biomarker": "PD-L1 TPS",
+      "unit": "percent (%)",
+      "published_median": 10.0,
+      "reference_categories": "<1% (Negative: 45%), 1-49% (Low: 25%), >=50% (High: 30%)",
+      "clinical_cutoff": ">=50% for 1L Pembrolizumab monotherapy",
+      "utility": "Predicts response to immune checkpoint inhibition (anti-PD1/PD-L1)",
+      "doi": "10.1056/NEJMoa1606774 (KEYNOTE-024)"
+    },
+    {
+      "biomarker": "TMB (Tumor Mutational Burden)",
+      "unit": "mutations per megabase (mut/Mb)",
+      "published_median": 7.4,
+      "reference_categories": "Low (<6 mut/Mb: 40%), Intermediate (6-9.9 mut/Mb: 30%), High (>=10 mut/Mb: 30%)",
+      "clinical_cutoff": ">=10 mut/Mb (FDA FoundationOne CDx approval)",
+      "utility": "Predicts benefit from immune checkpoint inhibitors regardless of PD-L1",
+      "doi": "10.1016/S1470-2045(20)30445-9 (KEYNOTE-158)"
+    },
+    {
+      "biomarker": "ctDNA MAF (Mutant Allele Fraction)",
+      "unit": "percent (%)",
+      "published_median": 2.1,
+      "reference_categories": "Undetectable (<0.1%), Low (0.1-1.0%), Intermediate (1.1-5.0%), High (>5.0%)",
+      "clinical_cutoff": ">=1.0% detectable shedding; >50% reduction for molecular response",
+      "utility": "Surrogate for total systemic disease burden and early response/resistance detection",
+      "doi": "10.1038/s41591-019-0408-3 (NATURE MED 2019)"
+    },
+    {
+      "biomarker": "NLR (Neutrophil-to-Lymphocyte Ratio)",
+      "unit": "ratio",
+      "published_median": 3.2,
+      "reference_categories": "Normal (<3.0: 45%), Borderline (3.0-4.9: 30%), Elevated (>=5.0: 25%)",
+      "clinical_cutoff": ">=4.0 or >=5.0 associated with systemic inflammation and poor immunotherapy PFS",
+      "utility": "Marker of host systemic inflammatory response and immune suppression",
+      "doi": "10.1016/j.jtho.2018.04.012 (JTO 2018)"
+    },
+    {
+      "biomarker": "CRP (C-Reactive Protein)",
+      "unit": "mg/L",
+      "published_median": 14.5,
+      "reference_categories": "Normal (<5.0 mg/L: 35%), Elevated (>=5.0 mg/L: 65%)",
+      "clinical_cutoff": ">=10.0 mg/L indicates active tumor-associated systemic inflammation",
+      "utility": "Correlates with tumor cachexia and reduced checkpoint inhibitor efficacy",
+      "doi": "10.1186/s12885-021-08143-6 (BMC Cancer 2021)"
+    },
+    {
+      "biomarker": "LDH (Lactate Dehydrogenase)",
+      "unit": "U/L",
+      "published_median": 245.0,
+      "reference_categories": "Normal (140-280 U/L: 60%), Elevated (>280 U/L: 40%)",
+      "clinical_cutoff": ">280 U/L (Upper limit of normal)",
+      "utility": "Surrogate for tumor glycolytic activity hypoxia and metabolic burden",
+      "doi": "10.1038/s41416-020-0853-x (Br J Cancer 2020)"
+    }
+  ]
+}

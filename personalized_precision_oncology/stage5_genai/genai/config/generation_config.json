@@ -1,0 +1,11 @@
+{
+  "number_of_scenarios": 20,
+  "generation_mode": "template",
+  "fallback_mode": "template",
+  "temperature": 0.7,
+  "max_tokens": 2500,
+  "random_seed": 42,
+  "require_provenance": true,
+  "require_synthetic_label": true,
+  "require_blind_spot": true
+}

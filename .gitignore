@@ -1,0 +1,19 @@
+# Environment and secrets
+.env
+*.env
+*.key
+*.pem
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Workspace shims
+powershell.cmd
+test_write.txt

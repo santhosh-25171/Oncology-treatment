@@ -1,0 +1,20 @@
+{
+  "title": "Historical Sex Distribution",
+  "sample_size": 75,
+  "distribution": [
+    {
+      "sex": "Male",
+      "count": 42,
+      "percentage": 56.0
+    },
+    {
+      "sex": "Female",
+      "count": 33,
+      "percentage": 44.0
+    }
+  ],
+  "seer_benchmark": {
+    "male_percent": 52.3,
+    "female_percent": 47.7
+  }
+}

@@ -1,0 +1,277 @@
+{
+  "summary": {
+    "total_blind_spots": 24,
+    "rare_patterns": 9,
+    "sparse_patterns": 6,
+    "not_observed_patterns": 6,
+    "insufficient_evidence_patterns": 0,
+    "conflicting_evidence_patterns": 1,
+    "source_limitation_patterns": 2
+  },
+  "blind_spots": [
+    {
+      "blind_spot_id": "BS001",
+      "category": "rare_mutation",
+      "pattern": "BRAF p.V600E",
+      "frequency": 2.67,
+      "coverage_status": "rare",
+      "evidence_status": "Documented in TCGA/MSK-IMPACT reference data but low representation (<3% cohort)",
+      "source": "TCGA / MSK-IMPACT Baseline",
+      "reason": "Observed in 2 patient(s) in reference baseline; rare representation requires explicit stress-test validation.",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS002",
+      "category": "rare_mutation",
+      "pattern": "MET p.D1010H",
+      "frequency": 2.67,
+      "coverage_status": "rare",
+      "evidence_status": "Documented in TCGA/MSK-IMPACT reference data but low representation (<3% cohort)",
+      "source": "TCGA / MSK-IMPACT Baseline",
+      "reason": "Observed in 2 patient(s) in reference baseline; rare representation requires explicit stress-test validation.",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS003",
+      "category": "rare_mutation",
+      "pattern": "TP53 p.R175H",
+      "frequency": 2.67,
+      "coverage_status": "rare",
+      "evidence_status": "Documented in TCGA/MSK-IMPACT reference data but low representation (<3% cohort)",
+      "source": "TCGA / MSK-IMPACT Baseline",
+      "reason": "Observed in 2 patient(s) in reference baseline; rare representation requires explicit stress-test validation.",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS004",
+      "category": "rare_mutation",
+      "pattern": "ERBB2 p.Y772_A775dup",
+      "frequency": 2.67,
+      "coverage_status": "rare",
+      "evidence_status": "Documented in TCGA/MSK-IMPACT reference data but low representation (<3% cohort)",
+      "source": "TCGA / MSK-IMPACT Baseline",
+      "reason": "Observed in 2 patient(s) in reference baseline; rare representation requires explicit stress-test validation.",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS005",
+      "category": "rare_mutation",
+      "pattern": "RET KIF5B-RET",
+      "frequency": 2.67,
+      "coverage_status": "rare",
+      "evidence_status": "Documented in TCGA/MSK-IMPACT reference data but low representation (<3% cohort)",
+      "source": "TCGA / MSK-IMPACT Baseline",
+      "reason": "Observed in 2 patient(s) in reference baseline; rare representation requires explicit stress-test validation.",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS006",
+      "category": "rare_mutation",
+      "pattern": "FGFR1 Amplification",
+      "frequency": 2.67,
+      "coverage_status": "rare",
+      "evidence_status": "Documented in TCGA/MSK-IMPACT reference data but low representation (<3% cohort)",
+      "source": "TCGA / MSK-IMPACT Baseline",
+      "reason": "Observed in 2 patient(s) in reference baseline; rare representation requires explicit stress-test validation.",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS007",
+      "category": "missing_mutation",
+      "pattern": "NTRK1 Fusion",
+      "frequency": 0.0,
+      "coverage_status": "not_observed",
+      "evidence_status": "not_observed_in_reference_baseline",
+      "source": "Clinical Oncology Check-Target Audit",
+      "reason": "NTRK1 (Fusion) was evaluated against baseline and is not observed in reference baseline; unobserved in dataset does not imply biological impossibility.",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS008",
+      "category": "missing_mutation",
+      "pattern": "NTRK2 Fusion",
+      "frequency": 0.0,
+      "coverage_status": "not_observed",
+      "evidence_status": "not_observed_in_reference_baseline",
+      "source": "Clinical Oncology Check-Target Audit",
+      "reason": "NTRK2 (Fusion) was evaluated against baseline and is not observed in reference baseline; unobserved in dataset does not imply biological impossibility.",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS009",
+      "category": "missing_mutation",
+      "pattern": "NTRK3 Fusion",
+      "frequency": 0.0,
+      "coverage_status": "not_observed",
+      "evidence_status": "not_observed_in_reference_baseline",
+      "source": "Clinical Oncology Check-Target Audit",
+      "reason": "NTRK3 (Fusion) was evaluated against baseline and is not observed in reference baseline; unobserved in dataset does not imply biological impossibility.",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS010",
+      "category": "missing_mutation",
+      "pattern": "NRG1 Fusion",
+      "frequency": 0.0,
+      "coverage_status": "not_observed",
+      "evidence_status": "not_observed_in_reference_baseline",
+      "source": "Clinical Oncology Check-Target Audit",
+      "reason": "NRG1 (Fusion) was evaluated against baseline and is not observed in reference baseline; unobserved in dataset does not imply biological impossibility.",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS011",
+      "category": "mutation_cooccurrence",
+      "pattern": "KRAS + STK11 + KEAP1",
+      "frequency": 0.0,
+      "coverage_status": "rare",
+      "evidence_status": "Documented in clinical literature / sparse or unobserved in cohort",
+      "source": "MSK-IMPACT & CIViC Co-occurrence Analysis",
+      "reason": "Combination KRAS + STK11 + KEAP1 was evaluated against baseline and is Rarely observed in baseline (3 instances)..",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS012",
+      "category": "mutation_cooccurrence",
+      "pattern": "KRAS (G12C + Y99C)",
+      "frequency": 0.0,
+      "coverage_status": "rare",
+      "evidence_status": "Documented in clinical literature / sparse or unobserved in cohort",
+      "source": "MSK-IMPACT & CIViC Co-occurrence Analysis",
+      "reason": "Combination KRAS (G12C + Y99C) was evaluated against baseline and is Rarely observed in baseline (3 instances)..",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS013",
+      "category": "mutation_cooccurrence",
+      "pattern": "ALK (EML4-ALK + G1202R)",
+      "frequency": 0.0,
+      "coverage_status": "rare",
+      "evidence_status": "Documented in clinical literature / sparse or unobserved in cohort",
+      "source": "MSK-IMPACT & CIViC Co-occurrence Analysis",
+      "reason": "Combination ALK (EML4-ALK + G1202R) was evaluated against baseline and is Rarely observed in baseline (2 instances)..",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS014",
+      "category": "resistance_mechanism",
+      "pattern": "EGFR C797S Tertiary Resistance (3rd-Gen EGFR TKI (Osimertinib))",
+      "frequency": 1.33,
+      "coverage_status": "sparse",
+      "evidence_status": "Published clinical trial evidence / sparse or unobserved in cohort",
+      "source": "MSK-IMPACT NSCLC & CIViC Registry",
+      "reason": "Resistance pattern EGFR C797S Tertiary Resistance was audited and is Observed in MSK-IMPACT cohort baseline (sparse representation)..",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS015",
+      "category": "resistance_mechanism",
+      "pattern": "Bypass RTK MET Amplification (EGFR TKI / Osimertinib)",
+      "frequency": 1.33,
+      "coverage_status": "sparse",
+      "evidence_status": "Published clinical trial evidence / sparse or unobserved in cohort",
+      "source": "MSK-IMPACT NSCLC & CIViC Registry",
+      "reason": "Resistance pattern Bypass RTK MET Amplification was audited and is Observed in MSK-IMPACT cohort baseline (sparse representation)..",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS016",
+      "category": "resistance_mechanism",
+      "pattern": "KRAS Y99C Secondary Mutation (KRAS G12C Inhibitor (Sotorasib / Adagrasib))",
+      "frequency": 1.33,
+      "coverage_status": "sparse",
+      "evidence_status": "Published clinical trial evidence / sparse or unobserved in cohort",
+      "source": "MSK-IMPACT NSCLC & CIViC Registry",
+      "reason": "Resistance pattern KRAS Y99C Secondary Mutation was audited and is Observed in MSK-IMPACT cohort baseline (sparse representation)..",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS017",
+      "category": "resistance_mechanism",
+      "pattern": "ALK G1202R Solvent Front Mutation (2nd-Gen ALK TKI (Alectinib / Brigatinib))",
+      "frequency": 1.33,
+      "coverage_status": "sparse",
+      "evidence_status": "Published clinical trial evidence / sparse or unobserved in cohort",
+      "source": "MSK-IMPACT NSCLC & CIViC Registry",
+      "reason": "Resistance pattern ALK G1202R Solvent Front Mutation was audited and is Observed in MSK-IMPACT cohort baseline (sparse representation)..",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS018",
+      "category": "resistance_mechanism",
+      "pattern": "Histological SCLC Transformation (EGFR TKI / Targeted Therapy)",
+      "frequency": 1.33,
+      "coverage_status": "sparse",
+      "evidence_status": "Published clinical trial evidence / sparse or unobserved in cohort",
+      "source": "MSK-IMPACT NSCLC & CIViC Registry",
+      "reason": "Resistance pattern Histological SCLC Transformation was audited and is Observed in MSK-IMPACT cohort baseline (sparse representation)..",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS019",
+      "category": "resistance_mechanism",
+      "pattern": "Fourth-Generation EGFR Allosteric Inhibitor Resistance (4th-Gen EGFR Inhibitors (BLU-945, BBT-176))",
+      "frequency": 1.33,
+      "coverage_status": "sparse",
+      "evidence_status": "Published clinical trial evidence / sparse or unobserved in cohort",
+      "source": "MSK-IMPACT NSCLC & CIViC Registry",
+      "reason": "Resistance pattern Fourth-Generation EGFR Allosteric Inhibitor Resistance was audited and is Present in curated CIViC/ClinVar evidence registry but unobserved in direct cohort records..",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS020",
+      "category": "resistance_mechanism",
+      "pattern": "ADC Internalization & Payload Resistance (HER2 ADC (Trastuzumab deruxtecan) / TROP2 ADC)",
+      "frequency": 0.0,
+      "coverage_status": "not_observed",
+      "evidence_status": "Published clinical trial evidence / sparse or unobserved in cohort",
+      "source": "MSK-IMPACT NSCLC & CIViC Registry",
+      "reason": "Resistance pattern ADC Internalization & Payload Resistance (HER2 ADC (Trastuzumab deruxtecan) / TROP2 ADC) is not observed in reference baseline; unobserved in dataset does not imply biological impossibility.",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS021",
+      "category": "source_limitation",
+      "pattern": "Plasma ctDNA MAF in Early-Stage Resectable NSCLC (Stage I/II)",
+      "frequency": 0.0,
+      "coverage_status": "source_limitation",
+      "evidence_status": "Variable not available in supplied surgical cohort reference baseline",
+      "source": "TCGA-LUAD / TCGA-LUSC Historical Cohort",
+      "reason": "Historical surgical frozen tissue cohorts did not collect longitudinal plasma ctDNA; absence reflects assay era rather than biological absence.",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS022",
+      "category": "source_limitation",
+      "pattern": "Patient-level Peripheral Inflammatory Biomarkers (NLR, CRP, LDH)",
+      "frequency": 0.0,
+      "coverage_status": "source_limitation",
+      "evidence_status": "Variable not available in supplied reference baseline cohort",
+      "source": "Clinical Trials Literature Benchmark",
+      "reason": "Inflammatory markers are cataloged as trial benchmarks but are not tracked at the patient level in baseline sequencing cohorts.",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS023",
+      "category": "evidence_conflict",
+      "pattern": "Discordant Immunotherapy Biomarkers (TMB-High >=10 mut/Mb with PD-L1 TPS 0%)",
+      "frequency": 4.0,
+      "coverage_status": "conflicting_evidence",
+      "evidence_status": "Divergent biomarker predictive signals documented in KEYNOTE-158 vs KEYNOTE-042",
+      "source": "MSK-IMPACT & Clinical Trial Registries",
+      "reason": "High TMB predicts checkpoint inhibitor benefit via neoantigen load, but PD-L1 negativity signals an immune-cold microenvironment with uncertain response.",
+      "confidence": "high"
+    },
+    {
+      "blind_spot_id": "BS024",
+      "category": "stage_specific",
+      "pattern": "Acquired TKI Resistance Alterations in Stage I/II NSCLC",
+      "frequency": 0.0,
+      "coverage_status": "not_observed",
+      "evidence_status": "not_observed_in_reference_baseline",
+      "source": "TCGA & MSK-IMPACT Cross-Stage Audit",
+      "reason": "Acquired TKI resistance alterations are documented exclusively in metastatic (Stage IV) patients in baseline; adjuvant targeted resistance in Stage I/II is not observed in reference baseline.",
+      "confidence": "high"
+    }
+  ]
+}

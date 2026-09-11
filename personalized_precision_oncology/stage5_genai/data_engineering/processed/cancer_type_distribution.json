@@ -1,0 +1,19 @@
+{
+  "adenocarcinoma": {
+    "count": 52,
+    "percentage": 69.33
+  },
+  "squamous_cell_carcinoma": {
+    "count": 23,
+    "percentage": 30.67
+  },
+  "other_or_unspecified": {
+    "count": 0,
+    "percentage": 0.0
+  },
+  "metadata": {
+    "title": "Historical NSCLC Subtype Distribution",
+    "evidence_basis": "TCGA PanCancer Atlas & MSK-IMPACT NSCLC",
+    "total_patients": 75
+  }
+}

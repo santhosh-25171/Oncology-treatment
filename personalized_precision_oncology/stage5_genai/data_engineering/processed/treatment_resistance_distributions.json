@@ -1,0 +1,271 @@
+{
+  "title": "Targeted Therapy Resistance Alterations & Evidence Base",
+  "cohort_observed_resistance": [
+    {
+      "resistance_mechanism": NaN,
+      "observed_count": 10
+    },
+    {
+      "resistance_mechanism": "On-target T790M gatekeeper",
+      "observed_count": 1
+    },
+    {
+      "resistance_mechanism": "On-target C797S tertiary resistance",
+      "observed_count": 1
+    },
+    {
+      "resistance_mechanism": "Secondary KRAS switch II pocket mutation",
+      "observed_count": 1
+    },
+    {
+      "resistance_mechanism": "Solvent-front steric hindrance",
+      "observed_count": 1
+    },
+    {
+      "resistance_mechanism": "Intrinsic STK11/KEAP1 co-mutation resistance",
+      "observed_count": 1
+    },
+    {
+      "resistance_mechanism": "Bypass RTK MET amplification",
+      "observed_count": 1
+    },
+    {
+      "resistance_mechanism": "Compound cis-T790M/C797S resistance",
+      "observed_count": 1
+    },
+    {
+      "resistance_mechanism": "KRAS G12D allelic shift",
+      "observed_count": 1
+    },
+    {
+      "resistance_mechanism": "Bypass RTK HER2 amplification",
+      "observed_count": 1
+    },
+    {
+      "resistance_mechanism": "Solvent-front G2032R resistance",
+      "observed_count": 1
+    },
+    {
+      "resistance_mechanism": "Histological phenotype switch to SCLC",
+      "observed_count": 1
+    },
+    {
+      "resistance_mechanism": "Secondary RAS GTPase activating mutation",
+      "observed_count": 1
+    },
+    {
+      "resistance_mechanism": "ATP binding site L718Q resistance",
+      "observed_count": 1
+    },
+    {
+      "resistance_mechanism": "Secondary ALK kinase domain mutation",
+      "observed_count": 1
+    },
+    {
+      "resistance_mechanism": "Bypass MAPK activation via BRAF V600E",
+      "observed_count": 1
+    }
+  ],
+  "civic_clinvar_curated_evidence": [
+    {
+      "gene": "EGFR",
+      "variant": "T790M",
+      "therapy_associated": "Erlotinib / Gefitinib / Afatinib",
+      "drug_class": "1st/2nd Gen EGFR TKI",
+      "resistance_phenotype": "Acquired Resistance (Gatekeeper steric hindrance)",
+      "evidence_level": "Level A",
+      "clinical_significance": "Therapeutic Resistance / NCCN Category 1",
+      "pubmed_id": "15721495"
+    },
+    {
+      "gene": "EGFR",
+      "variant": "C797S",
+      "therapy_associated": "Osimertinib",
+      "drug_class": "3rd Gen EGFR TKI",
+      "resistance_phenotype": "Acquired Resistance (Disrupts covalent binding to C797)",
+      "evidence_level": "Level A",
+      "clinical_significance": "Therapeutic Resistance / NCCN Category 2A",
+      "pubmed_id": "25938933"
+    },
+    {
+      "gene": "EGFR",
+      "variant": "MET Amplification",
+      "therapy_associated": "Osimertinib / Erlotinib",
+      "drug_class": "EGFR TKI",
+      "resistance_phenotype": "Acquired Resistance (Bypass RTK pathway activation)",
+      "evidence_level": "Level A",
+      "clinical_significance": "Therapeutic Resistance / NCCN Category 2A",
+      "pubmed_id": "17463250"
+    },
+    {
+      "gene": "EGFR",
+      "variant": "HER2 Amplification",
+      "therapy_associated": "Osimertinib",
+      "drug_class": "3rd Gen EGFR TKI",
+      "resistance_phenotype": "Acquired Resistance (Bypass RTK signaling)",
+      "evidence_level": "Level B",
+      "clinical_significance": "Therapeutic Resistance / Clinical Trials",
+      "pubmed_id": "29853610"
+    },
+    {
+      "gene": "EGFR",
+      "variant": "L718Q",
+      "therapy_associated": "Osimertinib",
+      "drug_class": "3rd Gen EGFR TKI",
+      "resistance_phenotype": "Acquired Resistance (ATP binding site clash)",
+      "evidence_level": "Level B",
+      "clinical_significance": "Therapeutic Resistance / Case Cohorts",
+      "pubmed_id": "28965749"
+    },
+    {
+      "gene": "EGFR",
+      "variant": "G796S",
+      "therapy_associated": "Osimertinib",
+      "drug_class": "3rd Gen EGFR TKI",
+      "resistance_phenotype": "Acquired Resistance (Steric conflict in hinge region)",
+      "evidence_level": "Level C",
+      "clinical_significance": "Therapeutic Resistance / Case Report",
+      "pubmed_id": "28646019"
+    },
+    {
+      "gene": "KRAS",
+      "variant": "Y99C",
+      "therapy_associated": "Sotorasib",
+      "drug_class": "KRAS G12C Inhibitor",
+      "resistance_phenotype": "Acquired Resistance (Switch II pocket spatial disruption)",
+      "evidence_level": "Level B",
+      "clinical_significance": "Therapeutic Resistance / Clinical Trial (CodeBreaK 100)",
+      "pubmed_id": "34161704"
+    },
+    {
+      "gene": "KRAS",
+      "variant": "G12D (Secondary)",
+      "therapy_associated": "Sotorasib / Adagrasib",
+      "drug_class": "KRAS G12C Inhibitor",
+      "resistance_phenotype": "Acquired Resistance (Allelic shift to non-G12C mutant)",
+      "evidence_level": "Level B",
+      "clinical_significance": "Therapeutic Resistance / Clinical Trial (KRYSTAL-1)",
+      "pubmed_id": "34161704"
+    },
+    {
+      "gene": "KRAS",
+      "variant": "G13D",
+      "therapy_associated": "Sotorasib",
+      "drug_class": "KRAS G12C Inhibitor",
+      "resistance_phenotype": "Acquired Resistance (Secondary activating codon switch)",
+      "evidence_level": "Level B",
+      "clinical_significance": "Therapeutic Resistance / Case Cohorts",
+      "pubmed_id": "34161704"
+    },
+    {
+      "gene": "KRAS",
+      "variant": "Q61H",
+      "therapy_associated": "Sotorasib",
+      "drug_class": "KRAS G12C Inhibitor",
+      "resistance_phenotype": "Acquired Resistance (Secondary RAS activation bypass)",
+      "evidence_level": "Level B",
+      "clinical_significance": "Therapeutic Resistance / Case Series",
+      "pubmed_id": "34161704"
+    },
+    {
+      "gene": "ALK",
+      "variant": "G1202R",
+      "therapy_associated": "Alectinib / Crizotinib / Ceritinib",
+      "drug_class": "1st/2nd Gen ALK TKI",
+      "resistance_phenotype": "Acquired Resistance (Solvent front steric conflict)",
+      "evidence_level": "Level A",
+      "clinical_significance": "Therapeutic Resistance / NCCN Category 1 (Sensitive to Lorlatinib)",
+      "pubmed_id": "27009998"
+    },
+    {
+      "gene": "ALK",
+      "variant": "I1171N",
+      "therapy_associated": "Alectinib",
+      "drug_class": "2nd Gen ALK TKI",
+      "resistance_phenotype": "Acquired Resistance (ATP pocket alteration)",
+      "evidence_level": "Level B",
+      "clinical_significance": "Therapeutic Resistance / Case Series",
+      "pubmed_id": "26569766"
+    },
+    {
+      "gene": "ALK",
+      "variant": "L1196M",
+      "therapy_associated": "Crizotinib",
+      "drug_class": "1st Gen ALK TKI",
+      "resistance_phenotype": "Acquired Resistance (Gatekeeper mutation)",
+      "evidence_level": "Level A",
+      "clinical_significance": "Therapeutic Resistance / NCCN Category 2A",
+      "pubmed_id": "20978007"
+    },
+    {
+      "gene": "ROS1",
+      "variant": "G2032R",
+      "therapy_associated": "Crizotinib / Entrectinib",
+      "drug_class": "ROS1 TKI",
+      "resistance_phenotype": "Acquired Resistance (Solvent front steric hindrance)",
+      "evidence_level": "Level A",
+      "clinical_significance": "Therapeutic Resistance / NCCN Category 2A",
+      "pubmed_id": "23851509"
+    },
+    {
+      "gene": "BRAF",
+      "variant": "V600E",
+      "therapy_associated": "Dabrafenib+Trametinib",
+      "drug_class": "BRAF+MEK Inhibitor",
+      "resistance_phenotype": "Primary Sensitivity / Acquired MEK bypass",
+      "evidence_level": "Level A",
+      "clinical_significance": "Therapeutic Sensitivity / FDA Approved",
+      "pubmed_id": "27283860"
+    },
+    {
+      "gene": "MET",
+      "variant": "Exon 14 Skipping",
+      "therapy_associated": "Capmatinib / Tepotinib",
+      "drug_class": "MET TKI",
+      "resistance_phenotype": "Primary Sensitivity / MET amplification secondary",
+      "evidence_level": "Level A",
+      "clinical_significance": "Therapeutic Sensitivity / FDA Approved",
+      "pubmed_id": "32905675"
+    },
+    {
+      "gene": "RET",
+      "variant": "KIF5B-RET",
+      "therapy_associated": "Selpercatinib / Pralsetinib",
+      "drug_class": "RET TKI",
+      "resistance_phenotype": "Primary Sensitivity / Solvent front G810R resistance",
+      "evidence_level": "Level A",
+      "clinical_significance": "Therapeutic Sensitivity / FDA Approved",
+      "pubmed_id": "32849363"
+    },
+    {
+      "gene": "ERBB2",
+      "variant": "Y772_A775dup",
+      "therapy_associated": "Trastuzumab Deruxtecan",
+      "drug_class": "HER2 ADC",
+      "resistance_phenotype": "Primary Sensitivity / NCCN Recommended",
+      "evidence_level": "Level A",
+      "clinical_significance": "Therapeutic Sensitivity / FDA Approved (DESTINY-Lung01)",
+      "pubmed_id": "34534430"
+    },
+    {
+      "gene": "STK11",
+      "variant": "Loss of Function",
+      "therapy_associated": "Pembrolizumab / Nivolumab",
+      "drug_class": "Immune Checkpoint Inhibitor (anti-PD1)",
+      "resistance_phenotype": "Primary Immunotherapy Resistance (Cold tumor microenvironment)",
+      "evidence_level": "Level A",
+      "clinical_significance": "Therapeutic Resistance / Prospective Cohorts",
+      "pubmed_id": "29749964"
+    },
+    {
+      "gene": "KEAP1",
+      "variant": "Loss of Function",
+      "therapy_associated": "Pembrolizumab / Nivolumab",
+      "drug_class": "Immune Checkpoint Inhibitor (anti-PD1)",
+      "resistance_phenotype": "Primary Immunotherapy Resistance (NRF2 activation & immune evasion)",
+      "evidence_level": "Level B",
+      "clinical_significance": "Therapeutic Resistance / Retrospective Cohorts",
+      "pubmed_id": "31980566"
+    }
+  ]
+}

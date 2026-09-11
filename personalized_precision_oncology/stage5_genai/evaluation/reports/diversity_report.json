@@ -1,0 +1,89 @@
+{
+  "total_scenarios": 20,
+  "unique_exact_scenarios": 20,
+  "exact_duplicate_count": 0,
+  "exact_duplicates": [],
+  "near_duplicate_count": 2,
+  "near_duplicates": [
+    {
+      "original": "EDGE_010",
+      "duplicate": "EDGE_013",
+      "signature": "('EGFR', 'EGFR', 'EGFR')|Lung Adenocarcinoma"
+    },
+    {
+      "original": "EDGE_009",
+      "duplicate": "EDGE_018",
+      "signature": "('ALK', 'ALK')|Lung Adenocarcinoma"
+    }
+  ],
+  "category_distribution": {
+    "rare_mutation": 4,
+    "sparse_evidence": 2,
+    "compound_mutation": 1,
+    "compound_resistance": 2,
+    "on_target_resistance": 2,
+    "bypass_resistance": 2,
+    "multi_factor_resistance": 1,
+    "conflicting_genomic_evidence": 1,
+    "missing_biomarker": 1,
+    "unusual_stage_genomic_combination": 1,
+    "rare_mutation_combination": 1,
+    "prior_treatment_resistance": 1,
+    "wildcard": 1
+  },
+  "blind_spot_distribution": {
+    "BS001": 1,
+    "BS002": 1,
+    "BS004": 1,
+    "BS005": 1,
+    "BS007": 1,
+    "BS010": 1,
+    "BS011": 2,
+    "BS012": 1,
+    "BS013": 1,
+    "BS014": 1,
+    "BS015": 1,
+    "BS018": 2,
+    "BS019": 1,
+    "BS023": 1,
+    "BS021": 1,
+    "BS024": 1,
+    "BS017": 1,
+    "BS020": 1
+  },
+  "unique_blind_spots_covered": 18,
+  "gene_coverage_frequency": {
+    "BRAF": 1,
+    "TP53": 3,
+    "MET": 3,
+    "ERBB2": 2,
+    "RET": 1,
+    "NTRK1": 1,
+    "NRG1": 1,
+    "KEAP1": 1,
+    "KRAS": 4,
+    "STK11": 2,
+    "ALK": 4,
+    "EGFR": 14,
+    "Histological Switch": 1,
+    "RB1": 2,
+    "NFE2L2": 1,
+    "ABCB1": 1,
+    "SLFN11": 1,
+    "Histological Transformation": 1
+  },
+  "resistance_mechanism_frequency": {
+    "p.Y99C": 1,
+    "p.G1202R": 1,
+    "p.C797S (in cis)": 1,
+    "Gene Copy Number 14 (High Amplification)": 1,
+    "Neuroendocrine Lineage Plasticity": 1,
+    "p.L718Q": 1,
+    "p.C797S": 2,
+    "Compound p.G1202R + p.L1196M": 1,
+    "Loss of Expression": 1,
+    "Overexpression (P-gp)": 1,
+    "High Copy Amplification (CN=12)": 1,
+    "Neuroendocrine / SCLC Plasticity": 1
+  }
+}

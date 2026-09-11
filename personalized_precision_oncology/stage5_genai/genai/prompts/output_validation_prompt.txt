@@ -1,0 +1,27 @@
+TASK:
+Audit the following generated synthetic oncology stress-test scenario for adherence to scientific evidence boundaries, synthetic labeling, and schema rules.
+
+CANDIDATE SCENARIO JSON:
+{{candidate_scenario}}
+
+AUDIT CRITERIA:
+1. Is the record explicitly labeled with "synthetic": true?
+2. Does the scenario target the specified blind spot?
+3. Are historical baseline claims supported rather than fabricated?
+4. Are synthetic assumptions clearly isolated in "synthetic_assumptions"?
+5. Is uncertainty appropriately categorized (low, medium, or high) with explicit clinical justification?
+6. Is mutation notation standard and plausible (e.g., p.V600E, p.C797S, p.G12C)?
+7. Does the scenario contain any contradictory metadata (e.g., claiming a patient is Stage I while having multifocal visceral metastases)?
+8. Are provenance fields populated with valid timestamps, sources, and generator tags?
+
+AUDIT RESPONSE FORMAT:
+Return ONLY a valid JSON object matching:
+
+{
+  "status": "PASS|FAIL",
+  "issues": [
+    "Description of issue if failed..."
+  ],
+  "evidence_boundary_valid": true,
+  "blind_spot_alignment": true
+}

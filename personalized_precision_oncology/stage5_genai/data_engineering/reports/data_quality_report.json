@@ -1,0 +1,177 @@
+{
+  "original_row_count": 78,
+  "original_column_count": 22,
+  "cleaned_row_count": 75,
+  "removed_duplicate_count": 3,
+  "invalid_record_count": 1,
+  "missing_value_summary": {
+    "patient_id": 0,
+    "cancer_type": 0,
+    "age": 0,
+    "sex": 0,
+    "cancer_stage": 0,
+    "histology": 0,
+    "smoking_history": 25,
+    "pack_years": 25,
+    "vital_status": 25,
+    "overall_survival_months": 25,
+    "progression_free_months": 25,
+    "primary_driver_gene": 0,
+    "primary_mutation": 0,
+    "secondary_resistance_mutation": 11,
+    "prior_targeted_therapy": 50,
+    "best_recist_response": 50,
+    "tmb_mut_per_mb": 50,
+    "pdl1_tps_percent": 50,
+    "ctdna_maf_percent": 51,
+    "resistance_mechanism": 60,
+    "data_source": 0,
+    "source_record_id": 0
+  },
+  "validation_errors": [],
+  "warnings": [],
+  "retained_records": 75,
+  "source_information": {
+    "tcga_clinical": 52,
+    "tcga_mutations": 64,
+    "msk_impact": 26,
+    "seer_epidemiology": 13,
+    "clinvar_civic": 20,
+    "biomarkers_evidence": 6
+  },
+  "final_validation_status": "PASSED",
+  "report_metadata": {
+    "timestamp": "2026-09-11T16:53:06.608401+00:00",
+    "pipeline_version": "1.0.0",
+    "role": "Data Engineer (Stage 5)",
+    "executor": "Automated Quality Assurance Validator"
+  },
+  "source_record_counts": {
+    "tcga_clinical": 52,
+    "tcga_mutations": 64,
+    "msk_impact": 26,
+    "seer_epidemiology": 13,
+    "clinvar_civic": 20,
+    "biomarkers_evidence": 6
+  },
+  "cleaning_summary": {
+    "rows_before_cleaning": 78,
+    "rows_after_cleaning": 75,
+    "duplicates_removed": 3,
+    "invalid_records_removed_or_quarantined": 1
+  },
+  "missing_value_audit": {
+    "patient_id": 0,
+    "cancer_type": 0,
+    "age": 0,
+    "sex": 0,
+    "cancer_stage": 0,
+    "histology": 0,
+    "smoking_history": 25,
+    "pack_years": 25,
+    "vital_status": 25,
+    "overall_survival_months": 25,
+    "progression_free_months": 25,
+    "primary_driver_gene": 0,
+    "primary_mutation": 0,
+    "secondary_resistance_mutation": 11,
+    "prior_targeted_therapy": 50,
+    "best_recist_response": 50,
+    "tmb_mut_per_mb": 50,
+    "pdl1_tps_percent": 50,
+    "ctdna_maf_percent": 51,
+    "resistance_mechanism": 60,
+    "data_source": 0,
+    "source_record_id": 0
+  },
+  "numeric_range_validation": {
+    "age": {
+      "expected_range": [
+        18,
+        115
+      ],
+      "out_of_bounds_count": 0,
+      "status": "PASSED"
+    },
+    "pdl1_tps_percent": {
+      "expected_range": [
+        0,
+        100
+      ],
+      "assayed_records": 25,
+      "out_of_bounds_count": 0,
+      "status": "PASSED"
+    },
+    "ctdna_maf_percent": {
+      "expected_range": [
+        0,
+        100
+      ],
+      "assayed_records": 24,
+      "out_of_bounds_count": 0,
+      "status": "PASSED"
+    },
+    "tmb_mut_per_mb": {
+      "expected_range": [
+        0,
+        500
+      ],
+      "assayed_records": 25,
+      "out_of_bounds_count": 0,
+      "status": "PASSED"
+    }
+  },
+  "categorical_consistency_audit": {
+    "cancer_stage": {
+      "observed_categories": [
+        "Stage IA",
+        "Stage IB",
+        "Stage IIA",
+        "Stage IIB",
+        "Stage IIIA",
+        "Stage IIIB",
+        "Stage IV"
+      ],
+      "invalid_categories": [],
+      "status": "PASSED"
+    },
+    "sex": {
+      "observed_categories": [
+        "Female",
+        "Male"
+      ],
+      "invalid_categories": [],
+      "status": "PASSED"
+    }
+  },
+  "rare_mutation_preservation_audit": {
+    "rare_mutations_identified": 36,
+    "rare_mutations_retained": 31,
+    "retention_rate_percent": 86.11,
+    "retained_variants_sample": [
+      "EGFR:p.C797S",
+      "EGFR:p.T790M",
+      "EGFR:p.L718Q",
+      "EGFR:p.A763_Y764insFQEA",
+      "KRAS:p.Y99C",
+      "KRAS:p.G12D",
+      "KRAS:p.Q61H",
+      "KRAS:p.G12A",
+      "ALK:p.G1202R",
+      "ALK:p.I1171N",
+      "ALK:EML4-ALK",
+      "ROS1:p.G2032R",
+      "ROS1:CD74-ROS1",
+      "MET:p.D1010H",
+      "MET:p.D1010Y"
+    ],
+    "audit_passed": true
+  },
+  "validation_status": {
+    "overall_status": "PASSED",
+    "total_checks_passed": 5,
+    "critical_errors": 0,
+    "warnings": 0,
+    "error_details": []
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RawOncologySourceSchema",
+  "description": "Validation schema for raw ingested historical oncology data sources",
+  "type": "object",
+  "properties": {
+    "tcga_clinical_record": {
+      "type": "object",
+      "required": ["bcr_patient_barcode", "cancer_type", "age_at_index", "gender", "ajcc_pathologic_stage"],
+      "properties": {
+        "bcr_patient_barcode": { "type": "string" },
+        "cancer_type": { "type": "string" },
+        "age_at_index": { "type": ["number", "string"] },
+        "gender": { "type": "string" },
+        "ajcc_pathologic_stage": { "type": "string" }
+      }
+    },
+    "tcga_mutation_record": {
+      "type": "object",
+      "required": ["bcr_patient_barcode", "hugo_symbol", "variant_classification", "hgvsp_short"],
+      "properties": {
+        "bcr_patient_barcode": { "type": "string" },
+        "hugo_symbol": { "type": "string" },
+        "variant_classification": { "type": "string" },
+        "hgvsp_short": { "type": "string" }
+      }
+    },
+    "msk_impact_record": {
+      "type": "object",
+      "required": ["patient_id", "cancer_type", "age", "sex", "cancer_stage", "primary_driver_gene", "primary_mutation"],
+      "properties": {
+        "patient_id": { "type": "string" },
+        "cancer_type": { "type": "string" },
+        "age": { "type": ["number", "string"] },
+        "sex": { "type": "string" },
+        "cancer_stage": { "type": "string" },
+        "primary_driver_gene": { "type": "string" },
+        "primary_mutation": { "type": "string" }
+      }
+    },
+    "seer_epidemiology_record": {
+      "type": "object",
+      "required": ["cohort_subset", "age_bracket", "stage_at_diagnosis", "case_percentage"],
+      "properties": {
+        "cohort_subset": { "type": "string" },
+        "age_bracket": { "type": "string" },
+        "stage_at_diagnosis": { "type": "string" },
+        "case_percentage": { "type": ["number", "string"] }
+      }
+    }
+  }
+}

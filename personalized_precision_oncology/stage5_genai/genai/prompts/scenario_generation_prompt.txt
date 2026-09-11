@@ -1,0 +1,82 @@
+TASK:
+Generate a single, structured SYNTHETIC oncology stress-test scenario that targets the specified genomic blind spot.
+
+TARGET BLIND SPOT:
+{{blind_spot}}
+
+SCENARIO CATEGORY:
+{{scenario_category}}
+
+HISTORICAL REFERENCE BASELINE CONTEXT:
+{{reference_baseline}}
+
+PATIENT CONTEXT CONSTRAINTS:
+{{patient_context_constraints}}
+
+GENOMIC PROFILE CONSTRAINTS:
+{{genomic_constraints}}
+
+BIOMARKER CONSTRAINTS:
+{{biomarker_constraints}}
+
+MANDATORY OUTPUT FORMAT:
+Return ONLY valid, parseable JSON matching the following schema. Do not enclose in markdown ticks or include extraneous conversational prose.
+
+{
+  "scenario_id": "EDGE_XXX",
+  "synthetic": true,
+  "generation_method": "llm",
+  "scenario_category": "{{scenario_category}}",
+  "target_blind_spot": {
+    "blind_spot_id": "...",
+    "category": "...",
+    "coverage_status": "...",
+    "reason": "..."
+  },
+  "patient_context": {
+    "age_group": "...",
+    "sex": "...",
+    "cancer_type": "...",
+    "histology": "...",
+    "stage": "...",
+    "prior_treatment_context": "..."
+  },
+  "genomic_profile": {
+    "alterations": [
+      {
+        "gene": "...",
+        "variant": "...",
+        "alteration_type": "...",
+        "status": "historically_observed|synthetic_combination_not_observed_in_reference"
+      }
+    ],
+    "cooccurring_alterations": [],
+    "resistance_related_features": []
+  },
+  "biomarkers": {},
+  "clinical_context": {
+    "disease_status": "...",
+    "progression_context": "..."
+  },
+  "synthetic_assumptions": [
+    "Explicit statement of simulated features introduced for stress testing..."
+  ],
+  "reference_evidence": [
+    "Explicit citations or facts from the supplied historical baseline supporting elements of this profile..."
+  ],
+  "uncertainty": {
+    "level": "low|medium|high",
+    "reason": "Explicit justification of diagnostic or therapeutic ambiguity..."
+  },
+  "provenance": {
+    "reference_sources": [
+      "TCGA PanCancer Atlas (GDC)",
+      "MSK-IMPACT Targeted Sequencing (cBioPortal)",
+      "CIViC / ClinVar Curated Registries"
+    ],
+    "blind_spot_source": "Stage 5 EDA / blind_spot_report.json",
+    "generation_method": "llm",
+    "generation_timestamp": "ISO_TIMESTAMP",
+    "random_seed": 42
+  }
+}

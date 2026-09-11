@@ -1,0 +1,25 @@
+{
+  "total_scenarios_audited": 20,
+  "documented_blind_spots_targeted_count": 18,
+  "blind_spot_targeting_rate_pct": 100.0,
+  "coverage_by_blind_spot_id": {
+    "BS001": 1,
+    "BS002": 1,
+    "BS004": 1,
+    "BS005": 1,
+    "BS007": 1,
+    "BS010": 1,
+    "BS011": 2,
+    "BS012": 1,
+    "BS013": 1,
+    "BS014": 1,
+    "BS015": 1,
+    "BS018": 2,
+    "BS019": 1,
+    "BS023": 1,
+    "BS021": 1,
+    "BS024": 1,
+    "BS017": 1,
+    "BS020": 1
+  }
+}

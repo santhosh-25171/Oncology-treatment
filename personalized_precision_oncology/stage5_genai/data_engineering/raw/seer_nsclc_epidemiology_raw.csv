@@ -1,0 +1,14 @@
+cohort_subset,age_bracket,sex,stage_at_diagnosis,case_percentage,five_year_relative_survival_percent,median_age_at_diagnosis,incidence_per_100k,primary_source
+Overall NSCLC,All Ages,Both,Localized (Stage I),20.4,65.2,70.0,11.3,SEER 21 Registries 2015-2020
+Overall NSCLC,All Ages,Both,Regional (Stage II-III),21.8,37.1,70.0,12.1,SEER 21 Registries 2015-2020
+Overall NSCLC,All Ages,Both,Distant / Metastatic (Stage IV),53.1,8.9,70.0,29.4,SEER 21 Registries 2015-2020
+Overall NSCLC,All Ages,Both,Unstaged,4.7,11.8,70.0,2.6,SEER 21 Registries 2015-2020
+Age Breakdown,<50,Both,All Stages,4.2,32.4,45.0,2.3,SEER 21 Registries 2015-2020
+Age Breakdown,50-64,Both,All Stages,28.7,29.1,58.0,15.9,SEER 21 Registries 2015-2020
+Age Breakdown,65-74,Both,All Stages,37.6,24.8,70.0,20.8,SEER 21 Registries 2015-2020
+Age Breakdown,75+,Both,All Stages,29.5,17.2,79.0,16.4,SEER 21 Registries 2015-2020
+Sex Distribution,All Ages,Male,All Stages,52.3,21.5,70.0,60.1,SEER 21 Registries 2015-2020
+Sex Distribution,All Ages,Female,All Stages,47.7,28.6,70.0,46.8,SEER 21 Registries 2015-2020
+Histology Breakdown,All Ages,Both,Adenocarcinoma,59.3,27.2,69.0,32.8,SEER 21 Registries 2015-2020
+Histology Breakdown,All Ages,Both,Squamous Cell Carcinoma,24.8,19.6,72.0,13.7,SEER 21 Registries 2015-2020
+Histology Breakdown,All Ages,Both,Large Cell / Other NSCLC,15.9,15.1,71.0,8.8,SEER 21 Registries 2015-2020

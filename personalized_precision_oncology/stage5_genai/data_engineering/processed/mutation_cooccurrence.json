@@ -1,0 +1,109 @@
+{
+  "title": "Observed Somatic Mutation Co-occurrence Patterns",
+  "methodology": "Empirical observation from linked TCGA & MSK-IMPACT NGS profiles",
+  "total_observed_cooccurring_pairs": 17,
+  "cooccurrence_patterns": [
+    {
+      "cooccurring_genes": "EGFR",
+      "observed_instances": 5,
+      "prevalence_in_cohort_percent": 6.67,
+      "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+    },
+    {
+      "cooccurring_genes": "KRAS",
+      "observed_instances": 3,
+      "prevalence_in_cohort_percent": 4.0,
+      "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+    },
+    {
+      "cooccurring_genes": "KRAS + STK11",
+      "observed_instances": 2,
+      "prevalence_in_cohort_percent": 2.67,
+      "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+    },
+    {
+      "cooccurring_genes": "KEAP1 + KRAS",
+      "observed_instances": 2,
+      "prevalence_in_cohort_percent": 2.67,
+      "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+    },
+    {
+      "cooccurring_genes": "ALK",
+      "observed_instances": 2,
+      "prevalence_in_cohort_percent": 2.67,
+      "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+    },
+    {
+      "cooccurring_genes": "KRAS + TP53",
+      "observed_instances": 1,
+      "prevalence_in_cohort_percent": 1.33,
+      "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+    },
+    {
+      "cooccurring_genes": "EGFR + TP53",
+      "observed_instances": 1,
+      "prevalence_in_cohort_percent": 1.33,
+      "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+    },
+    {
+      "cooccurring_genes": "KEAP1 + KRAS + STK11",
+      "observed_instances": 1,
+      "prevalence_in_cohort_percent": 1.33,
+      "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+    },
+    {
+      "cooccurring_genes": "STK11 + TP53",
+      "observed_instances": 1,
+      "prevalence_in_cohort_percent": 1.33,
+      "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+    },
+    {
+      "cooccurring_genes": "NFE2L2 + TP53",
+      "observed_instances": 1,
+      "prevalence_in_cohort_percent": 1.33,
+      "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+    },
+    {
+      "cooccurring_genes": "PIK3CA + TP53",
+      "observed_instances": 1,
+      "prevalence_in_cohort_percent": 1.33,
+      "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+    },
+    {
+      "cooccurring_genes": "CDKN2A + TP53",
+      "observed_instances": 1,
+      "prevalence_in_cohort_percent": 1.33,
+      "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+    },
+    {
+      "cooccurring_genes": "SOX2 + TP53",
+      "observed_instances": 1,
+      "prevalence_in_cohort_percent": 1.33,
+      "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+    },
+    {
+      "cooccurring_genes": "EGFR + MET",
+      "observed_instances": 1,
+      "prevalence_in_cohort_percent": 1.33,
+      "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+    },
+    {
+      "cooccurring_genes": "EGFR + HER2",
+      "observed_instances": 1,
+      "prevalence_in_cohort_percent": 1.33,
+      "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+    },
+    {
+      "cooccurring_genes": "ROS1",
+      "observed_instances": 1,
+      "prevalence_in_cohort_percent": 1.33,
+      "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+    },
+    {
+      "cooccurring_genes": "BRAF_V600E + EGFR",
+      "observed_instances": 1,
+      "prevalence_in_cohort_percent": 1.33,
+      "clinical_context": "Observed co-mutation pattern in historical NSCLC cohort"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "generation_timestamp": "2026-09-11T17:13:19.706055+00:00",
+  "generation_method": "template",
+  "number_requested": 20,
+  "number_generated": 20,
+  "number_validated": 20,
+  "number_rejected": 0,
+  "random_seed": 42,
+  "input_reference_files": [
+    "genai_reference_baseline.jsonl",
+    "mutation_frequency.json",
+    "mutation_cooccurrence.json",
+    "biomarker_distributions.json",
+    "treatment_resistance_distributions.json",
+    "blind_spot_report.json"
+  ],
+  "blind_spots_used": [
+    "BS001",
+    "BS002",
+    "BS004",
+    "BS005",
+    "BS007",
+    "BS010",
+    "BS011",
+    "BS012",
+    "BS013",
+    "BS014",
+    "BS015",
+    "BS017",
+    "BS018",
+    "BS019",
+    "BS020",
+    "BS021",
+    "BS023",
+    "BS024"
+  ]
+}

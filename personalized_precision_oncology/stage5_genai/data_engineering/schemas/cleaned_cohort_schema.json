@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CleanedOncologyCohortSchema",
+  "description": "Validation schema for cleaned, standardized historical oncology patient cohort records",
+  "type": "object",
+  "required": [
+    "patient_id",
+    "cancer_type",
+    "age",
+    "sex",
+    "cancer_stage",
+    "data_source"
+  ],
+  "properties": {
+    "patient_id": { "type": "string", "minLength": 1 },
+    "cancer_type": { "type": "string", "minLength": 1 },
+    "age": {
+      "type": ["number", "null"],
+      "minimum": 18,
+      "maximum": 115
+    },
+    "sex": {
+      "type": "string",
+      "enum": ["Male", "Female", "Unknown"]
+    },
+    "cancer_stage": {
+      "type": "string",
+      "enum": [
+        "Stage IA", "Stage IB", "Stage I",
+        "Stage IIA", "Stage IIB", "Stage II",
+        "Stage IIIA", "Stage IIIB", "Stage IIIC", "Stage III",
+        "Stage IVA", "Stage IVB", "Stage IV",
+        "Unstaged"
+      ]
+    },
+    "histology": { "type": ["string", "null"] },
+    "smoking_history": { "type": ["string", "null"] },
+    "pack_years": {
+      "type": ["number", "string", "null"]
+    },
+    "vital_status": {
+      "type": ["string", "null"],
+      "enum": ["Alive", "Dead", "Unknown", "not_available_in_source", null]
+    },
+    "overall_survival_months": {
+      "type": ["number", "string", "null"]
+    },
+    "progression_free_months": {
+      "type": ["number", "string", "null"]
+    },
+    "primary_driver_gene": { "type": ["string", "null"] },
+    "primary_mutation": { "type": ["string", "null"] },
+    "secondary_resistance_mutation": { "type": ["string", "null"] },
+    "prior_targeted_therapy": { "type": ["string", "null"] },
+    "best_recist_response": { "type": ["string", "null"] },
+    "tmb_mut_per_mb": {
+      "type": ["number", "string", "null"]
+    },
+    "pdl1_tps_percent": {
+      "type": ["number", "string", "null"]
+    },
+    "ctdna_maf_percent": {
+      "type": ["number", "string", "null"]
+    },
+    "resistance_mechanism": { "type": ["string", "null"] },
+    "data_source": { "type": "string", "minLength": 1 },
+    "source_record_id": { "type": "string" }
+  }
+}

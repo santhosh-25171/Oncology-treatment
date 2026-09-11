@@ -1,0 +1,146 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SyntheticPatientScenarioSchema",
+  "description": "Validation schema for synthetic oncology stress-test edge-case scenarios",
+  "type": "object",
+  "required": [
+    "scenario_id",
+    "synthetic",
+    "generation_method",
+    "scenario_category",
+    "target_blind_spot",
+    "patient_context",
+    "genomic_profile",
+    "biomarkers",
+    "clinical_context",
+    "synthetic_assumptions",
+    "reference_evidence",
+    "uncertainty",
+    "provenance"
+  ],
+  "properties": {
+    "scenario_id": {
+      "type": "string",
+      "pattern": "^EDGE_[0-9]{3}$"
+    },
+    "synthetic": {
+      "type": "boolean",
+      "enum": [true]
+    },
+    "generation_method": {
+      "type": "string",
+      "enum": ["llm", "template"]
+    },
+    "fallback_reason": {
+      "type": "string"
+    },
+    "scenario_category": {
+      "type": "string"
+    },
+    "target_blind_spot": {
+      "type": "object",
+      "required": [
+        "blind_spot_id",
+        "category",
+        "coverage_status",
+        "reason"
+      ],
+      "properties": {
+        "blind_spot_id": { "type": "string" },
+        "category": { "type": "string" },
+        "coverage_status": { "type": "string" },
+        "reason": { "type": "string" }
+      }
+    },
+    "patient_context": {
+      "type": "object",
+      "required": [
+        "age_group",
+        "sex",
+        "cancer_type",
+        "histology",
+        "stage",
+        "prior_treatment_context"
+      ],
+      "properties": {
+        "age_group": { "type": "string" },
+        "sex": { "type": "string" },
+        "cancer_type": { "type": "string" },
+        "histology": { "type": "string" },
+        "stage": { "type": "string" },
+        "prior_treatment_context": { "type": "string" }
+      }
+    },
+    "genomic_profile": {
+      "type": "object",
+      "required": [
+        "alterations",
+        "cooccurring_alterations",
+        "resistance_related_features"
+      ],
+      "properties": {
+        "alterations": { "type": "array" },
+        "cooccurring_alterations": { "type": "array" },
+        "resistance_related_features": { "type": "array" }
+      }
+    },
+    "biomarkers": {
+      "type": "object"
+    },
+    "clinical_context": {
+      "type": "object",
+      "required": [
+        "disease_status",
+        "progression_context"
+      ],
+      "properties": {
+        "disease_status": { "type": "string" },
+        "progression_context": { "type": "string" }
+      }
+    },
+    "synthetic_assumptions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "reference_evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "uncertainty": {
+      "type": "object",
+      "required": [
+        "level",
+        "reason"
+      ],
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": ["low", "medium", "high"]
+        },
+        "reason": { "type": "string" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "reference_sources",
+        "blind_spot_source",
+        "generation_method",
+        "generation_timestamp",
+        "random_seed"
+      ],
+      "properties": {
+        "reference_sources": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "blind_spot_source": { "type": "string" },
+        "generation_method": { "type": "string" },
+        "generation_timestamp": { "type": "string" },
+        "random_seed": { "type": "integer" }
+      }
+    }
+  }
+}

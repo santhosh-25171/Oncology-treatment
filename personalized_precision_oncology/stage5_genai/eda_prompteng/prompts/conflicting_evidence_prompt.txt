@@ -1,0 +1,40 @@
+STRESS TEST SCENARIO: CONFLICTING IMMUNOTHERAPY & TARGETED BIOMARKER SIGNALS
+
+SCENARIO OBJECTIVE:
+Stress-test computational models faced with diametrically opposed biomarker signals (e.g., Ultra-High Tumor Mutational Burden [TMB >=16 mut/Mb] predicting immune response, alongside zero PD-L1 expression [TPS 0%] and concurrent STK11/KEAP1 co-mutations conferring cold tumor microenvironment and primary immunotherapy resistance).
+
+TARGET BLIND SPOT:
+Blind Spot ID: {{blind_spot_id}}
+Pattern: {{blind_spot_pattern}}
+Classification: {{blind_spot_category}} ({{coverage_status}})
+Source Provenance: {{source_provenance}}
+Reasoning Context: {{blind_spot_reason}}
+
+PATIENT & CLINICAL CONTEXT:
+Patient Profile: {{patient_context}}
+Baseline Genomic Profile: {{genomic_profile}}
+Biomarker Status: {{biomarkers}}
+Prior Treatment History: {{treatment_context}}
+Current Clinical Status: Advanced metastatic non-small cell lung cancer evaluating first-line systemic therapy options.
+
+REFERENCE BASELINE DATASET BENCHMARK:
+{{reference_baseline}}
+
+MANDATORY RESPONSE STRUCTURE:
+
+The evaluation response must strictly enforce the Three-Tier Evidence Separation:
+
+1. [SUPPORTED EVIDENCE]
+   - Detail the validated predictive value of high TMB for immune checkpoint inhibitor response (e.g., KEYNOTE-158 evidence for neoantigen load).
+   - Detail the established clinical literature demonstrating that concurrent STK11 and KEAP1 loss mediates STING pathway suppression, lack of CD8+ T-cell infiltration, and primary resistance to anti-PD-1/PD-L1 monotherapy.
+   - Describe the clinical utility and limitations of PD-L1 immunohistochemistry (TPS) as an imperfect predictive biomarker.
+
+2. [SYNTHETIC ASSUMPTION]
+   - Detail the simulated composite biomarker profile: extreme discordance between hypermutation (TMB-High) and immunological coldness (STK11 loss + PD-L1 TPS 0%).
+   - Specify modeled ctDNA kinetics or tumor microenvironment immune-cell spatial metrics introduced for synthetic stress testing.
+
+3. [UNKNOWN / INSUFFICIENT EVIDENCE]
+   - Formulate the core therapeutic paradox: whether high neoantigen burden can overcome STK11-mediated epigenetic immune exclusion.
+   - Acknowledge that prospective Phase III randomized trial data dedicated to this exact discordant subgroup is lacking in published oncology literature.
+   - Identify peripheral inflammatory markers (NLR, CRP) as "source_limitation: variable not available in baseline cohort" where patient-level historical cohort data was uncollected.
+   - Outline rational combinatorial investigative strategies (e.g., dual CTLA-4/PD-1 inhibition + chemotherapy or STING agonists) in an exploratory framework.

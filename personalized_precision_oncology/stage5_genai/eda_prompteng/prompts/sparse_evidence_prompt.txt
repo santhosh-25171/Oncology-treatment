@@ -1,0 +1,38 @@
+STRESS TEST SCENARIO: ULTRA-RARE / UNOBSERVED GENOMIC ALTERATIONS & DATASET BLIND SPOTS
+
+SCENARIO OBJECTIVE:
+Evaluate agentic capability to gracefully handle genomic alterations that are completely absent or sparsely represented in standard clinical registries (e.g., NTRK1/2/3 fusions, NRG1 fusions, novel allosteric exon insertions, or atypical kinase fusions).
+
+TARGET BLIND SPOT:
+Blind Spot ID: {{blind_spot_id}}
+Pattern: {{blind_spot_pattern}}
+Classification: {{blind_spot_category}} ({{coverage_status}})
+Source Provenance: {{source_provenance}}
+Reasoning Context: {{blind_spot_reason}}
+
+PATIENT & CLINICAL CONTEXT:
+Patient Profile: {{patient_context}}
+Baseline Genomic Profile: {{genomic_profile}}
+Biomarker Status: {{biomarkers}}
+Prior Treatment History: {{treatment_context}}
+Current Clinical Status: Metastatic adenocarcinoma with comprehensive next-generation sequencing revealing a rare uncataloged gene fusion or atypical variant.
+
+REFERENCE BASELINE DATASET BENCHMARK:
+{{reference_baseline}}
+
+MANDATORY RESPONSE STRUCTURE:
+
+The evaluation response must strictly enforce the Three-Tier Evidence Separation:
+
+1. [SUPPORTED EVIDENCE]
+   - Detail the tissue-agnostic mechanism of action of targeted kinase inhibition (e.g., TRK inhibition by Larotrectinib/Entrectinib or HER3 targeting for NRG1 fusions).
+   - Document any basket trial evidence (e.g., NAVIGATE, STARTRK-2) supporting the oncogenic driver status of the target family.
+
+2. [SYNTHETIC ASSUMPTION]
+   - Detail the simulated clinical case parameters and novel fusion partner architecture (e.g., TPR-NTRK1 or CD74-NRG1 in-frame fusion transcript).
+   - Model the patient's functional status and specific organ involvement for algorithmic evaluation.
+
+3. [UNKNOWN / INSUFFICIENT EVIDENCE]
+   - Explicitly classify the pattern as "not_observed_in_reference_baseline" (rather than "biologically absent").
+   - Highlight the data provenance reality: unobserved status in a reference cohort reflects low population prevalence (<0.5% in NSCLC) and targeted panel design limitations rather than absence in nature.
+   - Emphasize the requirement for RNA-based NGS or confirmatory IHC/FISH when DNA-based assays lack adequate probe coverage across large intronic breakpoints.

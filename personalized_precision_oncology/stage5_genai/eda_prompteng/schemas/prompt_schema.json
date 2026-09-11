@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PromptCoverageReportSchema",
+  "description": "Validation schema for prompt coverage of genomic blind spots and stress-test scenarios",
+  "type": "object",
+  "required": [
+    "total_blind_spots",
+    "blind_spots_converted_into_prompts",
+    "prompt_categories",
+    "rare_mutation_coverage",
+    "compound_mutation_coverage",
+    "resistance_coverage",
+    "conflicting_evidence_coverage",
+    "sparse_evidence_coverage",
+    "wildcard_coverage",
+    "prompts"
+  ],
+  "properties": {
+    "total_blind_spots": { "type": "integer" },
+    "blind_spots_converted_into_prompts": { "type": "integer" },
+    "prompt_categories": { "type": "object" },
+    "rare_mutation_coverage": { "type": "integer" },
+    "compound_mutation_coverage": { "type": "integer" },
+    "resistance_coverage": { "type": "integer" },
+    "conflicting_evidence_coverage": { "type": "integer" },
+    "sparse_evidence_coverage": { "type": "integer" },
+    "wildcard_coverage": { "type": "integer" },
+    "prompts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "prompt_id",
+          "prompt_name",
+          "template_file",
+          "target_blind_spot_id",
+          "stress_dimension",
+          "evidence_boundary_status"
+        ],
+        "properties": {
+          "prompt_id": { "type": "string" },
+          "prompt_name": { "type": "string" },
+          "template_file": { "type": "string" },
+          "target_blind_spot_id": { "type": "string" },
+          "stress_dimension": { "type": "string" },
+          "evidence_boundary_status": { "type": "string" }
+        }
+      }
+    }
+  }
+}

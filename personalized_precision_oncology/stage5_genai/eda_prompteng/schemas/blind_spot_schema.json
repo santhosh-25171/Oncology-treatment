@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BlindSpotReportSchema",
+  "description": "Validation schema for oncology reference baseline blind-spot detection report",
+  "type": "object",
+  "required": ["summary", "blind_spots"],
+  "properties": {
+    "summary": {
+      "type": "object",
+      "required": [
+        "total_blind_spots",
+        "rare_patterns",
+        "sparse_patterns",
+        "not_observed_patterns",
+        "insufficient_evidence_patterns"
+      ],
+      "properties": {
+        "total_blind_spots": { "type": "integer" },
+        "rare_patterns": { "type": "integer" },
+        "sparse_patterns": { "type": "integer" },
+        "not_observed_patterns": { "type": "integer" },
+        "insufficient_evidence_patterns": { "type": "integer" },
+        "conflicting_evidence_patterns": { "type": "integer" },
+        "source_limitation_patterns": { "type": "integer" }
+      }
+    },
+    "blind_spots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "blind_spot_id",
+          "category",
+          "pattern",
+          "frequency",
+          "coverage_status",
+          "evidence_status",
+          "source",
+          "reason",
+          "confidence"
+        ],
+        "properties": {
+          "blind_spot_id": { "type": "string" },
+          "category": {
+            "type": "string",
+            "enum": [
+              "rare_mutation",
+              "missing_mutation",
+              "mutation_cooccurrence",
+              "resistance_mechanism",
+              "biomarker_coverage",
+              "stage_specific",
+              "evidence_conflict",
+              "source_limitation"
+            ]
+          },
+          "pattern": { "type": "string" },
+          "frequency": { "type": "number" },
+          "coverage_status": {
+            "type": "string",
+            "enum": [
+              "well_represented",
+              "rare",
+              "sparse",
+              "not_observed",
+              "insufficient_evidence",
+              "conflicting_evidence",
+              "source_limitation"
+            ]
+          },
+          "evidence_status": { "type": "string" },
+          "source": { "type": "string" },
+          "reason": { "type": "string" },
+          "confidence": {
+            "type": "string",
+            "enum": ["high", "medium", "low"]
+          }
+        }
+      }
+    }
+  }
+}

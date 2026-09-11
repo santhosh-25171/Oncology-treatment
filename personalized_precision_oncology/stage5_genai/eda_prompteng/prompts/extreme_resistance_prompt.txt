@@ -1,0 +1,40 @@
+STRESS TEST SCENARIO: EXTREME TARGETED DRUG RESISTANCE (TERTIARY ON-TARGET + BYPASS RTK)
+
+SCENARIO OBJECTIVE:
+Evaluate computational oncology reasoning under multi-layered targeted drug resistance where primary, secondary, and bypass resistance mechanisms co-occur after sequential targeted therapy.
+
+TARGET BLIND SPOT:
+Blind Spot ID: {{blind_spot_id}}
+Pattern: {{blind_spot_pattern}}
+Classification: {{blind_spot_category}} ({{coverage_status}})
+Source Provenance: {{source_provenance}}
+Reasoning Context: {{blind_spot_reason}}
+
+PATIENT & CLINICAL CONTEXT:
+Patient Profile: {{patient_context}}
+Baseline Genomic Profile: {{genomic_profile}}
+Biomarker Status: {{biomarkers}}
+Prior Treatment History: {{treatment_context}}
+Current Clinical Status: Progressive disease on third-generation targeted therapy with new multifocal hepatic and skeletal metastases.
+
+REFERENCE BASELINE DATASET BENCHMARK:
+{{reference_baseline}}
+
+MANDATORY RESPONSE STRUCTURE:
+
+The evaluation response must strictly enforce the Three-Tier Evidence Separation:
+
+1. [SUPPORTED EVIDENCE]
+   - Detail the established biological mechanism of the primary driver and secondary gatekeeper/switch alterations based on peer-reviewed literature.
+   - Characterize the documented interaction between the ongoing therapy and the binding pocket disruption.
+   - Cite relevant functional evidence (e.g., crystal structure disruption, in vitro IC50 shifts, or CIViC/ClinVar annotations).
+
+2. [SYNTHETIC ASSUMPTION]
+   - Detail the simulated co-occurrence of the tertiary resistance alteration (e.g., {{blind_spot_pattern}}) alongside secondary bypass activation.
+   - Explicitly define the simulated allelic orientation (cis vs trans configuration) and clonal architecture assumptions.
+   - Note that this specific compound resistance profile represents a stress-test edge case derived from empirical dataset blind spots.
+
+3. [UNKNOWN / INSUFFICIENT EVIDENCE]
+   - Identify the therapeutic blind spot: absence of FDA-approved targeted regimens or prospective Phase III trial data addressing this exact concurrent profile.
+   - State whether this configuration was "not_observed_in_reference_baseline" and clarify that lack of cohort representation reflects sample size or historical panel limitations rather than biological impossibility.
+   - Formulate testable scientific hypotheses for experimental combination strategies (e.g., fourth-generation allosteric inhibitors + bispecific antibodies + clinical trial enrollment) without making prescriptive medical decisions.

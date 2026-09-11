@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EvaluationReportSchema",
+  "description": "Validation schema for Stage 5 Evaluation Report",
+  "type": "object",
+  "required": [
+    "evaluation_metadata",
+    "evaluation_summary",
+    "blind_spot_coverage_audit",
+    "stress_distribution",
+    "realism_distribution",
+    "diversity_analysis",
+    "agent_decision_logic_stress_matrix"
+  ],
+  "properties": {
+    "evaluation_metadata": {
+      "type": "object",
+      "required": ["timestamp", "evaluator_role", "total_scenarios_audited", "pipeline_status"],
+      "properties": {
+        "timestamp": { "type": "string" },
+        "evaluator_role": { "type": "string" },
+        "total_scenarios_audited": { "type": "integer" },
+        "pipeline_status": { "type": "string" }
+      }
+    },
+    "evaluation_summary": {
+      "type": "object",
+      "required": [
+        "total_scenarios",
+        "passed",
+        "review",
+        "failed",
+        "average_stress_score",
+        "average_realism_score",
+        "blind_spot_coverage",
+        "duplicate_count",
+        "near_duplicate_count",
+        "strong_stress_cases",
+        "extreme_stress_cases"
+      ],
+      "properties": {
+        "total_scenarios": { "type": "integer" },
+        "passed": { "type": "integer" },
+        "review": { "type": "integer" },
+        "failed": { "type": "integer" },
+        "average_stress_score": { "type": "number" },
+        "average_realism_score": { "type": "number" },
+        "blind_spot_coverage": { "type": "number" },
+        "duplicate_count": { "type": "integer" },
+        "near_duplicate_count": { "type": "integer" },
+        "strong_stress_cases": { "type": "integer" },
+        "extreme_stress_cases": { "type": "integer" }
+      }
+    },
+    "blind_spot_coverage_audit": { "type": "object" },
+    "stress_distribution": { "type": "object" },
+    "realism_distribution": { "type": "object" },
+    "diversity_analysis": { "type": "object" },
+    "agent_decision_logic_stress_matrix": {
+      "type": "array",
+      "items": { "type": "object" }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "title": "Historical Stage Distribution",
+  "cohort_sample_size": 75,
+  "cohort_stage_distribution": [
+    {
+      "stage": "Stage IV",
+      "count": 33,
+      "percentage": 44.0
+    },
+    {
+      "stage": "Stage IA",
+      "count": 11,
+      "percentage": 14.67
+    },
+    {
+      "stage": "Stage IB",
+      "count": 10,
+      "percentage": 13.33
+    },
+    {
+      "stage": "Stage IIIA",
+      "count": 9,
+      "percentage": 12.0
+    },
+    {
+      "stage": "Stage IIB",
+      "count": 6,
+      "percentage": 8.0
+    },
+    {
+      "stage": "Stage IIA",
+      "count": 5,
+      "percentage": 6.67
+    },
+    {
+      "stage": "Stage IIIB",
+      "count": 1,
+      "percentage": 1.33
+    }
+  ],
+  "seer_population_benchmark": [
+    {
+      "stage_group": "Localized (Stage I)",
+      "population_case_percentage": 20.4,
+      "five_year_relative_survival_percent": 65.2,
+      "reference": "SEER 21 Registries 2015-2020"
+    },
+    {
+      "stage_group": "Regional (Stage II-III)",
+      "population_case_percentage": 21.8,
+      "five_year_relative_survival_percent": 37.1,
+      "reference": "SEER 21 Registries 2015-2020"
+    },
+    {
+      "stage_group": "Distant / Metastatic (Stage IV)",
+      "population_case_percentage": 53.1,
+      "five_year_relative_survival_percent": 8.9,
+      "reference": "SEER 21 Registries 2015-2020"
+    },
+    {
+      "stage_group": "Unstaged",
+      "population_case_percentage": 4.7,
+      "five_year_relative_survival_percent": 11.8,
+      "reference": "SEER 21 Registries 2015-2020"
+    }
+  ]
+}

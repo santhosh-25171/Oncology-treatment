@@ -1,0 +1,38 @@
+{
+  "title": "Historical Age Distribution",
+  "summary_statistics": {
+    "variable": "age_at_diagnosis",
+    "sample_size": 75,
+    "mean": 67.19,
+    "std": 7.11,
+    "median": 68.0,
+    "q1": 62.0,
+    "q3": 72.5,
+    "iqr": 10.5,
+    "min": 52.0,
+    "max": 82.0
+  },
+  "age_bracket_distribution": [
+    {
+      "bracket": "<50",
+      "count": 0,
+      "percentage": 0.0
+    },
+    {
+      "bracket": "50-64",
+      "count": 27,
+      "percentage": 36.0
+    },
+    {
+      "bracket": "65-74",
+      "count": 36,
+      "percentage": 48.0
+    },
+    {
+      "bracket": "75+",
+      "count": 12,
+      "percentage": 16.0
+    }
+  ],
+  "seer_median_reference": 70.0
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GenerationConfigSchema",
+  "description": "Validation schema for Stage 5 scenario generation runtime configuration",
+  "type": "object",
+  "required": [
+    "number_of_scenarios",
+    "generation_mode",
+    "fallback_mode",
+    "temperature",
+    "max_tokens",
+    "random_seed",
+    "require_provenance",
+    "require_synthetic_label",
+    "require_blind_spot"
+  ],
+  "properties": {
+    "number_of_scenarios": { "type": "integer", "minimum": 1 },
+    "generation_mode": { "type": "string", "enum": ["llm", "template"] },
+    "fallback_mode": { "type": "string", "enum": ["template"] },
+    "temperature": { "type": "number", "minimum": 0.0, "maximum": 2.0 },
+    "max_tokens": { "type": "integer", "minimum": 500 },
+    "random_seed": { "type": "integer" },
+    "require_provenance": { "type": "boolean" },
+    "require_synthetic_label": { "type": "boolean" },
+    "require_blind_spot": { "type": "boolean" }
+  }
+}

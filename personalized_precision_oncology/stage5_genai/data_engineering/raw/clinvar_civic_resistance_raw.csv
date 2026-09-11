@@ -1,0 +1,21 @@
+gene,variant,hgvsp,drug_name,drug_class,resistance_phenotype,evidence_level,clinical_significance,pubmed_id,source_database
+EGFR,T790M,p.Thr790Met,Erlotinib / Gefitinib / Afatinib,1st/2nd Gen EGFR TKI,Acquired Resistance (Gatekeeper steric hindrance),Level A,Therapeutic Resistance / NCCN Category 1,15721495,CIViC / ClinVar
+EGFR,C797S,p.Cys797Ser,Osimertinib,3rd Gen EGFR TKI,Acquired Resistance (Disrupts covalent binding to C797),Level A,Therapeutic Resistance / NCCN Category 2A,25938933,CIViC / ClinVar
+EGFR,MET Amplification,Amplification,Osimertinib / Erlotinib,EGFR TKI,Acquired Resistance (Bypass RTK pathway activation),Level A,Therapeutic Resistance / NCCN Category 2A,17463250,CIViC / ClinVar
+EGFR,HER2 Amplification,Amplification,Osimertinib,3rd Gen EGFR TKI,Acquired Resistance (Bypass RTK signaling),Level B,Therapeutic Resistance / Clinical Trials,29853610,CIViC
+EGFR,L718Q,p.Leu718Gln,Osimertinib,3rd Gen EGFR TKI,Acquired Resistance (ATP binding site clash),Level B,Therapeutic Resistance / Case Cohorts,28965749,CIViC
+EGFR,G796S,p.Gly796Ser,Osimertinib,3rd Gen EGFR TKI,Acquired Resistance (Steric conflict in hinge region),Level C,Therapeutic Resistance / Case Report,28646019,CIViC
+KRAS,Y99C,p.Tyr99Cys,Sotorasib,KRAS G12C Inhibitor,Acquired Resistance (Switch II pocket spatial disruption),Level B,Therapeutic Resistance / Clinical Trial (CodeBreaK 100),34161704,CIViC / NEJM
+KRAS,G12D (Secondary),p.Gly12Asp,Sotorasib / Adagrasib,KRAS G12C Inhibitor,Acquired Resistance (Allelic shift to non-G12C mutant),Level B,Therapeutic Resistance / Clinical Trial (KRYSTAL-1),34161704,CIViC / NEJM
+KRAS,G13D,p.Gly13Asp,Sotorasib,KRAS G12C Inhibitor,Acquired Resistance (Secondary activating codon switch),Level B,Therapeutic Resistance / Case Cohorts,34161704,CIViC / NEJM
+KRAS,Q61H,p.Gln61His,Sotorasib,KRAS G12C Inhibitor,Acquired Resistance (Secondary RAS activation bypass),Level B,Therapeutic Resistance / Case Series,34161704,CIViC
+ALK,G1202R,p.Gly1202Arg,Alectinib / Crizotinib / Ceritinib,1st/2nd Gen ALK TKI,Acquired Resistance (Solvent front steric conflict),Level A,Therapeutic Resistance / NCCN Category 1 (Sensitive to Lorlatinib),27009998,CIViC / ClinVar
+ALK,I1171N,p.Ile1171Asn,Alectinib,2nd Gen ALK TKI,Acquired Resistance (ATP pocket alteration),Level B,Therapeutic Resistance / Case Series,26569766,CIViC
+ALK,L1196M,p.Leu1196Met,Crizotinib,1st Gen ALK TKI,Acquired Resistance (Gatekeeper mutation),Level A,Therapeutic Resistance / NCCN Category 2A,20978007,CIViC / ClinVar
+ROS1,G2032R,p.Gly2032Arg,Crizotinib / Entrectinib,ROS1 TKI,Acquired Resistance (Solvent front steric hindrance),Level A,Therapeutic Resistance / NCCN Category 2A,23851509,CIViC / ClinVar
+BRAF,V600E,p.Val600Glu,Dabrafenib+Trametinib,BRAF+MEK Inhibitor,Primary Sensitivity / Acquired MEK bypass,Level A,Therapeutic Sensitivity / FDA Approved,27283860,CIViC / ClinVar
+MET,Exon 14 Skipping,p.Asp1010_splice,Capmatinib / Tepotinib,MET TKI,Primary Sensitivity / MET amplification secondary,Level A,Therapeutic Sensitivity / FDA Approved,32905675,CIViC / NEJM
+RET,KIF5B-RET,Fusion,Selpercatinib / Pralsetinib,RET TKI,Primary Sensitivity / Solvent front G810R resistance,Level A,Therapeutic Sensitivity / FDA Approved,32849363,CIViC / NEJM
+ERBB2,Y772_A775dup,p.Tyr772_Ala775dup,Trastuzumab Deruxtecan,HER2 ADC,Primary Sensitivity / NCCN Recommended,Level A,Therapeutic Sensitivity / FDA Approved (DESTINY-Lung01),34534430,CIViC / NEJM
+STK11,Loss of Function,p.Q37* / Frameshift,Pembrolizumab / Nivolumab,Immune Checkpoint Inhibitor (anti-PD1),Primary Immunotherapy Resistance (Cold tumor microenvironment),Level A,Therapeutic Resistance / Prospective Cohorts,29749964,CIViC / Cancer Discov
+KEAP1,Loss of Function,p.R320Q / p.G333C,Pembrolizumab / Nivolumab,Immune Checkpoint Inhibitor (anti-PD1),Primary Immunotherapy Resistance (NRF2 activation & immune evasion),Level B,Therapeutic Resistance / Retrospective Cohorts,31980566,CIViC / Clin Cancer Res

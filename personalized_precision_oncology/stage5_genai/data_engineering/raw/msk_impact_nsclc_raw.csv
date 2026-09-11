@@ -1,0 +1,27 @@
+patient_id,cancer_type,age,sex,cancer_stage,histology,primary_driver_gene,primary_mutation,secondary_resistance_mutation,prior_targeted_therapy,best_recist_response,tmb_mut_per_mb,pdl1_tps_percent,ctdna_maf_percent,resistance_mechanism
+MSK-LC-001,NSCLC,64,Female,Stage IV,Adenocarcinoma,EGFR,p.L858R,p.T790M,Erlotinib,PR,4.8,15,3.2,On-target T790M gatekeeper
+MSK-LC-002,NSCLC,58,Female,Stage IV,Adenocarcinoma,EGFR,p.E746_A750del,p.C797S,Osimertinib,SD,6.2,5,8.4,On-target C797S tertiary resistance
+MSK-LC-003,NSCLC,71,Male,Stage IV,Adenocarcinoma,KRAS,p.G12C,p.Y99C,Sotorasib,PR,11.5,80,5.6,Secondary KRAS switch II pocket mutation
+MSK-LC-004,NSCLC,52,Male,Stage IV,Adenocarcinoma,ALK,EML4-ALK,p.G1202R,Alectinib,PR,3.1,45,2.1,Solvent-front steric hindrance
+MSK-LC-005,NSCLC,67,Male,Stage IV,Adenocarcinoma,KRAS,p.G12C,None,Sotorasib,PD,14.2,0,12.8,Intrinsic STK11/KEAP1 co-mutation resistance
+MSK-LC-006,NSCLC,69,Female,Stage IV,Adenocarcinoma,EGFR,p.E746_A750del,MET_amplification,Osimertinib,PR,5.1,10,6.7,Bypass RTK MET amplification
+MSK-LC-007,NSCLC,61,Female,Stage IV,Adenocarcinoma,EGFR,p.L858R,p.T790M;p.C797S,Osimertinib,PD,8.9,50,14.5,Compound cis-T790M/C797S resistance
+MSK-LC-008,NSCLC,75,Male,Stage IV,Squamous,PIK3CA,p.E545K,None,Chemotherapy,SD,9.4,30,4.2,None
+MSK-LC-009,NSCLC,59,Male,Stage IV,Adenocarcinoma,BRAF,p.V600E,None,Dabrafenib+Trametinib,PR,7.0,60,1.8,None
+MSK-LC-010,NSCLC,63,Female,Stage IV,Adenocarcinoma,RET,KIF5B-RET,None,Selpercatinib,PR,2.8,5,1.2,None
+MSK-LC-011,NSCLC,70,Male,Stage IV,Adenocarcinoma,KRAS,p.G12D,None,Chemotherapy+Pembrolizumab,PR,8.3,90,3.9,None
+MSK-LC-012,NSCLC,56,Female,Stage IV,Adenocarcinoma,EGFR,p.A763_Y764insFQEA,None,Amivantamab,PR,4.0,20,2.5,None
+MSK-LC-013,NSCLC,68,Female,Stage IV,Adenocarcinoma,MET,p.D1010H,None,Capmatinib,PR,5.5,10,3.0,None
+MSK-LC-014,NSCLC,74,Male,Stage IV,Adenocarcinoma,KRAS,p.G12C,p.G12D,Adagrasib,SD,12.1,75,7.9,KRAS G12D allelic shift
+MSK-LC-015,NSCLC,66,Female,Stage IV,Adenocarcinoma,EGFR,p.L858R,HER2_amplification,Osimertinib,PR,6.5,5,5.1,Bypass RTK HER2 amplification
+MSK-LC-016,NSCLC,54,Male,Stage IV,Adenocarcinoma,ROS1,CD74-ROS1,p.G2032R,Crizotinib,PR,3.5,0,2.8,Solvent-front G2032R resistance
+MSK-LC-017,NSCLC,72,Male,Stage IV,Adenocarcinoma,KRAS,p.G12V,None,Chemotherapy,PD,10.8,40,9.2,None
+MSK-LC-018,NSCLC,60,Female,Stage IV,Adenocarcinoma,EGFR,p.E746_A750del,SCLC_transformation,Osimertinib,PR,7.8,0,11.0,Histological phenotype switch to SCLC
+MSK-LC-019,NSCLC,77,Male,Stage IV,Squamous,FGFR1,Amplification,None,Chemotherapy,SD,11.0,25,not_available_in_source,None
+MSK-LC-020,NSCLC,65,Female,Stage IV,Adenocarcinoma,ERBB2,p.Y772_A775dup,None,Trastuzumab_deruxtecan,PR,4.2,40,2.2,None
+MSK-LC-021,NSCLC,62,Male,Stage IV,Adenocarcinoma,KRAS,p.G12C,p.Q61H,Sotorasib,SD,13.5,85,6.4,Secondary RAS GTPase activating mutation
+MSK-LC-022,NSCLC,73,Female,Stage IV,Adenocarcinoma,EGFR,p.L858R,p.L718Q,Osimertinib,PR,5.9,15,4.8,ATP binding site L718Q resistance
+MSK-LC-023,NSCLC,57,Male,Stage IV,Adenocarcinoma,ALK,EML4-ALK,p.I1171N,Alectinib,PR,2.9,35,1.9,Secondary ALK kinase domain mutation
+MSK-LC-024,NSCLC,70,Male,Stage IV,Squamous,NFE2L2,p.E79K,None,Chemotherapy+Pembrolizumab,PR,15.6,95,5.3,None
+MSK-LC-025,NSCLC,68,Female,Stage IV,Adenocarcinoma,EGFR,p.E746_A750del,BRAF_V600E,Osimertinib,PR,8.1,20,5.7,Bypass MAPK activation via BRAF V600E
+MSK-LC-001,NSCLC,64,Female,Stage IV,Adenocarcinoma,EGFR,p.L858R,p.T790M,Erlotinib,PR,4.8,15,3.2,On-target T790M gatekeeper

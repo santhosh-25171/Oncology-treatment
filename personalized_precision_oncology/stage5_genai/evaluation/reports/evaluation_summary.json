@@ -1,0 +1,16 @@
+{
+  "total_scenarios": 20,
+  "passed": 17,
+  "review": 3,
+  "failed": 0,
+  "average_stress_score": 3.23,
+  "average_realism_score": 4.78,
+  "blind_spot_coverage": 18,
+  "duplicate_count": 0,
+  "near_duplicate_count": 2,
+  "strong_stress_cases": 12,
+  "extreme_stress_cases": 2,
+  "percentage_targeting_valid_blind_spots": 100.0,
+  "percentage_with_complete_provenance": 100.0,
+  "percentage_with_correct_synthetic_labeling": 100.0
+}

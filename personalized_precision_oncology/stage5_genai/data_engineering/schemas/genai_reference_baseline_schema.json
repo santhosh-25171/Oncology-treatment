@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GenAIReferenceBaselineSchema",
+  "description": "Validation schema for GenAI Reference Baseline JSONL records consumed by Stage 5 SyntheticCaseGenerator",
+  "type": "object",
+  "required": [
+    "reference_id",
+    "source",
+    "data_type",
+    "cancer_type",
+    "stage_distribution",
+    "age_distribution",
+    "sex_distribution",
+    "mutation_patterns",
+    "mutation_cooccurrence",
+    "biomarker_distributions",
+    "resistance_patterns",
+    "provenance"
+  ],
+  "properties": {
+    "reference_id": { "type": "string", "minLength": 1 },
+    "source": { "type": "string", "minLength": 1 },
+    "data_type": { "type": "string", "minLength": 1 },
+    "cancer_type": { "type": "string", "minLength": 1 },
+    "stage_distribution": {
+      "type": ["object", "string"]
+    },
+    "age_distribution": {
+      "type": ["object", "string"]
+    },
+    "sex_distribution": {
+      "type": ["object", "string"]
+    },
+    "mutation_patterns": {
+      "type": ["array", "string"]
+    },
+    "mutation_cooccurrence": {
+      "type": ["array", "string"]
+    },
+    "biomarker_distributions": {
+      "type": ["object", "string"]
+    },
+    "resistance_patterns": {
+      "type": ["array", "string"]
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["source_name", "dataset", "access_date", "reference"],
+      "properties": {
+        "source_name": { "type": "string" },
+        "dataset": { "type": "string" },
+        "access_date": { "type": "string" },
+        "reference": { "type": "string" },
+        "source_url": { "type": "string" },
+        "license": { "type": "string" },
+        "record_count": { "type": ["integer", "string"] }
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+STRESS TEST SCENARIO: COMPOUND MUTATIONS & MULTI-DRIVER CO-OCCURRENCE
+
+SCENARIO OBJECTIVE:
+Evaluate agentic genomic reasoning when presented with dual or triple canonical oncogenic drivers that violate classical mutual exclusivity paradigms (e.g., concurrent EGFR kinase domain mutation, KRAS GTPase activation, or dual ALK/EGFR rearrangements).
+
+TARGET BLIND SPOT:
+Blind Spot ID: {{blind_spot_id}}
+Pattern: {{blind_spot_pattern}}
+Classification: {{blind_spot_category}} ({{coverage_status}})
+Source Provenance: {{source_provenance}}
+Reasoning Context: {{blind_spot_reason}}
+
+PATIENT & CLINICAL CONTEXT:
+Patient Profile: {{patient_context}}
+Baseline Genomic Profile: {{genomic_profile}}
+Biomarker Status: {{biomarkers}}
+Prior Treatment History: {{treatment_context}}
+Current Clinical Status: Treatment-naive or early progression with NGS tissue biopsy reporting multiple co-existing driver alterations.
+
+REFERENCE BASELINE DATASET BENCHMARK:
+{{reference_baseline}}
+
+MANDATORY RESPONSE STRUCTURE:
+
+The evaluation response must strictly enforce the Three-Tier Evidence Separation:
+
+1. [SUPPORTED EVIDENCE]
+   - Detail the known single-agent oncogenic potency and signaling cascades for each driver alteration in isolation.
+   - Describe standard-of-care monotherapy benchmarks for each single alteration according to current clinical guidelines.
+   - Document any known biochemical crosstalk (e.g., MAPK-ERK vs PI3K-AKT pathway redundancy).
+
+2. [SYNTHETIC ASSUMPTION]
+   - Detail the modeled co-occurrence assumption (e.g., dual clonal coexistence in the same tumor cell versus distinct subclonal populations).
+   - Specify modeled variant allele fractions (VAFs) or copy number amplifications illustrating clonal dominance or subclonal divergence.
+   - State clearly that multi-driver concurrence represents an extreme stress-test condition to probe agent hierarchy selection.
+
+3. [UNKNOWN / INSUFFICIENT EVIDENCE]
+   - Acknowledge that the therapeutic hierarchy for concurrent major oncogenic drivers is clinically undefined due to rarity and exclusion from standard clinical trials.
+   - State whether the co-occurrence pattern is "not_observed_in_reference_baseline" or observed with sparse representation.
+   - Outline the primary mechanistic dilemmas (e.g., risk of concurrent toxicity with dual full-dose TKIs vs selective subclonal pressure with sequential monotherapy).
