@@ -1,0 +1,5 @@
+entity_metric,value
+mean_entity_precision,0.2375
+mean_entity_recall,0.5406
+mean_entity_f1,0.1712
+mean_entity_preservation_rate,0.5406

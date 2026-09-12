@@ -1,0 +1,7 @@
+tissue_class,count,percentage
+normal,5268,32.925
+benign,4351,27.19375
+inflammatory,2186,13.6625
+malignant,1790,11.1875
+tumor_margin,1352,8.450000000000001
+necrotic,1053,6.58125

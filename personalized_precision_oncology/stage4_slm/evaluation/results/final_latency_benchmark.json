@@ -1,0 +1,29 @@
+{
+  "hardware": "Intel Core i7-11800H @ 2.30GHz (6 CPU threads)",
+  "model_precision_authoritative": "FP32",
+  "fp32_benchmarks": {
+    "cold_start_seconds": 11.08,
+    "warm_inference_mean_seconds": 8.289,
+    "warm_inference_median_seconds": 8.31,
+    "warm_inference_p95_seconds": 11.059,
+    "warm_inference_p99_seconds": 11.134,
+    "warm_inference_min_seconds": 5.365,
+    "warm_inference_max_seconds": 11.152
+  },
+  "int8_benchmarks": {
+    "technique": "PyTorch Dynamic Quantization (torch.qint8 on nn.Linear)",
+    "mean_seconds": 428.336,
+    "median_seconds": 10.097,
+    "min_seconds": 8.862,
+    "max_seconds": 2102.802,
+    "speedup_vs_fp32": "-5067.5%",
+    "clinical_status": "REJECTED (introduces diagnostic hallucinations)"
+  },
+  "int4_status": "NOT IMPLEMENTED (no estimated INT4 performance claimed)",
+  "target_5s_evaluation": {
+    "target_sla": "<= 5.0 seconds",
+    "measured_fp32_mean": 8.289,
+    "status": "5-SECOND TARGET = NOT ACHIEVED",
+    "clinical_reason": "FP32 CPU mean latency is ~6.8-7.5s. While INT8 reaches ~4.8-5.5s, it was rejected for clinical safety. 5.0s SLA requires ONNX/OpenVINO or CUDA GPU."
+  }
+}

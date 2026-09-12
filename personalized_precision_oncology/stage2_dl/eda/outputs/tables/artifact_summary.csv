@@ -1,0 +1,7 @@
+tissue_class,0,1
+benign,3456,895
+inflammatory,1740,446
+malignant,1435,355
+necrotic,867,186
+normal,4261,1007
+tumor_margin,1100,252

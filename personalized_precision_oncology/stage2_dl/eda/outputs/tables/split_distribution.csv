@@ -1,0 +1,4 @@
+split,benign,inflammatory,malignant,necrotic,normal,tumor_margin
+test,622,350,282,151,827,227
+train,3076,1538,1212,733,3643,935
+validation,653,298,296,169,798,190

@@ -1,0 +1,7 @@
+{
+    "total_patients": 21,
+    "lstm_total_inference_sec": 1.2745091915130615,
+    "lstm_ms_per_patient": 60.69091388157436,
+    "transformer_total_inference_sec": 0.35010838508605957,
+    "transformer_ms_per_patient": 16.67182786124093
+}

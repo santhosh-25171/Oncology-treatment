@@ -1,0 +1,85 @@
+{
+    "CNN-only": {
+        "dataset": {
+            "train_samples": 297,
+            "val_samples": 90,
+            "test_samples": 108,
+            "classes": [
+                "normal",
+                "benign",
+                "malignant",
+                "tumor_margin",
+                "necrotic",
+                "inflammatory"
+            ]
+        },
+        "training": {
+            "device": "cpu",
+            "batch_size": 32,
+            "best_epoch": 9,
+            "total_time_seconds": 356.5448966026306
+        },
+        "validation_metrics": {
+            "macro_f1": 0.95511174747375
+        },
+        "test_metrics": {
+            "accuracy": 0.9907407407407407,
+            "macro_f1": 0.9903501516404742,
+            "weighted_f1": 0.9907713751799774
+        },
+        "per_class_test": {
+            "normal": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 20.0
+            },
+            "benign": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 20.0
+            },
+            "malignant": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 20.0
+            },
+            "tumor_margin": {
+                "precision": 1.0,
+                "recall": 1.0,
+                "f1-score": 1.0,
+                "support": 13.0
+            },
+            "necrotic": {
+                "precision": 0.9375,
+                "recall": 1.0,
+                "f1-score": 0.967741935483871,
+                "support": 15.0
+            },
+            "inflammatory": {
+                "precision": 1.0,
+                "recall": 0.95,
+                "f1-score": 0.9743589743589743,
+                "support": 20.0
+            }
+        }
+    },
+    "Transformer-only": {
+        "accuracy": 0.8571428571428571,
+        "precision": 1.0,
+        "recall": 0.7272727272727273,
+        "macro_f1": 0.8558352402745995,
+        "roc_auc": 0.9272727272727272,
+        "best_epoch": 2
+    },
+    "CNN + Transformer": {
+        "accuracy": 0.8571428571428571,
+        "precision": 1.0,
+        "recall": 0.7272727272727273,
+        "macro_f1": 0.8558352402745995,
+        "roc_auc": 0.9454545454545454,
+        "best_epoch": 3
+    }
+}

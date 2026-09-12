@@ -1,0 +1,29 @@
+{
+  "total_evaluated": 240,
+  "fully_supported_percentage": 62.5,
+  "partially_supported_percentage": 24.58,
+  "contradictory_percentage": 12.92,
+  "unsupported_claim_percentage": 0.0,
+  "summary_table": [
+    {
+      "faithfulness_status": "FULLY_SUPPORTED",
+      "count": 150,
+      "percentage": 62.5
+    },
+    {
+      "faithfulness_status": "PARTIALLY_SUPPORTED",
+      "count": 59,
+      "percentage": 24.58
+    },
+    {
+      "faithfulness_status": "UNSUPPORTED_CLAIM",
+      "count": 0,
+      "percentage": 0.0
+    },
+    {
+      "faithfulness_status": "CONTRADICTORY",
+      "count": 31,
+      "percentage": 12.92
+    }
+  ]
+}

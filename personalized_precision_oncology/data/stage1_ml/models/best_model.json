@@ -1,0 +1,29 @@
+{
+    "overall_patient_risk": {
+        "best_model": "Logistic Regression",
+        "best_f1_macro": 0.37684428141443904,
+        "classes": [
+            "High",
+            "Low",
+            "Moderate"
+        ]
+    },
+    "toxicity_risk": {
+        "best_model": "Logistic Regression",
+        "best_f1_macro": 0.3925489023644742,
+        "classes": [
+            "High",
+            "Low",
+            "Moderate"
+        ]
+    },
+    "therapy_response": {
+        "best_model": "LightGBM",
+        "best_f1_macro": 0.34436716569853654,
+        "classes": [
+            "Complete Response",
+            "Non-Responder",
+            "Partial Response"
+        ]
+    }
+}

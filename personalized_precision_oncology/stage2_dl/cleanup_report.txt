@@ -1,0 +1,215 @@
+File: configs/cnn.yaml
+Referenced: True
+Safe to delete: False
+Reason: Referenced by other project files
+----------------------------------------
+File: configs/fusion.yaml
+Referenced: True
+Safe to delete: False
+Reason: Referenced by other project files
+----------------------------------------
+File: configs/lstm.yaml
+Referenced: True
+Safe to delete: False
+Reason: Referenced by other project files
+----------------------------------------
+File: configs/transformer.yaml
+Referenced: True
+Safe to delete: False
+Reason: Referenced by other project files
+----------------------------------------
+File: notebooks/01_dl_eda.ipynb
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: notebooks/02_cnn_experiments.ipynb
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: notebooks/03_sequence_model.ipynb
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: notebooks/04_evaluation.ipynb
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: notebooks/05_gradcam_analysis.ipynb
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: scripts/evaluate.py
+Referenced: True
+Safe to delete: False
+Reason: Referenced by other project files
+----------------------------------------
+File: scripts/generate_gradcam.py
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: scripts/run_eda.py
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: scripts/train_cnn.py
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: scripts/train_sequence.py
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: src/__init__.py
+Referenced: N/A
+Safe to delete: False
+Reason: Valid Python package file
+----------------------------------------
+File: tests/test_models.py
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: tests/test_pipeline.py
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: tests/__init__.py
+Referenced: N/A
+Safe to delete: False
+Reason: Valid Python package file
+----------------------------------------
+File: src/data/__init__.py
+Referenced: N/A
+Safe to delete: False
+Reason: Valid Python package file
+----------------------------------------
+File: src/eda/artifact_analysis.py
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: src/eda/class_distribution.py
+Referenced: True
+Safe to delete: False
+Reason: Referenced by other project files
+----------------------------------------
+File: src/eda/image_eda.py
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: src/eda/temporal_eda.py
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: src/eda/__init__.py
+Referenced: N/A
+Safe to delete: False
+Reason: Valid Python package file
+----------------------------------------
+File: src/evaluation/confusion_matrix.py
+Referenced: True
+Safe to delete: False
+Reason: Referenced by other project files
+----------------------------------------
+File: src/evaluation/error_analysis.py
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: src/evaluation/evaluate_cnn.py
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: src/evaluation/evaluate_sequence.py
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: src/evaluation/__init__.py
+Referenced: N/A
+Safe to delete: False
+Reason: Valid Python package file
+----------------------------------------
+File: src/explainability/saliency.py
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: src/explainability/__init__.py
+Referenced: N/A
+Safe to delete: False
+Reason: Valid Python package file
+----------------------------------------
+File: src/fusion/__init__.py
+Referenced: N/A
+Safe to delete: False
+Reason: Valid Python package file
+----------------------------------------
+File: src/models/fusion_model.py
+Referenced: True
+Safe to delete: False
+Reason: Referenced by other project files
+----------------------------------------
+File: src/models/__init__.py
+Referenced: N/A
+Safe to delete: False
+Reason: Valid Python package file
+----------------------------------------
+File: src/training/train_cnn.py
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: src/training/train_fusion.py
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: src/training/train_lstm.py
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: src/training/train_transformer.py
+Referenced: False
+Safe to delete: True
+Reason: Unused empty placeholder
+----------------------------------------
+File: src/training/__init__.py
+Referenced: N/A
+Safe to delete: False
+Reason: Valid Python package file
+----------------------------------------
+File: src/utils/checkpoint.py
+Referenced: True
+Safe to delete: False
+Reason: Referenced by other project files
+----------------------------------------
+File: src/utils/logging.py
+Referenced: True
+Safe to delete: False
+Reason: Referenced by other project files
+----------------------------------------
+File: src/utils/seed.py
+Referenced: True
+Safe to delete: False
+Reason: Referenced by other project files
+----------------------------------------
+File: src/utils/__init__.py
+Referenced: N/A
+Safe to delete: False
+Reason: Valid Python package file
+----------------------------------------

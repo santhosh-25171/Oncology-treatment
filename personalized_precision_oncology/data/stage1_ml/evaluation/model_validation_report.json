@@ -1,0 +1,138 @@
+{
+    "status": "PASS",
+    "models_tested": [
+        "overall_patient_risk: Logistic Regression",
+        "toxicity_risk: Logistic Regression",
+        "therapy_response: LightGBM"
+    ],
+    "errors": [],
+    "test_samples": 750,
+    "prediction_examples": {
+        "overall_patient_risk": {
+            "first_5_predictions": [
+                "High",
+                "High",
+                "High",
+                "High",
+                "High"
+            ],
+            "first_5_probabilities": [
+                [
+                    0.536,
+                    0.139,
+                    0.325
+                ],
+                [
+                    0.5513,
+                    0.1386,
+                    0.3101
+                ],
+                [
+                    0.5217,
+                    0.1411,
+                    0.3372
+                ],
+                [
+                    0.5141,
+                    0.1492,
+                    0.3367
+                ],
+                [
+                    0.4561,
+                    0.1495,
+                    0.3944
+                ]
+            ],
+            "classes": [
+                "High",
+                "Low",
+                "Moderate"
+            ]
+        },
+        "toxicity_risk": {
+            "first_5_predictions": [
+                "High",
+                "Low",
+                "Low",
+                "High",
+                "Low"
+            ],
+            "first_5_probabilities": [
+                [
+                    0.4254,
+                    0.3908,
+                    0.1838
+                ],
+                [
+                    0.377,
+                    0.421,
+                    0.202
+                ],
+                [
+                    0.3481,
+                    0.4269,
+                    0.225
+                ],
+                [
+                    0.4388,
+                    0.4106,
+                    0.1506
+                ],
+                [
+                    0.4054,
+                    0.4131,
+                    0.1814
+                ]
+            ],
+            "classes": [
+                "High",
+                "Low",
+                "Moderate"
+            ]
+        },
+        "therapy_response": {
+            "first_5_predictions": [
+                "Partial Response",
+                "Partial Response",
+                "Partial Response",
+                "Partial Response",
+                "Partial Response"
+            ],
+            "first_5_probabilities": [
+                [
+                    0.3465,
+                    0.1868,
+                    0.4666
+                ],
+                [
+                    0.3269,
+                    0.1851,
+                    0.488
+                ],
+                [
+                    0.3611,
+                    0.1793,
+                    0.4596
+                ],
+                [
+                    0.3531,
+                    0.1875,
+                    0.4594
+                ],
+                [
+                    0.3774,
+                    0.1705,
+                    0.4521
+                ]
+            ],
+            "classes": [
+                "Complete Response",
+                "Non-Responder",
+                "Partial Response"
+            ]
+        }
+    },
+    "generated_files": [
+        "C:\\Users\\Dell\\Documents\\SPECIAL\\personalized_precision_oncology\\data\\stage1_ml\\evaluation\\model_validation_report.json"
+    ]
+}

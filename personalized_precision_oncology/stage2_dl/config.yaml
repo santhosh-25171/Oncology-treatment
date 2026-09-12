@@ -1,0 +1,8 @@
+dataset:
+  root: "stage2_dl/sample_data"
+  spatial_metadata: "stage2_dl/sample_data/spatial/spatial_metadata.csv"
+  spatial_labels: "stage2_dl/sample_data/spatial/labels.csv"
+  spatial_images: "stage2_dl/sample_data/images"
+  temporal_data: "stage2_dl/sample_data/temporal/biomarker_timeseries.csv"
+  progression_targets: "stage2_dl/sample_data/temporal/progression_targets.csv"
+  treatment_timeline: "stage2_dl/sample_data/temporal/treatment_timeline.csv"

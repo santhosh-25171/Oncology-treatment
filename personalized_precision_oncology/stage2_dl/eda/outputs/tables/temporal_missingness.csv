@@ -1,0 +1,17 @@
+,Missing_Count,Missing_Percentage
+patient_id,0,0.0
+study_day,0,0.0
+ctDNA_level,0,0.0
+ctDNA_change_percent,0,0.0
+tumor_volume_cm3,0,0.0
+tumor_growth_rate,0,0.0
+CEA,0,0.0
+CYFRA21_1,0,0.0
+CRP,0,0.0
+LDH,0,0.0
+treatment_status,0,0.0
+treatment_cycle,0,0.0
+treatment_type,0,0.0
+dose_intensity,0,0.0
+response_status,0,0.0
+split,0,0.0

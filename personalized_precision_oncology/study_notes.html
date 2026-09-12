@@ -1,0 +1,706 @@
+
+<html>
+<head>
+<style>
+    body { font-family: Calibri, sans-serif; line-height: 1.5; font-size: 11pt; }
+    h1 { color: #2c3e50; text-align: center; }
+    h2 { color: #2980b9; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid black; padding: 8px; }
+    th { background-color: #f2f2f2; }
+</style>
+</head>
+<body>
+<h1>Stage 02 Deep Learning — Data Engineering Study Notes</h1>
+<p><strong>Subtitle:</strong> Personalized Precision Medicine for Oncology Treatment Optimization</p>
+<hr />
+<h2>Cover Page</h2>
+<p><strong>Stage 02 Deep Learning</strong><br />
+<strong>Data Engineering — Detailed Study Notes</strong><br />
+<strong>Personalized Precision Medicine for Oncology Treatment Optimization</strong>  </p>
+<ul>
+<li><strong>Stage:</strong> Stage 02 — Deep Learning</li>
+<li><strong>Role:</strong> Data Engineer</li>
+<li><strong>Purpose:</strong> Study / Viva Preparation</li>
+<li><strong>Dataset type:</strong> Synthetic research/educational dataset</li>
+</ul>
+<hr />
+<div style="page-break-after: always;"></div>
+
+<h2>SECTION 1 — STAGE 02 OVERVIEW</h2>
+<h3>What is Stage 02 Deep Learning?</h3>
+<p>Stage 02 focuses on leveraging state-of-the-art Deep Learning (DL) architectures to process highly complex, multimodal medical data. While traditional machine learning (ML) typically relies on manually engineered features from tabular datasets, deep learning is capable of automatically discovering representations and learning complex patterns directly from raw data like high-dimensional images and sequential time-series data.</p>
+<h3>How Stage 02 Differs from Stage 01 ML</h3>
+<ul>
+<li><strong>Stage 01 (Machine Learning):</strong> Primarily involved classical models (like Random Forests or Gradient Boosting) operating on structured, tabular data where features (e.g., patient age, single biomarker level) were pre-computed.</li>
+<li><strong>Stage 02 (Deep Learning):</strong> Replaces feature engineering with representation learning. It processes unstructured data—such as pixel arrays from images and raw chronological sequences—and maps them to predictive outcomes using multi-layered neural networks.</li>
+</ul>
+<h3>Why Deep Learning is Being Used</h3>
+<p>The goal of personalized precision oncology requires understanding subtle morphological patterns in tumor tissues and complex dynamic trajectories in patient biomarkers. Deep Learning excels at this through specific architectures:
+1. <strong>Image Data (CNNs):</strong> Convolutional Neural Networks (CNNs) process spatial data, extracting features like cellular atypia, tissue inflammation, and necrosis from histopathology-style image tiles.
+2. <strong>Temporal Data (LSTMs / Transformers):</strong> Long Short-Term Memory networks (LSTMs) or Transformers process sequential longitudinal data (e.g., biomarker changes over time), capturing the temporal dependencies and discovering how a patient’s disease evolves.</p>
+<h3>How Data Engineering Supports These Models</h3>
+<p>Deep Learning models are data-hungry and sensitive to poor-quality inputs. Data Engineering ensures that the right data reaches the model in the correct format, completely free of leaks or corruption. </p>
+<h4>Overall Pipeline Flow:</h4>
+<p><code>text
+DATA
+  ↓
+DATA ENGINEERING
+  ↓
+EDA (Exploratory Data Analysis)
+  ↓
+PREPROCESSING
+  ↓
+MODEL
+  ↓
+TRAINING
+  ↓
+EVALUATION
+  ↓
+INTEGRATION</code></p>
+<hr />
+<div style="page-break-after: always;"></div>
+
+<h2>SECTION 2 — WHAT IS DATA ENGINEERING?</h2>
+<h3>Definition</h3>
+<p><strong>Data Engineering</strong> is the process of collecting, generating, cleaning, organizing, labeling, validating, splitting, and preparing data so that machine-learning or deep-learning models can use it reliably.</p>
+<h3>Responsibilities of the Data Engineer</h3>
+<ol>
+<li><strong>Data Collection/Generation</strong></li>
+<li><strong>What it means:</strong> Gathering or procedurally generating the raw data.</li>
+<li><strong>Why it is needed:</strong> Without data, models cannot learn.</li>
+<li><strong>What was done:</strong> Procedurally generated synthetic pathology-style image tiles and longitudinal biomarker sequences for 2,000 patients.</li>
+<li><strong>Data Cleaning</strong></li>
+<li><strong>What it means:</strong> Identifying and correcting errors, such as missing values or invalid formats.</li>
+<li><strong>Why it is needed:</strong> “Bad data → Bad model.” Dirty data leads to incorrect learning.</li>
+<li><strong>What was done:</strong> Filtered out missing images, handled corrupt data, and ensured temporal consistency.</li>
+<li><strong>Data Preprocessing</strong></li>
+<li><strong>What it means:</strong> Standardizing formats (e.g., 224×224 resolution, RGB).</li>
+<li><strong>Why it is needed:</strong> Neural networks require fixed-size, standardized tensor inputs.</li>
+<li><strong>What was done:</strong> Saved all images precisely as 224×224 RGB files.</li>
+<li><strong>Data Labeling</strong></li>
+<li><strong>What it means:</strong> Assigning the correct target (e.g., "malignant" or "responder").</li>
+<li><strong>Why it is needed:</strong> Supervised learning models need a ground truth to calculate error and adjust weights.</li>
+<li><strong>What was done:</strong> Assigned tissue classes to images and 90-day progression targets to sequences.</li>
+<li><strong>Data Augmentation/Variation</strong></li>
+<li><strong>What it means:</strong> Creating diversity within the dataset to simulate real-world conditions.</li>
+<li><strong>Why it is needed:</strong> Prevents the model from memorizing specific artifacts and helps it generalize.</li>
+<li><strong>What was done:</strong> Introduced intra-class variations, stain variations, and cellular pattern diversities.</li>
+<li><strong>Dataset Organization</strong></li>
+<li><strong>What it means:</strong> Structuring files cleanly so scripts can load them easily.</li>
+<li><strong>Why it is needed:</strong> Disorganized data leads to buggy dataloaders and pipeline crashes.</li>
+<li><strong>What was done:</strong> Organized files into <code>spatial</code> and <code>temporal</code> directories with accompanying metadata CSVs.</li>
+<li><strong>Train/Validation/Test Splitting</strong></li>
+<li><strong>What it means:</strong> Dividing the dataset into subsets for learning, tuning, and final evaluation.</li>
+<li><strong>Why it is needed:</strong> To evaluate how the model performs on unseen data.</li>
+<li><strong>What was done:</strong> Performed a strict patient-level split (1400/300/300).</li>
+<li><strong>Data Quality Validation</strong></li>
+<li><strong>What it means:</strong> Writing scripts to automatically verify the dataset’s integrity.</li>
+<li><strong>Why it is needed:</strong> Manual checking is impossible for large datasets. </li>
+<li><strong>What was done:</strong> Generated a <code>data_quality_report.csv</code> checking image counts, missing values, and file paths.</li>
+<li><strong>Leakage Detection</strong></li>
+<li><strong>What it means:</strong> Ensuring no future or test data accidentally influences the training phase.</li>
+<li><strong>Why it is needed:</strong> Leakage results in models that look perfect during training but fail completely in real life.</li>
+<li><strong>What was done:</strong> Validated that no patient IDs overlap between train/val/test splits.</li>
+<li><strong>Documentation</strong><ul>
+<li><strong>What it means:</strong> Creating a manual or data dictionary describing what every file and column means.</li>
+<li><strong>Why it is needed:</strong> Other engineers and data scientists need to understand the data without reverse-engineering scripts.</li>
+<li><strong>What was done:</strong> Created <code>dataset_dictionary.csv</code>, <code>README.md</code>, and this study document.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<div style="page-break-after: always;"></div>
+
+<h2>SECTION 3 — DATASET OVERVIEW</h2>
+<p>Below is the summary of the finalized dataset generated for this project. These metrics represent the true scale of the data engineered for Deep Learning models.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Metric</th>
+<th style="text-align: left;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Patients</strong></td>
+<td style="text-align: left;">2,000</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Spatial image records</strong></td>
+<td style="text-align: left;">16,000</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Actual image files</strong></td>
+<td style="text-align: left;">16,000</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Temporal observations</strong></td>
+<td style="text-align: left;">58,979</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Image resolution</strong></td>
+<td style="text-align: left;">224 × 224</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Image format</strong></td>
+<td style="text-align: left;">RGB</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Tissue classes</strong></td>
+<td style="text-align: left;">6</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Prediction horizon</strong></td>
+<td style="text-align: left;">90 days</td>
+</tr>
+</tbody>
+</table>
+<h3>Patient Split Distribution</h3>
+<ul>
+<li><strong>Training:</strong> 1,400 patients</li>
+<li><strong>Validation:</strong> 300 patients</li>
+<li><strong>Test:</strong> 300 patients</li>
+</ul>
+<h3>What These Numbers Mean</h3>
+<ul>
+<li><strong>2,000 Patients:</strong> The unique individuals tracked in this dataset.</li>
+<li><strong>16,000 Images:</strong> Multiple pathological tissue patches exist per patient (average of 8 tiles per patient).</li>
+<li><strong>58,979 Observations:</strong> Longitudinal tracking means each patient has multiple time steps recorded over their treatment history.</li>
+<li><strong>224×224 RGB:</strong> Standard input size for modern image models like ResNet, VGG, or Vision Transformers.</li>
+</ul>
+<hr />
+<h2>SECTION 4 — PATIENT MASTER DATA</h2>
+<h3>The Role of <code>patient_master.csv</code></h3>
+<p>The <code>patient_master.csv</code> file serves as the central hub of truth for the entire dataset. It lists all 2,000 patients and holds their demographic and baseline clinical data. </p>
+<h3>Why Patient IDs are Important</h3>
+<p>In a multimodal dataset, different data modalities (images, tabular time-series) live in separate files and folders. The <strong>Patient ID</strong> (e.g., <code>P0001</code>) acts as the relational key that ties everything together. </p>
+<h3>Relationship Hierarchy</h3>
+<p><code>text
+Patient
+  ↓
+Slides (Whole Slide Images)
+  ↓
+Tiles (224x224 cropped regions)
+  ↓
+Temporal observations (Blood tests, biomarkers over time)
+  ↓
+Treatment (Drug cycles applied)
+  ↓
+Prediction targets (What happens at 90 days)</code></p>
+<h3>Why this is Important for Multimodal DL</h3>
+<p>In later stages, a Multimodal Deep Learning architecture will attempt to combine spatial features (from CNNs) and temporal features (from LSTMs) to make a unified prediction. Without strict patient-level relationship tracking, the dataloader would mix up Patient A's tumor image with Patient B's blood tests, destroying the model's ability to learn anything coherent.</p>
+<hr />
+<div style="page-break-after: always;"></div>
+
+<h2>SECTION 5 — SPATIAL / IMAGE DATA ENGINEERING</h2>
+<p>The spatial component consists of histopathology-style image tiles, which act as proxy data for whole slide images (WSIs). </p>
+<h3>Image Specifics</h3>
+<ul>
+<li><strong>Dimensions:</strong> 224 × 224 pixels.</li>
+<li><strong>Format:</strong> RGB (Red, Green, Blue color channels).</li>
+</ul>
+<h3>Why Metadata Matters</h3>
+<p>Even though a CNN primarily "sees" only raw pixel arrays (the 224x224 images), the <code>spatial_metadata.csv</code> provides critical context:
+* <strong>Identifiers:</strong> Patient ID, Slide ID, Tile ID, Image path
+* <strong>Split Information:</strong> Whether the image belongs to train, val, or test.
+* <strong>Tissue Labels:</strong> Ground truth diagnosis (e.g., "malignant").
+* <strong>Pathological Scores:</strong> Cellular atypia, necrosis, inflammation, tumor probability, tumor margin status.
+* <strong>Technical Information:</strong> Artifact information, stain information, magnification.</p>
+<h3>Usefulness of Metadata in DL</h3>
+<p>While the CNN trains on images, the metadata is essential for:
+1. <strong>Dataloading:</strong> Locating the physical <code>.jpg</code> files using <code>image_path</code>.
+2. <strong>Loss Calculation:</strong> Supplying the target <code>tissue_class</code> label.
+3. <strong>Subpopulation Analysis:</strong> Evaluating if the model performs worse on images with high "artifact flags" or unusual "stain types."</p>
+<hr />
+<h2>SECTION 6 — SIX IMAGE CLASSES</h2>
+<p>The dataset categorizes tissues into 6 distinct classes. </p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Class</th>
+<th style="text-align: left;">Meaning</th>
+<th style="text-align: left;">What the CNN should learn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>1. normal</strong></td>
+<td style="text-align: left;">Healthy, unaltered tissue.</td>
+<td style="text-align: left;">Regular, uniform cellular spacing without aggressive growth.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>2. benign</strong></td>
+<td style="text-align: left;">Non-cancerous abnormal growth.</td>
+<td style="text-align: left;">Well-defined boundaries, lacking invasive characteristics.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>3. malignant</strong></td>
+<td style="text-align: left;">Cancerous, invasive tissue.</td>
+<td style="text-align: left;">High cellular atypia, dense clustering, chaotic structural patterns.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>4. tumor_margin</strong></td>
+<td style="text-align: left;">The boundary zone between tumor and healthy tissue.</td>
+<td style="text-align: left;">Transition patterns blending normal and cancerous cellular densities.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>5. necrotic</strong></td>
+<td style="text-align: left;">Dead tissue, often found inside fast-growing tumors.</td>
+<td style="text-align: left;">Lack of cellular structure, fragmented debris, specific color shifts.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>6. inflammatory</strong></td>
+<td style="text-align: left;">Tissue showing immune response.</td>
+<td style="text-align: left;">High density of small immune cells infiltrating the tissue area.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>IMPORTANT:</strong> 
+These are <strong>procedurally generated synthetic pathology-style images for prototype/educational use</strong>. They are not clinically validated pathology images. They simulate the <em>statistical distributions</em> and <em>visual complexity</em> of real WSIs to allow Deep Learning pipeline development.</p>
+</blockquote>
+<hr />
+<div style="page-break-after: always;"></div>
+
+<h2>SECTION 7 — IMAGE GENERATION</h2>
+<h3>Procedural Generation</h3>
+<p>Because accessing 16,000 real, labeled, patient-matched whole-slide images presents massive privacy and logistical barriers, this project utilizes procedural generation using Python libraries like <code>NumPy</code> and <code>Pillow/PIL</code>. </p>
+<p>The generation engine mathematical simulates:
+* Tissue-like background structures
+* Cellular patterns and nuclei placement
+* Appropriate stain variations (e.g., standard H&amp;E, dark H&amp;E)
+* Artifact variations (e.g., blur, folding)</p>
+<h3>Intra-Class vs. Inter-Class Variation</h3>
+<p>If we simply copy-pasted 1,000 identical images of a "malignant" tumor, the CNN would instantly overfit—memorizing that one specific pixel arrangement rather than learning what "malignancy" actually means. </p>
+<ul>
+<li><strong>Intra-class variation:</strong> Differences <em>within the same category</em>. (e.g., A malignant tumor image from Patient A looks slightly different from Patient B due to different staining intensity or cell density, but both are still malignant).</li>
+<li><strong>Inter-class variation:</strong> Differences <em>between different categories</em>. (e.g., A normal tissue image looks structurally different from a necrotic image).</li>
+</ul>
+<p>The generation script explicitly enforces intra-class variation so the CNN is forced to learn robust, generalizable features.</p>
+<hr />
+<h2>SECTION 8 — IMAGE AUGMENTATION AND VARIATION</h2>
+<h3>Dataset Generation Variation vs. Training-Time Augmentation</h3>
+<p>It is vital to distinguish between two distinct concepts:</p>
+<ol>
+<li>
+<p><strong>Dataset Generation Variation (Completed):</strong> 
+   During the Data Engineering phase, we deliberately generated base images with built-in variability (different base stains, simulated blur artifacts). This guarantees the foundational dataset on disk is diverse.</p>
+</li>
+<li>
+<p><strong>Training-Time Augmentation (Future Work):</strong> 
+   During the actual Deep Learning model training (in PyTorch/TensorFlow), the dataloader will apply on-the-fly random transformations to an image right before passing it to the GPU. </p>
+</li>
+</ol>
+<h3>Why Augmentation is Useful</h3>
+<p>Augmentation artificially expands the size of the dataset. Even with 16,000 images, a large CNN can overfit. By randomly altering the image slightly every epoch, the network never sees the exact same image twice.</p>
+<h3>Common Augmentation Techniques (To be applied at training time)</h3>
+<ul>
+<li><strong>Rotation:</strong> Randomly spinning the image (tumors have no fixed orientation).</li>
+<li><strong>Flipping:</strong> Horizontal or vertical mirroring.</li>
+<li><strong>Cropping:</strong> Zooming in on specific patches.</li>
+<li><strong>Brightness/Contrast variation:</strong> Simulating different microscope lighting conditions.</li>
+<li><strong>Color/Stain Jittering:</strong> Modifying RGB channels to simulate different laboratory chemical staining variations.</li>
+</ul>
+<hr />
+<div style="page-break-after: always;"></div>
+
+<h2>SECTION 9 — IMAGE QUALITY VALIDATION</h2>
+<p>A dataset is useless if the dataloader crashes midway through training because a file is missing. The data engineering pipeline executed strict quality assurance.</p>
+<h3>Validation Checks Performed:</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Check Performed</th>
+<th style="text-align: left;">Status</th>
+<th style="text-align: left;">Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Image existence (16,000)</strong></td>
+<td style="text-align: left;"><strong>PASS</strong></td>
+<td style="text-align: left;">Expected: 16000, Actual: 16000</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Missing images</strong></td>
+<td style="text-align: left;"><strong>PASS</strong></td>
+<td style="text-align: left;">0 missing files</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Corrupt images</strong></td>
+<td style="text-align: left;"><strong>PASS</strong></td>
+<td style="text-align: left;">All files can be opened by PIL</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Broken image paths</strong></td>
+<td style="text-align: left;"><strong>PASS</strong></td>
+<td style="text-align: left;">CSV paths correctly map to OS files</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Invalid image dimensions</strong></td>
+<td style="text-align: left;"><strong>PASS</strong></td>
+<td style="text-align: left;">All images are exactly 224x224</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Duplicate image paths</strong></td>
+<td style="text-align: left;"><strong>PASS</strong></td>
+<td style="text-align: left;">0 duplicate paths</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Duplicate tile IDs</strong></td>
+<td style="text-align: left;"><strong>PASS</strong></td>
+<td style="text-align: left;">0 duplicate tile identifiers</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Duplicate slide IDs</strong></td>
+<td style="text-align: left;"><strong>PASS</strong></td>
+<td style="text-align: left;">Slides are shared correctly across patients</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Patient leakage</strong></td>
+<td style="text-align: left;"><strong>PASS</strong></td>
+<td style="text-align: left;">0 patients exist in multiple splits</td>
+</tr>
+</tbody>
+</table>
+<p>These checks confirm the image dataset is 100% physically intact and structurally valid for tensor conversion.</p>
+<hr />
+<h2>SECTION 10 — CLASS DISTRIBUTION</h2>
+<p>A critical aspect of data engineering is profiling the target labels.</p>
+<h3>Current Class Counts</h3>
+<ul>
+<li><strong>normal:</strong> 5,268</li>
+<li><strong>benign:</strong> 4,351</li>
+<li><strong>inflammatory:</strong> 2,186</li>
+<li><strong>malignant:</strong> 1,790</li>
+<li><strong>tumor_margin:</strong> 1,352</li>
+<li><strong>necrotic:</strong> 1,053</li>
+</ul>
+<h3>Class Imbalance</h3>
+<p><strong>What it means:</strong> Some categories appear much more frequently than others (e.g., normal vs. necrotic).
+<strong>Why it matters:</strong> A CNN is "lazy." If 90% of the data is "normal," the network might achieve 90% accuracy simply by guessing "normal" every time, completely ignoring the minority classes.</p>
+<h3>Minority Classes Requiring Attention</h3>
+<p>Malignant, tumor_margin, and necrotic are the most critical classes clinically, yet they have the fewest samples. </p>
+<h3>Planned Future Solutions (Deep Learning Phase)</h3>
+<ul>
+<li><strong>Data Augmentation:</strong> Heavier augmentation on minority classes.</li>
+<li><strong>Class Weights:</strong> Modifying the loss function (e.g., Cross-Entropy with weights) to penalize the model more heavily if it misclassifies a minority class.</li>
+<li><strong>Weighted Sampling:</strong> Forcing the dataloader to oversample minority classes during batch creation.</li>
+<li><strong>Focal Loss:</strong> An advanced loss function that forces the model to focus on "hard-to-predict" examples.</li>
+</ul>
+<p><em>(Note: These solutions are planned for the modeling phase and are not yet applied to the physical dataset).</em></p>
+<hr />
+<div style="page-break-after: always;"></div>
+
+<h2>SECTION 11 — TEMPORAL DATA ENGINEERING</h2>
+<p>While images capture a spatial snapshot, oncology requires observing how the patient changes over time. </p>
+<h3>Temporal Dataset Overview</h3>
+<ul>
+<li><strong>Observations:</strong> 58,979</li>
+<li><strong>Modality:</strong> Longitudinal, sequence-based tabular data.</li>
+</ul>
+<h3>Longitudinal Observations</h3>
+<p>Unlike static data, longitudinal data tracks the same variables recorded repeatedly over a period (e.g., every 15 days). Variables included in the <code>biomarker_timeseries.csv</code> include:
+* <strong>ctDNA level:</strong> Circulating tumor DNA in the bloodstream.
+* <strong>ctDNA change percentage:</strong> Trend analysis of ctDNA.
+* <strong>tumor volume:</strong> Physical size estimation.
+* <strong>tumor growth rate:</strong> Velocity of expansion.
+* <strong>Blood biomarkers:</strong> CEA, CYFRA21-1, CRP, LDH.</p>
+<p>Also integrated is the context under which these observations happen:
+* <strong>Treatment status:</strong> Active / Follow-up
+* <strong>Treatment cycle:</strong> Which round of therapy the patient is receiving
+* <strong>Treatment type:</strong> The specific protocol used
+* <strong>Dose intensity:</strong> Dosage level applied
+* <strong>Response status:</strong> Clinical assessment at that time point</p>
+<h3>Usage in Deep Learning</h3>
+<p>This data is specifically engineered for sequence models:
+* <strong>LSTM (Long Short-Term Memory):</strong> Can ingest these time points chronologically, retaining an internal "memory" of how the patient's ctDNA fluctuated historically.
+* <strong>Transformers:</strong> Can look at the entire sequence of visits simultaneously using "attention" mechanisms to discover long-range dependencies (e.g., noticing that a specific biomarker spike on Day 15 strongly correlates with relapse on Day 90).</p>
+<hr />
+<h2>SECTION 12 — TEMPORAL SEQUENCES</h2>
+<h3>The Chronological Chain</h3>
+<p><code>text
+Patient P001
+  ↓ Day 1  (Baseline)
+  ↓ Day 15 (Cycle 1 start)
+  ↓ Day 30 (Observation)
+  ↓ Day 45 (Cycle 2 start)
+  ↓ Day 60 (Observation)
+  ↓ Future prediction</code></p>
+<h3>Why Chronological Ordering Matters</h3>
+<p>Recurrent Neural Networks (RNN/LSTMs) ingest data sequentially. If rows in the dataset are accidentally scrambled (e.g., Day 60 appears before Day 15), the model learns a chaotic, biologically impossible trajectory.</p>
+<h3>Protecting Against Temporal Leakage</h3>
+<p>When forming input tensors, the model must only "see" data up to the current day to predict the future. If Day 90 information accidentally slips into the Day 60 input sequence, the model is "cheating." Data Engineering strictly enforces temporal integrity.</p>
+<hr />
+<div style="page-break-after: always;"></div>
+
+<h2>SECTION 13 — TREATMENT TIMELINE</h2>
+<p>The <code>treatment_timeline.csv</code> encapsulates the therapeutic interventions applied to the patient.</p>
+<h3>Key Variables:</h3>
+<ul>
+<li><strong>Treatment status:</strong> Is the patient currently on drug?</li>
+<li><strong>Treatment cycle:</strong> The current therapy iteration.</li>
+<li><strong>Treatment type:</strong> Targeted therapy vs. broad chemotherapy.</li>
+<li><strong>Dose intensity:</strong> 100% vs reduced doses.</li>
+<li><strong>Treatment dates:</strong> Start and stop timeframes.</li>
+<li><strong>Response status:</strong> Ongoing clinical evaluation.</li>
+</ul>
+<h3>Why Treatment Context is Essential</h3>
+<p>Biomarker trajectories do not exist in a vacuum. A sudden drop in tumor volume is excellent news if the patient is on active treatment, but a rapid rise in ctDNA is catastrophic if it happens <em>despite</em> high dose intensity. By providing treatment context to the LSTM, the model learns the <em>interaction</em> between biology and pharmacology.</p>
+<hr />
+<h2>SECTION 14 — 90-DAY TARGETS</h2>
+<p>The ultimate goal of the Stage 02 model is prediction. </p>
+<h3>Prediction Horizon</h3>
+<p><strong>90 Days:</strong> The model observes current and past sequences/images, and attempts to forecast the patient's state exactly 90 days into the future.</p>
+<h3>Target Variables</h3>
+<p>Located in <code>progression_targets.csv</code>:
+* <code>progression_90d</code>: Binary flag (Yes/No) will the disease progress?
+* <code>future_tumor_volume_cm3</code>: Regression target for physical size.
+* <code>future_tumor_growth_rate</code>: Regression target for growth speed.
+* <code>response_category_90d</code>: Multiclass target for clinical outcome.</p>
+<h3>Prediction Targets vs. Input Features</h3>
+<p>These variables are the <strong>answers to the test</strong>. They are carefully isolated in their own file so they are NEVER accidentally fed into the model as input data (which would cause massive target leakage).</p>
+<hr />
+<h2>SECTION 15 — RESPONSE CATEGORIES</h2>
+<p>To provide nuanced clinical outputs, patients are grouped into response categories:</p>
+<ul>
+<li><strong>responder:</strong> Tumor is shrinking, biomarkers falling.</li>
+<li><strong>stable:</strong> Disease is halted, neither growing nor shrinking.</li>
+<li><strong>progressive:</strong> Disease is actively advancing despite intervention.</li>
+<li><strong>mixed:</strong> Some lesions shrink while others grow.</li>
+<li><strong>delayed_progression:</strong> Initial stability followed by sudden failure.</li>
+<li><strong>resistant:</strong> Complete lack of response to therapy from Day 1.</li>
+</ul>
+<h3>Usefulness for Sequence Models</h3>
+<p>By classifying patients into these distinct longitudinal archetypes, the Transformer/LSTM model can be trained on a multi-class classification task, outputting a probability distribution. (e.g., "Patient A has a 70% chance of being 'resistant' based on their Day 15 ctDNA trajectory.")</p>
+<hr />
+<div style="page-break-after: always;"></div>
+
+<h2>SECTION 16 — TRAIN / VALIDATION / TEST SPLIT</h2>
+<p>Data must be partitioned to train and evaluate the model honestly.</p>
+<ul>
+<li><strong>Training Set (1,400 patients):</strong> The data the model "studies" to learn internal parameters and weights.</li>
+<li><strong>Validation Set (300 patients):</strong> Used during training to tune hyperparameters and check for overfitting. The model does not learn from this data directly.</li>
+<li><strong>Test Set (300 patients):</strong> Completely locked away until the final day. Used for the final, unbiased evaluation of model accuracy.</li>
+</ul>
+<h3>Why Splitting by Patient is Critical</h3>
+<p>A severe mistake in medical ML is a "random" or "image-level" split. </p>
+<p><strong>Example of Bad Splitting:</strong>
+* Patient 001's Tile 1 → Sent to Training
+* Patient 001's Tile 2 → Sent to Test</p>
+<p><strong>Why this is disastrous:</strong>
+If the CNN sees Tile 1 during training, it learns the unique structural artifacts, background noise, or specific stain signature of Patient 001. During testing, when it sees Tile 2, it isn't recognizing "malignancy"—it's just recognizing Patient 001! This causes massive "patient leakage" and artificial 99% accuracy.</p>
+<p><strong>The Correct Approach (Implemented):</strong>
+* Patient 001 → ALL tiles and temporal data go to Training.
+* Patient 002 → ALL tiles and temporal data go to Test.
+This guarantees the model proves its worth on <em>entirely unseen human beings</em>.</p>
+<hr />
+<h2>SECTION 17 — DATA LEAKAGE</h2>
+<p><strong>Data Leakage</strong> occurs when information from outside the training dataset is used to create the model, allowing the model to "cheat" and perform artificially well during development, only to fail completely in production.</p>
+<h3>Types of Leakage</h3>
+<ul>
+<li><strong>Patient Leakage:</strong> (Described above) A single patient's records crossing the train/test barrier.</li>
+<li><strong>Target Leakage:</strong> The model accidentally receives a feature that implies the answer. (e.g., Using "cause of death" to predict 90-day progression).</li>
+<li><strong>Temporal Leakage:</strong> Using Day 90 biomarker values to predict the Day 90 outcome. Time-series models must be strictly causally masked.</li>
+<li><strong>Split Leakage:</strong> Allowing information from the Validation or Test set to influence the preprocessing phase (e.g., calculating the global mean of the entire dataset to normalize the Training data, rather than calculating the mean from the Training data alone).</li>
+</ul>
+<blockquote>
+<p><strong>Remember this:</strong> Leakage creates artificially high model performance. If your Deep Learning model achieves 99.9% accuracy on a complex medical task on its first run, you almost certainly have a data leak.</p>
+</blockquote>
+<hr />
+<div style="page-break-after: always;"></div>
+
+<h2>SECTION 18 — DATA QUALITY</h2>
+<p>Data Engineering is essentially about building trust in the numbers. <strong>Bad data → Bad model.</strong></p>
+<h3>Quality Factors Handled</h3>
+<ul>
+<li><strong>Missing values:</strong> Handled or imputed to prevent NaN crashes in PyTorch tensors.</li>
+<li><strong>Duplicate records:</strong> Removed so the model doesn't over-weight repeated events.</li>
+<li><strong>Invalid values:</strong> E.g., ensuring no negative ages or impossible categorizations.</li>
+<li><strong>Impossible tumor volumes:</strong> Ensuring physical constraints (a tumor cannot have negative cm³).</li>
+<li><strong>Biomarker outliers:</strong> Handling biologically impossible readings that would skew model loss gradients.</li>
+<li><strong>Invalid treatment dates:</strong> Ensuring chronological consistency (Treatment End cannot be before Treatment Start).</li>
+<li><strong>Missing images:</strong> Asserting every path exists on disk.</li>
+<li><strong>Corrupt images:</strong> Verifying headers so the dataloader doesn't throw a decoding error.</li>
+<li><strong>Invalid dimensions:</strong> Ensuring standard 224x224 geometry.</li>
+<li><strong>Temporal inconsistencies:</strong> Making sure Day 30 happens after Day 15.</li>
+</ul>
+<hr />
+<h2>SECTION 19 — DATASET DOCUMENTATION</h2>
+<p>A well-engineered dataset requires a map. The following files provide full context:</p>
+<ul>
+<li><code>README.md</code>: High-level overview, project goals, and folder structure.</li>
+<li><code>dataset_dictionary.csv</code>: Defines exactly what every column name means and its data type.</li>
+<li><code>data_quality_report.csv</code>: The automated PASS/FAIL report verifying data integrity.</li>
+<li><code>patient_master.csv</code>: The core demographic linkage table.</li>
+<li><code>train_validation_test_split.csv</code>: The cryptographic-style map of which patient belongs to which split.</li>
+<li><code>spatial_metadata.csv</code>: Detailed labels and pathological scores for every image tile.</li>
+<li><code>labels.csv</code>: Ground truth tissue classifications.</li>
+<li><code>biomarker_timeseries.csv</code>: The chronological sequence of patient lab values.</li>
+<li><code>treatment_timeline.csv</code>: The historical log of interventions applied.</li>
+<li><code>progression_targets.csv</code>: The 90-day future outcomes for model prediction.</li>
+</ul>
+<hr />
+<div style="page-break-after: always;"></div>
+
+<h2>SECTION 20 — DATA ENGINEERING PIPELINE</h2>
+<p>The automated workflow that generated the data from nothing to a DL-ready state:</p>
+<p><code>text
+PATIENT GENERATION 
+  (Base demographics)
+  ↓
+SPATIAL DATA GENERATION 
+  (Assigning slides/tiles)
+  ↓
+IMAGE GENERATION 
+  (Drawing the 16,000 .jpg files)
+  ↓
+IMAGE LABELING 
+  (Assigning tissue_class and atypia scores)
+  ↓
+TEMPORAL DATA GENERATION 
+  (Simulating sequential lab values)
+  ↓
+TREATMENT DATA 
+  (Aligning drug cycles with timelines)
+  ↓
+90-DAY TARGET GENERATION 
+  (Calculating final prediction goals)
+  ↓
+PATIENT-LEVEL SPLIT 
+  (1400 / 300 / 300 strict isolation)
+  ↓
+QUALITY VALIDATION 
+  (Automated QA checks against dataset)
+  ↓
+LEAKAGE CHECK 
+  (Verifying split isolation and temporal integrity)
+  ↓
+DOCUMENTATION 
+  (Generating dictionaries and reports)
+  ↓
+HANDOFF TO DL ENGINEER 
+  (Data is now ready for PyTorch/TensorFlow)</code></p>
+<hr />
+<h2>SECTION 21 — WHAT IS COMPLETED?</h2>
+<h3>Completed</h3>
+<ul>
+<li>[x] Dataset creation</li>
+<li>[x] Patient master</li>
+<li>[x] Image metadata</li>
+<li>[x] Image labels</li>
+<li>[x] 16,000 actual image files</li>
+<li>[x] Temporal biomarker data</li>
+<li>[x] Treatment timeline</li>
+<li>[x] 90-day targets</li>
+<li>[x] Patient-level split</li>
+<li>[x] Data quality validation</li>
+<li>[x] Leakage checks</li>
+<li>[x] Dataset dictionary</li>
+<li>[x] Quality report</li>
+<li>[x] Data Engineering documentation</li>
+</ul>
+<h3>Not yet completed (Future Work)</h3>
+<ul>
+<li>[ ] DL EDA (Exploratory Data Analysis at Tensor Level)</li>
+<li>[ ] CNN training</li>
+<li>[ ] LSTM/Transformer training</li>
+<li>[ ] Model evaluation</li>
+<li>[ ] Grad-CAM analysis</li>
+<li>[ ] Multimodal fusion</li>
+<li>[ ] API integration</li>
+</ul>
+<hr />
+<div style="page-break-after: always;"></div>
+
+<h2>SECTION 22 — LIMITATIONS</h2>
+<p>It is vital to state the limitations of this dataset clearly for any viva or review:</p>
+<ol>
+<li>The pathology images are <strong>synthetic</strong>.</li>
+<li>They are <strong>procedurally generated</strong> using mathematical scripting, not captured via microscope.</li>
+<li>They are <strong>not real clinical WSI data</strong>.</li>
+<li>They are <strong>not clinically validated</strong> by human pathologists.</li>
+<li>The current spatial dataset does <strong>not contain actual CT/MRI scans</strong>.</li>
+<li>The dataset is intended purely for <strong>prototype / educational model development</strong> (proving the architecture works).</li>
+<li>Clinical deployment would require <strong>real, de-identified, expert-labeled medical data</strong> and rigorous external validation.</li>
+</ol>
+<hr />
+<div style="page-break-after: always;"></div>
+
+<h2>SECTION 23 — VIVA QUESTIONS</h2>
+<p><strong>1. What is Data Engineering?</strong>
+The process of generating, cleaning, organizing, and verifying data so models can learn reliably.</p>
+<p><strong>2. Why is Data Engineering important in DL?</strong>
+Deep Learning is highly sensitive to dirty data. "Bad data means a bad model." Data engineering prevents crashes and leakage.</p>
+<p><strong>3. Why are images 224 × 224?</strong>
+It is the standard input tensor size required by major pre-trained CNN architectures (ResNet, VGG, ViT).</p>
+<p><strong>4. Why RGB?</strong>
+Neural networks process image data as matrices. RGB splits the image into three channels (Red, Green, Blue) capturing stain colors efficiently.</p>
+<p><strong>5. What is augmentation?</strong>
+Modifying images during training (rotating, flipping) so the model sees new variations and avoids overfitting.</p>
+<p><strong>6. What is class imbalance?</strong>
+When some labels (e.g., normal) appear much more frequently than others (e.g., necrotic), causing the model to become biased.</p>
+<p><strong>7. Why is patient-level splitting required?</strong>
+To prevent patient leakage. If Tile A is in training and Tile B is in testing for the same patient, the model memorizes the patient, inflating test accuracy.</p>
+<p><strong>8. What is data leakage?</strong>
+When information from outside the training set leaks into the training process, allowing the model to "cheat."</p>
+<p><strong>9. What is target leakage?</strong>
+When the input data accidentally contains information about the final answer you are trying to predict.</p>
+<p><strong>10. What is temporal leakage?</strong>
+When a sequence model accidentally uses future data points to predict past or present events.</p>
+<p><strong>11. Why is chronological ordering important?</strong>
+LSTMs and Transformers learn from time sequences. Disordered time steps teach the model impossible biological trajectories.</p>
+<p><strong>12. What is the purpose of the validation set?</strong>
+To tune model hyperparameters during training and check for overfitting without touching the final test data.</p>
+<p><strong>13. What is the purpose of the test set?</strong>
+A locked vault of data used only once at the end to provide an honest evaluation of model performance.</p>
+<p><strong>14. Why use CNN for image data?</strong>
+Convolutional networks are specifically designed to extract spatial features, edges, and textures from 2D grids of pixels.</p>
+<p><strong>15. Why use LSTM/Transformer for temporal data?</strong>
+These architectures are designed to "remember" sequential dependencies and analyze changes across time.</p>
+<p><strong>16. What is a tumor margin?</strong>
+The boundary transition zone blending healthy tissue and malignant tumor cells.</p>
+<p><strong>17. Why are metadata and labels important?</strong>
+Even if the CNN only sees pixels, metadata allows us to locate files, calculate loss against ground truth labels, and perform subgroup analysis.</p>
+<p><strong>18. Why validate image files?</strong>
+To guarantee zero missing files, zero corruption, and correct dimensions, preventing the dataloader from crashing mid-training.</p>
+<p><strong>19. Why document the dataset?</strong>
+To provide a source of truth so downstream data scientists understand what each column and split represents.</p>
+<p><strong>20. What is the limitation of synthetic medical data?</strong>
+It proves the software architecture works, but cannot be deployed clinically without retraining on real, expert-validated patient data.</p>
+<hr />
+<div style="page-break-after: always;"></div>
+
+<h2>SECTION 24 — QUICK REVISION PAGE</h2>
+<h3>🔢 The Numbers</h3>
+<ul>
+<li><strong>Patients:</strong> 2,000</li>
+<li><strong>Images:</strong> 16,000</li>
+<li><strong>Temporal Observations:</strong> 58,979</li>
+<li><strong>Image Format:</strong> 224 × 224 RGB</li>
+<li><strong>Classes:</strong> 6 (normal, benign, malignant, tumor_margin, necrotic, inflammatory)</li>
+<li><strong>Split:</strong> 1,400 (Train) / 300 (Validation) / 300 (Test)</li>
+<li><strong>Target:</strong> 90-day prediction horizon</li>
+</ul>
+<h3>⚙️ Pipeline Flow</h3>
+<p><code>text
+DATA 
+ → CLEAN 
+ → LABEL 
+ → AUGMENT/VARIATE 
+ → SPLIT 
+ → VALIDATE 
+ → DOCUMENT 
+ → MODEL</code></p>
+<h3>🧠 Most Important Concepts</h3>
+<ul>
+<li><strong>Patient-level split:</strong> The golden rule. A patient exists in only ONE split to avoid memorization.</li>
+<li><strong>Data leakage:</strong> The enemy. Any "cheating" that inflates accuracy.</li>
+<li><strong>Temporal integrity:</strong> Time must only flow forward; future data cannot predict the past.</li>
+<li><strong>Class imbalance:</strong> Dominant classes can blind the model to rare, critical classes like necrosis.</li>
+<li><strong>Image quality:</strong> Missing or corrupt files will crash training pipelines.</li>
+<li><strong>Synthetic data limitation:</strong> Proves the tech, but not the clinical efficacy. Real-world deployment requires real-world data.</li>
+</ul>
+</body>
+</html>

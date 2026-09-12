@@ -1,0 +1,359 @@
+{
+  "metadata": {
+    "name": "Oncology Domain Knowledge Dictionary",
+    "version": "1.0.0",
+    "description": "Standardized oncology domain vocabulary, variants, abbreviations, and clinical descriptions for Stage 4 SLM prompt engineering and fine-tuning.",
+    "disclaimer": "SYNTHETIC RESEARCH USE ONLY — NOT FOR CLINICAL USE"
+  },
+  "categories": {
+    "cancer_types": [
+      {
+        "term": "Non-Small Cell Lung Cancer",
+        "category": "cancer_types",
+        "abbreviation": "NSCLC",
+        "common_variants": ["lung adenocarcinoma", "lung squamous cell carcinoma", "large cell neuroendocrine lung carcinoma"],
+        "description": "The most common type of lung cancer, accounting for approximately 85% of all lung cancer cases."
+      },
+      {
+        "term": "Breast Invasive Ductal Carcinoma",
+        "category": "cancer_types",
+        "abbreviation": "IDC",
+        "common_variants": ["infiltrating ductal carcinoma", "invasive mammary carcinoma", "ductal breast cancer"],
+        "description": "The most common histological subtype of invasive breast cancer originating in the milk ducts."
+      },
+      {
+        "term": "Colorectal Adenocarcinoma",
+        "category": "cancer_types",
+        "abbreviation": "CRC",
+        "common_variants": ["colon cancer", "rectal cancer", "colorectal adenocarcinoma"],
+        "description": "Malignancy developing from the epithelial lining of the colon or rectum."
+      },
+      {
+        "term": "Cutaneous Melanoma",
+        "category": "cancer_types",
+        "abbreviation": "MEL",
+        "common_variants": ["malignant melanoma", "superficial spreading melanoma", "nodular melanoma"],
+        "description": "Aggressive skin malignancy arising from melanocytes, strongly driven by MAPK pathway alterations."
+      },
+      {
+        "term": "Prostate Adenocarcinoma",
+        "category": "cancer_types",
+        "abbreviation": "PRCA",
+        "common_variants": ["prostate ductal adenocarcinoma", "acinar adenocarcinoma", "castration-resistant prostate cancer"],
+        "description": "Androgen-dependent malignancy of the prostate gland epithelium, graded by Gleason score."
+      },
+      {
+        "term": "Cholangiocarcinoma",
+        "category": "cancer_types",
+        "abbreviation": "CCA",
+        "common_variants": ["bile duct cancer", "intrahepatic cholangiocarcinoma", "extrahepatic cholangiocarcinoma"],
+        "description": "Rare and aggressive adenocarcinoma originating in the intrahepatic or extrahepatic bile ducts."
+      }
+    ],
+    "biomarkers": [
+      {
+        "term": "Programmed Death-Ligand 1",
+        "category": "biomarkers",
+        "abbreviation": "PD-L1",
+        "common_variants": ["CD274", "B7-H1"],
+        "description": "Immune checkpoint surface protein predictive of tumor response to immune checkpoint inhibitor therapies."
+      },
+      {
+        "term": "Circulating Tumor DNA",
+        "category": "biomarkers",
+        "abbreviation": "ctDNA",
+        "common_variants": ["cell-free tumor DNA", "liquid biopsy ctDNA"],
+        "description": "Fragmented DNA released by apoptotic or necrotic malignant cells into the peripheral bloodstream, used for minimal residual disease monitoring."
+      },
+      {
+        "term": "Carcinoembryonic Antigen",
+        "category": "biomarkers",
+        "abbreviation": "CEA",
+        "common_variants": ["CEACAM5", "serum CEA"],
+        "description": "Glycoprotein oncofetal serum marker commonly elevated in colorectal, gastric, and pancreatic carcinomas."
+      },
+      {
+        "term": "Human Epidermal Growth Factor Receptor 2",
+        "category": "biomarkers",
+        "abbreviation": "HER2",
+        "common_variants": ["ERBB2", "HER2/neu"],
+        "description": "Receptor tyrosine kinase amplified or overexpressed in a subset of breast, gastroesophageal, and ovarian cancers."
+      },
+      {
+        "term": "Prostate-Specific Antigen",
+        "category": "biomarkers",
+        "abbreviation": "PSA",
+        "common_variants": ["serum PSA", "total PSA"],
+        "description": "Glycoprotein enzyme secreted by prostate epithelial cells; primary serum biomarker for prostate cancer surveillance."
+      },
+      {
+        "term": "Alpha-Fetoprotein",
+        "category": "biomarkers",
+        "abbreviation": "AFP",
+        "common_variants": ["serum AFP"],
+        "description": "Oncofetal glycoprotein tumor marker utilized in hepatocellular carcinoma, cholangiocarcinoma, and nonseminomatous germ cell tumors."
+      }
+    ],
+    "mutations": [
+      {
+        "term": "EGFR L858R",
+        "category": "mutations",
+        "abbreviation": "L858R",
+        "common_variants": ["EGFR exon 21 L858R", "c.2573T>G"],
+        "description": "Classic sensitizing kinase domain point mutation in exon 21 of EGFR conferring high sensitivity to first-, second-, and third-generation TKIs."
+      },
+      {
+        "term": "EGFR T790M",
+        "category": "mutations",
+        "abbreviation": "T790M",
+        "common_variants": ["EGFR exon 20 T790M", "c.2369C>T"],
+        "description": "Gatekeeper resistance mutation in EGFR exon 20 mediating resistance to first-generation EGFR inhibitors, targeted by osimertinib."
+      },
+      {
+        "term": "BRAF V600E",
+        "category": "mutations",
+        "abbreviation": "V600E",
+        "common_variants": ["BRAF p.V600E", "c.1799T>A"],
+        "description": "Valine to glutamic acid substitution at codon 600 constitutively activating the MAPK/ERK pathway in melanoma, colorectal, and thyroid carcinomas."
+      },
+      {
+        "term": "KRAS G12D",
+        "category": "mutations",
+        "abbreviation": "G12D",
+        "common_variants": ["KRAS p.G12D", "c.35G>A"],
+        "description": "Common oncogenic GTPase driver alteration in pancreatic ductal adenocarcinoma, non-small cell lung cancer, and colorectal cancer."
+      },
+      {
+        "term": "CDK12 Alteration",
+        "category": "mutations",
+        "abbreviation": "CDK12",
+        "common_variants": ["CDK12 loss-of-function", "CDK12 biallelic inactivation"],
+        "description": "Cyclin-dependent kinase alteration associated with genomic tandem duplications and immune gene upregulation in advanced prostate cancers."
+      },
+      {
+        "term": "CTNNB1 Mutation",
+        "category": "mutations",
+        "abbreviation": "CTNNB1",
+        "common_variants": ["beta-catenin mutation", "CTNNB1 exon 3 mutation"],
+        "description": "Activating mutation in the Wnt/beta-catenin pathway recurrently detected in hepatocellular and biliary tract malignancies."
+      }
+    ],
+    "drugs": [
+      {
+        "term": "Pembrolizumab",
+        "category": "drugs",
+        "abbreviation": "Pembro",
+        "common_variants": ["Keytruda", "MK-3475"],
+        "description": "Humanized monoclonal IgG4 antibody targeting the PD-1 immune checkpoint receptor."
+      },
+      {
+        "term": "Osimertinib",
+        "category": "drugs",
+        "abbreviation": "Osi",
+        "common_variants": ["Tagrisso", "AZD9291"],
+        "description": "Third-generation oral, CNS-penetrant EGFR tyrosine kinase inhibitor selective for EGFR-sensitizing and T790M resistance mutations."
+      },
+      {
+        "term": "Doxorubicin",
+        "category": "drugs",
+        "abbreviation": "DOX",
+        "common_variants": ["Adriamycin", "hydroxydaunorubicin"],
+        "description": "Anthracycline topoisomerase II inhibitor cytotoxic antibiotic widely used across hematologic and solid tumor malignancies."
+      },
+      {
+        "term": "Carboplatin",
+        "category": "drugs",
+        "abbreviation": "Carbo",
+        "common_variants": ["Paraplatin", "CBDCA"],
+        "description": "Second-generation platinum antineoplastic alkylating-like agent inducing inter- and intrastrand DNA crosslinks."
+      },
+      {
+        "term": "Docetaxel",
+        "category": "drugs",
+        "abbreviation": "DOC",
+        "common_variants": ["Taxotere"],
+        "description": "Semisynthetic taxane antineoplastic agent that stabilizes tubulin microtubules and inhibits mitotic cell division."
+      },
+      {
+        "term": "Bevacizumab",
+        "category": "drugs",
+        "abbreviation": "Bev",
+        "common_variants": ["Avastin"],
+        "description": "Recombinant humanized monoclonal antibody targeting vascular endothelial growth factor A (VEGF-A) to inhibit angiogenesis."
+      },
+      {
+        "term": "Dabrafenib",
+        "category": "drugs",
+        "abbreviation": "Dab",
+        "common_variants": ["Tafinlar"],
+        "description": "Selective, potent adenosine triphosphate-competitive inhibitor of BRAF kinase bearing V600E/K mutations."
+      },
+      {
+        "term": "Trametinib",
+        "category": "drugs",
+        "abbreviation": "Tra",
+        "common_variants": ["Mekinist"],
+        "description": "Allosteric, non-ATP-competitive small-molecule inhibitor of MEK1 and MEK2 kinases."
+      }
+    ],
+    "drug_combinations": [
+      {
+        "term": "Dabrafenib and Trametinib",
+        "category": "drug_combinations",
+        "abbreviation": "Dab+Tram",
+        "common_variants": ["BRAF/MEK combined inhibition"],
+        "description": "Dual MAPK pathway blockade targeting BRAF V600 and MEK1/2 to delay onset of acquired resistance in BRAF-mutant cancers."
+      },
+      {
+        "term": "Carboplatin and Paclitaxel",
+        "category": "drug_combinations",
+        "abbreviation": "Carbo/Pac",
+        "common_variants": ["Carboplatin + Taxol"],
+        "description": "Standard doublet cytotoxic chemotherapy regimen combining a platinum cross-linker and taxane microtubule stabilizer."
+      },
+      {
+        "term": "Pembrolizumab, Carboplatin, and Docetaxel",
+        "category": "drug_combinations",
+        "abbreviation": "Pembro+Carbo+Doc",
+        "common_variants": ["Chemo-immunotherapy combination"],
+        "description": "Chemo-immunotherapy triplet regimen combining anti-PD-1 checkpoint inhibition with platinum and taxane cytotoxic backbones."
+      }
+    ],
+    "oncology_abbreviations": [
+      {
+        "term": "Performance Status (ECOG)",
+        "category": "oncology_abbreviations",
+        "abbreviation": "ECOG",
+        "common_variants": ["ECOG PS", "Zubrod score"],
+        "description": "Standardized 0 to 5 functional assessment scale quantifying a patient's daily activity capability and disease-related functional impairment."
+      },
+      {
+        "term": "Absolute Neutrophil Count",
+        "category": "oncology_abbreviations",
+        "abbreviation": "ANC",
+        "common_variants": ["neutrophil count"],
+        "description": "Critical laboratory hematologic measurement calculating the total count of circulating mature and immature neutrophils per microliter."
+      },
+      {
+        "term": "Follow-Up",
+        "category": "oncology_abbreviations",
+        "abbreviation": "f/u",
+        "common_variants": ["FU", "surveillance visit"],
+        "description": "Clinical surveillance monitoring assessment conducted after therapeutic intervention."
+      },
+      {
+        "term": "Treatment",
+        "category": "oncology_abbreviations",
+        "abbreviation": "tx",
+        "common_variants": ["Tx", "therapy"],
+        "description": "Clinical therapy or pharmacologic intervention administered to manage neoplastic disease."
+      },
+      {
+        "term": "Progression-Free Survival",
+        "category": "oncology_abbreviations",
+        "abbreviation": "PFS",
+        "common_variants": ["progression free survival"],
+        "description": "Time length during and after oncological treatment that a patient lives with disease without progression."
+      },
+      {
+        "term": "Overall Survival",
+        "category": "oncology_abbreviations",
+        "abbreviation": "OS",
+        "common_variants": ["overall survival time"],
+        "description": "Duration from either diagnosis or start of clinical trial treatment until patient death from any cause."
+      }
+    ],
+    "adverse_events": [
+      {
+        "term": "Febrile Neutropenia",
+        "category": "adverse_events",
+        "abbreviation": "FN",
+        "common_variants": ["neutropenic fever", "high-grade febrile neutropenia"],
+        "description": "Oncologic emergency defined by absolute neutrophil count < 500 cells/mm3 accompanied by a single temperature spike >= 38.3 C."
+      },
+      {
+        "term": "Chemotherapy-Induced Cardiotoxicity",
+        "category": "adverse_events",
+        "abbreviation": "CTX",
+        "common_variants": ["anthracycline cardiotoxicity", "left ventricular dysfunction"],
+        "description": "Myocardial toxicity or decline in left ventricular ejection fraction triggered by antineoplastic agents like anthracyclines."
+      },
+      {
+        "term": "Peripheral Neuropathy",
+        "category": "adverse_events",
+        "abbreviation": "CIPN",
+        "common_variants": ["chemotherapy-induced peripheral neuropathy", "sensory neuropathy"],
+        "description": "Damage to peripheral sensory nerves manifested as numbness, tingling, and paresthesias following taxane or platinum treatment."
+      },
+      {
+        "term": "Immune-Related Adverse Event",
+        "category": "adverse_events",
+        "abbreviation": "irAE",
+        "common_variants": ["autoimmune toxicity", "checkpoint toxicity"],
+        "description": "Off-target autoimmune inflammation induced by immune checkpoint inhibitors affecting endocrine, pulmonary, gastrointestinal, or hepatic tissues."
+      }
+    ],
+    "pathology_terms": [
+      {
+        "term": "Perineural Invasion",
+        "category": "pathology_terms",
+        "abbreviation": "PNI",
+        "common_variants": ["neurotropism"],
+        "description": "Histopathologic presence of neoplastic cells within the space surrounding peripheral nerves, associated with increased recurrence."
+      },
+      {
+        "term": "Lymphovascular Invasion",
+        "category": "pathology_terms",
+        "abbreviation": "LVI",
+        "common_variants": ["angiolymphatic invasion"],
+        "description": "Presence of malignant tumor cell clusters inside thin-walled lymphatic or blood vascular spaces on histology."
+      },
+      {
+        "term": "Positive Surgical Margins",
+        "category": "pathology_terms",
+        "abbreviation": "R1 margin",
+        "common_variants": ["microscopic residual disease", "positive margins"],
+        "description": "Histopathological identification of tumor cells extending to the inked tissue edge of a resected specimen."
+      }
+    ],
+    "treatment_terms": [
+      {
+        "term": "Adjuvant Therapy",
+        "category": "treatment_terms",
+        "abbreviation": "Adj Tx",
+        "common_variants": ["postoperative chemotherapy", "adjuvant systemic therapy"],
+        "description": "Systemic therapy administered following definitive primary curative surgical resection to eradicate micrometastatic disease."
+      },
+      {
+        "term": "Neoadjuvant Therapy",
+        "category": "treatment_terms",
+        "abbreviation": "Neoadj Tx",
+        "common_variants": ["preoperative systemic therapy", "induction therapy"],
+        "description": "Systemic treatment delivered before surgical resection to downstage tumor volume and assess in vivo therapeutic response."
+      },
+      {
+        "term": "Maintenance Therapy",
+        "category": "treatment_terms",
+        "abbreviation": "Maint Tx",
+        "common_variants": ["surveillance maintenance"],
+        "description": "Ongoing low-toxicity systemic therapy administered following initial response to prolong disease control and delay progression."
+      }
+    ],
+    "guideline_related_terms": [
+      {
+        "term": "Standard of Care",
+        "category": "guideline_related_terms",
+        "abbreviation": "SoC",
+        "common_variants": ["consensus treatment", "evidence-based therapy"],
+        "description": "Formal diagnostic and treatment process that clinical consensus and evidence determine to be the standard medical practice."
+      },
+      {
+        "term": "Multidisciplinary Tumor Board",
+        "category": "guideline_related_terms",
+        "abbreviation": "MDT / MTB",
+        "common_variants": ["molecular tumor board", "tumor board consensus"],
+        "description": "Formal consensus conference of medical oncologists, surgical oncologists, radiation oncologists, radiologists, and molecular pathologists."
+      }
+    ]
+  }
+}

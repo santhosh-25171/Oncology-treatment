@@ -1,0 +1,6 @@
+note_type,Count,Avg_Word_Count,HIGH,LOW,MODERATE
+nurse_intake,2001,29.63,26.1,56.8,17.1
+pathology_report,2002,35.87,0.0,100.0,0.0
+patient_symptom_log,2000,34.66,32.9,43.0,24.0
+physician_progress_note,3002,53.0,27.6,52.6,19.8
+treatment_note,1000,35.01,22.1,61.8,16.1

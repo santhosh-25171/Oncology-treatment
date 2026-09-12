@@ -1,0 +1,9 @@
+{
+    "Total Patients": 2000,
+    "Total Observations": 58979,
+    "Mean Sequence Length": 29.4895,
+    "Median Sequence Length": 29.0,
+    "Min Sequence Length": 25.0,
+    "Max Sequence Length": 34.0,
+    "Features Count": 30
+}

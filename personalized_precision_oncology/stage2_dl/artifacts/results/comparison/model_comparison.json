@@ -1,0 +1,27 @@
+{
+    "lstm": {
+        "accuracy": 0.8095238095238095,
+        "precision": 0.8888888888888888,
+        "recall": 0.7272727272727273,
+        "macro_f1": 0.8090909090909091,
+        "roc_auc": 0.8818181818181818,
+        "best_epoch": 4
+    },
+    "transformer": {
+        "accuracy": 0.8571428571428571,
+        "precision": 1.0,
+        "recall": 0.7272727272727273,
+        "macro_f1": 0.8558352402745995,
+        "roc_auc": 0.9272727272727272,
+        "best_epoch": 2
+    },
+    "inference_benchmark": {
+        "total_patients": 21,
+        "lstm_total_inference_sec": 1.2745091915130615,
+        "lstm_ms_per_patient": 60.69091388157436,
+        "transformer_total_inference_sec": 0.35010838508605957,
+        "transformer_ms_per_patient": 16.67182786124093
+    },
+    "perf_winner": "Transformer",
+    "speed_winner": "Transformer"
+}
