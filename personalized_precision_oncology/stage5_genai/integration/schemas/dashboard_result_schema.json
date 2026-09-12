@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Stage5DashboardResultSchema",
+  "description": "Validation schema for scenario evaluation outputs presented in the Stage 5 testing dashboard.",
+  "type": "object",
+  "required": [
+    "scenario_id",
+    "synthetic",
+    "synthetic_badge",
+    "evaluation_status",
+    "decision_stress_score",
+    "realism_score",
+    "blind_spot_targeted",
+    "evaluation_timestamp",
+    "pipeline_version"
+  ],
+  "properties": {
+    "scenario_id": {
+      "type": "string",
+      "pattern": "^EDGE_[0-9]{3,}$"
+    },
+    "synthetic": {
+      "type": "boolean",
+      "const": true
+    },
+    "synthetic_badge": {
+      "type": "string"
+    },
+    "evaluation_status": {
+      "type": "string",
+      "enum": ["PASS", "REVIEW", "FAIL", "NOT EVALUATED"]
+    },
+    "decision_stress_score": {
+      "type": "object",
+      "required": ["overall_stress_score"],
+      "properties": {
+        "overall_stress_score": { "type": "number", "minimum": 0, "maximum": 5 },
+        "genomic_complexity": { "type": "number" },
+        "evidence_uncertainty": { "type": "number" },
+        "resistance_complexity": { "type": "number" },
+        "conflicting_signals": { "type": "number" },
+        "decision_ambiguity": { "type": "number" },
+        "stress_level": { "type": "string" }
+      }
+    },
+    "realism_score": {
+      "type": "object",
+      "required": ["overall_realism_score"],
+      "properties": {
+        "overall_realism_score": { "type": "number", "minimum": 0, "maximum": 5 },
+        "reference_data_consistency": { "type": "number" },
+        "evidence_consistency": { "type": "number" },
+        "clinical_consistency": { "type": "number" },
+        "provenance_quality": { "type": "number" },
+        "uncertainty_handling": { "type": "number" }
+      }
+    },
+    "blind_spot_targeted": {
+      "type": "string"
+    },
+    "flags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "stress_dimensions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "evaluation_timestamp": {
+      "type": "string"
+    },
+    "pipeline_version": {
+      "type": "string"
+    }
+  }
+}

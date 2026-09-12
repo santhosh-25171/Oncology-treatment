@@ -36,9 +36,45 @@ GENAI_REFERENCE_BASELINE_JSONL = PROCESSED_DIR / "genai_reference_baseline.jsonl
 # Reports
 SOURCE_METADATA_CSV = REPORTS_DIR / "source_metadata.csv"
 DATA_QUALITY_REPORT_JSON = REPORTS_DIR / "data_quality_report.json"
+QUARANTINE_REPORT_JSON = REPORTS_DIR / "quarantine_report.json"
 
-# Missing value sentinel
+# Missing value sentinels and semantics
+# STRICT SEMANTIC DEFINITIONS:
+# A. None / np.nan: Genuinely missing patient-level value where assay was performed or expected
+# B. not_available_in_source: Original source registry does not contain/assay that variable
+# C. not_observed_in_reference: Genomic mutation/pattern was not observed in the reference data (does NOT mean biologically impossible)
+# D. insufficient_evidence: Some evidence exists, but insufficient for clinical consensus
+# E. source_limitation: The source/data type does not support the requested analysis
 UNAVAILABLE_SENTINEL = "not_available_in_source"
+NOT_OBSERVED_SENTINEL = "not_observed_in_reference"
+INSUFFICIENT_EVIDENCE_SENTINEL = "insufficient_evidence"
+SOURCE_LIMITATION_SENTINEL = "source_limitation"
+
+# Source-Aware Taxonomy
+SOURCE_TYPES = [
+    "patient_cohort",
+    "epidemiology",
+    "variant_evidence",
+    "biomarker_evidence",
+    "literature_reference"
+]
+
+DATA_DOMAINS = [
+    "clinical",
+    "genomic",
+    "epidemiology",
+    "resistance",
+    "biomarker",
+    "treatment_response"
+]
+
+EVIDENCE_STATUSES = [
+    "prospective_clinical_cohort",
+    "retrospective_surgical_cohort",
+    "population_registry",
+    "curated_clinical_evidence",
+    "published_guideline_benchmark"
+]
 
 # Valid physiological and clinical ranges
 CLINICAL_BOUNDS = {

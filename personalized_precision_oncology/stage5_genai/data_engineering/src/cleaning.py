@@ -14,13 +14,15 @@ import re
 import numpy as np
 import pandas as pd
 import logging
+import json
 from typing import Dict, Any, Tuple, List
 from .config import (
     STAGE_NORMALIZATION_MAP,
     SEX_NORMALIZATION_MAP,
     CLINICAL_BOUNDS,
     UNAVAILABLE_SENTINEL,
-    PROTECTED_RARE_VARIANTS
+    PROTECTED_RARE_VARIANTS,
+    QUARANTINE_REPORT_JSON
 )
 
 logger = logging.getLogger("DataEngineering.Cleaning")
@@ -63,25 +65,47 @@ class OncologyDataCleaner:
 
         valid_rows = []
         for idx, row in df.iterrows():
+            record_id = str(row.get("bcr_patient_barcode", f"tcga_row_{idx}"))
             # Validate age
             try:
                 age = float(row.get("age_at_index", np.nan))
                 if age < CLINICAL_BOUNDS["age"]["min"] or age > CLINICAL_BOUNDS["age"]["max"]:
                     self.metrics["invalid_records_removed_or_quarantined"] += 1
-                    self.quarantined_records.append({"reason": "Age out of physiological bounds", "row": row.to_dict()})
+                    self.quarantined_records.append({
+                        "record_id": record_id,
+                        "source": "TCGA-GDC PanCancer Atlas",
+                        "validation_rule": "CLINICAL_BOUNDS['age'] (18-115)",
+                        "reason": f"Invalid biological range (age={age})",
+                        "status": "quarantined",
+                        "raw_record": row.to_dict()
+                    })
                     continue
             except (ValueError, TypeError):
                 self.metrics["invalid_records_removed_or_quarantined"] += 1
-                self.quarantined_records.append({"reason": "Non-numeric age", "row": row.to_dict()})
+                self.quarantined_records.append({
+                    "record_id": record_id,
+                    "source": "TCGA-GDC PanCancer Atlas",
+                    "validation_rule": "CLINICAL_BOUNDS['age'] numeric type",
+                    "reason": "Non-numeric age value",
+                    "status": "quarantined",
+                    "raw_record": row.to_dict()
+                })
                 continue
 
             # Standardize stage
             raw_stage = str(row.get("ajcc_pathologic_stage", "")).strip().lower()
             norm_stage = STAGE_NORMALIZATION_MAP.get(raw_stage, None)
-            if not norm_stage or norm_stage == "Unstaged" and raw_stage == "stage x":
+            if not norm_stage or (norm_stage == "Unstaged" and raw_stage == "stage x"):
                 if raw_stage == "stage x":
                     self.metrics["invalid_records_removed_or_quarantined"] += 1
-                    self.quarantined_records.append({"reason": "Invalid unclassifiable stage Stage X", "row": row.to_dict()})
+                    self.quarantined_records.append({
+                        "record_id": record_id,
+                        "source": "TCGA-GDC PanCancer Atlas",
+                        "validation_rule": "STAGE_NORMALIZATION_MAP",
+                        "reason": "Invalid unclassifiable stage Stage X",
+                        "status": "quarantined",
+                        "raw_record": row.to_dict()
+                    })
                     continue
                 norm_stage = "Unstaged"
 
@@ -321,5 +345,14 @@ class OncologyDataCleaner:
             missing_count = int((cohort[col] == UNAVAILABLE_SENTINEL).sum() + cohort[col].isna().sum())
             self.metrics["missing_values_by_field"][col] = missing_count
 
-        logger.info(f"Cleaning complete: {self.metrics['rows_after_cleaning']} records retained.")
+        # Export quarantined records report
+        QUARANTINE_REPORT_JSON.parent.mkdir(parents=True, exist_ok=True)
+        quarantine_data = {
+            "total_quarantined": len(self.quarantined_records),
+            "quarantined_records": self.quarantined_records
+        }
+        with open(QUARANTINE_REPORT_JSON, "w", encoding="utf-8") as qf:
+            json.dump(quarantine_data, qf, indent=2)
+
+        logger.info(f"Cleaning complete: {self.metrics['rows_after_cleaning']} records retained. Quarantined: {len(self.quarantined_records)}")
         return cohort

@@ -1,0 +1,27 @@
+{
+  "total_quarantined": 1,
+  "quarantined_records": [
+    {
+      "record_id": "TCGA-ERR-9999",
+      "source": "TCGA-GDC PanCancer Atlas",
+      "validation_rule": "CLINICAL_BOUNDS['age'] (18-115)",
+      "reason": "Invalid biological range (age=-5.0)",
+      "status": "quarantined",
+      "raw_record": {
+        "bcr_patient_barcode": "TCGA-ERR-9999",
+        "cancer_type": "LUAD",
+        "age_at_index": "-5",
+        "gender": "MALE",
+        "race": "WHITE",
+        "ajcc_pathologic_stage": "Stage X",
+        "tobacco_smoking_history": "Unknown",
+        "pack_years_smoked": NaN,
+        "vital_status": "Alive",
+        "overall_survival_months": "12.0",
+        "progression_free_months": "10.0",
+        "ctdna_maf_percent": "not_available_in_source",
+        "pdl1_tps_percent": "not_available_in_source"
+      }
+    }
+  ]
+}

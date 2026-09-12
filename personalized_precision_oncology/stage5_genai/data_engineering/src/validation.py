@@ -262,12 +262,36 @@ class OncologyDataValidator:
         }
         self.report["missing_value_audit"] = cleaning_metrics.get("missing_values_by_field", {})
 
+        # Compile source-level missingness
+        source_missingness = {}
+        for src in cohort_df["data_source"].unique():
+            sub = cohort_df[cohort_df["data_source"] == src]
+            source_missingness[src] = {}
+            for c in cohort_df.columns:
+                cnt = int(((sub[c] == UNAVAILABLE_SENTINEL) | (sub[c].isna())).sum())
+                source_missingness[src][c] = cnt
+        self.report["source_level_missingness"] = source_missingness
+
         # Run validation checks
         self.validate_schema(cohort_df)
         self.validate_patient_uniqueness(cohort_df)
         self.validate_clinical_ranges(cohort_df)
         self.validate_categorical_consistency(cohort_df)
         self.validate_rare_mutation_preservation(cohort_df)
+
+        # Aliases for prompt requirement completeness
+        self.report["numeric_validation"] = self.report["numeric_range_validation"]
+        self.report["categorical_validation"] = self.report["categorical_consistency_audit"]
+        self.report["rare_variants_retained"] = self.report["rare_mutation_preservation_audit"].get("rare_mutations_retained", 0)
+        self.report["raw_source_record_counts"] = raw_counts
+        self.report["source_wise_record_counts"] = raw_counts
+        self.report["rows_before_cleaning"] = cleaning_metrics.get("rows_before_cleaning", 0)
+        self.report["duplicate_rows_detected"] = cleaning_metrics.get("duplicates_removed", 0)
+        self.report["duplicate_rows_removed"] = cleaning_metrics.get("duplicates_removed", 0)
+        self.report["invalid_records_detected"] = cleaning_metrics.get("invalid_records_removed_or_quarantined", 0)
+        self.report["invalid_records_quarantined"] = cleaning_metrics.get("invalid_records_removed_or_quarantined", 0)
+        self.report["final_cleaned_patient_count"] = len(cohort_df)
+        self.report["critical_errors"] = self.report["validation_status"]["critical_errors"]
 
         if self.report["validation_status"]["critical_errors"] == 0:
             status_val = "PASSED"

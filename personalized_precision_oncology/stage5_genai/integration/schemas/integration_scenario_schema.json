@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Stage5IntegrationScenarioSchema",
+  "description": "Validation schema for synthetic oncology scenarios ingested into the Stage 5 integration dashboard.",
+  "type": "object",
+  "required": [
+    "scenario_id",
+    "synthetic",
+    "generation_method",
+    "scenario_category",
+    "target_blind_spot",
+    "patient_context",
+    "genomic_profile",
+    "biomarkers",
+    "clinical_context",
+    "synthetic_assumptions",
+    "reference_evidence",
+    "uncertainty",
+    "provenance"
+  ],
+  "properties": {
+    "scenario_id": {
+      "type": "string",
+      "pattern": "^EDGE_[0-9]{3,}$"
+    },
+    "synthetic": {
+      "type": "boolean",
+      "enum": [true]
+    },
+    "generation_method": {
+      "type": "string",
+      "enum": ["template", "llm", "hybrid"]
+    },
+    "scenario_category": {
+      "type": "string",
+      "minLength": 3
+    },
+    "target_blind_spot": {
+      "type": "object",
+      "required": ["blind_spot_id"],
+      "properties": {
+        "blind_spot_id": {
+          "type": "string"
+        },
+        "category": { "type": "string" },
+        "coverage_status": { "type": "string" },
+        "reason": { "type": "string" }
+      }
+    },
+    "patient_context": {
+      "type": "object",
+      "required": ["age_group", "sex", "cancer_type", "histology", "stage"],
+      "properties": {
+        "age_group": { "type": "string" },
+        "sex": { "type": "string" },
+        "cancer_type": { "type": "string" },
+        "histology": { "type": "string" },
+        "stage": { "type": "string" },
+        "prior_treatment_context": { "type": "string" }
+      }
+    },
+    "genomic_profile": {
+      "type": "object",
+      "required": ["alterations"],
+      "properties": {
+        "alterations": {
+          "type": "array",
+          "minItems": 1
+        },
+        "cooccurring_alterations": { "type": "array" },
+        "resistance_related_features": { "type": "array" }
+      }
+    },
+    "biomarkers": {
+      "type": "object",
+      "properties": {
+        "tmb": { "type": ["number", "null"] },
+        "tmb_status": { "type": "string" },
+        "pdl1_tps": { "type": ["number", "null"] },
+        "msi_status": { "type": "string" }
+      }
+    },
+    "clinical_context": {
+      "type": "object",
+      "required": ["disease_status"],
+      "properties": {
+        "disease_status": { "type": "string" },
+        "progression_context": { "type": "string" }
+      }
+    },
+    "synthetic_assumptions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "reference_evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "uncertainty": {
+      "type": "object",
+      "required": ["level"],
+      "properties": {
+        "level": { "type": "string", "enum": ["low", "medium", "moderate", "high"] },
+        "reason": { "type": "string" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["reference_sources", "blind_spot_source", "generation_method", "generation_timestamp", "random_seed"],
+      "properties": {
+        "reference_sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "blind_spot_source": { "type": "string" },
+        "generation_method": { "type": "string" },
+        "generation_timestamp": { "type": "string" },
+        "random_seed": { "type": "integer" }
+      }
+    }
+  }
+}

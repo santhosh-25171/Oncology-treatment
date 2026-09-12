@@ -41,7 +41,7 @@
   },
   "final_validation_status": "PASSED",
   "report_metadata": {
-    "timestamp": "2026-09-11T16:53:06.608401+00:00",
+    "timestamp": "2026-09-12T04:56:27.497301+00:00",
     "pipeline_version": "1.0.0",
     "role": "Data Engineer (Stage 5)",
     "executor": "Automated Quality Assurance Validator"
@@ -173,5 +173,139 @@
     "critical_errors": 0,
     "warnings": 0,
     "error_details": []
-  }
+  },
+  "source_level_missingness": {
+    "TCGA-GDC PanCancer Atlas": {
+      "patient_id": 0,
+      "cancer_type": 0,
+      "age": 0,
+      "sex": 0,
+      "cancer_stage": 0,
+      "histology": 0,
+      "smoking_history": 0,
+      "pack_years": 0,
+      "vital_status": 0,
+      "overall_survival_months": 0,
+      "progression_free_months": 0,
+      "primary_driver_gene": 0,
+      "primary_mutation": 0,
+      "secondary_resistance_mutation": 0,
+      "prior_targeted_therapy": 50,
+      "best_recist_response": 50,
+      "tmb_mut_per_mb": 50,
+      "pdl1_tps_percent": 50,
+      "ctdna_maf_percent": 50,
+      "resistance_mechanism": 50,
+      "data_source": 0,
+      "source_record_id": 0
+    },
+    "MSK-IMPACT Targeted Sequencing (cBioPortal)": {
+      "patient_id": 0,
+      "cancer_type": 0,
+      "age": 0,
+      "sex": 0,
+      "cancer_stage": 0,
+      "histology": 0,
+      "smoking_history": 25,
+      "pack_years": 25,
+      "vital_status": 25,
+      "overall_survival_months": 25,
+      "progression_free_months": 25,
+      "primary_driver_gene": 0,
+      "primary_mutation": 0,
+      "secondary_resistance_mutation": 11,
+      "prior_targeted_therapy": 0,
+      "best_recist_response": 0,
+      "tmb_mut_per_mb": 0,
+      "pdl1_tps_percent": 0,
+      "ctdna_maf_percent": 1,
+      "resistance_mechanism": 10,
+      "data_source": 0,
+      "source_record_id": 0
+    }
+  },
+  "numeric_validation": {
+    "age": {
+      "expected_range": [
+        18,
+        115
+      ],
+      "out_of_bounds_count": 0,
+      "status": "PASSED"
+    },
+    "pdl1_tps_percent": {
+      "expected_range": [
+        0,
+        100
+      ],
+      "assayed_records": 25,
+      "out_of_bounds_count": 0,
+      "status": "PASSED"
+    },
+    "ctdna_maf_percent": {
+      "expected_range": [
+        0,
+        100
+      ],
+      "assayed_records": 24,
+      "out_of_bounds_count": 0,
+      "status": "PASSED"
+    },
+    "tmb_mut_per_mb": {
+      "expected_range": [
+        0,
+        500
+      ],
+      "assayed_records": 25,
+      "out_of_bounds_count": 0,
+      "status": "PASSED"
+    }
+  },
+  "categorical_validation": {
+    "cancer_stage": {
+      "observed_categories": [
+        "Stage IA",
+        "Stage IB",
+        "Stage IIA",
+        "Stage IIB",
+        "Stage IIIA",
+        "Stage IIIB",
+        "Stage IV"
+      ],
+      "invalid_categories": [],
+      "status": "PASSED"
+    },
+    "sex": {
+      "observed_categories": [
+        "Female",
+        "Male"
+      ],
+      "invalid_categories": [],
+      "status": "PASSED"
+    }
+  },
+  "rare_variants_retained": 31,
+  "raw_source_record_counts": {
+    "tcga_clinical": 52,
+    "tcga_mutations": 64,
+    "msk_impact": 26,
+    "seer_epidemiology": 13,
+    "clinvar_civic": 20,
+    "biomarkers_evidence": 6
+  },
+  "source_wise_record_counts": {
+    "tcga_clinical": 52,
+    "tcga_mutations": 64,
+    "msk_impact": 26,
+    "seer_epidemiology": 13,
+    "clinvar_civic": 20,
+    "biomarkers_evidence": 6
+  },
+  "rows_before_cleaning": 78,
+  "duplicate_rows_detected": 3,
+  "duplicate_rows_removed": 3,
+  "invalid_records_detected": 1,
+  "invalid_records_quarantined": 1,
+  "final_cleaned_patient_count": 75,
+  "critical_errors": 0
 }

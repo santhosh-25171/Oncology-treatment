@@ -5,21 +5,48 @@
   "type": "object",
   "required": [
     "reference_id",
-    "source",
-    "data_type",
-    "cancer_type",
-    "stage_distribution",
-    "age_distribution",
-    "sex_distribution",
-    "mutation_patterns",
-    "mutation_cooccurrence",
-    "biomarker_distributions",
-    "resistance_patterns",
+    "source_name",
+    "source_type",
+    "data_domain",
+    "evidence_status",
     "provenance"
   ],
   "properties": {
     "reference_id": { "type": "string", "minLength": 1 },
     "source": { "type": "string", "minLength": 1 },
+    "source_name": { "type": "string", "minLength": 1 },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "patient_cohort",
+        "epidemiology",
+        "variant_evidence",
+        "biomarker_evidence",
+        "literature_reference"
+      ]
+    },
+    "source_record_id": { "type": "string" },
+    "data_domain": {
+      "type": "string",
+      "enum": [
+        "clinical",
+        "genomic",
+        "epidemiology",
+        "resistance",
+        "biomarker",
+        "treatment_response"
+      ]
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": [
+        "prospective_clinical_cohort",
+        "retrospective_surgical_cohort",
+        "population_registry",
+        "curated_clinical_evidence",
+        "published_guideline_benchmark"
+      ]
+    },
     "data_type": { "type": "string", "minLength": 1 },
     "cancer_type": { "type": "string", "minLength": 1 },
     "stage_distribution": {
@@ -48,8 +75,13 @@
       "required": ["source_name", "dataset", "access_date", "reference"],
       "properties": {
         "source_name": { "type": "string" },
+        "source_dataset": { "type": "string" },
         "dataset": { "type": "string" },
+        "source_study": { "type": "string" },
+        "source_database": { "type": "string" },
+        "source_publication": { "type": "string" },
         "access_date": { "type": "string" },
+        "access_information": { "type": "string" },
         "reference": { "type": "string" },
         "source_url": { "type": "string" },
         "license": { "type": "string" },
