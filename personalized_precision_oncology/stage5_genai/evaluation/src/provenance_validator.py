@@ -61,8 +61,8 @@ class ProvenanceValidator:
 
         # generation_method
         gen_method = provenance.get("generation_method")
-        if gen_method not in ["llm", "template"]:
-            issues.append(f"Provenance 'generation_method' must be 'llm' or 'template', found '{gen_method}'.")
+        if gen_method not in ["llm", "template", "deterministic_fallback"]:
+            issues.append(f"Provenance 'generation_method' must be 'llm', 'template', or 'deterministic_fallback', found '{gen_method}'.")
 
         is_valid = len(issues) == 0
         return is_valid, issues, checks

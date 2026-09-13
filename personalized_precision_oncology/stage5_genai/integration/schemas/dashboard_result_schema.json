@@ -17,7 +17,7 @@
   "properties": {
     "scenario_id": {
       "type": "string",
-      "pattern": "^EDGE_[0-9]{3,}$"
+      "pattern": "^(EDGE_[0-9]{3,}|SYN-[0-9]{6})$"
     },
     "synthetic": {
       "type": "boolean",

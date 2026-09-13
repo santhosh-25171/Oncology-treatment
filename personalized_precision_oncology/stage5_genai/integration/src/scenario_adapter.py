@@ -43,11 +43,13 @@ class ScenarioAdapter:
             stress_score = stress_score_obj.get("overall_stress_score", "NOT AVAILABLE") if isinstance(stress_score_obj, dict) else "NOT AVAILABLE"
             realism_score = realism_score_obj.get("overall_realism_score", "NOT AVAILABLE") if isinstance(realism_score_obj, dict) else "NOT AVAILABLE"
             stress_level = stress_score_obj.get("stress_level", "NOT AVAILABLE") if isinstance(stress_score_obj, dict) else "NOT AVAILABLE"
+            synthetic_quality = evaluation.get("synthetic_quality", {})
         else:
             status = "NOT EVALUATED"
             stress_score = "NOT EVALUATED"
             realism_score = "NOT EVALUATED"
             stress_level = "NOT EVALUATED"
+            synthetic_quality = {}
 
         return {
             "scenario_id": sid,
@@ -60,6 +62,7 @@ class ScenarioAdapter:
             "decision_stress_score": stress_score,
             "stress_level": stress_level,
             "realism_score": realism_score,
+            "synthetic_quality": synthetic_quality,
             "evaluation_status": status,
             "generation_method": method
         }
@@ -165,7 +168,9 @@ class ScenarioAdapter:
                 "clinical_consistency": evaluation.get("clinical_consistency", {"valid": "NOT EVALUATED"}),
                 "resistance_stress_audit": evaluation.get("resistance_stress_audit", {"identified_dimensions": []}),
                 "decision_stress_score": evaluation.get("decision_stress_score", {"overall_stress_score": "NOT EVALUATED"}),
-                "realism_score": evaluation.get("realism_score", {"overall_realism_score": "NOT EVALUATED"})
+                "realism_score": evaluation.get("realism_score", {"overall_realism_score": "NOT EVALUATED"}),
+                "synthetic_quality": evaluation.get("synthetic_quality", {}),
+                "seed_compliance": evaluation.get("seed_compliance", {})
             }
 
         return {

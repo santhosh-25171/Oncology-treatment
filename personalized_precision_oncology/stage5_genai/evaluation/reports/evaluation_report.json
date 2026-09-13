@@ -1,14 +1,14 @@
 {
   "evaluation_metadata": {
-    "timestamp": "2026-09-12T04:56:35.574285+00:00",
+    "timestamp": "2026-09-13T05:34:26.246832+00:00",
     "evaluator_role": "Stage 5 Evaluation Engineer",
     "total_scenarios_audited": 20,
     "pipeline_status": "COMPLETED_AUDIT"
   },
   "evaluation_summary": {
     "total_scenarios": 20,
-    "passed": 17,
-    "review": 3,
+    "passed": 16,
+    "review": 4,
     "failed": 0,
     "average_stress_score": 3.23,
     "average_realism_score": 4.78,
@@ -17,6 +17,12 @@
     "near_duplicate_count": 2,
     "strong_stress_cases": 12,
     "extreme_stress_cases": 2,
+    "average_statistical_similarity": 0.87,
+    "average_cohort_similarity": 0.86,
+    "synthetic_quality_accepted": 19,
+    "synthetic_quality_review": 1,
+    "synthetic_quality_rejected": 0,
+    "reference_memorization_duplicate_flags": 1,
     "percentage_targeting_valid_blind_spots": 100.0,
     "percentage_with_complete_provenance": 100.0,
     "percentage_with_correct_synthetic_labeling": 100.0
@@ -237,7 +243,7 @@
       "stress_score": 3.44,
       "stress_level": "strong",
       "realism_score": 4.78,
-      "final_status": "PASS"
+      "final_status": "REVIEW"
     },
     {
       "scenario_id": "EDGE_008",

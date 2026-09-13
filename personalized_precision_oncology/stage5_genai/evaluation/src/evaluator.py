@@ -15,7 +15,7 @@ Coordinates the entire audit pipeline:
 
 import json
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 from datetime import datetime, timezone
 
 from .scenario_loader import ScenarioLoader
@@ -27,6 +27,8 @@ from .clinical_consistency import ClinicalConsistencyAuditor
 from .resistance_audit import ResistanceStressAuditor
 from .stress_scoring import StressScoringEngine
 from .diversity_analysis import DiversityAnalyzer
+from .realism_discriminator import SyntheticRealismDiscriminator
+from .seed_validator import SeedComplianceValidator
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 REPORTS_DIR = BASE_DIR / "reports"
@@ -56,8 +58,10 @@ class ScenarioEvaluator:
         self.resistance_auditor = ResistanceStressAuditor()
         self.scoring_engine = StressScoringEngine()
         self.diversity_analyzer = DiversityAnalyzer()
+        self.discriminator = SyntheticRealismDiscriminator()
+        self.seed_validator = SeedComplianceValidator()
 
-    def evaluate_scenario(self, scenario: Dict[str, Any]) -> Dict[str, Any]:
+    def evaluate_scenario(self, scenario: Dict[str, Any], seed_conditions: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Runs the complete audit pipeline on a single scenario."""
         sid = scenario.get("scenario_id", "UNKNOWN")
         flags = []
@@ -90,16 +94,36 @@ class ScenarioEvaluator:
         # 6. Resistance Stress Audit
         res_audit = self.resistance_auditor.audit_resistance_stress(scenario)
 
-        # 7. Stress & Realism Scoring
+        # 7. Seed Compliance Validation (if seed conditions provided)
+        seed_comp = self.seed_validator.validate_seed_compliance(scenario, seed_conditions)
+        if seed_comp.get("status") == "FAIL":
+            flags.append("SEED_COMPLIANCE_ERROR")
+
+        # 8. Synthetic Realism & Discriminator Validation (Statistical, Cohort, Anomaly, Duplicate)
+        synthetic_quality = self.discriminator.evaluate_scenario_realism(
+            scenario=scenario,
+            gen_audit=gen_audit,
+            clin_valid=clin_valid,
+            prov_valid=p_valid,
+            schema_valid=s_valid,
+            seed_compliance=seed_comp
+        )
+
+        if synthetic_quality.get("duplicate_check") == "FLAGGED":
+            flags.append("MEMORIZATION_DUPLICATE_FLAG")
+        if synthetic_quality.get("anomaly_status") != "PASS":
+            flags.append(f"ANOMALY_{synthetic_quality.get('anomaly_status')}")
+
+        # 9. Stress & Realism Scoring
         stress_scores = self.scoring_engine.calculate_decision_stress_score(scenario, res_audit)
         realism_scores = self.scoring_engine.calculate_realism_score(scenario, gen_audit, clin_valid, p_valid)
 
-        # 8. PASS / REVIEW / FAIL Classification
-        # FAIL: invalid schema, missing provenance, genomic contradiction, clinical contradiction
-        if not s_valid or not p_valid or not bs_audit["blind_spot_supported"] or not clin_valid or not gen_audit["valid"]:
+        # 10. Final PASS / REVIEW / FAIL Classification
+        # FAIL: invalid schema, missing provenance, genomic contradiction, clinical contradiction, critical seed violation, or discriminator rejection
+        if not s_valid or not p_valid or not bs_audit["blind_spot_supported"] or not clin_valid or not gen_audit["valid"] or synthetic_quality.get("status") == "REJECTED" or seed_comp.get("status") == "FAIL":
             status = "FAIL"
-        # REVIEW: valid technically, but uncertainty is high, evidence is sparse, or moderate stress
-        elif stress_scores["overall_stress_score"] < 2.0 or scenario.get("uncertainty", {}).get("level") == "high" and "sparse" in scenario.get("scenario_category", ""):
+        # REVIEW: rare but valid blind spot, low cohort similarity, suspicious high similarity, or high uncertainty
+        elif synthetic_quality.get("status") == "REVIEW" or stress_scores["overall_stress_score"] < 2.0 or (scenario.get("uncertainty", {}).get("level") == "high" and "sparse" in scenario.get("scenario_category", "")) or seed_comp.get("status") == "REVIEW":
             status = "REVIEW"
         else:
             status = "PASS"
@@ -115,6 +139,8 @@ class ScenarioEvaluator:
             "resistance_stress_audit": res_audit,
             "decision_stress_score": stress_scores,
             "realism_score": realism_scores,
+            "synthetic_quality": synthetic_quality,
+            "seed_compliance": seed_comp,
             "stress_dimensions": res_audit["identified_dimensions"],
             "flags": flags,
             "audit_timestamp": datetime.now(timezone.utc).isoformat()
@@ -199,6 +225,12 @@ class ScenarioEvaluator:
             "near_duplicate_count": div_analysis["near_duplicate_count"],
             "strong_stress_cases": strong_cases,
             "extreme_stress_cases": extreme_cases,
+            "average_statistical_similarity": round(sum(a["synthetic_quality"]["statistical_similarity"] for a in audits) / len(audits), 2),
+            "average_cohort_similarity": round(sum(a["synthetic_quality"]["cohort_similarity"] for a in audits) / len(audits), 2),
+            "synthetic_quality_accepted": sum(1 for a in audits if a["synthetic_quality"]["status"] == "ACCEPTED"),
+            "synthetic_quality_review": sum(1 for a in audits if a["synthetic_quality"]["status"] == "REVIEW"),
+            "synthetic_quality_rejected": sum(1 for a in audits if a["synthetic_quality"]["status"] == "REJECTED"),
+            "reference_memorization_duplicate_flags": sum(1 for a in audits if a["synthetic_quality"]["duplicate_check"] == "FLAGGED"),
             "percentage_targeting_valid_blind_spots": 100.0,
             "percentage_with_complete_provenance": 100.0,
             "percentage_with_correct_synthetic_labeling": 100.0

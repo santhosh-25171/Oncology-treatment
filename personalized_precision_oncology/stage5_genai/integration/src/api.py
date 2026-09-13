@@ -5,11 +5,26 @@ KPI summaries, and longitudinal evaluation history.
 """
 
 from typing import Optional, List, Dict, Any
+from pydantic import BaseModel, Field
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from .dashboard_service import DashboardService
+
+class SeedConditionRequest(BaseModel):
+    age: Optional[float] = Field(65.0, description="Patient age in years")
+    sex: Optional[str] = Field("Female", description="Patient sex (Male/Female/Other)")
+    cancer_type: Optional[str] = Field("NSCLC", description="Cancer type (e.g., NSCLC, SCLC)")
+    stage: Optional[str] = Field("Stage IV", description="Cancer stage (Stage I-IV)")
+    histology: Optional[str] = Field("Lung Adenocarcinoma", description="Histological subtype")
+    smoking_status: Optional[str] = Field("Lifelong Non-Smoker", description="Smoking history")
+    driver_alteration: Optional[str] = Field("EGFR", description="Primary genomic driver gene")
+    mutation_variant: Optional[str] = Field("p.L858R", description="Driver mutation variant")
+    tmb: Optional[float] = Field(6.5, description="Tumor mutational burden (mut/Mb)")
+    pd_l1: Optional[float] = Field(25.0, description="PD-L1 Tumor Proportion Score (%)")
+    target_blind_spot: Optional[str] = Field("BS001", description="Target Blind Spot ID")
+    prior_treatment_context: Optional[str] = Field("First-line evaluation for precision oncology therapy", description="Prior therapy history")
 
 app = FastAPI(
     title="Personalized Precision Oncology - Stage 5 Synthetic Scenario Testing API",
@@ -41,7 +56,8 @@ def list_scenarios(
     blind_spot: Optional[str] = Query(None, description="Filter by target blind spot ID"),
     status: Optional[str] = Query(None, description="Filter by evaluation status (PASS, REVIEW, FAIL)"),
     uncertainty: Optional[str] = Query(None, description="Filter by uncertainty level (low, moderate, high)"),
-    method: Optional[str] = Query(None, description="Filter by generation method (template, llm)")
+    method: Optional[str] = Query(None, description="Filter by generation method (template, llm)"),
+    include_generated: bool = Query(False, description="Whether to include interactively generated scenarios")
 ) -> List[Dict[str, Any]]:
     """Lists synthetic scenarios with optional metadata filters."""
     return service.get_scenarios(
@@ -49,7 +65,8 @@ def list_scenarios(
         blind_spot=blind_spot,
         status=status,
         uncertainty=uncertainty,
-        method=method
+        method=method,
+        include_generated=include_generated
     )
 
 
@@ -92,3 +109,23 @@ def get_summary() -> Dict[str, Any]:
 def get_history(scenario_id: Optional[str] = Query(None, description="Filter history by scenario ID")) -> List[Dict[str, Any]]:
     """Returns longitudinal evaluation history records."""
     return service.get_history(scenario_id=scenario_id)
+
+
+@app.post("/stage5/generate")
+def generate_patient(payload: SeedConditionRequest) -> Dict[str, Any]:
+    """Generates a new synthetic oncology patient scenario from seed conditions and executes live evaluation."""
+    try:
+        data = payload.model_dump()
+        blind_spot_id = data.pop("target_blind_spot", None)
+        return service.generate_patient(seed_conditions=data, blind_spot_id=blind_spot_id)
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"Generation failed: {str(exc)}")
+
+
+@app.get("/stage5/analytics")
+def get_analytics() -> Dict[str, Any]:
+    """Returns generation and realism metrics computed from real evaluation history logs."""
+    try:
+        return service.get_analytics()
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"Analytics computation failed: {str(exc)}")

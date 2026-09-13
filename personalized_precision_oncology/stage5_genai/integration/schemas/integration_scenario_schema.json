@@ -21,7 +21,7 @@
   "properties": {
     "scenario_id": {
       "type": "string",
-      "pattern": "^EDGE_[0-9]{3,}$"
+      "pattern": "^(EDGE_[0-9]{3,}|SYN-[0-9]{6})$"
     },
     "synthetic": {
       "type": "boolean",
@@ -29,7 +29,7 @@
     },
     "generation_method": {
       "type": "string",
-      "enum": ["template", "llm", "hybrid"]
+      "enum": ["template", "llm", "hybrid", "deterministic_fallback"]
     },
     "scenario_category": {
       "type": "string",

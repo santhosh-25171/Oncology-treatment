@@ -41,6 +41,10 @@ class HistoryManager:
         else:
             realism_val = realism_score
 
+        sq = evaluation_result.get("synthetic_quality", {})
+        gen_meta = evaluation_result.get("generation_metadata", {})
+        seed_comp = evaluation_result.get("seed_compliance", {})
+
         record = {
             "scenario_id": sid,
             "run_number": run_number,
@@ -50,6 +54,11 @@ class HistoryManager:
             "realism_score": realism_val,
             "blind_spot_targeted": evaluation_result.get("blind_spot_targeted", "NOT AVAILABLE"),
             "flags": evaluation_result.get("flags", []),
+            "synthetic_quality": sq,
+            "seed_compliance": seed_comp,
+            "generation_source": gen_meta.get("generation_source") or evaluation_result.get("generation_source", "TEMPLATE"),
+            "model": gen_meta.get("model") or evaluation_result.get("model", "deterministic_v5"),
+            "seed_conditions": gen_meta.get("seed_conditions") or evaluation_result.get("seed_conditions"),
             "evaluation_timestamp": evaluation_result.get("evaluation_timestamp", datetime.now(timezone.utc).isoformat()),
             "pipeline_version": evaluation_result.get("pipeline_version", "5.0.0")
         }

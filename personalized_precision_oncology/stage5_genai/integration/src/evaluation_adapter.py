@@ -65,17 +65,19 @@ class EvaluationAdapter:
         except Exception:
             return None
 
-    def evaluate_scenario(self, scenario: Dict[str, Any]) -> Dict[str, Any]:
+    def evaluate_scenario(self, scenario: Dict[str, Any], seed_conditions: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
         Runs live evaluation for a single scenario through the official ScenarioEvaluator.
         """
         sid = scenario.get("scenario_id", "UNKNOWN")
-        raw_result = self.evaluator.evaluate_scenario(scenario)
+        raw_result = self.evaluator.evaluate_scenario(scenario, seed_conditions=seed_conditions)
 
         # Format according to dashboard_result_schema
         bs_audit = raw_result.get("blind_spot_audit", {})
         stress_score = raw_result.get("decision_stress_score", {})
         realism_score = raw_result.get("realism_score", {})
+        synthetic_quality = raw_result.get("synthetic_quality", {})
+        seed_comp = raw_result.get("seed_compliance", {})
 
         return {
             "scenario_id": sid,
@@ -84,6 +86,8 @@ class EvaluationAdapter:
             "evaluation_status": raw_result.get("evaluation_status", "NOT EVALUATED"),
             "decision_stress_score": stress_score,
             "realism_score": realism_score,
+            "synthetic_quality": synthetic_quality,
+            "seed_compliance": seed_comp,
             "blind_spot_targeted": bs_audit.get("blind_spot_targeted", "NOT AVAILABLE"),
             "flags": raw_result.get("flags", []),
             "stress_dimensions": raw_result.get("stress_dimensions", []),

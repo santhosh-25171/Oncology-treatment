@@ -126,6 +126,42 @@
     },
     "stress_dimensions": { "type": "array", "items": { "type": "string" } },
     "flags": { "type": "array", "items": { "type": "string" } },
-    "audit_timestamp": { "type": "string" }
+    "audit_timestamp": { "type": "string" },
+    "synthetic_quality": {
+      "type": "object",
+      "required": [
+        "statistical_similarity",
+        "cohort_similarity",
+        "realism_score",
+        "anomaly_status",
+        "duplicate_check",
+        "clinical_consistency",
+        "biological_plausibility",
+        "blind_spot_status",
+        "status",
+        "interpretation"
+      ],
+      "properties": {
+        "statistical_similarity": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "cohort_similarity": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "realism_score": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "anomaly_status": { "type": "string", "enum": ["PASS", "REVIEW", "FAIL"] },
+        "duplicate_check": { "type": "string", "enum": ["CLEAN", "FLAGGED"] },
+        "clinical_consistency": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "biological_plausibility": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "blind_spot_status": { "type": "string", "enum": ["NORMAL", "RARE_BUT_VALID", "INVALID"] },
+        "status": { "type": "string", "enum": ["ACCEPTED", "REVIEW", "REJECTED"] },
+        "interpretation": { "type": "string" }
+      }
+    },
+    "seed_compliance": {
+      "type": "object",
+      "properties": {
+        "status": { "type": "string", "enum": ["PASS", "REVIEW", "FAIL", "NOT_SPECIFIED"] },
+        "matched_fields": { "type": "array", "items": { "type": "string" } },
+        "mismatched_fields": { "type": "array", "items": { "type": "string" } },
+        "details": { "type": "string" }
+      }
+    }
   }
 }

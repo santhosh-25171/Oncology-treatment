@@ -48,8 +48,8 @@ class ScenarioValidator:
 
         # 2. Scenario ID
         sid = scenario.get("scenario_id", "")
-        if not sid.startswith("EDGE_"):
-            issues.append(f"Invalid scenario_id '{sid}'; must start with 'EDGE_'.")
+        if not (sid.startswith("EDGE_") or sid.startswith("SYN-")):
+            issues.append(f"Invalid scenario_id '{sid}'; must start with 'EDGE_' or 'SYN-'.")
 
         # 3. Target blind spot
         tbs = scenario.get("target_blind_spot", {})

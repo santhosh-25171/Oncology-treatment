@@ -13,6 +13,7 @@ from .scenario_loader import ScenarioLoader
 from .scenario_adapter import ScenarioAdapter
 from .evaluation_adapter import EvaluationAdapter
 from .history_manager import HistoryManager
+from personalized_precision_oncology.stage5_genai.genai.generators.interactive_generator import InteractivePatientGenerator
 
 
 class DashboardService:
@@ -22,14 +23,17 @@ class DashboardService:
         self,
         loader: Optional[ScenarioLoader] = None,
         eval_adapter: Optional[EvaluationAdapter] = None,
-        history_mgr: Optional[HistoryManager] = None
+        history_mgr: Optional[HistoryManager] = None,
+        generator: Optional[InteractivePatientGenerator] = None
     ):
         self.loader = loader or ScenarioLoader()
         self.eval_adapter = eval_adapter or EvaluationAdapter()
         self.history_mgr = history_mgr or HistoryManager()
+        self.generator = generator or InteractivePatientGenerator()
 
         # In-memory caches for fast dashboard responsiveness
         self._scenarios: List[Dict[str, Any]] = []
+        self._generated_scenarios: List[Dict[str, Any]] = []
         self._rejected: List[Dict[str, Any]] = []
         self._latest_evaluations: Dict[str, Dict[str, Any]] = {}
         self._last_loaded_mtime: float = 0.0
@@ -53,9 +57,28 @@ class DashboardService:
 
     def reload_scenarios(self) -> Dict[str, Any]:
         """Loads scenarios from disk and updates caching state."""
+        import json
         valid, rejected = self.loader.load_scenarios()
         self._scenarios = valid
         self._rejected = rejected
+        self._generated_scenarios = []
+
+        # Load dynamically generated synthetic scenarios into separate container
+        gen_path = self.generator.scenarios_file
+        if gen_path.exists():
+            seen_ids = {s.get("scenario_id") for s in self._scenarios}
+            with open(gen_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    clean = line.strip()
+                    if clean:
+                        try:
+                            record = json.loads(clean)
+                            sid = record.get("scenario_id")
+                            if sid and sid not in seen_ids and record.get("synthetic") is True:
+                                seen_ids.add(sid)
+                                self._generated_scenarios.append(record)
+                        except Exception:
+                            pass
 
         p = self.loader.scenario_path
         if p.exists():
@@ -116,14 +139,19 @@ class DashboardService:
         blind_spot: Optional[str] = None,
         status: Optional[str] = None,
         uncertainty: Optional[str] = None,
-        method: Optional[str] = None
+        method: Optional[str] = None,
+        include_generated: bool = False
     ) -> List[Dict[str, Any]]:
         """Returns filtered list of dashboard scenario summaries."""
         # Auto-detect file changes
         self.check_for_updates()
 
+        source_scenarios = list(self._scenarios)
+        if include_generated or (method and method.lower() in ["llm", "deterministic_fallback"]):
+            source_scenarios.extend(self._generated_scenarios)
+
         items = []
-        for sc in self._scenarios:
+        for sc in source_scenarios:
             sid = sc.get("scenario_id")
             eval_data = self._latest_evaluations.get(sid)
             item = ScenarioAdapter.to_dashboard_item(sc, eval_data)
@@ -147,7 +175,8 @@ class DashboardService:
     def get_scenario_detail(self, scenario_id: str) -> Optional[Dict[str, Any]]:
         """Returns comprehensive detail view for a specific scenario."""
         self.check_for_updates()
-        sc = next((s for s in self._scenarios if s.get("scenario_id") == scenario_id), None)
+        all_sc = self._scenarios + self._generated_scenarios
+        sc = next((s for s in all_sc if s.get("scenario_id") == scenario_id), None)
         if not sc:
             return None
 
@@ -159,7 +188,8 @@ class DashboardService:
         Executes evaluation for a single scenario, updates state and appends to history.
         """
         self.check_for_updates()
-        sc = next((s for s in self._scenarios if s.get("scenario_id") == scenario_id), None)
+        all_sc = self._scenarios + self._generated_scenarios
+        sc = next((s for s in all_sc if s.get("scenario_id") == scenario_id), None)
         if not sc:
             raise ValueError(f"Scenario '{scenario_id}' not found in loaded dataset.")
 
@@ -324,3 +354,161 @@ class DashboardService:
         if scenario_id:
             return self.history_mgr.get_history_for_scenario(scenario_id)
         return self.history_mgr.get_all_history()
+
+    def generate_patient(
+        self,
+        seed_conditions: Dict[str, Any],
+        blind_spot_id: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """
+        Generates a new synthetic oncology patient scenario using LLM or deterministic fallback,
+        immediately runs evaluation (discriminator + seed compliance + stress scoring),
+        registers the scenario in memory and appends to evaluation history.
+        """
+        scenario, metadata = self.generator.generate_patient(seed_conditions, blind_spot_id)
+        sid = scenario.get("scenario_id")
+
+        # Run live evaluation with seed conditions
+        eval_result = self.eval_adapter.evaluate_scenario(scenario, seed_conditions=seed_conditions)
+
+        # Merge generation metadata into eval_result for recording
+        eval_result["generation_metadata"] = metadata
+        eval_result["generation_source"] = metadata.get("generation_source")
+        eval_result["model"] = metadata.get("model")
+        eval_result["seed_conditions"] = seed_conditions
+
+        # Add to generated scenarios list if not already present
+        if not any(s.get("scenario_id") == sid for s in self._generated_scenarios):
+            self._generated_scenarios.append(scenario)
+
+        self._latest_evaluations[sid] = eval_result.get("detailed_audit", eval_result)
+        self._last_eval_time = eval_result.get("evaluation_timestamp")
+
+        # Record to history
+        history_rec = self.history_mgr.record_evaluation(eval_result)
+
+        # Detailed view for dashboard
+        detail_view = ScenarioAdapter.to_detailed_view(scenario, self._latest_evaluations[sid])
+
+        return {
+            "scenario": scenario,
+            "metadata": metadata,
+            "evaluation": eval_result,
+            "detail_view": detail_view,
+            "history_record": history_rec
+        }
+
+    def get_analytics(self) -> Dict[str, Any]:
+        """
+        Computes comprehensive generation and realism analytics from evaluation history.
+        Tracks LLM vs Fallback distributions, pass/review/fail rates, realism metrics,
+        and blind spot coverage without any hardcoded falsifications.
+        """
+        all_records = self.history_mgr.get_all_history()
+        total_evals = len(all_records)
+
+        llm_count = 0
+        fallback_count = 0
+        template_count = 0
+        pass_count = 0
+        review_count = 0
+        fail_count = 0
+
+        realism_scores = []
+        stress_scores = []
+        stat_similarities = []
+        cohort_similarities = []
+        covered_blind_spots = set()
+
+        for rec in all_records:
+            source = str(rec.get("generation_source", "")).upper()
+            if "LLM" in source:
+                llm_count += 1
+            elif "DETERMINISTIC" in source or "FALLBACK" in source:
+                fallback_count += 1
+            else:
+                template_count += 1
+
+            status = str(rec.get("evaluation_status", "")).upper()
+            if status == "PASS":
+                pass_count += 1
+            elif status == "REVIEW":
+                review_count += 1
+            elif status == "FAIL":
+                fail_count += 1
+
+            rs = rec.get("realism_score")
+            if isinstance(rs, (int, float)):
+                realism_scores.append(rs)
+
+            ss = rec.get("decision_stress_score")
+            if isinstance(ss, (int, float)):
+                stress_scores.append(ss)
+
+            sq = rec.get("synthetic_quality", {})
+            if isinstance(sq, dict):
+                sim = sq.get("statistical_similarity")
+                if isinstance(sim, (int, float)):
+                    stat_similarities.append(sim)
+                csim = sq.get("cohort_similarity")
+                if isinstance(csim, (int, float)):
+                    cohort_similarities.append(csim)
+
+            bs = rec.get("blind_spot_targeted")
+            if bs and bs != "NOT AVAILABLE":
+                covered_blind_spots.add(bs)
+
+        total_targets = self._get_total_blind_spot_targets()
+        cov_count = len(covered_blind_spots)
+        cov_pct = round((cov_count / total_targets) * 100.0, 1) if total_targets > 0 else 0.0
+
+        avg_realism = round(sum(realism_scores) / len(realism_scores), 2) if realism_scores else 0.0
+        avg_stress = round(sum(stress_scores) / len(stress_scores), 2) if stress_scores else 0.0
+        avg_stat_sim = round(sum(stat_similarities) / len(stat_similarities), 3) if stat_similarities else 0.0
+        avg_cohort_sim = round(sum(cohort_similarities) / len(cohort_similarities), 3) if cohort_similarities else 0.0
+
+        recent_gen = []
+        for rec in reversed(all_records):
+            sid = rec.get("scenario_id", "")
+            if sid.startswith("SYN-") or rec.get("generation_source") in ("LLM", "DETERMINISTIC_FALLBACK"):
+                recent_gen.append({
+                    "scenario_id": sid,
+                    "generation_source": rec.get("generation_source", "UNKNOWN"),
+                    "model": rec.get("model", "UNKNOWN"),
+                    "evaluation_status": rec.get("evaluation_status", "NOT EVALUATED"),
+                    "realism_score": rec.get("realism_score"),
+                    "decision_stress_score": rec.get("decision_stress_score"),
+                    "blind_spot_targeted": rec.get("blind_spot_targeted"),
+                    "timestamp": rec.get("evaluation_timestamp")
+                })
+                if len(recent_gen) >= 10:
+                    break
+
+        return {
+            "total_evaluations": total_evals,
+            "total_interactive_generated": llm_count + fallback_count,
+            "source_distribution": {
+                "LLM": llm_count,
+                "DETERMINISTIC_FALLBACK": fallback_count,
+                "TEMPLATE_BASELINE": template_count
+            },
+            "status_distribution": {
+                "PASS": pass_count,
+                "REVIEW": review_count,
+                "FAIL": fail_count
+            },
+            "pass_rate_pct": round((pass_count / total_evals) * 100.0, 1) if total_evals > 0 else 0.0,
+            "review_rate_pct": round((review_count / total_evals) * 100.0, 1) if total_evals > 0 else 0.0,
+            "fail_rate_pct": round((fail_count / total_evals) * 100.0, 1) if total_evals > 0 else 0.0,
+            "average_realism_score": avg_realism,
+            "average_stress_score": avg_stress,
+            "average_statistical_similarity": avg_stat_sim,
+            "average_cohort_similarity": avg_cohort_sim,
+            "blind_spot_coverage": {
+                "covered_count": cov_count,
+                "total_targets": total_targets,
+                "coverage_pct": cov_pct,
+                "unique_blind_spots": sorted(list(covered_blind_spots))
+            },
+            "recent_generations": recent_gen
+        }

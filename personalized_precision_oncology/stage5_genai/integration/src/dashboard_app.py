@@ -740,10 +740,16 @@ DASHBOARD_HTML = """<!DOCTYPE html>
 """
 
 
+DASHBOARD_HTML_FILE = Path(__file__).resolve().parent.parent / "dashboard.html"
+
+
 @app.get("/", response_class=HTMLResponse)
 @app.get("/dashboard", response_class=HTMLResponse)
 def serve_dashboard():
     """Serves the interactive Stage 5 testing dashboard."""
+    if DASHBOARD_HTML_FILE.exists():
+        with open(DASHBOARD_HTML_FILE, "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read(), status_code=200)
     return HTMLResponse(content=DASHBOARD_HTML, status_code=200)
 
 
