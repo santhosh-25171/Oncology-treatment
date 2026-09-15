@@ -83,6 +83,7 @@ class WorkflowManager:
         self,
         context: PatientContext,
         orchestrator_decision: Optional[OrchestratorDecision] = None,
+        stop_at_physician_review: bool = False,
     ) -> WorkflowResult:
         """
         Executes the end-to-end deliberation workflow for a given PatientContext.
@@ -229,6 +230,25 @@ class WorkflowManager:
                     reason="Flagged for multidisciplinary oncologist review and clinical correlation",
                     responsible_component="TumorBoardChair"
                 )
+                if stop_at_physician_review:
+                    duration_ms = (time.perf_counter() - start_time) * 1000
+                    context.workflow_status = WorkflowState.PHYSICIAN_REVIEW
+                    agent_results_map = self._build_agent_results_map(agent_results_list)
+                    return WorkflowResult(
+                        patient_id=context.patient_id,
+                        workflow_id=workflow_id,
+                        final_state=WorkflowState.PHYSICIAN_REVIEW.value,
+                        state_transitions=[t.to_dict() for t in sm.transitions],
+                        orchestrator_decision=orchestrator_decision,
+                        tumor_board_decision=tumor_board_decision,
+                        safety_evaluation=safety_eval,
+                        agent_results=agent_results_map,
+                        evidence_ids=sorted(set(all_evidence_ids)),
+                        warnings=all_warnings,
+                        missing_data=sorted(set(all_missing_data)),
+                        errors=errors,
+                        execution_time_ms=duration_ms,
+                    )
 
             sm.transition_to(
                 WorkflowState.COMPLETED,
