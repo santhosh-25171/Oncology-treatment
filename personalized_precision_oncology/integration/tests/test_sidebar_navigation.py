@@ -1,10 +1,20 @@
 import pytest
-from integration.dashboard.app import (
-    STAGE_1_PAGES,
-    STAGE_2_PAGES,
-    STAGE_3_PAGES,
-    ALL_PAGE_KEYS
-)
+try:
+    from integration.dashboard.app import (
+        STAGE_1_PAGES,
+        STAGE_2_PAGES,
+        STAGE_3_PAGES,
+        STAGE_4_PAGES,
+        ALL_PAGE_KEYS
+    )
+except ImportError:
+    from personalized_precision_oncology.integration.dashboard.app import (
+        STAGE_1_PAGES,
+        STAGE_2_PAGES,
+        STAGE_3_PAGES,
+        STAGE_4_PAGES,
+        ALL_PAGE_KEYS
+    )
 
 def test_stage_groupings_defined_and_disjoint():
     """Verify each stage has distinct, non-empty, and mutually disjoint pages."""
@@ -47,8 +57,8 @@ def test_stage3_subpages_contents():
     assert STAGE_3_PAGES == expected
 
 def test_all_pages_count_and_inclusions():
-    """Verify total of 15 unique domain pages are registered in ALL_PAGE_KEYS."""
-    assert len(ALL_PAGE_KEYS) == 15
+    """Verify total of 20 unique domain pages are registered in ALL_PAGE_KEYS."""
+    assert len(ALL_PAGE_KEYS) == 20
     assert "🏠 Dashboard Home" in ALL_PAGE_KEYS
     assert "🌐 Unified Patient Analysis" in ALL_PAGE_KEYS
     assert "🩺 System & Model Health" in ALL_PAGE_KEYS
@@ -58,6 +68,8 @@ def test_all_pages_count_and_inclusions():
     for p in STAGE_2_PAGES:
         assert p in ALL_PAGE_KEYS
     for p in STAGE_3_PAGES:
+        assert p in ALL_PAGE_KEYS
+    for p in STAGE_4_PAGES:
         assert p in ALL_PAGE_KEYS
 
 def test_auto_expansion_logic():

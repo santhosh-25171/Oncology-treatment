@@ -1,7 +1,17 @@
 import os
 import json
 import pandas as pd
-from prediction import OncologyPredictionPipeline
+try:
+    from prediction import OncologyPredictionPipeline
+except ImportError:
+    try:
+        from personalized_precision_oncology.stage1_ml.prediction import OncologyPredictionPipeline
+    except ImportError:
+        from stage1_ml.prediction import OncologyPredictionPipeline
+
+def test_prediction_pipeline():
+    """Pytest entrypoint for Stage 1 prediction pipeline integration test."""
+    main()
 
 def main():
     base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

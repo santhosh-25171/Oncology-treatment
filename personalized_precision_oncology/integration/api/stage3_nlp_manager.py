@@ -10,10 +10,15 @@ logger = logging.getLogger("stage3_nlp_manager")
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 STAGE3_DIR = PROJECT_ROOT / "stage3_nlp"
 
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 if str(STAGE3_DIR) not in sys.path:
     sys.path.insert(0, str(STAGE3_DIR))
 
-from stage3_nlp.models.predict import NLPPipeline
+try:
+    from personalized_precision_oncology.stage3_nlp.models.predict import NLPPipeline
+except ImportError:
+    from stage3_nlp.models.predict import NLPPipeline
 
 
 class Stage3NLPManager:

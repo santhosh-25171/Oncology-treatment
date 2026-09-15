@@ -561,4 +561,15 @@ def predict_briefing_test_adapted(payload: Stage4AdaptedPayload):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-
+# =========================================================================
+# STAGE 6 AGENTIC AI ENDPOINTS (ADDITIVE INTEGRATION)
+# =========================================================================
+try:
+    try:
+        from personalized_precision_oncology.stage6_agentic.integration.api.routes import stage6_router
+    except ImportError:
+        from stage6_agentic.integration.api.routes import stage6_router
+    app.include_router(stage6_router)
+    print("[SUCCESS] Stage 6 Agentic AI router mounted at /stage6.")
+except Exception as e:
+    print(f"[WARNING] Could not mount Stage 6 Agentic AI router: {e}")

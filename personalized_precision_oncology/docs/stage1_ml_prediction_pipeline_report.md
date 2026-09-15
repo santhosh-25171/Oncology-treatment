@@ -58,7 +58,7 @@ By natively integrating SHAP, the pipeline ensures no prediction is a "black box
         "prediction": "Low",
         "confidence": 0.4116,
         "probabilities": {
-            "High": 0.3714369160554006,
+            "High": 0.3714369160554007,
             "Low": 0.41156396340524165,
             "Moderate": 0.21699912053935777
         }
@@ -69,7 +69,7 @@ By natively integrating SHAP, the pipeline ensures no prediction is a "black box
         "probabilities": {
             "Complete Response": 0.3841152366608749,
             "Non-Responder": 0.1595127398646713,
-            "Partial Response": 0.4563720234744539
+            "Partial Response": 0.45637202347445377
         }
     }
 }

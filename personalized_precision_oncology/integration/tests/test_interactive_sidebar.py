@@ -1,14 +1,17 @@
+from pathlib import Path
 import pytest
 from streamlit.testing.v1 import AppTest
 
+DASHBOARD_PATH = str(Path(__file__).resolve().parent.parent / "dashboard" / "app.py")
+
 def test_app_sidebar_interaction_workflow():
-    at = AppTest.from_file("integration/dashboard/app.py", default_timeout=30)
+    at = AppTest.from_file(DASHBOARD_PATH, default_timeout=30)
     at.run()
     assert not at.exception
 
-    # 1. Startup State: Exactly 12 buttons initially
-    # (Home, Unified, Stage 1 Header + 4 subpages, Stage 2 Header, Stage 3 Header, Health, About, Disclaimer)
-    assert len(at.sidebar.button) == 12
+    # 1. Startup State: Exactly 13 buttons initially
+    # (Home, Unified, Stage 1 Header + 4 subpages, Stage 2 Header, Stage 3 Header, Stage 4 Header, Health, About, Disclaimer)
+    assert len(at.sidebar.button) == 13
     labels = [b.label for b in at.sidebar.button]
 
     # Verify Stage 1 is expanded (its sub-pages are in labels)
