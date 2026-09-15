@@ -25,6 +25,25 @@ html, body, [class*="css"] {
     max-width: 100% !important;
 }
 
+/* High-Contrast Main Workspace Typography */
+.main, .main p, .main span {
+    color: #1e293b;
+}
+
+.main h1, .main h2, .main h3, .main h4, .main h5, .main h6 {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+}
+
+.main b, .main strong {
+    color: #0f172a !important;
+}
+
+.main [data-testid="stCaptionContainer"] p {
+    color: #475569 !important;
+    font-size: 13px !important;
+}
+
 /* ----------------------------------------------------
    SIDEBAR STYLING (Ultra High-Contrast Dark Navy #0B192C)
 ---------------------------------------------------- */
@@ -210,6 +229,67 @@ section[data-testid="stSidebar"] *,
 [data-testid="stSidebar"] [data-testid="stSelectbox"] * {
     color: #f8fafc !important;
     -webkit-text-fill-color: #f8fafc !important;
+}
+
+/* ----------------------------------------------------
+   MAIN WORKSPACE INPUTS & SELECTBOXES (Crisp White & High-Contrast)
+---------------------------------------------------- */
+/* Search bar, text inputs, text areas on main workspace */
+.main [data-testid="stTextInput"] div[data-baseweb="input"],
+.main [data-testid="stTextInput"] input,
+.main [data-testid="stTextArea"] div[data-baseweb="textarea"],
+.main [data-testid="stTextArea"] textarea,
+.main [data-testid="stNumberInput"] div[data-baseweb="input"],
+.main [data-testid="stNumberInput"] input {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    -webkit-text-fill-color: #0f172a !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+}
+
+.main [data-testid="stTextInput"] input::placeholder,
+.main [data-testid="stTextArea"] textarea::placeholder {
+    color: #64748b !important;
+    -webkit-text-fill-color: #64748b !important;
+    opacity: 1 !important;
+    font-weight: 400 !important;
+}
+
+/* Selectbox on main workspace (Switch Case, Filters, Form fields) */
+.main [data-testid="stSelectbox"] div[data-baseweb="select"],
+.main [data-testid="stSelectbox"] div[data-baseweb="select"] > div {
+    background-color: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+}
+
+.main [data-testid="stSelectbox"] * {
+    color: #0f172a !important;
+    -webkit-text-fill-color: #0f172a !important;
+    font-weight: 600 !important;
+}
+
+/* Dropdown popover list items */
+div[data-baseweb="popover"],
+div[data-baseweb="popover"] ul,
+div[data-baseweb="popover"] li,
+div[data-baseweb="menu"],
+div[data-baseweb="menu"] * {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    -webkit-text-fill-color: #0f172a !important;
+}
+
+/* Main workspace labels */
+.main [data-testid="stWidgetLabel"] p,
+.main [data-testid="stWidgetLabel"] span {
+    color: #0f172a !important;
+    -webkit-text-fill-color: #0f172a !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
 }
 
 /* ----------------------------------------------------
