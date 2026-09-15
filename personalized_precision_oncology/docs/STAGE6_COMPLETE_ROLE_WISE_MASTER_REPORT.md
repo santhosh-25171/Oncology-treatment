@@ -22,6 +22,81 @@ The system operates as an **Autonomous Multi-Agent Tumor Board (MTB)**, orchestr
 
 ---
 
+## Stage 6 End-to-End Deliberation Workflow
+
+The Stage 6 autonomous multidisciplinary tumor board executes through a deterministic, 6-stage finite-state-machine (FSM) pipeline. This eliminates unbounded agent-to-agent conversational hallucination loops and guarantees that every treatment recommendation is strictly auditable, clinically verified, and safely gated.
+
+```mermaid
+flowchart TD
+    subgraph Step1 ["1. Ingestion & Validation"]
+        A1["Patient Profile & Upstream Artifacts\n(Stages 1-5 Inferences, Genomics, Labs, Notes)"] --> A2["PatientContext Schema Validation\n(Missing Fields & Integrity Checks)"]
+    end
+
+    subgraph Step2 ["2. Specialist Deliberation"]
+        A2 --> B1["RiskAgent (Stage 1 Tabular ML)"]
+        A2 --> B2["GenomicAgent (Biomarkers & Resistance)"]
+        A2 --> B3["NLPTriageAgent (Stage 3 Clinical NLP)"]
+        A2 --> B4["MultimodalAgent (Stage 2 CNN & Transformers)"]
+        A2 --> B5["ToxicityAgent (Organ Labs & DDI Matrix)"]
+    end
+
+    subgraph Step3 ["3. Evidence & Simulation"]
+        B1 & B2 & B3 & B4 & B5 --> C1["EvidenceStore & KnowledgeRetriever\n(12 NCCN Guidelines & Landmark Trials)"]
+        C1 --> C2["CounterfactualAgent (Stage 5 In-Silico Probing)\n(Stress-Testing & Organ Risk Edge Cases)"]
+    end
+
+    subgraph Step4 ["4. Independent Safety Review"]
+        C2 --> D1{"SafetyGuardianAgent\n(Cross-Modal Conflict & Contraindication Check)"}
+        D1 -- "Critical Hazard / DDI Detected" --> D2["BLOCKED STATE\n(Halt Recommendations & Flag Contraindications)"]
+        D1 -- "Cleared / Warnings Attached" --> E1
+    end
+
+    subgraph Step5 ["5. Tumor Board Synthesis"]
+        E1["TumorBoardChair\nConsensus Synthesis & Candidate Regimen Ranking"]
+    end
+
+    subgraph Step6 ["6. Clinical Governance & Delivery"]
+        E1 --> F1{"PhysicianReviewGate\n(Mandatory Attending Oncologist Sign-Off)"}
+        D2 --> F1
+        F1 -- "Approved / Overridden" --> G1["Finalized Care Plan & Prescription"]
+        F1 --> G2["Streamlit Workstation & FastAPI Endpoints"]
+        F1 --> G3["Thread-Safe AuditLogger (Provenance Record)"]
+    end
+```
+
+### End-to-End Operational Pipeline Stages:
+
+1. **Patient Ingestion & Validation (`RECEIVED` &rarr; `VALIDATING`)**:
+   * Multimodal data ingestion encapsulating clinical demographics, Stage 1 tabular features, Stage 2 histopathology & temporal trajectory embeddings, Stage 3 clinical notes/transcripts, genomic sequencing (e.g., *EGFR*, *KRAS*, *ALK*, *BRAF*, *HER2*, PD-L1), and laboratory panels (eGFR, LFTs, ANC).
+   * Strict validation via Pydantic schemas; missing critical markers or IDs fail safely to explicit error states rather than being artificially imputed.
+
+2. **Specialist Agent Execution (`ANALYZING`)**:
+   * Isolated, deterministic execution of specialist agents gathering domain inferences:
+     * **`RiskAgent`**: Evaluates calibrated tabular ML models (Stage 1) for mortality and recurrence risk stratification.
+     * **`GenomicAgent`**: Identifies actionable driver mutations, assigns AMP/ASCO/CAP evidence tiers, and detects resistance alterations (e.g., *EGFR* T790M/C797S, *KRAS* G12C).
+     * **`NLPTriageAgent`**: Analyzes oncology consultation text, clinical notes, ECOG performance scores, and symptom urgency via Stage 3 NLP/NER pipelines.
+     * **`MultimodalAgent`**: Synthesizes deep histopathology patch features and temporal treatment trajectory encodings from Stage 2 models.
+     * **`ToxicityAgent`**: Scans laboratory values against organ function cutoff thresholds (e.g., eGFR < 50 mL/min, elevated bilirubin) and checks pairwise drug-drug interactions (DDIs).
+
+3. **Deterministic Evidence Retrieval & In-Silico Probing (`EVIDENCE_RETRIEVAL` &rarr; `SIMULATION`)**:
+   * Deterministic queries to the `EvidenceStore` populated with 12 NCCN Category 1/2A clinical practice guidelines and landmark Phase III clinical trials (`FLAURA`, `AURA3`, `KEYNOTE-024`, `CLEOPATRA`, etc.).
+   * In-silico stress-testing by the **`CounterfactualAgent`** (leveraging Stage 5 generative scenarios) to evaluate patient resiliency under regimen variations, organ degradation, and dosage limits.
+
+4. **Independent Safety Guardian Evaluation (`SAFETY_REVIEW`)**:
+   * The **`SafetyGuardianAgent`** acts as an uncompromisable gatekeeper, executing cross-modal consistency checks (e.g., clinical stage vs. pathology discrepancy).
+   * Automatically intercepts hard pharmacological contraindications (e.g., cisplatin in severe renal impairment; anthracyclines combined with trastuzumab). If an unresolvable safety risk is present, the pipeline transitions immediately to `BLOCKED`.
+
+5. **Consensus Synthesis & Regimen Ranking (`SYNTHESIS`)**:
+   * The **`TumorBoardChair`** aggregates specialist findings, safety flags, and guideline evidence to construct a prioritized candidate treatment table.
+   * Ranks regimens by clinical efficacy, biomarker alignment, and toxicity profiles while attaching mandatory monitoring requirements and contraindication alerts.
+
+6. **Physician Review Gate & Delivery (`PHYSICIAN_REVIEW` &rarr; `COMPLETED`)**:
+   * Adheres strictly to non-autonomous Decision Support governance: autonomous treatment issuance is blocked until an attending oncologist provides sign-off or an explicit clinical override via the `PhysicianReviewGate`.
+   * Real-time presentation in the **Streamlit Clinician Workstation** and delivery via **FastAPI `/stage6` REST endpoints**.
+   * Immutable logging of every agent invocation, score, transition, and physician interaction through the thread-safe `AuditLogger`.
+
+---
+
 ## Squad Roles & Deliverables Overview
 
 ```mermaid
